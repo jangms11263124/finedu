@@ -1,0 +1,81 @@
+from django.db.models import Count
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+
+from .models import Content, Event
+from .serializers import (
+    ContentCommentSerializer,
+    ContentSerializer,
+    EventSerializer,
+)
+
+
+class ContentViewSet(viewsets.ModelViewSet):
+    """콘텐츠 CRUD + 커뮤니티 활동(좋아요·댓글)·랭킹."""
+
+    queryset = Content.objects.all()
+    serializer_class = ContentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        params = self.request.query_params
+        if params.get('recommended') in ('1', 'true'):
+            qs = qs.filter(is_recommended=True)
+        if params.get('popular') in ('1', 'true'):
+            qs = qs.filter(is_popular=True).order_by('-views')
+        if category := params.get('category'):
+            qs = qs.filter(category=category)
+        return qs
+
+    @action(detail=False, methods=['get'])
+    def ranking(self, request):
+        """좋아요 순 콘텐츠 랭킹 (커뮤니티 페이지)."""
+        qs = (
+            Content.objects.annotate(_likes=Count('likes'))
+            .order_by('-_likes', '-views')[:10]
+        )
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def like(self, request, pk=None):
+        """좋아요 토글."""
+        content = self.get_object()
+        user = request.user
+        if content.likes.filter(pk=user.pk).exists():
+            content.likes.remove(user)
+            liked = False
+        else:
+            content.likes.add(user)
+            liked = True
+        return Response({'liked': liked, 'like_count': content.likes.count()})
+
+    @action(detail=True, methods=['get', 'post'],
+            permission_classes=[IsAuthenticatedOrReadOnly])
+    def comments(self, request, pk=None):
+        """콘텐츠 댓글 목록 조회 / 작성."""
+        content = self.get_object()
+        if request.method == 'POST':
+            serializer = ContentCommentSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(content=content, author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        qs = content.comments.select_related('author').all()
+        return Response(ContentCommentSerializer(qs, many=True).data)
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    """교육 행사 · 프로그램 CRUD. ?status=open 필터."""
+
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if status_ := self.request.query_params.get('status'):
+            qs = qs.filter(status=status_)
+        return qs
