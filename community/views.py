@@ -1,11 +1,26 @@
 from django.db.models import F
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import action
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly,
+)
 from rest_framework.response import Response
 
 from .models import Comment, Post
 from .permissions import IsAuthorOrReadOnly
 from .serializers import CommentSerializer, PostListSerializer, PostSerializer
+
+
+def _toggle_like(obj, user):
+    """좋아요 토글 후 (liked, like_count) 반환."""
+    if obj.likes.filter(pk=user.pk).exists():
+        obj.likes.remove(user)
+        liked = False
+    else:
+        obj.likes.add(user)
+        liked = True
+    return liked, obj.likes.count()
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -41,9 +56,15 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def like(self, request, pk=None):
+        """게시글 좋아요 토글."""
+        liked, count = _toggle_like(self.get_object(), request.user)
+        return Response({'liked': liked, 'like_count': count})
+
 
 class CommentViewSet(viewsets.ModelViewSet):
-    """댓글 CRUD. 생성 시 post id를 body에 담아 전송."""
+    """댓글·대댓글 CRUD. 생성 시 post(필수)·parent(대댓글이면) id 전송."""
 
     queryset = Comment.objects.select_related('author').all()
     serializer_class = CommentSerializer
@@ -51,3 +72,9 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def like(self, request, pk=None):
+        """댓글 좋아요 토글."""
+        liked, count = _toggle_like(self.get_object(), request.user)
+        return Response({'liked': liked, 'like_count': count})

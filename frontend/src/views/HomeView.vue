@@ -110,14 +110,22 @@ onMounted(async () => {
             <RouterLink to="/community" class="more">더보기 ›</RouterLink>
           </div>
           <ul class="post-list">
-            <li v-for="(p, i) in posts" :key="p.id">
-              <span class="rank">{{ i + 1 }}</span>
-              <span class="board">{{ p.board_display }}</span>
-              <span class="title">{{ p.title }}</span>
-              <span class="info">
-                💬 {{ p.comment_count }} · 👁 {{ p.views.toLocaleString() }}
-              </span>
-            </li>
+            <RouterLink
+              v-for="(p, i) in posts"
+              :key="p.id"
+              :to="`/community/${p.id}`"
+              custom
+              v-slot="{ navigate }"
+            >
+              <li @click="navigate">
+                <span class="rank">{{ i + 1 }}</span>
+                <span class="board">{{ p.board_display }}</span>
+                <span class="title">{{ p.title }}</span>
+                <span class="info">
+                  💬 {{ p.comment_count }} · 👁 {{ p.views.toLocaleString() }}
+                </span>
+              </li>
+            </RouterLink>
           </ul>
         </section>
       </div>
@@ -286,6 +294,9 @@ onMounted(async () => {
 }
 .post-list li:hover {
   background: var(--bg);
+}
+.post-list li {
+  cursor: pointer;
 }
 .rank {
   font-weight: 800;

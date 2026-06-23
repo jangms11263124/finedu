@@ -1,8 +1,9 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, provide, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import api from '@/api'
 import { useAuthStore } from '@/stores/auth'
+import CommentItem from '@/components/community/CommentItem.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -11,12 +12,15 @@ const auth = useAuthStore()
 const post = ref(null)
 const loading = ref(true)
 const newComment = ref('')
-const editingId = ref(null)
-const editText = ref('')
 
 const isAuthor = computed(
   () => post.value && auth.user && post.value.author_id === auth.user.id
 )
+
+// 대댓글 추가/삭제 시 전체 댓글 수를 조정
+provide('bumpCommentCount', (delta) => {
+  if (post.value) post.value.comment_count += delta
+})
 
 async function load() {
   loading.value = true
@@ -29,6 +33,13 @@ async function load() {
   } finally {
     loading.value = false
   }
+}
+
+async function togglePostLike() {
+  if (!auth.isLoggedIn) return alert('로그인이 필요합니다.')
+  const { data } = await api.post(`/posts/${post.value.id}/like/`)
+  post.value.is_liked = data.liked
+  post.value.like_count = data.like_count
 }
 
 async function removePost() {
@@ -48,28 +59,8 @@ async function addComment() {
   newComment.value = ''
 }
 
-function startEdit(c) {
-  editingId.value = c.id
-  editText.value = c.content
-}
-
-async function saveComment(c) {
-  const { data } = await api.patch(`/comments/${c.id}/`, {
-    content: editText.value,
-  })
-  Object.assign(c, data)
-  editingId.value = null
-}
-
-async function removeComment(c) {
-  if (!confirm('댓글을 삭제할까요?')) return
-  await api.delete(`/comments/${c.id}/`)
-  post.value.comments = post.value.comments.filter((x) => x.id !== c.id)
-  post.value.comment_count--
-}
-
-function mine(c) {
-  return auth.user && c.author_id === auth.user.id
+function onTopDeleted(id) {
+  post.value.comments = post.value.comments.filter((c) => c.id !== id)
 }
 
 function fmt(dt) {
@@ -103,13 +94,23 @@ onMounted(load)
           </div>
           <div class="body">{{ post.content }}</div>
 
-          <div v-if="isAuthor" class="owner-actions">
-            <RouterLink :to="`/community/${post.id}/edit`" class="btn btn-outline sm">
-              수정
-            </RouterLink>
-            <button class="btn btn-outline sm danger" @click="removePost">
-              삭제
+          <div class="post-foot">
+            <button
+              class="post-like"
+              :class="{ on: post.is_liked }"
+              @click="togglePostLike"
+            >
+              {{ post.is_liked ? '❤️' : '🤍' }} 좋아요 {{ post.like_count }}
             </button>
+
+            <div v-if="isAuthor" class="owner-actions">
+              <RouterLink :to="`/community/${post.id}/edit`" class="btn btn-outline sm">
+                수정
+              </RouterLink>
+              <button class="btn btn-outline sm danger" @click="removePost">
+                삭제
+              </button>
+            </div>
           </div>
         </article>
 
@@ -118,24 +119,13 @@ onMounted(load)
           <h2>댓글 <span>{{ post.comment_count }}</span></h2>
 
           <ul v-if="post.comments.length" class="c-list">
-            <li v-for="c in post.comments" :key="c.id">
-              <div class="c-top">
-                <strong>{{ c.author }}</strong>
-                <span class="c-date">{{ fmt(c.created_at) }}</span>
-              </div>
-              <div v-if="editingId === c.id" class="c-edit">
-                <input v-model="editText" @keyup.enter="saveComment(c)" />
-                <button class="btn btn-navy sm" @click="saveComment(c)">저장</button>
-                <button class="btn btn-outline sm" @click="editingId = null">취소</button>
-              </div>
-              <template v-else>
-                <p class="c-body">{{ c.content }}</p>
-                <div v-if="mine(c)" class="c-actions">
-                  <button @click="startEdit(c)">수정</button>
-                  <button @click="removeComment(c)">삭제</button>
-                </div>
-              </template>
-            </li>
+            <CommentItem
+              v-for="c in post.comments"
+              :key="c.id"
+              :comment="c"
+              :post-id="post.id"
+              @deleted="onTopDeleted"
+            />
           </ul>
           <p v-else class="no-comment">첫 댓글을 남겨보세요.</p>
 
@@ -210,12 +200,35 @@ onMounted(load)
   white-space: pre-wrap;
   min-height: 80px;
 }
-.owner-actions {
+.post-foot {
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   border-top: 1px solid var(--line);
   padding-top: 16px;
+}
+.post-like {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  transition: all 0.12s;
+}
+.post-like:hover {
+  border-color: #fca5a5;
+}
+.post-like.on {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+.owner-actions {
+  display: flex;
+  gap: 8px;
 }
 .btn.sm {
   padding: 7px 14px;

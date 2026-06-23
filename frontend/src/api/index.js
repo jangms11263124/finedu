@@ -14,4 +14,16 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+// 만료/무효 토큰(401)이면 토큰을 비워 공개 콘텐츠는 계속 볼 수 있게 한다
+api.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error.response?.status === 401 && localStorage.getItem('access')) {
+      localStorage.removeItem('access')
+      localStorage.removeItem('refresh')
+    }
+    return Promise.reject(error)
+  }
+)
+
 export default api
