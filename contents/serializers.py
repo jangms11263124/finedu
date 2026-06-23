@@ -24,8 +24,8 @@ class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Content
         fields = ('id', 'title', 'summary', 'body', 'category',
-                  'category_display', 'thumbnail', 'views', 'like_count',
-                  'comment_count', 'is_liked', 'is_recommended',
+                  'category_display', 'youtube_id', 'thumbnail', 'views',
+                  'like_count', 'comment_count', 'is_liked', 'is_recommended',
                   'is_popular', 'created_at')
 
     def get_is_liked(self, obj):
@@ -39,9 +39,13 @@ class EventSerializer(serializers.ModelSerializer):
     status_display = serializers.CharField(
         source='get_status_display', read_only=True
     )
+    online_display = serializers.CharField(
+        source='get_online_type_display', read_only=True
+    )
+    d_day = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Event
         fields = ('id', 'title', 'summary', 'body', 'thumbnail', 'status',
-                  'status_display', 'host', 'start_date', 'end_date',
-                  'created_at')
+                  'status_display', 'region', 'online_type', 'online_display',
+                  'host', 'start_date', 'end_date', 'd_day', 'created_at')

@@ -1,13 +1,22 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const keyword = ref('')
 // 추천 검색어 (데모)
 const suggestions = ['금리', '인플레이션', 'ETF', '복리', '환율']
 
-function search(term) {
-  keyword.value = term || keyword.value
-  // 실제 서비스에서는 용어 사전 검색 페이지로 이동
+// 예시 단어 클릭 → 검색창에 채우기만 (이동 X)
+function fill(term) {
+  keyword.value = term
+}
+
+// 검색 버튼/엔터 → 경제 용어 사전으로 이동하며 검색어 전달
+function go() {
+  const q = keyword.value.trim()
+  if (!q) return
+  router.push({ name: 'glossary', query: { term: q } })
 }
 </script>
 
@@ -18,7 +27,7 @@ function search(term) {
       <strong>경제 용어 사전</strong>
     </div>
     <p class="desc">어려운 경제 용어, 검색해서 바로 찾아보세요.</p>
-    <form class="search" @submit.prevent="search()">
+    <form class="search" @submit.prevent="go">
       <input v-model="keyword" placeholder="용어를 검색해보세요" />
       <button type="submit" aria-label="검색">🔍</button>
     </form>
@@ -27,7 +36,7 @@ function search(term) {
         v-for="s in suggestions"
         :key="s"
         class="chip"
-        @click="search(s)"
+        @click="fill(s)"
       >
         #{{ s }}
       </button>

@@ -17,6 +17,26 @@ const router = createRouter({
       component: () => import('@/views/SignupView.vue'),
     },
     {
+      path: '/contents',
+      name: 'contents',
+      component: () => import('@/views/ContentsView.vue'),
+    },
+    {
+      path: '/contents/:id',
+      name: 'content-detail',
+      component: () => import('@/views/ContentDetailView.vue'),
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: () => import('@/views/EventsView.vue'),
+    },
+    {
+      path: '/glossary',
+      name: 'glossary',
+      component: () => import('@/views/GlossaryView.vue'),
+    },
+    {
       path: '/community',
       name: 'community',
       component: () => import('@/views/CommunityView.vue'),

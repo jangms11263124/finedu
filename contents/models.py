@@ -10,6 +10,7 @@ class Content(models.Model):
         ('invest', '투자'),
         ('saving', '저축'),
         ('finance', '금융상품'),
+        ('society', '사회'),
         ('etc', '기타'),
     ]
 
@@ -19,6 +20,7 @@ class Content(models.Model):
     category = models.CharField(
         '카테고리', max_length=20, choices=CATEGORY_CHOICES, default='economy'
     )
+    youtube_id = models.CharField('유튜브 영상 ID', max_length=20, blank=True)
     thumbnail = models.ImageField(
         '썸네일', upload_to='contents/', blank=True, null=True
     )
@@ -77,6 +79,11 @@ class Event(models.Model):
         ('closed', '모집마감'),
         ('ended', '종료'),
     ]
+    ONLINE_CHOICES = [
+        ('offline', '오프라인'),
+        ('online', '온라인'),
+        ('both', '온·오프라인'),
+    ]
 
     title = models.CharField('제목', max_length=200)
     summary = models.CharField('요약', max_length=300, blank=True)
@@ -86,6 +93,10 @@ class Event(models.Model):
     )
     status = models.CharField(
         '상태', max_length=10, choices=STATUS_CHOICES, default='open'
+    )
+    region = models.CharField('지역', max_length=30, blank=True)
+    online_type = models.CharField(
+        '진행 방식', max_length=10, choices=ONLINE_CHOICES, default='offline'
     )
     host = models.CharField('주최', max_length=100, blank=True)
     start_date = models.DateField('시작일', blank=True, null=True)
@@ -97,3 +108,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def d_day(self):
+        """접수 마감(end_date)까지 남은 일수. 지난 경우 None."""
+        if not self.end_date:
+            return None
+        from datetime import date
+        delta = (self.end_date - date.today()).days
+        return delta if delta >= 0 else None

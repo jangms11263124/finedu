@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import api from '@/api'
 import ContentCard from '@/components/home/ContentCard.vue'
 import EventCard from '@/components/home/EventCard.vue'
+import CardCarousel from '@/components/common/CardCarousel.vue'
 import SideAuth from '@/components/home/SideAuth.vue'
 import SideQuiz from '@/components/home/SideQuiz.vue'
 import SideCalendar from '@/components/home/SideCalendar.vue'
@@ -25,9 +26,9 @@ onMounted(async () => {
       api.get('/events/'),
       api.get('/posts/', { params: { popular: 1 } }),
     ])
-    recommended.value = rec.data.slice(0, 4)
-    popular.value = pop.data.slice(0, 4)
-    events.value = ev.data.slice(0, 3)
+    recommended.value = rec.data
+    popular.value = pop.data
+    events.value = ev.data
     posts.value = ps.data.slice(0, 5)
   } catch (e) {
     console.error('홈 데이터 로딩 실패', e)
@@ -62,11 +63,13 @@ onMounted(async () => {
         <section class="block">
           <div class="section-head">
             <h2>추천 콘텐츠<span class="sub">나에게 딱 맞는 콘텐츠를 추천해드려요</span></h2>
-            <a href="#" class="more">더보기 ›</a>
+            <RouterLink to="/contents" class="more">더보기 ›</RouterLink>
           </div>
           <div class="rec-wrap">
-            <div class="grid-4" :class="{ blurred: !auth.isLoggedIn }">
-              <ContentCard v-for="c in recommended" :key="c.id" :content="c" />
+            <div :class="{ blurred: !auth.isLoggedIn }">
+              <CardCarousel :items="recommended" v-slot="{ item }">
+                <ContentCard :content="item" />
+              </CardCarousel>
             </div>
             <div v-if="!auth.isLoggedIn" class="rec-lock">
               <span class="lock-ico">🔒</span>
@@ -85,22 +88,22 @@ onMounted(async () => {
         <section class="block">
           <div class="section-head">
             <h2>인기 콘텐츠<span class="sub">지금 가장 많이 본 콘텐츠</span></h2>
-            <a href="#" class="more">더보기 ›</a>
+            <RouterLink to="/contents" class="more">더보기 ›</RouterLink>
           </div>
-          <div class="grid-4">
-            <ContentCard v-for="c in popular" :key="c.id" :content="c" />
-          </div>
+          <CardCarousel :items="popular" v-slot="{ item }">
+            <ContentCard :content="item" />
+          </CardCarousel>
         </section>
 
         <!-- 교육 행사 & 프로그램 -->
         <section class="block">
           <div class="section-head">
             <h2>교육 행사 &amp; 프로그램</h2>
-            <a href="#" class="more">더보기 ›</a>
+            <RouterLink to="/events" class="more">더보기 ›</RouterLink>
           </div>
-          <div class="grid-3">
-            <EventCard v-for="e in events" :key="e.id" :event="e" />
-          </div>
+          <CardCarousel :items="events" v-slot="{ item }">
+            <EventCard :event="item" />
+          </CardCarousel>
         </section>
 
         <!-- 인기 게시글 -->

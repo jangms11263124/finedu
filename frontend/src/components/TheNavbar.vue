@@ -2,9 +2,9 @@
 import { RouterLink } from 'vue-router'
 
 const menus = [
-  { label: '콘텐츠 보기', to: '#' },
-  { label: '교육 행사 프로그램', to: '#' },
-  { label: '경제 용어 사전', to: '#' },
+  { label: '콘텐츠 보기', to: '/contents' },
+  { label: '교육 행사 프로그램', to: '/events' },
+  { label: '경제 용어 사전', to: '/glossary' },
   { label: '커뮤니티', to: '/community' },
 ]
 </script>
