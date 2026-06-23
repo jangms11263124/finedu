@@ -1,4 +1,4 @@
-# finedu 💰
+#  finedu 💰
 
 경제·금융 교육 플랫폼. **Django REST Framework** 백엔드 + **Vue 3 (Vite)** 프론트엔드로 구성된 RESTful 웹 앱입니다.
 
