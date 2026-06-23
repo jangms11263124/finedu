@@ -69,6 +69,12 @@ const router = createRouter({
       component: () => import('@/views/EbtiView.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: () => import('@/views/MyPageView.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
   scrollBehavior() {
     return { top: 0 }

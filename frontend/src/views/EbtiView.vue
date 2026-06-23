@@ -1,122 +1,37 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import {
+  SCALE,
+  THEME_MIN,
+  THEME_MAX,
+  STRONG_RATIO,
+  themes,
+  personaFor,
+} from '@/data/ebti'
 
 /**
- * 경제 EBTI 테스트
- * 5개 축(소비 관리·자산 관리·변화 대응·위기 관리·노후 대비)을 측정한다.
- * 문항은 아래 배열만 교체하면 되도록 데이터 주도로 구성했다.
- * 각 보기의 strong: true 는 해당 축의 '강점' 응답.
+ * 경제 EBTI 테스트 (기획재정부 경제배움e+ 진단 기반)
+ * 5개 역량(소비·자산·변화·위기·노후) × 3문항, 5점 척도.
+ * 데이터는 src/data/ebti.js 참고.
  */
-const dimensions = {
-  spend: '소비 관리',
-  asset: '자산 관리',
-  change: '변화 대응',
-  risk: '위기 관리',
-  retire: '노후 대비',
-}
 
-const questions = [
-  {
-    dim: 'spend',
-    text: '이번 달 카드값이 대략 얼마인지 알고 있나요?',
-    options: [
-      { label: '정확히 파악하고 있다', strong: true },
-      { label: '잘 모르겠다', strong: false },
-    ],
-  },
-  {
-    dim: 'spend',
-    text: '갖고 싶은 물건이 생기면 보통?',
-    options: [
-      { label: '예산을 따져보고 결정한다', strong: true },
-      { label: '일단 지르고 본다', strong: false },
-    ],
-  },
-  {
-    dim: 'asset',
-    text: '내 예적금·투자 현황을 얼마나 챙기나요?',
-    options: [
-      { label: '정기적으로 점검한다', strong: true },
-      { label: '거의 신경 쓰지 않는다', strong: false },
-    ],
-  },
-  {
-    dim: 'asset',
-    text: '여윳돈이 생기면?',
-    options: [
-      { label: '저축·투자 계획을 세운다', strong: true },
-      { label: '통장에 그냥 둔다', strong: false },
-    ],
-  },
-  {
-    dim: 'change',
-    text: '새로운 금융 상품이나 제도가 나오면?',
-    options: [
-      { label: '찾아보고 활용한다', strong: true },
-      { label: '딱히 관심 없다', strong: false },
-    ],
-  },
-  {
-    dim: 'change',
-    text: '금리가 크게 바뀌면 내 자산 계획은?',
-    options: [
-      { label: '상황에 맞춰 조정한다', strong: true },
-      { label: '그대로 둔다', strong: false },
-    ],
-  },
-  {
-    dim: 'risk',
-    text: '갑자기 큰돈이 필요해진다면?',
-    options: [
-      { label: '비상금으로 대비돼 있다', strong: true },
-      { label: '막막할 것 같다', strong: false },
-    ],
-  },
-  {
-    dim: 'risk',
-    text: '보험·안전장치에 대해 생각해보면?',
-    options: [
-      { label: '최소한은 준비해 두었다', strong: true },
-      { label: '거의 준비가 없다', strong: false },
-    ],
-  },
-  {
-    dim: 'retire',
-    text: '은퇴 후 자금에 대한 계획이 있나요?',
-    options: [
-      { label: '조금씩 준비하고 있다', strong: true },
-      { label: '아직 생각해보지 못했다', strong: false },
-    ],
-  },
-  {
-    dim: 'retire',
-    text: '연금이나 장기 저축은?',
-    options: [
-      { label: '이미 실천하고 있다', strong: true },
-      { label: '생각만 하고 있다', strong: false },
-    ],
-  },
-]
-
-// 강점 개수(0~5)에 따른 페르소나
-const personas = [
-  { emoji: '🌱', name: '금융 새싹', desc: '이제 막 첫걸음을 뗀 단계예요. 작은 습관부터 시작해볼까요?' },
-  { emoji: '🧭', name: '금융 탐색가', desc: '관심은 충분해요. 방향만 잡으면 빠르게 성장할 타입!' },
-  { emoji: '🚶', name: '금융 실천러', desc: '기본기를 갖춰가는 중. 꾸준함이 무기가 될 거예요.' },
-  { emoji: '📈', name: '금융 성장러', desc: '제법 탄탄해요. 부족한 축만 보완하면 상위권!' },
-  { emoji: '♟️', name: '금융 전략가', desc: '대부분의 영역을 챙기는 전략가. 디테일만 다듬으면 완성형.' },
-  { emoji: '👑', name: '금융 마스터', desc: '5개 영역을 모두 갖춘 진정한 경제 고수! 멋져요.' },
-]
+// 모든 문항을 (주제 + 문항)으로 평탄화
+const questions = themes.flatMap((t) =>
+  t.questions.map((text) => ({ themeKey: t.key, themeName: t.name, text }))
+)
+const themeMap = Object.fromEntries(themes.map((t) => [t.key, t]))
 
 const STEP = { INTRO: 'intro', QUIZ: 'quiz', RESULT: 'result' }
 const step = ref(STEP.INTRO)
 const current = ref(0)
-const answers = ref([]) // 각 문항의 strong 여부 저장
+const answers = ref([]) // 각 문항의 선택 점수 저장
 
 const progress = computed(() =>
   Math.round((current.value / questions.length) * 100)
 )
+
+const result = ref(null)
 
 function start() {
   step.value = STEP.QUIZ
@@ -125,7 +40,7 @@ function start() {
 }
 
 function choose(option) {
-  answers.value[current.value] = option.strong
+  answers.value[current.value] = option.score
   if (current.value < questions.length - 1) {
     current.value++
   } else {
@@ -137,30 +52,35 @@ function prev() {
   if (current.value > 0) current.value--
 }
 
-// 축별 강점 점수 집계
-const scores = ref({})
-const result = ref(null)
-
 function finish() {
-  const tally = { spend: 0, asset: 0, change: 0, risk: 0, retire: 0 }
-  const max = { spend: 0, asset: 0, change: 0, risk: 0, retire: 0 }
+  // 주제별 점수 집계
+  const totals = Object.fromEntries(themes.map((t) => [t.key, 0]))
   questions.forEach((q, i) => {
-    max[q.dim]++
-    if (answers.value[i]) tally[q.dim]++
+    totals[q.themeKey] += answers.value[i] ?? 0
   })
-  // 축별 강점 여부(O/X): 강점 응답이 절반 이상이면 O
-  const strongDims = Object.keys(tally).filter(
-    (d) => tally[d] / max[d] >= 0.5
-  )
-  scores.value = Object.fromEntries(
-    Object.keys(tally).map((d) => [d, { got: tally[d], total: max[d] }])
-  )
+
+  const threshold = THEME_MIN + (THEME_MAX - THEME_MIN) * STRONG_RATIO
+  const breakdown = themes.map((t) => {
+    const score = totals[t.key]
+    const strong = score >= threshold
+    return {
+      key: t.key,
+      name: t.name,
+      score,
+      ratio: (score - THEME_MIN) / (THEME_MAX - THEME_MIN),
+      strong,
+      feedback: strong ? t.strong : t.weak,
+      tags: strong ? [] : t.tags, // 보완 영역에만 추천 태그 노출 (원본과 동일)
+    }
+  })
+
+  const strongCount = breakdown.filter((b) => b.strong).length
   result.value = {
-    strongCount: strongDims.length,
-    strongDims,
-    persona: personas[strongDims.length],
+    breakdown,
+    strongCount,
+    persona: personaFor(strongCount),
   }
-  // 결과를 로컬에 저장 (기획서: EBTI 결과는 로컬스토리지 처리)
+  // 기획서: EBTI 결과는 로컬스토리지에 저장
   localStorage.setItem('ebtiResult', JSON.stringify(result.value))
   step.value = STEP.RESULT
 }
@@ -176,19 +96,22 @@ function restart() {
     <div class="container narrow">
       <!-- 인트로 -->
       <section v-if="step === STEP.INTRO" class="intro card">
-        <span class="badge">경제 성향 테스트</span>
+        <span class="badge">경제 습관 진단</span>
         <h1>나의 경제 EBTI는?</h1>
         <p class="lead">
-          10개의 질문으로 알아보는 나의 금융 성향.<br />
-          소비·자산·변화·위기·노후 5가지 영역을 진단해드려요.
+          {{ questions.length }}개의 질문으로 알아보는 나의 경제 습관.<br />
+          소비·자산·변화·위기·노후 5가지 역량을 진단해드려요.
+        </p>
+        <p class="src">
+          ※ 기획재정부 경제배움e+ ‘나의 경제 습관 테스트’ 기반
         </p>
         <div class="dims">
-          <span v-for="(label, key) in dimensions" :key="key" class="dim-chip">
-            {{ label }}
+          <span v-for="t in themes" :key="t.key" class="dim-chip">
+            {{ t.name }}
           </span>
         </div>
-        <button class="btn btn-navy big" @click="start">테스트 시작하기 →</button>
-        <p class="time">⏱ 약 1분 소요 · 10문항</p>
+        <button class="btn btn-navy big" @click="start">진단 시작하기 →</button>
+        <p class="time">⏱ 약 2분 소요 · {{ questions.length }}문항</p>
       </section>
 
       <!-- 문항 -->
@@ -197,15 +120,16 @@ function restart() {
           <div class="bar-fill" :style="{ width: progress + '%' }"></div>
         </div>
         <div class="q-top">
-          <span class="q-dim">{{ dimensions[questions[current].dim] }}</span>
+          <span class="q-dim">{{ questions[current].themeName }}</span>
           <span class="q-count">{{ current + 1 }} / {{ questions.length }}</span>
         </div>
         <h2 class="q-text">{{ questions[current].text }}</h2>
-        <div class="options">
+        <div class="options scale">
           <button
-            v-for="(o, i) in questions[current].options"
+            v-for="(o, i) in SCALE"
             :key="i"
             class="opt"
+            :class="{ on: answers[current] === o.score }"
             @click="choose(o)"
           >
             {{ o.label }}
@@ -216,32 +140,53 @@ function restart() {
 
       <!-- 결과 -->
       <section v-else class="result card">
-        <span class="badge">테스트 결과</span>
+        <span class="badge">경제 EBTI 진단 결과</span>
         <div class="persona">
           <span class="p-emoji">{{ result.persona.emoji }}</span>
-          <h1>{{ result.persona.name }}</h1>
+          <h1 class="p-name">{{ result.persona.name }}</h1>
           <p class="p-desc">{{ result.persona.desc }}</p>
           <span class="p-score">강점 영역 {{ result.strongCount }} / 5</span>
         </div>
 
+        <!-- 역량별 점수 막대 -->
         <div class="breakdown">
-          <div v-for="(label, key) in dimensions" :key="key" class="row">
+          <div v-for="b in result.breakdown" :key="b.key" class="row">
             <span class="r-label">
-              {{ result.strongDims.includes(key) ? '✅' : '⬜' }} {{ label }}
+              {{ b.strong ? '✅' : '✏️' }} {{ b.name }}
             </span>
             <div class="r-bar">
               <div
                 class="r-fill"
-                :class="{ strong: result.strongDims.includes(key) }"
-                :style="{ width: (scores[key].got / scores[key].total) * 100 + '%' }"
+                :class="{ strong: b.strong }"
+                :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
               ></div>
             </div>
+            <span class="r-score">{{ b.score }}점</span>
           </div>
         </div>
 
+        <!-- 역량별 상세 피드백 -->
+        <div class="details">
+          <article v-for="b in result.breakdown" :key="b.key" class="detail">
+            <h3 class="d-head" :class="b.strong ? 'good' : 'todo'">
+              {{ b.name }} - {{ b.strong ? '좋아요!' : '함께 공부해요!' }}
+            </h3>
+            <p class="d-desc">{{ themeMap[b.key].desc }}</p>
+            <p class="d-fb">{{ b.feedback }}</p>
+            <div v-if="b.tags.length" class="d-tags">
+              <RouterLink
+                v-for="tag in b.tags"
+                :key="tag"
+                :to="`/contents?q=${tag}`"
+                class="tag"
+              >#{{ tag }}</RouterLink>
+            </div>
+          </article>
+        </div>
+
         <div class="actions">
-          <RouterLink to="/" class="btn btn-navy">맞춤 콘텐츠 보러가기 →</RouterLink>
-          <button class="btn btn-outline" @click="restart">다시 테스트하기</button>
+          <RouterLink to="/contents" class="btn btn-navy">맞춤 콘텐츠 보러가기 →</RouterLink>
+          <button class="btn btn-outline" @click="restart">다시 진단하기</button>
         </div>
       </section>
     </div>
@@ -250,11 +195,11 @@ function restart() {
 
 <style scoped>
 .ebti {
-  padding: 48px 0 30px;
+  padding: 48px 0 40px;
   min-height: 72vh;
 }
 .narrow {
-  max-width: 600px;
+  max-width: 640px;
 }
 .card {
   background: #fff;
@@ -287,6 +232,11 @@ function restart() {
   color: var(--text-sub);
   font-size: 0.94rem;
   line-height: 1.6;
+}
+.src {
+  margin-top: 8px;
+  font-size: 0.76rem;
+  color: var(--text-mute);
 }
 .dims {
   display: flex;
@@ -363,17 +313,22 @@ function restart() {
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: 14px;
-  padding: 18px 20px;
+  padding: 16px 20px;
   font-size: 0.98rem;
   font-weight: 600;
   color: var(--text);
-  text-align: left;
+  text-align: center;
   transition: all 0.14s;
 }
 .opt:hover {
   border-color: var(--navy);
   background: #f7f9ff;
   transform: translateY(-2px);
+}
+.opt.on {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
 }
 .back {
   margin-top: 20px;
@@ -396,16 +351,18 @@ function restart() {
   font-size: 3.6rem;
   display: block;
 }
-.persona h1 {
-  font-size: 1.8rem;
+.p-name {
+  font-size: 1.7rem;
   font-weight: 800;
-  margin: 10px 0 8px;
+  margin: 10px 0 10px;
+  line-height: 1.3;
+  white-space: pre-line;
 }
 .p-desc {
   color: var(--text-sub);
   font-size: 0.92rem;
-  line-height: 1.55;
-  max-width: 380px;
+  line-height: 1.6;
+  max-width: 440px;
   margin: 0 auto 14px;
 }
 .p-score {
@@ -422,14 +379,14 @@ function restart() {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin: 8px 0 30px;
+  margin: 8px 0 26px;
   padding: 22px;
   background: var(--bg);
   border-radius: 14px;
 }
 .row {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 130px 1fr 44px;
   align-items: center;
   gap: 12px;
 }
@@ -453,6 +410,70 @@ function restart() {
 .r-fill.strong {
   background: linear-gradient(90deg, var(--teal), var(--green));
 }
+.r-score {
+  font-size: 0.78rem;
+  color: var(--text-mute);
+  font-weight: 700;
+  text-align: right;
+}
+
+/* 역량별 상세 */
+.details {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.detail {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+.d-head {
+  display: inline-block;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.d-head.good {
+  background: linear-gradient(90deg, var(--teal), var(--green));
+}
+.d-head.todo {
+  background: linear-gradient(90deg, #ec4899, #f43f5e);
+}
+.d-desc {
+  font-size: 0.82rem;
+  color: var(--text-mute);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+.d-fb {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.65;
+}
+.d-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.tag {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 11px;
+}
+.tag:hover {
+  border-color: var(--navy);
+}
 .actions {
   display: flex;
   flex-direction: column;
@@ -463,7 +484,7 @@ function restart() {
     padding: 30px 22px;
   }
   .row {
-    grid-template-columns: 96px 1fr;
+    grid-template-columns: 96px 1fr 40px;
   }
 }
 </style>

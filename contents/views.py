@@ -28,6 +28,9 @@ class ContentViewSet(viewsets.ModelViewSet):
             qs = qs.filter(is_popular=True).order_by('-views')
         if category := params.get('category'):
             qs = qs.filter(category=category)
+        # 마이페이지: 좋아요한 콘텐츠
+        if params.get('liked') == 'me' and self.request.user.is_authenticated:
+            qs = qs.filter(likes=self.request.user)
         if q := params.get('q'):
             qs = (qs.filter(title__icontains=q)
                   | qs.filter(summary__icontains=q)).distinct()

@@ -113,6 +113,8 @@ h3 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  /* 제목이 1줄이든 2줄이든 항상 2줄 높이를 확보해 카드 높이를 통일 */
+  min-height: calc(1.35em * 2);
 }
 .summary {
   font-size: 0.8rem;

@@ -5,6 +5,7 @@ import api from '@/api'
 import ContentCard from '@/components/home/ContentCard.vue'
 import EventCard from '@/components/home/EventCard.vue'
 import CardCarousel from '@/components/common/CardCarousel.vue'
+import HeroCarousel from '@/components/home/HeroCarousel.vue'
 import SideAuth from '@/components/home/SideAuth.vue'
 import SideQuiz from '@/components/home/SideQuiz.vue'
 import SideCalendar from '@/components/home/SideCalendar.vue'
@@ -41,23 +42,8 @@ onMounted(async () => {
     <div class="container layout">
       <!-- ===== 본문 ===== -->
       <div class="main-col">
-        <!-- 히어로 배너 -->
-        <section class="hero">
-          <div class="hero-text">
-            <span class="kicker">금융 교육 플랫폼</span>
-            <h1>똑똑한 경제 습관,<br />finedu와 함께</h1>
-            <p>경제 용어부터 금융 상품까지, 누구나 쉽게 배우는 금융 교육</p>
-            <RouterLink
-              :to="auth.isLoggedIn ? '/ebti' : '/login'"
-              class="btn btn-green"
-            >지금 시작하기 →</RouterLink>
-          </div>
-          <div class="hero-art">
-            <span class="coin c1">💰</span>
-            <span class="coin c2">📈</span>
-            <span class="coin c3">🪙</span>
-          </div>
-        </section>
+        <!-- 히어로 배너 (캐러셀) -->
+        <HeroCarousel />
 
         <!-- 추천 콘텐츠 -->
         <section class="block">
@@ -164,55 +150,6 @@ onMounted(async () => {
   flex-direction: column;
   gap: 18px;
 }
-
-/* 히어로 */
-.hero {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: linear-gradient(120deg, #0b4f49 0%, #0f766e 55%, #15803d 120%);
-  color: #fff;
-  padding: 44px 40px;
-  min-height: 230px;
-  display: flex;
-  align-items: center;
-}
-.kicker {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.18);
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-}
-.hero-text h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.5px;
-}
-.hero-text p {
-  margin: 14px 0 22px;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-.hero-art {
-  position: absolute;
-  right: 30px;
-  top: 0;
-  bottom: 0;
-  width: 240px;
-  pointer-events: none;
-}
-.coin {
-  position: absolute;
-  font-size: 3rem;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
-}
-.c1 { right: 30px; top: 40px; font-size: 4rem; }
-.c2 { right: 120px; top: 110px; }
-.c3 { right: 20px; bottom: 36px; }
 
 /* 추천 콘텐츠 잠금 (비로그인) */
 .rec-wrap {
