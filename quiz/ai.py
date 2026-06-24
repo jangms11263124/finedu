@@ -5,8 +5,11 @@
 GMS_KEY 가 없거나 오류가 나면 정적 폴백 퀴즈로 자동 대체한다.
 """
 import json
+import logging
 
 from django.conf import settings
+
+logger = logging.getLogger(__name__)
 
 # Gemini structured output 스키마 (responseSchema)
 _SCHEMA = {
@@ -74,7 +77,7 @@ def generate_quiz(seed_date):
         try:
             return _ai_quiz(seed_date)
         except Exception as exc:  # API 오류 시 폴백
-            print('퀴즈 AI 생성 실패, 폴백 사용:', exc)
+            logger.warning('퀴즈 AI 생성 실패, 폴백 사용: %s', exc)
     return _fallback_quiz(seed_date)
 
 
