@@ -6,9 +6,12 @@ class Post(models.Model):
     """정보 게시판 글 (인기 게시글)."""
 
     BOARD_CHOICES = [
+        ('notice', '공지'),
         ('free', '자유게시판'),
-        ('info', '정보공유'),
-        ('qna', '질문답변'),
+        ('review', '후기게시판'),
+        ('info', '정보게시판'),
+        ('qna', '질문게시판'),
+        ('study', '스터디 모집'),
     ]
 
     board = models.CharField(
@@ -16,6 +19,7 @@ class Post(models.Model):
     )
     title = models.CharField('제목', max_length=200)
     content = models.TextField('내용', blank=True)
+    image = models.ImageField('이미지', upload_to='posts/', blank=True, null=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
