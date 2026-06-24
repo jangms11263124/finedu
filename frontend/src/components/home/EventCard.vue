@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from 'vue-router'
+
 defineProps({
   event: { type: Object, required: true },
 })
@@ -11,7 +13,7 @@ const statusClass = {
 </script>
 
 <template>
-  <article class="ev-card">
+  <RouterLink :to="`/events/${event.id}`" class="ev-card">
     <div class="thumb">
       <span class="emoji">🎓</span>
       <span class="badge" :class="statusClass[event.status]">
@@ -25,11 +27,12 @@ const statusClass = {
         🗓 {{ event.start_date }} ~ {{ event.end_date }}
       </p>
     </div>
-  </article>
+  </RouterLink>
 </template>
 
 <style scoped>
 .ev-card {
+  display: block;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
