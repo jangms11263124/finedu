@@ -4,6 +4,8 @@ import { RouterLink } from 'vue-router'
 import api from '@/api'
 import ContentCard from '@/components/home/ContentCard.vue'
 import EventCard from '@/components/home/EventCard.vue'
+import CardCarousel from '@/components/common/CardCarousel.vue'
+import HeroCarousel from '@/components/home/HeroCarousel.vue'
 import SideAuth from '@/components/home/SideAuth.vue'
 import SideQuiz from '@/components/home/SideQuiz.vue'
 import SideCalendar from '@/components/home/SideCalendar.vue'
@@ -25,9 +27,9 @@ onMounted(async () => {
       api.get('/events/'),
       api.get('/posts/', { params: { popular: 1 } }),
     ])
-    recommended.value = rec.data.slice(0, 4)
-    popular.value = pop.data.slice(0, 4)
-    events.value = ev.data.slice(0, 3)
+    recommended.value = rec.data
+    popular.value = pop.data
+    events.value = ev.data
     posts.value = ps.data.slice(0, 5)
   } catch (e) {
     console.error('홈 데이터 로딩 실패', e)
@@ -40,33 +42,20 @@ onMounted(async () => {
     <div class="container layout">
       <!-- ===== 본문 ===== -->
       <div class="main-col">
-        <!-- 히어로 배너 -->
-        <section class="hero">
-          <div class="hero-text">
-            <span class="kicker">금융 교육 플랫폼</span>
-            <h1>똑똑한 경제 습관,<br />finedu와 함께</h1>
-            <p>경제 용어부터 금융 상품까지, 누구나 쉽게 배우는 금융 교육</p>
-            <RouterLink
-              :to="auth.isLoggedIn ? '/ebti' : '/login'"
-              class="btn btn-green"
-            >지금 시작하기 →</RouterLink>
-          </div>
-          <div class="hero-art">
-            <span class="coin c1">💰</span>
-            <span class="coin c2">📈</span>
-            <span class="coin c3">🪙</span>
-          </div>
-        </section>
+        <!-- 히어로 배너 (캐러셀) -->
+        <HeroCarousel />
 
         <!-- 추천 콘텐츠 -->
         <section class="block">
           <div class="section-head">
             <h2>추천 콘텐츠<span class="sub">나에게 딱 맞는 콘텐츠를 추천해드려요</span></h2>
-            <a href="#" class="more">더보기 ›</a>
+            <RouterLink to="/contents" class="more">더보기 ›</RouterLink>
           </div>
           <div class="rec-wrap">
-            <div class="grid-4" :class="{ blurred: !auth.isLoggedIn }">
-              <ContentCard v-for="c in recommended" :key="c.id" :content="c" />
+            <div :class="{ blurred: !auth.isLoggedIn }">
+              <CardCarousel :items="recommended" v-slot="{ item }">
+                <ContentCard :content="item" />
+              </CardCarousel>
             </div>
             <div v-if="!auth.isLoggedIn" class="rec-lock">
               <span class="lock-ico">🔒</span>
@@ -85,22 +74,22 @@ onMounted(async () => {
         <section class="block">
           <div class="section-head">
             <h2>인기 콘텐츠<span class="sub">지금 가장 많이 본 콘텐츠</span></h2>
-            <a href="#" class="more">더보기 ›</a>
+            <RouterLink to="/contents" class="more">더보기 ›</RouterLink>
           </div>
-          <div class="grid-4">
-            <ContentCard v-for="c in popular" :key="c.id" :content="c" />
-          </div>
+          <CardCarousel :items="popular" v-slot="{ item }">
+            <ContentCard :content="item" />
+          </CardCarousel>
         </section>
 
         <!-- 교육 행사 & 프로그램 -->
         <section class="block">
           <div class="section-head">
             <h2>교육 행사 &amp; 프로그램</h2>
-            <a href="#" class="more">더보기 ›</a>
+            <RouterLink to="/events" class="more">더보기 ›</RouterLink>
           </div>
-          <div class="grid-3">
-            <EventCard v-for="e in events" :key="e.id" :event="e" />
-          </div>
+          <CardCarousel :items="events" v-slot="{ item }">
+            <EventCard :event="item" />
+          </CardCarousel>
         </section>
 
         <!-- 인기 게시글 -->
@@ -161,55 +150,6 @@ onMounted(async () => {
   flex-direction: column;
   gap: 18px;
 }
-
-/* 히어로 */
-.hero {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: linear-gradient(120deg, #0b4f49 0%, #0f766e 55%, #15803d 120%);
-  color: #fff;
-  padding: 44px 40px;
-  min-height: 230px;
-  display: flex;
-  align-items: center;
-}
-.kicker {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.18);
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-}
-.hero-text h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.5px;
-}
-.hero-text p {
-  margin: 14px 0 22px;
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-.hero-art {
-  position: absolute;
-  right: 30px;
-  top: 0;
-  bottom: 0;
-  width: 240px;
-  pointer-events: none;
-}
-.coin {
-  position: absolute;
-  font-size: 3rem;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
-}
-.c1 { right: 30px; top: 40px; font-size: 4rem; }
-.c2 { right: 120px; top: 110px; }
-.c3 { right: 20px; bottom: 36px; }
 
 /* 추천 콘텐츠 잠금 (비로그인) */
 .rec-wrap {

@@ -65,6 +65,9 @@ npm run dev                     # http://localhost:5173
 | GET | `/api/contents/?popular=1` | 인기 콘텐츠 |
 | GET | `/api/events/` | 교육 행사·프로그램 |
 | GET | `/api/posts/?popular=1` | 인기 게시글 |
+| GET | `/api/contents/?page=1&q=&category=&ordering=` | 콘텐츠 목록(검색·정렬·페이지) |
+| GET | `/api/events/?page=1&region=&online_type=` | 교육 행사(지역·온오프라인 필터) |
+| GET | `/api/terms/?page=1&subject=&initial=&q=` | 경제 용어 사전(주제·두문자·검색) |
 | GET | `/api/contents/ranking/` | 커뮤니티 - 콘텐츠 좋아요 랭킹 |
 | GET | `/api/accounts/ranking/` | 커뮤니티 - 사용자 활동 랭킹 |
 | POST | `/api/contents/{id}/like/` | 콘텐츠 좋아요 토글 |

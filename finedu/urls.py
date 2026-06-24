@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/accounts/', include('accounts.urls')),
     path('api/', include('contents.urls')),
     path('api/', include('community.urls')),
+    path('api/', include('glossary.urls')),
 ]
 
 if settings.DEBUG:

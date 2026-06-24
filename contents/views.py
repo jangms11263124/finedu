@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, F
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -28,7 +28,26 @@ class ContentViewSet(viewsets.ModelViewSet):
             qs = qs.filter(is_popular=True).order_by('-views')
         if category := params.get('category'):
             qs = qs.filter(category=category)
+        # 마이페이지: 좋아요한 콘텐츠
+        if params.get('liked') == 'me' and self.request.user.is_authenticated:
+            qs = qs.filter(likes=self.request.user)
+        if q := params.get('q'):
+            qs = (qs.filter(title__icontains=q)
+                  | qs.filter(summary__icontains=q)).distinct()
+        ordering = params.get('ordering')
+        if ordering == 'views':
+            qs = qs.order_by('-views')
+        elif ordering == 'oldest':
+            qs = qs.order_by('created_at')
         return qs
+
+    def retrieve(self, request, *args, **kwargs):
+        """상세 조회 시 조회수 +1."""
+        instance = self.get_object()
+        Content.objects.filter(pk=instance.pk).update(views=F('views') + 1)
+        instance.refresh_from_db()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def ranking(self, request):
@@ -76,6 +95,11 @@ class EventViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        if status_ := self.request.query_params.get('status'):
+        params = self.request.query_params
+        if status_ := params.get('status'):
             qs = qs.filter(status=status_)
+        if region := params.get('region'):
+            qs = qs.filter(region=region)
+        if online_type := params.get('online_type'):
+            qs = qs.filter(online_type=online_type)
         return qs

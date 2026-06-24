@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from 'vue-router'
+
 const props = defineProps({
   content: { type: Object, required: true },
 })
@@ -9,13 +11,17 @@ const gradients = {
   invest: 'linear-gradient(135deg,#1b2a59,#3b82f6)',
   saving: 'linear-gradient(135deg,#15803d,#65a30d)',
   finance: 'linear-gradient(135deg,#7c3aed,#2563eb)',
+  society: 'linear-gradient(135deg,#b45309,#f59e0b)',
   etc: 'linear-gradient(135deg,#475569,#94a3b8)',
 }
-const icons = { economy: '📈', invest: '💹', saving: '🏦', finance: '💳', etc: '📰' }
+const icons = {
+  economy: '📈', invest: '💹', saving: '🏦',
+  finance: '💳', society: '🏙️', etc: '📰',
+}
 </script>
 
 <template>
-  <article class="card">
+  <RouterLink :to="`/contents/${content.id}`" class="card">
     <div
       class="thumb"
       :style="content.thumbnail
@@ -25,6 +31,7 @@ const icons = { economy: '📈', invest: '💹', saving: '🏦', finance: '💳'
       <span v-if="!content.thumbnail" class="emoji">
         {{ icons[content.category] || '📰' }}
       </span>
+      <span class="play">▶</span>
       <span class="tag">{{ content.category_display }}</span>
     </div>
     <div class="body">
@@ -34,11 +41,12 @@ const icons = { economy: '📈', invest: '💹', saving: '🏦', finance: '💳'
         <span>👁 {{ content.views.toLocaleString() }}</span>
       </div>
     </div>
-  </article>
+  </RouterLink>
 </template>
 
 <style scoped>
 .card {
+  display: block;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -61,6 +69,26 @@ const icons = { economy: '📈', invest: '💹', saving: '🏦', finance: '💳'
 .emoji {
   font-size: 2rem;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+.play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  padding-left: 3px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.card:hover .play {
+  opacity: 1;
 }
 .tag {
   position: absolute;
@@ -85,6 +113,8 @@ h3 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  /* 제목이 1줄이든 2줄이든 항상 2줄 높이를 확보해 카드 높이를 통일 */
+  min-height: calc(1.35em * 2);
 }
 .summary {
   font-size: 0.8rem;

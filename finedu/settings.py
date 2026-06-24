@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'contents',
     'community',
+    'glossary',
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'finedu.pagination.OptionalPageNumberPagination',
+    'PAGE_SIZE': 12,
 }
 
 # Simple JWT

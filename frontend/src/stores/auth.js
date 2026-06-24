@@ -36,6 +36,13 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function updateProfile(payload) {
+    // payload가 FormData면 프로필 이미지 업로드(멀티파트), 아니면 일반 JSON
+    const { data } = await api.patch('/accounts/me/', payload)
+    user.value = data
+    return data
+  }
+
   function logout() {
     access.value = ''
     user.value = null
@@ -43,5 +50,5 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem('refresh')
   }
 
-  return { access, user, isLoggedIn, login, signup, fetchMe, logout }
+  return { access, user, isLoggedIn, login, signup, fetchMe, updateProfile, logout }
 })
