@@ -22,27 +22,25 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         demo, _ = User.objects.get_or_create(
             username='finedu_demo',
-            defaults={'nickname': '핀에듀지기', 'points': 480},
+            defaults={'nickname': '핀에듀지기'},
         )
         demo.nickname = '핀에듀지기'
-        demo.points = 480
         demo.set_password('finedu1234')
         demo.save()
 
-        # 랭킹용 추가 회원들
+        # 좋아요·게시글 작성용 추가 회원들
         members = [demo]
         roster = [
-            ('econ_master', '경제마스터', 1280),
-            ('saving_queen', '절약여왕', 1050),
-            ('young_invest', '주린이탈출', 760),
-            ('coin_lover', '코인러버', 540),
+            ('econ_master', '경제마스터'),
+            ('saving_queen', '절약여왕'),
+            ('young_invest', '주린이탈출'),
+            ('coin_lover', '코인러버'),
         ]
-        for uname, nick, pts in roster:
+        for uname, nick in roster:
             u, _ = User.objects.get_or_create(
                 username=uname, defaults={'nickname': nick}
             )
             u.nickname = nick
-            u.points = pts
             u.set_password('finedu1234')
             u.save()
             members.append(u)
