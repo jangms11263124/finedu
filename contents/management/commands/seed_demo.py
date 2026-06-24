@@ -132,6 +132,9 @@ class Command(BaseCommand):
             '부산': ('부산광역시청', '부산광역시 연제구 중앙대로 1001', 35.1796, 129.0756),
         }
         for i, (title, host, region, online, dday) in enumerate(events):
+            # 오프라인(또는 온·오프 병행) 행사는 지역 대표 좌표를 지도에 표시
+            offline = online in ('offline', 'both')
+            place = region_place.get(region)
             # 데모 데이터를 풍부하게 하기 위해 일부 이벤트의 접수 기간을 다양화
             if i == len(events) - 1:  # 마지막 이벤트는 마감된 이벤트로 시딩
                 start_dt = today - timedelta(days=10)
