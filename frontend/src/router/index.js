@@ -42,6 +42,11 @@ const router = createRouter({
       component: () => import('@/views/CommunityView.vue'),
     },
     {
+      path: '/community/ranking',
+      name: 'community-ranking',
+      component: () => import('@/views/CommunityRankingView.vue'),
+    },
+    {
       path: '/community/write',
       name: 'post-create',
       component: () => import('@/views/PostFormView.vue'),
