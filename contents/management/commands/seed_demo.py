@@ -148,6 +148,9 @@ class Command(BaseCommand):
                 end_dt = today + timedelta(days=dday)
                 status_val = 'open' if dday >= 0 else 'closed'
 
+            place = region_place.get(region)
+            is_offline = (online in ('offline', 'both'))
+
             Event.objects.create(
                 title=title,
                 summary='실생활에 바로 쓰는 금융 지식을 배워보세요.',
@@ -158,13 +161,13 @@ class Command(BaseCommand):
                 host=host,
                 region=region,
                 online_type=online,
-                status='open' if dday >= 0 else 'closed',
-                start_date=today,
-                end_date=today + timedelta(days=dday),
-                place_name=place[0] if (place and offline) else '',
-                address=place[1] if (place and offline) else '',
-                latitude=place[2] if (place and offline) else None,
-                longitude=place[3] if (place and offline) else None,
+                status=status_val,
+                start_date=start_dt,
+                end_date=end_dt,
+                place_name=place[0] if (place and is_offline) else '',
+                address=place[1] if (place and is_offline) else '',
+                latitude=place[2] if (place and is_offline) else None,
+                longitude=place[3] if (place and is_offline) else None,
             )
 
         posts = [
