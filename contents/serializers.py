@@ -48,4 +48,6 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ('id', 'title', 'summary', 'body', 'thumbnail', 'status',
                   'status_display', 'region', 'online_type', 'online_display',
-                  'host', 'start_date', 'end_date', 'd_day', 'created_at')
+                  'host', 'start_date', 'end_date', 'd_day',
+                  'place_name', 'address', 'latitude', 'longitude',
+                  'created_at')

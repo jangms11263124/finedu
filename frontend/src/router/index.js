@@ -22,6 +22,12 @@ const router = createRouter({
       component: () => import('@/views/ContentsView.vue'),
     },
     {
+      path: '/ai-recommend',
+      name: 'ai-recommend',
+      component: () => import('@/views/AIRecommendView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/contents/:id',
       name: 'content-detail',
       component: () => import('@/views/ContentDetailView.vue'),
@@ -30,6 +36,11 @@ const router = createRouter({
       path: '/events',
       name: 'events',
       component: () => import('@/views/EventsView.vue'),
+    },
+    {
+      path: '/events/:id',
+      name: 'event-detail',
+      component: () => import('@/views/EventDetailView.vue'),
     },
     {
       path: '/glossary',

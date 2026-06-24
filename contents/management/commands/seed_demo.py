@@ -125,6 +125,14 @@ class Command(BaseCommand):
             ('대학생 모의 주식 투자 대회', '한국거래소', '서울', 'online', 18),
             ('우리 동네 금융 사기 예방 교실', '금융감독원', '인천', 'offline', 20),
         ]
+        # 지역별 대표 좌표·장소 (카카오맵 표시용)
+        region_place = {
+            '서울': ('서울특별시청', '서울특별시 중구 세종대로 110', 37.5663, 126.9779),
+            '경기도': ('경기도청', '경기도 수원시 영통구 도청로 30', 37.2750, 127.0095),
+            '인천': ('인천광역시청', '인천광역시 남동구 정각로 29', 37.4563, 126.7052),
+            '대전': ('대전광역시청', '대전광역시 서구 둔산로 100', 36.3504, 127.3845),
+            '부산': ('부산광역시청', '부산광역시 연제구 중앙대로 1001', 35.1796, 129.0756),
+        }
         for i, (title, host, region, online, dday) in enumerate(events):
             # 데모 데이터를 풍부하게 하기 위해 일부 이벤트의 접수 기간을 다양화
             if i == len(events) - 1:  # 마지막 이벤트는 마감된 이벤트로 시딩
@@ -143,12 +151,20 @@ class Command(BaseCommand):
             Event.objects.create(
                 title=title,
                 summary='실생활에 바로 쓰는 금융 지식을 배워보세요.',
+                body=(
+                    title + ' 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 '
+                    '참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.'
+                ),
                 host=host,
                 region=region,
                 online_type=online,
-                status=status_val,
-                start_date=start_dt,
-                end_date=end_dt,
+                status='open' if dday >= 0 else 'closed',
+                start_date=today,
+                end_date=today + timedelta(days=dday),
+                place_name=place[0] if (place and offline) else '',
+                address=place[1] if (place and offline) else '',
+                latitude=place[2] if (place and offline) else None,
+                longitude=place[3] if (place and offline) else None,
             )
 
         posts = [

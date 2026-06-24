@@ -46,6 +46,10 @@ python manage.py runserver      # http://127.0.0.1:8000
 
 데모 계정: **finedu_demo / finedu1234**
 
+> **AI 추천 활성화(선택)**: 프로젝트 루트 `.env`의 `ANTHROPIC_API_KEY=`에
+> [Anthropic 콘솔](https://console.anthropic.com) 키를 넣으면 Claude 기반 AI 추천이
+> 작동합니다. 키가 없으면 규칙 기반 추천으로 자동 대체됩니다.
+
 ### 2. 프론트엔드 (Vue)
 
 ```bash
@@ -68,6 +72,7 @@ npm run dev                     # http://localhost:5173
 | GET | `/api/contents/?page=1&q=&category=&ordering=` | 콘텐츠 목록(검색·정렬·페이지) |
 | GET | `/api/events/?page=1&region=&online_type=` | 교육 행사(지역·온오프라인 필터) |
 | GET | `/api/terms/?page=1&subject=&initial=&q=` | 경제 용어 사전(주제·두문자·검색) |
+| POST | `/api/contents/ai-recommend/` | AI 맞춤 콘텐츠 추천 (RAG, Claude) |
 | GET | `/api/contents/ranking/` | 커뮤니티 - 콘텐츠 좋아요 랭킹 |
 | GET | `/api/accounts/ranking/` | 커뮤니티 - 사용자 활동 랭킹 |
 | POST | `/api/contents/{id}/like/` | 콘텐츠 좋아요 토글 |
