@@ -15,22 +15,53 @@ import { useAuthStore } from '@/stores/auth'
 const auth = useAuthStore()
 
 const recommended = ref([])
+const latest = ref([])
 const popular = ref([])
 const events = ref([])
 const posts = ref([])
 
+function getEbti() {
+  try {
+    return JSON.parse(localStorage.getItem('ebtiResult') || 'null')
+  } catch {
+    return null
+  }
+}
+
 onMounted(async () => {
   try {
-    const [rec, pop, ev, ps] = await Promise.all([
-      api.get('/contents/', { params: { recommended: 1 } }),
+    const promises = [
       api.get('/contents/', { params: { popular: 1 } }),
-      api.get('/events/'),
+      api.get('/events/', { params: { status: 'open' } }),
       api.get('/posts/', { params: { popular: 1 } }),
+      api.get('/contents/'), // 최신 콘텐츠
+    ]
+
+    let recPromise
+    if (auth.isLoggedIn) {
+      recPromise = api.post('/contents/ai-recommend/', {
+        ebti: getEbti(),
+        region: auth.user?.region || '',
+      }).then(res => {
+        return (res.data.items || []).map(it => it.content)
+      }).catch(err => {
+        console.error('AI 추천 실패, 기본 추천 로드', err)
+        return api.get('/contents/', { params: { recommended: 1 } }).then(res => res.data)
+      })
+    } else {
+      recPromise = api.get('/contents/', { params: { recommended: 1 } }).then(res => res.data)
+    }
+
+    const [pop, ev, ps, lat, rec] = await Promise.all([
+      ...promises,
+      recPromise
     ])
-    recommended.value = rec.data
-    popular.value = pop.data
-    events.value = ev.data
-    posts.value = ps.data.slice(0, 5)
+
+    popular.value = (pop.data || []).slice(0, 16)
+    events.value = (ev.data || []).slice(0, 16)
+    posts.value = (ps.data || []).slice(0, 5)
+    latest.value = (lat.data || []).slice(0, 16)
+    recommended.value = (rec || []).slice(0, 16)
   } catch (e) {
     console.error('홈 데이터 로딩 실패', e)
   }
@@ -45,11 +76,16 @@ onMounted(async () => {
         <!-- 히어로 배너 (캐러셀) -->
         <HeroCarousel />
 
-        <!-- 추천 콘텐츠 -->
+        <!-- AI 추천 콘텐츠 -->
         <section class="block">
           <div class="section-head">
-            <h2>추천 콘텐츠<span class="sub">나에게 딱 맞는 콘텐츠를 추천해드려요</span></h2>
-            <RouterLink to="/contents" class="more">더보기 ›</RouterLink>
+            <h2> AI 추천 콘텐츠<span class="sub">나에게 딱 맞는 콘텐츠를 추천해드려요</span></h2>
+            <RouterLink :to="auth.isLoggedIn ? '/ai-recommend' : '/login'" class="more">
+              <span>더보기</span>
+              <svg class="arrow-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </RouterLink>
           </div>
           <div class="rec-wrap">
             <div :class="{ blurred: !auth.isLoggedIn }">
@@ -58,23 +94,45 @@ onMounted(async () => {
               </CardCarousel>
             </div>
             <div v-if="!auth.isLoggedIn" class="rec-lock">
-              <span class="lock-ico">🔒</span>
-              <p class="lock-title">나만을 위한 맞춤 콘텐츠가 기다리고 있어요</p>
-              <p class="lock-desc">로그인하면 관심사에 딱 맞는 콘텐츠를 추천해드려요.</p>
-              <RouterLink to="/login" class="btn btn-navy">로그인하고 추천받기 →</RouterLink>
-              <p class="lock-sub">
-                아직 회원이 아니신가요?
-                <RouterLink to="/signup">회원가입</RouterLink>
-              </p>
+              <div class="lock-box">
+                <p class="lock-title">나만을 위한 맞춤 콘텐츠가 기다리고 있어요</p>
+                <p class="lock-desc">로그인하면 관심사에 딱 맞는 콘텐츠를 추천해드려요.</p>
+                <RouterLink to="/login" class="btn btn-navy">로그인하고 추천받기 →</RouterLink>
+                <p class="lock-sub">
+                  아직 회원이 아니신가요?
+                  <RouterLink to="/signup">회원가입</RouterLink>
+                </p>
+              </div>
             </div>
           </div>
+        </section>
+
+        <!-- 최신 콘텐츠 -->
+        <section class="block">
+          <div class="section-head">
+            <h2>최신 콘텐츠<span class="sub">새로 등록된 콘텐츠를 만나보세요</span></h2>
+            <RouterLink to="/contents" class="more">
+              <span>더보기</span>
+              <svg class="arrow-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </RouterLink>
+          </div>
+          <CardCarousel :items="latest" v-slot="{ item }">
+            <ContentCard :content="item" />
+          </CardCarousel>
         </section>
 
         <!-- 인기 콘텐츠 -->
         <section class="block">
           <div class="section-head">
             <h2>인기 콘텐츠<span class="sub">지금 가장 많이 본 콘텐츠</span></h2>
-            <RouterLink to="/contents" class="more">더보기 ›</RouterLink>
+            <RouterLink to="/contents" class="more">
+              <span>더보기</span>
+              <svg class="arrow-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </RouterLink>
           </div>
           <CardCarousel :items="popular" v-slot="{ item }">
             <ContentCard :content="item" />
@@ -85,7 +143,12 @@ onMounted(async () => {
         <section class="block">
           <div class="section-head">
             <h2>교육 행사 &amp; 프로그램</h2>
-            <RouterLink to="/events" class="more">더보기 ›</RouterLink>
+            <RouterLink to="/events" class="more">
+              <span>더보기</span>
+              <svg class="arrow-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </RouterLink>
           </div>
           <CardCarousel :items="events" v-slot="{ item }">
             <EventCard :event="item" />
@@ -96,7 +159,12 @@ onMounted(async () => {
         <section class="block">
           <div class="section-head">
             <h2>인기 게시글</h2>
-            <RouterLink to="/community" class="more">더보기 ›</RouterLink>
+            <RouterLink to="/community" class="more">
+              <span>더보기</span>
+              <svg class="arrow-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </RouterLink>
           </div>
           <ul class="post-list">
             <RouterLink
@@ -155,7 +223,7 @@ onMounted(async () => {
 .rec-wrap {
   position: relative;
 }
-.grid-4.blurred {
+.blurred {
   filter: blur(6px);
   pointer-events: none;
   user-select: none;
@@ -164,17 +232,26 @@ onMounted(async () => {
   position: absolute;
   inset: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(238, 240, 248, 0.25);
+  border-radius: var(--radius);
+  z-index: 10;
+}
+.lock-box {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  box-shadow: 0 10px 30px rgba(27, 42, 89, 0.15);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 6px;
-  padding: 20px;
-  background: rgba(238, 240, 248, 0.55);
-  border-radius: var(--radius);
-}
-.lock-ico {
-  font-size: 2rem;
+  gap: 10px;
+  max-width: 420px;
+  width: 90%;
 }
 .lock-title {
   font-size: 1.05rem;
@@ -184,13 +261,13 @@ onMounted(async () => {
 .lock-desc {
   font-size: 0.86rem;
   color: var(--text-sub);
-  margin-bottom: 8px;
 }
-.rec-lock .btn {
-  padding: 12px 24px;
+.lock-box .btn {
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  margin: 4px 0;
 }
 .lock-sub {
-  margin-top: 10px;
   font-size: 0.8rem;
   color: var(--text-sub);
 }

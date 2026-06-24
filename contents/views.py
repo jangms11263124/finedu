@@ -137,4 +137,49 @@ class EventViewSet(viewsets.ModelViewSet):
             qs = qs.filter(region=region)
         if online_type := params.get('online_type'):
             qs = qs.filter(online_type=online_type)
+
+        import datetime
+        from django.db.models import Case, When, Value, IntegerField, F
+        today = datetime.date.today()
+
+        status_priority = Case(
+            # ongoing
+            When(
+                status='open',
+                start_date__lte=today,
+                end_date__gte=today,
+                then=Value(1)
+            ),
+            When(
+                status='open',
+                start_date__isnull=True,
+                end_date__gte=today,
+                then=Value(1)
+            ),
+            When(
+                status='open',
+                start_date__lte=today,
+                end_date__isnull=True,
+                then=Value(1)
+            ),
+            When(
+                status='open',
+                start_date__isnull=True,
+                end_date__isnull=True,
+                then=Value(1)
+            ),
+            # upcoming
+            When(
+                start_date__gt=today,
+                then=Value(2)
+            ),
+            # closed (fallback)
+            default=Value(3),
+            output_field=IntegerField()
+        )
+
+        qs = (
+            qs.annotate(status_priority=status_priority)
+            .order_by('status_priority', F('end_date').asc(nulls_last=True), '-created_at')
+        )
         return qs
