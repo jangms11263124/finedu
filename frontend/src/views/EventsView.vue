@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import api from '@/api'
 import Pagination from '@/components/common/Pagination.vue'
 
@@ -76,7 +77,12 @@ onMounted(load)
       <p v-else-if="!items.length" class="empty">조건에 맞는 행사가 없습니다.</p>
 
       <div v-else class="grid">
-        <article v-for="e in items" :key="e.id" class="card">
+        <RouterLink
+          v-for="e in items"
+          :key="e.id"
+          :to="`/events/${e.id}`"
+          class="card"
+        >
           <div class="thumb">
             <span class="emoji">🎓</span>
             <span class="dday" :class="{ urgent: e.d_day !== null && e.d_day <= 2 }">
@@ -90,7 +96,7 @@ onMounted(load)
               접수기간 <span>{{ e.start_date }} ~ {{ e.end_date }}</span>
             </p>
           </div>
-        </article>
+        </RouterLink>
       </div>
 
       <Pagination :page="page" :total-pages="totalPages" @change="changePage" />
@@ -147,6 +153,7 @@ onMounted(load)
   gap: 18px;
 }
 .card {
+  display: block;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;

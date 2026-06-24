@@ -101,6 +101,11 @@ class Event(models.Model):
     host = models.CharField('주최', max_length=100, blank=True)
     start_date = models.DateField('시작일', blank=True, null=True)
     end_date = models.DateField('종료일', blank=True, null=True)
+    # 카카오맵 표시용 위치 정보 (오프라인 행사)
+    place_name = models.CharField('장소명', max_length=120, blank=True)
+    address = models.CharField('주소', max_length=255, blank=True)
+    latitude = models.FloatField('위도', blank=True, null=True)
+    longitude = models.FloatField('경도', blank=True, null=True)
     created_at = models.DateTimeField('등록일', auto_now_add=True)
 
     class Meta:

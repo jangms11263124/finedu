@@ -21,7 +21,7 @@ const slides = computed(() => [
     title: ['AI가 골라주는', '나만의 금융 콘텐츠'],
     desc: '관심사와 학습 이력을 분석해 딱 맞는 콘텐츠를 추천해드려요.',
     cta: 'AI 추천 콘텐츠 보러가기 →',
-    to: auth.isLoggedIn ? '/contents' : '/login',
+    to: auth.isLoggedIn ? '/ai-recommend' : '/login',
     gradient: 'linear-gradient(120deg, #1b2a59 0%, #2b3f7a 55%, #4f46e5 120%)',
     art: ['🤖', '✨', '🎯'],
   },
