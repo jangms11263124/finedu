@@ -15,7 +15,8 @@ const subjects = [
   { key: 'science', label: '과학' },
 ]
 const consonants = 'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ'.split('')
-const alphabets = '0-9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.match(/0-9|[A-Z]/g)
+const alphabets1 = '0-9ABCDEFGHIJKLMNO'.match(/0-9|[A-Z]/g)
+const alphabets2 = 'PQRSTUVWXYZ'.match(/[A-Z]/g)
 
 const items = ref([])
 const count = ref(0)
@@ -112,10 +113,12 @@ onMounted(async () => {
         <p>어려운 경제 용어도 쉽게 찾아보고 이해하세요.</p>
       </header>
 
-      <!-- 검색 박스 -->
       <div class="finder">
         <div class="row">
-          <span class="label">🔍 검색어로 찾기</span>
+          <span class="label">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="label-icon"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.637 10.637Z" /></svg>
+            검색어로 찾기
+          </span>
           <select v-model="subject" @change="search">
             <option v-for="s in subjects" :key="s.key" :value="s.key">{{ s.label }}</option>
           </select>
@@ -123,26 +126,36 @@ onMounted(async () => {
           <button class="btn btn-navy" @click="search">검색</button>
         </div>
         <div class="row initials">
-          <span class="label">🔠 두문자로 찾기</span>
-          <div class="chips">
-            <button :class="{ on: initial === '' }" @click="pickInitial('')">전체</button>
-            <button
-              v-for="c in consonants"
-              :key="c"
-              :class="{ on: initial === c }"
-              @click="pickInitial(c)"
-            >{{ c }}</button>
-          </div>
-        </div>
-        <div class="row initials alpha">
-          <span class="label"></span>
-          <div class="chips">
-            <button
-              v-for="a in alphabets"
-              :key="a"
-              :class="{ on: initial === a }"
-              @click="pickInitial(a)"
-            >{{ a }}</button>
+          <span class="label">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="label-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-16.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-16.25v16.25" /></svg>
+            두문자로 찾기
+          </span>
+          <div class="chips-group">
+            <div class="chips">
+              <button :class="{ on: initial === '' }" @click="pickInitial('')">전체</button>
+              <button
+                v-for="c in consonants"
+                :key="c"
+                :class="{ on: initial === c }"
+                @click="pickInitial(c)"
+              >{{ c }}</button>
+            </div>
+            <div class="chips">
+              <button
+                v-for="a in alphabets1"
+                :key="a"
+                :class="{ on: initial === a }"
+                @click="pickInitial(a)"
+              >{{ a }}</button>
+            </div>
+            <div class="chips">
+              <button
+                v-for="a in alphabets2"
+                :key="a"
+                :class="{ on: initial === a }"
+                @click="pickInitial(a)"
+              >{{ a }}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -168,7 +181,7 @@ onMounted(async () => {
         >
           <span class="t-no">{{ (page - 1) * 12 + i + 1 }}</span>
           <span class="t-sub">
-            <em :class="subjectClass[t.subject_display]">{{ t.subject_display }}</em>
+            {{ t.subject_display }}
           </span>
           <span class="t-term">{{ t.term }}</span>
           <span class="t-desc">{{ t.description }}</span>
@@ -182,9 +195,9 @@ onMounted(async () => {
     <div v-if="selected" class="modal-backdrop" @click.self="closeTerm">
       <div class="modal">
         <button class="close" @click="closeTerm" aria-label="닫기">✕</button>
-        <em class="m-sub" :class="subjectClass[selected.subject_display]">
+        <span class="m-sub">
           {{ selected.subject_display }}
-        </em>
+        </span>
         <h2 class="m-term">{{ selected.term }}</h2>
         <p class="m-desc">{{ selected.description }}</p>
       </div>
@@ -228,54 +241,99 @@ onMounted(async () => {
   border-bottom: none;
 }
 .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   flex-shrink: 0;
   width: 120px;
   font-size: 0.86rem;
   font-weight: 700;
   color: var(--text);
 }
-.row select {
+.label-icon {
+  width: 15px;
+  height: 15px;
+  stroke: var(--text-sub);
+}
+.row select,
+.row input {
+  height: 40px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 9px 12px;
+  padding: 0 12px;
   font-size: 0.85rem;
-  background: var(--bg);
   outline: none;
 }
-.row input {
-  flex: 1;
-  border: 1px solid var(--line);
+.row select {
+  padding-right: 30px;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.row select:focus,
+.row select:hover,
+.row input:focus,
+.row input:hover {
+  border-color: var(--navy);
+}
+.row .btn {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 0.88rem;
   border-radius: 8px;
-  padding: 9px 12px;
-  font-size: 0.85rem;
-  outline: none;
 }
 .row input:focus {
   border-color: var(--navy);
 }
-.initials.alpha {
-  padding-top: 0;
+.row.initials {
+  align-items: flex-start;
+  padding: 18px;
+}
+.row.initials .label {
+  margin-top: 8px;
+}
+.chips-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
+  max-width: 800px;
 }
 .chips button {
-  min-width: 30px;
-  height: 30px;
-  border-radius: 7px;
-  border: 1px solid transparent;
-  background: transparent;
-  font-size: 0.82rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--text-sub);
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 .chips button:hover {
+  border-color: var(--navy);
+  color: var(--navy);
   background: var(--bg);
 }
 .chips button.on {
   background: var(--navy);
+  border-color: var(--navy);
   color: #fff;
 }
 .count {
@@ -289,27 +347,41 @@ onMounted(async () => {
 .table {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 .thead,
 .trow {
   display: grid;
-  grid-template-columns: 50px 80px 180px 1fr;
+  grid-template-columns: 60px 100px 200px 1fr;
   align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
+  gap: 10px;
+  padding: 13px 18px;
 }
 .thead {
-  background: #2b3654;
-  color: #fff;
-  font-size: 0.84rem;
+  background: #f1f3f9;
+  color: var(--text);
+  font-size: 0.8rem;
   font-weight: 700;
+  border-bottom: 2px solid var(--line);
+}
+.thead span {
+  color: var(--text);
+  font-weight: 700;
+  text-align: center;
+}
+.thead .t-term,
+.thead .t-desc {
+  text-align: left;
 }
 .trow {
-  border-top: 1px solid var(--line);
-  font-size: 0.86rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
   cursor: pointer;
+  transition: background 0.15s ease;
+}
+.trow:last-child {
+  border-bottom: none;
 }
 .trow:hover {
   background: var(--bg);
@@ -317,27 +389,26 @@ onMounted(async () => {
 .t-no {
   color: var(--text-mute);
   text-align: center;
+  font-size: 0.8rem;
 }
-.t-sub em {
-  font-style: normal;
-  font-size: 0.74rem;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--bg);
+.t-sub {
   color: var(--text-sub);
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.8rem;
 }
-.t-sub em.economy { background: #e0f2fe; color: #0369a1; }
-.t-sub em.management { background: #ede9fe; color: #6d28d9; }
-.t-sub em.finance { background: #dcfce7; color: #15803d; }
-.t-sub em.society { background: #fef3c7; color: #b45309; }
-.t-sub em.science { background: #fee2e2; color: #b91c1c; }
 .t-term {
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .t-desc {
   color: var(--text-sub);
   line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .empty {
   text-align: center;
@@ -381,19 +452,10 @@ onMounted(async () => {
   background: #e5e7f0;
 }
 .m-sub {
-  font-style: normal;
-  font-size: 0.76rem;
+  font-size: 0.84rem;
+  color: var(--teal);
   font-weight: 700;
-  padding: 4px 11px;
-  border-radius: 999px;
-  background: var(--bg);
-  color: var(--text-sub);
 }
-.m-sub.economy { background: #e0f2fe; color: #0369a1; }
-.m-sub.management { background: #ede9fe; color: #6d28d9; }
-.m-sub.finance { background: #dcfce7; color: #15803d; }
-.m-sub.society { background: #fef3c7; color: #b45309; }
-.m-sub.science { background: #fee2e2; color: #b91c1c; }
 .m-term {
   font-size: 1.5rem;
   font-weight: 800;

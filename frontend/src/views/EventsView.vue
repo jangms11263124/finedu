@@ -3,7 +3,27 @@ import { onMounted, ref } from 'vue'
 import api from '@/api'
 import Pagination from '@/components/common/Pagination.vue'
 
-const regions = ['지역 선택', '서울', '경기도', '인천', '대전', '부산', '온라인']
+const regions = [
+  '지역 선택',
+  '서울',
+  '부산',
+  '대구',
+  '인천',
+  '광주',
+  '대전',
+  '울산',
+  '세종',
+  '경기도',
+  '강원도',
+  '충청북도',
+  '충청남도',
+  '전라북도',
+  '전라남도',
+  '경상북도',
+  '경상남도',
+  '제주도',
+  '온라인'
+]
 const onlines = [
   { key: '', label: '온/오프라인 선택' },
   { key: 'offline', label: '오프라인' },
@@ -17,6 +37,7 @@ const page = ref(1)
 const totalPages = ref(1)
 const loading = ref(true)
 
+const appStatus = ref('')
 const region = ref('지역 선택')
 const online = ref('')
 
@@ -24,6 +45,7 @@ async function load() {
   loading.value = true
   try {
     const params = { page: page.value }
+    if (appStatus.value) params.app_status = appStatus.value
     if (region.value && region.value !== '지역 선택') params.region = region.value
     if (online.value) params.online_type = online.value
     const { data } = await api.get('/events/', { params })
@@ -45,8 +67,26 @@ function changePage(p) {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+function getEventStatus(e) {
+  const d = new Date()
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  const todayStr = `${year}-${month}-${day}`
+  
+  if (e.start_date && e.start_date > todayStr) {
+    return 'upcoming'
+  }
+  if (e.d_day === null || e.status === 'closed' || e.status === 'ended') {
+    return 'closed'
+  }
+  return 'ongoing'
+}
+
 function ddayLabel(e) {
-  if (e.d_day === null) return '마감'
+  const status = getEventStatus(e)
+  if (status === 'upcoming') return '예정'
+  if (status === 'closed') return '마감'
   return e.d_day === 0 ? 'D-DAY' : `D-${e.d_day}`
 }
 
@@ -59,9 +99,15 @@ onMounted(load)
       <header class="head">
         <div>
           <h1>교육 행사 프로그램</h1>
-          <p class="count">총 <strong>{{ count }}</strong>개 진행중</p>
+          <p>다양한 금융·경제 교육 프로그램과 온·오프라인 행사 일정을 확인해 보세요.</p>
         </div>
         <div class="filters">
+          <select v-model="appStatus" @change="search">
+            <option value="">신청 상태</option>
+            <option value="upcoming">신청 예정</option>
+            <option value="ongoing">신청 중</option>
+            <option value="closed">신청 마감</option>
+          </select>
           <select v-model="region" @change="search">
             <option v-for="r in regions" :key="r" :value="r">{{ r }}</option>
           </select>
@@ -79,7 +125,8 @@ onMounted(load)
         <article v-for="e in items" :key="e.id" class="card">
           <div class="thumb">
             <span class="emoji">🎓</span>
-            <span class="dday" :class="{ urgent: e.d_day !== null && e.d_day <= 2 }">
+            <div v-if="getEventStatus(e) === 'closed'" class="closed-overlay"></div>
+            <span class="dday" :class="getEventStatus(e)">
               {{ ddayLabel(e) }}
             </span>
             <span class="tags">{{ e.region }} · {{ e.online_display }}</span>
@@ -116,13 +163,10 @@ onMounted(load)
   font-weight: 800;
   letter-spacing: -0.6px;
 }
-.count {
+.head p {
   margin-top: 8px;
-  font-size: 0.9rem;
   color: var(--text-sub);
-}
-.count strong {
-  color: var(--navy);
+  font-size: 0.92rem;
 }
 .filters {
   display: flex;
@@ -131,10 +175,23 @@ onMounted(load)
 .filters select {
   border: 1px solid var(--line);
   border-radius: 9px;
-  padding: 10px 14px;
+  padding: 10px 30px 10px 14px;
   font-size: 0.85rem;
   background: #fff;
   outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+  min-width: 110px;
+  transition: border-color 0.15s ease;
+}
+.filters select:focus,
+.filters select:hover {
+  border-color: var(--navy);
 }
 .empty {
   text-align: center;
@@ -168,6 +225,7 @@ onMounted(load)
 .emoji {
   font-size: 2.6rem;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+  z-index: 2;
 }
 .dday {
   position: absolute;
@@ -176,12 +234,18 @@ onMounted(load)
   font-size: 0.74rem;
   font-weight: 800;
   color: #fff;
-  background: #2563eb;
   padding: 4px 10px;
   border-radius: 7px;
+  z-index: 2;
 }
-.dday.urgent {
+.dday.upcoming {
+  background: #2563eb;
+}
+.dday.ongoing {
   background: #dc2626;
+}
+.dday.closed {
+  background: #000;
 }
 .tags {
   position: absolute;
@@ -193,6 +257,14 @@ onMounted(load)
   background: rgba(0, 0, 0, 0.4);
   padding: 3px 9px;
   border-radius: 999px;
+  z-index: 2;
+}
+.closed-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(128, 128, 128, 0.35);
+  z-index: 1;
+  pointer-events: none;
 }
 .body {
   padding: 14px 16px 18px;

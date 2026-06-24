@@ -35,7 +35,12 @@ async function load() {
 }
 
 async function toggleLike() {
-  if (!auth.isLoggedIn) return alert('로그인이 필요합니다.')
+  if (!auth.isLoggedIn) {
+    if (confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+      router.push({ name: 'login', query: { redirect: route.fullPath } })
+    }
+    return
+  }
   const { data } = await api.post(`/contents/${content.value.id}/like/`)
   content.value.is_liked = data.liked
   content.value.like_count = data.like_count
@@ -58,6 +63,12 @@ function fmt(dt) {
   })
 }
 
+function fmtDate(dt) {
+  return new Date(dt).toLocaleDateString('ko-KR', {
+    year: '2-digit', month: '2-digit', day: '2-digit'
+  })
+}
+
 watch(() => route.params.id, load)
 onMounted(load)
 </script>
@@ -65,7 +76,12 @@ onMounted(load)
 <template>
   <main class="detail">
     <div class="container narrow">
-      <RouterLink to="/contents" class="back">‹ 콘텐츠 목록</RouterLink>
+      <RouterLink to="/contents" class="back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="back-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+        <span>콘텐츠 목록</span>
+      </RouterLink>
 
       <p v-if="loading" class="empty">불러오는 중...</p>
 
@@ -88,13 +104,36 @@ onMounted(load)
           <span class="badge">{{ content.category_display }}</span>
           <h1>{{ content.title }}</h1>
           <div class="meta">
-            <span>👁 조회 {{ content.views.toLocaleString() }}</span>
-            <span>💬 댓글 {{ content.comment_count }}</span>
-            <span>🕑 {{ fmt(content.created_at) }}</span>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="meta-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+              조회 {{ content.views.toLocaleString() }}
+            </span>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="meta-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-1.923 2.07c-.464.248.035.75.502.578a11.97 11.97 0 0 0 3.42-1.48c.53-.18 1.09-.208 1.644-.208Z" /></svg>
+              댓글 {{ content.comment_count }}
+            </span>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="meta-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+              {{ fmtDate(content.created_at) }}
+            </span>
           </div>
           <p class="body">{{ content.body }}</p>
           <button class="like" :class="{ on: content.is_liked }" @click="toggleLike">
-            {{ content.is_liked ? '❤️' : '🤍' }} 좋아요 {{ content.like_count }}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="heart-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+              />
+            </svg>
+            <span>좋아요 {{ content.like_count }}</span>
           </button>
         </div>
 
@@ -135,13 +174,22 @@ onMounted(load)
   max-width: 820px;
 }
 .back {
-  display: inline-block;
-  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
   font-size: 0.86rem;
+  font-weight: 600;
   color: var(--text-sub);
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 .back:hover {
-  color: var(--navy);
+  transform: translateX(-3px);
+}
+.back-icon {
+  width: 14px;
+  height: 14px;
 }
 .empty {
   text-align: center;
@@ -193,9 +241,20 @@ onMounted(load)
 }
 .meta {
   display: flex;
+  align-items: center;
   gap: 16px;
   font-size: 0.82rem;
   color: var(--text-mute);
+}
+.meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.meta-icon {
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-mute);
 }
 .body {
   margin: 18px 0;
@@ -205,22 +264,47 @@ onMounted(load)
   white-space: pre-wrap;
 }
 .like {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   font-size: 0.88rem;
   font-weight: 700;
   color: var(--text-sub);
-  transition: all 0.12s;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 .like:hover {
   border-color: #fca5a5;
+  background-color: #fff5f5;
 }
 .like.on {
   background: #fee2e2;
   border-color: #fca5a5;
   color: #dc2626;
+}
+.heart-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+  fill: transparent;
+  stroke: var(--text-sub);
+}
+.like:hover .heart-icon {
+  stroke: #dc2626;
+}
+.like.on .heart-icon {
+  fill: #dc2626;
+  stroke: #dc2626;
+  animation: heart-bounce 0.4s ease;
+}
+@keyframes heart-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
 }
 .comments {
   margin-top: 26px;
