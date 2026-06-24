@@ -35,7 +35,11 @@ onMounted(() => nextTick(update))
       :class="{ hidden: atStart }"
       aria-label="이전"
       @click="scrollBy(-1)"
-    >‹</button>
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
 
     <div ref="track" class="track" @scroll="update">
       <div v-for="item in items" :key="item[itemKey]" class="slide">
@@ -48,7 +52,11 @@ onMounted(() => nextTick(update))
       :class="{ hidden: atEnd }"
       aria-label="다음"
       @click="scrollBy(1)"
-    >›</button>
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -81,15 +89,25 @@ onMounted(() => nextTick(update))
   background: #fff;
   border: 1px solid var(--line);
   box-shadow: 0 4px 14px rgba(27, 42, 89, 0.16);
-  font-size: 1.4rem;
   color: var(--navy);
   display: grid;
   place-items: center;
-  transition: opacity 0.15s, transform 0.12s;
+  transition: opacity 0.15s, transform 0.12s, background-color 0.15s, color 0.15s;
+}
+.nav svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.12s ease;
 }
 .nav:hover {
   background: var(--navy);
   color: #fff;
+}
+.nav:hover svg {
+  transform: scale(1.15);
+}
+.nav:active {
+  transform: translateY(-50%) scale(0.9);
 }
 .nav.prev {
   left: -12px;

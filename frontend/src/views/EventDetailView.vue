@@ -258,6 +258,10 @@ onMounted(load)
   border: 1px solid var(--line);
   background: var(--bg);
 }
+.map :deep(img) {
+  max-width: none !important;
+  max-height: none !important;
+}
 .map-msg {
   margin-top: 12px;
   font-size: 0.84rem;

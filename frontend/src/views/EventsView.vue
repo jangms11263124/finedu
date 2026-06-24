@@ -131,7 +131,6 @@ onMounted(load)
         >
           <div class="thumb">
             <span class="emoji">🎓</span>
-            <div v-if="getEventStatus(e) === 'closed'" class="closed-overlay"></div>
             <span class="dday" :class="getEventStatus(e)">
               {{ ddayLabel(e) }}
             </span>
@@ -143,6 +142,7 @@ onMounted(load)
               접수기간 <span>{{ e.start_date }} ~ {{ e.end_date }}</span>
             </p>
           </div>
+          <div v-if="getEventStatus(e) === 'closed'" class="closed-overlay"></div>
         </RouterLink>
       </div>
 
@@ -217,6 +217,7 @@ onMounted(load)
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.14s, box-shadow 0.14s;
+  position: relative;
 }
 .card:hover {
   transform: translateY(-4px);
@@ -232,6 +233,7 @@ onMounted(load)
 .emoji {
   font-size: 2.6rem;
   filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+  position: relative;
   z-index: 2;
 }
 .dday {
@@ -269,7 +271,7 @@ onMounted(load)
 .closed-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(128, 128, 128, 0.35);
+  background: rgba(128, 128, 128, 0.48);
   z-index: 1;
   pointer-events: none;
 }
