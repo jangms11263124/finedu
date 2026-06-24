@@ -8,9 +8,10 @@ const auth = useAuthStore()
 
 const loading = ref(true)
 const summary = ref('')
-const items = ref([])
+const bundles = ref([])
 const source = ref('') // 'ai' | 'rule'
 const error = ref('')
+const signalsMeta = ref(null)
 
 const gradients = {
   economy: 'linear-gradient(135deg,#0f766e,#0891b2)',
@@ -33,8 +34,6 @@ function getEbti() {
   }
 }
 
-const hasEbti = ref(!!getEbti())
-
 async function fetchRecommend() {
   loading.value = true
   error.value = ''
@@ -44,8 +43,9 @@ async function fetchRecommend() {
       region: auth.user?.region || '',
     })
     summary.value = data.summary
-    items.value = data.items
+    bundles.value = data.bundles || []
     source.value = data.source
+    signalsMeta.value = data.signals_meta || null
   } catch {
     error.value = '추천을 불러오지 못했어요. 잠시 후 다시 시도해주세요.'
   } finally {
@@ -71,18 +71,24 @@ onMounted(fetchRecommend)
 
       <!-- 분석에 사용된 신호 칩 -->
       <div class="signals">
-        <span class="chip" :class="{ off: !hasEbti }">
-          {{ hasEbti ? '✅' : '⬜' }} EBTI 결과
+        <span class="chip" :class="{ off: !signalsMeta?.has_ebti }">
+          {{ signalsMeta?.has_ebti ? '✅' : '⬜' }} EBTI 결과
         </span>
-        <span class="chip">✅ 관심 콘텐츠</span>
-        <span class="chip">✅ 커뮤니티 활동</span>
-        <span class="chip">✅ 최근 인기 주제</span>
-        <span class="chip" :class="{ off: !auth.user?.region }">
-          {{ auth.user?.region ? '✅' : '⬜' }} 지역
+        <span class="chip" :class="{ off: !signalsMeta?.has_liked_contents }">
+          {{ signalsMeta?.has_liked_contents ? '✅' : '⬜' }} 관심 콘텐츠
+        </span>
+        <span class="chip" :class="{ off: !signalsMeta?.has_community }">
+          {{ signalsMeta?.has_community ? '✅' : '⬜' }} 커뮤니티 활동
+        </span>
+        <span class="chip" :class="{ off: !signalsMeta?.has_trending }">
+          {{ signalsMeta?.has_trending ? '✅' : '⬜' }} 최근 인기 주제
+        </span>
+        <span class="chip" :class="{ off: !signalsMeta?.has_region }">
+          {{ signalsMeta?.has_region ? '✅' : '⬜' }} 지역
         </span>
       </div>
 
-      <p v-if="!hasEbti" class="ebti-hint">
+      <p v-if="signalsMeta && !signalsMeta.has_ebti" class="ebti-hint">
         💡 <RouterLink to="/ebti">EBTI 테스트</RouterLink>를 먼저 하면 더 정확한 추천을 받을 수 있어요.
       </p>
 
@@ -102,29 +108,42 @@ onMounted(fetchRecommend)
           <span class="src">{{ source === 'ai' ? 'AI 분석' : '추천 엔진' }}</span>
         </div>
 
-        <!-- 추천 카드 -->
-        <div class="rec-list">
-          <RouterLink
-            v-for="(it, i) in items"
-            :key="it.content.id"
-            :to="`/contents/${it.content.id}`"
-            class="rec-card"
-          >
-            <span class="rank">{{ i + 1 }}</span>
-            <span
-              class="thumb"
-              :style="{ background: gradients[it.content.category] || gradients.etc }"
-            >{{ icons[it.content.category] || '📰' }}</span>
-            <div class="body">
-              <span class="cat">{{ it.content.category_display }}</span>
-              <h3>{{ it.content.title }}</h3>
-              <p class="reason">
-                <span class="ai-tag">AI</span> {{ it.reason }}
-              </p>
+        <!-- 번들(묶음) 추천 -->
+        <section
+          v-for="(bundle, bi) in bundles"
+          :key="bi"
+          class="bundle"
+        >
+          <header class="bundle-head">
+            <div class="bundle-title">
+              <span class="bundle-no">묶음 {{ bi + 1 }}</span>
+              <h2>{{ bundle.title }}</h2>
             </div>
-            <span class="go">›</span>
-          </RouterLink>
-        </div>
+            <p class="storyline">
+              <span class="ai-tag">AI</span> {{ bundle.storyline }}
+            </p>
+          </header>
+
+          <div class="rec-list">
+            <RouterLink
+              v-for="it in bundle.items"
+              :key="it.content.id"
+              :to="`/contents/${it.content.id}`"
+              class="rec-card"
+            >
+              <span
+                class="thumb"
+                :style="{ background: gradients[it.content.category] || gradients.etc }"
+              >{{ icons[it.content.category] || '📰' }}</span>
+              <div class="body">
+                <span class="cat">{{ it.content.category_display }}</span>
+                <h3>{{ it.content.title }}</h3>
+                <p class="reason">{{ it.content.summary }}</p>
+              </div>
+              <span class="go">›</span>
+            </RouterLink>
+          </div>
+        </section>
 
         <div class="actions">
           <button class="btn btn-outline" @click="fetchRecommend">🔄 다시 추천받기</button>
@@ -248,6 +267,37 @@ onMounted(fetchRecommend)
   border-radius: 999px;
   white-space: nowrap;
 }
+.bundle {
+  margin: 0 0 26px;
+}
+.bundle-head {
+  margin: 0 0 12px;
+}
+.bundle-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bundle-no {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(120deg, #1b2a59, #4f46e5);
+  padding: 3px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.bundle-title h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+.storyline {
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-sub);
+}
 .rec-list {
   display: flex;
   flex-direction: column;
@@ -266,14 +316,6 @@ onMounted(fetchRecommend)
 .rec-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
-}
-.rank {
-  width: 26px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--navy);
-  flex-shrink: 0;
 }
 .thumb {
   width: 56px;
