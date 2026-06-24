@@ -26,7 +26,7 @@ async function submit() {
     <div class="avatar">{{ (auth.user?.nickname || 'U').charAt(0) }}</div>
     <div class="who">
       <strong>{{ auth.user?.nickname }}</strong>
-      <span class="lv">Lv.{{ auth.user?.level }} · {{ auth.user?.points }}P</span>
+      <span class="lv">@{{ auth.user?.username }}</span>
     </div>
     <div class="prof-menu">
       <a href="#">📚 내 학습</a>

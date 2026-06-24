@@ -17,15 +17,14 @@ from .serializers import (
 class AIRecommendView(APIView):
     """POST /api/contents/ai-recommend/ — RAG 기반 AI 맞춤 콘텐츠 추천.
 
-    body: { ebti?: {...}, region?: "..." }  (EBTI는 프론트 localStorage에서 전달)
+    body: { ebti?: {...} }  (EBTI는 프론트 localStorage에서 전달)
     """
 
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         ebti = request.data.get('ebti')
-        region = request.data.get('region', '')
-        result = ai.recommend(request.user, ebti=ebti, region=region)
+        result = ai.recommend(request.user, ebti=ebti)
         return Response(result)
 
 

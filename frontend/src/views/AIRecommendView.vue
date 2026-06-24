@@ -1,16 +1,12 @@
 <script setup>
-import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import api from '@/api'
 import { useAuthStore } from '@/stores/auth'
+import { useRecommendStore } from '@/stores/recommend'
 
 const auth = useAuthStore()
-
-const loading = ref(true)
-const summary = ref('')
-const items = ref([])
-const source = ref('') // 'ai' | 'rule'
-const error = ref('')
+// 추천 결과는 스토어에 보관 → 페이지 재진입 시 캐시를 그대로 보여주고,
+// '추천 받기 / 다시 추천받기'를 눌렀을 때만 rec.fetch()로 새로 호출한다.
+const rec = useRecommendStore()
 
 const gradients = {
   economy: 'linear-gradient(135deg,#0f766e,#0891b2)',
@@ -24,36 +20,6 @@ const icons = {
   economy: '📈', invest: '💹', saving: '🏦',
   finance: '💳', society: '🏙️', etc: '📰',
 }
-
-function getEbti() {
-  try {
-    return JSON.parse(localStorage.getItem('ebtiResult') || 'null')
-  } catch {
-    return null
-  }
-}
-
-const hasEbti = ref(!!getEbti())
-
-async function fetchRecommend() {
-  loading.value = true
-  error.value = ''
-  try {
-    const { data } = await api.post('/contents/ai-recommend/', {
-      ebti: getEbti(),
-      region: auth.user?.region || '',
-    })
-    summary.value = data.summary
-    items.value = data.items
-    source.value = data.source
-  } catch {
-    error.value = '추천을 불러오지 못했어요. 잠시 후 다시 시도해주세요.'
-  } finally {
-    loading.value = false
-  }
-}
-
-onMounted(fetchRecommend)
 </script>
 
 <template>
@@ -64,70 +30,130 @@ onMounted(fetchRecommend)
         <span class="badge">🤖 AI 맞춤 추천</span>
         <h1>{{ auth.user?.nickname }}님을 위한 콘텐츠</h1>
         <p class="lead">
-          EBTI 결과 · 관심사 · 학습 이력 · 커뮤니티 활동 · 지역을 종합해
+          EBTI 결과 · 관심사 · 커뮤니티 활동 · 퀴즈 학습 이력을 종합해
           AI가 맞춤 콘텐츠를 골랐어요.
         </p>
       </header>
 
-      <!-- 분석에 사용된 신호 칩 -->
-      <div class="signals">
-        <span class="chip" :class="{ off: !hasEbti }">
-          {{ hasEbti ? '✅' : '⬜' }} EBTI 결과
-        </span>
-        <span class="chip">✅ 관심 콘텐츠</span>
-        <span class="chip">✅ 커뮤니티 활동</span>
-        <span class="chip">✅ 최근 인기 주제</span>
-        <span class="chip" :class="{ off: !auth.user?.region }">
-          {{ auth.user?.region ? '✅' : '⬜' }} 지역
-        </span>
+      <!-- 분석에 사용된 신호 칩 (추천을 한 번 받은 뒤에만 표시) -->
+      <template v-if="rec.signalsMeta">
+        <div class="signals">
+          <span class="chip" :class="{ off: !rec.signalsMeta.has_ebti }">
+            {{ rec.signalsMeta.has_ebti ? '✅' : '⬜' }} EBTI 결과
+          </span>
+          <span class="chip" :class="{ off: !rec.signalsMeta.has_liked_contents }">
+            {{ rec.signalsMeta.has_liked_contents ? '✅' : '⬜' }} 관심 콘텐츠
+          </span>
+          <span class="chip" :class="{ off: !rec.signalsMeta.has_community }">
+            {{ rec.signalsMeta.has_community ? '✅' : '⬜' }} 커뮤니티 활동
+          </span>
+          <span class="chip" :class="{ off: !rec.signalsMeta.has_trending }">
+            {{ rec.signalsMeta.has_trending ? '✅' : '⬜' }} 최근 인기 주제
+          </span>
+          <span class="chip" :class="{ off: !rec.signalsMeta.has_quiz_weak }">
+            {{ rec.signalsMeta.has_quiz_weak ? '✅' : '⬜' }} 퀴즈 약점
+          </span>
+          <span class="chip" :class="{ off: !rec.signalsMeta.has_streak }">
+            {{ rec.signalsMeta.has_streak ? '✅' : '⬜' }} 학습 스트릭
+          </span>
+        </div>
+
+        <p v-if="!rec.signalsMeta.has_ebti" class="ebti-hint">
+          💡 <RouterLink to="/ebti">EBTI 테스트</RouterLink>를 먼저 하면 더 정확한 추천을 받을 수 있어요.
+        </p>
+      </template>
+
+      <!-- 1) 최초 진입: 아직 추천을 받지 않은 상태 -->
+      <div v-if="!rec.loaded && !rec.loading && !rec.error" class="intro">
+        <span class="intro-ico">🤖</span>
+        <h2>AI 맞춤 추천을 받아보세요</h2>
+        <p>버튼을 누르면 관심사 · 학습 이력 · EBTI 결과를 분석해 콘텐츠를 골라드려요.</p>
+        <button class="btn btn-navy" @click="rec.fetch()">✨ 추천 받기</button>
       </div>
 
-      <p v-if="!hasEbti" class="ebti-hint">
-        💡 <RouterLink to="/ebti">EBTI 테스트</RouterLink>를 먼저 하면 더 정확한 추천을 받을 수 있어요.
-      </p>
-
-      <!-- 로딩 -->
-      <div v-if="loading" class="loading">
-        <span class="spinner"></span>
-        <p>AI가 회원님께 맞는 콘텐츠를 고르고 있어요...</p>
+      <!-- 2) 로딩: 스켈레톤 UI -->
+      <div
+        v-else-if="rec.loading"
+        class="skeleton"
+        aria-busy="true"
+        aria-label="AI가 맞춤 콘텐츠를 고르는 중입니다"
+      >
+        <p class="sk-note">✨ AI가 회원님께 맞는 콘텐츠를 고르고 있어요...</p>
+        <div class="sk sk-summary"></div>
+        <section v-for="n in 2" :key="n" class="sk-bundle">
+          <div class="sk-bundle-head">
+            <span class="sk sk-no"></span>
+            <span class="sk sk-title"></span>
+          </div>
+          <span class="sk sk-story"></span>
+          <div class="sk-list">
+            <div v-for="m in 3" :key="m" class="sk-card">
+              <span class="sk sk-thumb"></span>
+              <div class="sk-card-body">
+                <span class="sk sk-cat"></span>
+                <span class="sk sk-line"></span>
+                <span class="sk sk-line short"></span>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <p v-else-if="error" class="error">{{ error }}</p>
+      <!-- 3) 에러 -->
+      <div v-else-if="rec.error" class="intro">
+        <span class="intro-ico">😢</span>
+        <p class="error">{{ rec.error }}</p>
+        <button class="btn btn-navy" @click="rec.fetch()">다시 시도</button>
+      </div>
 
+      <!-- 4) 추천 결과 -->
       <template v-else>
         <!-- AI 요약 -->
         <div class="summary">
           <span class="ico">✨</span>
-          <p>{{ summary }}</p>
-          <span class="src">{{ source === 'ai' ? 'AI 분석' : '추천 엔진' }}</span>
+          <p>{{ rec.summary }}</p>
+          <span class="src">{{ rec.source === 'ai' ? 'AI 분석' : '추천 엔진' }}</span>
         </div>
 
-        <!-- 추천 카드 -->
-        <div class="rec-list">
-          <RouterLink
-            v-for="(it, i) in items"
-            :key="it.content.id"
-            :to="`/contents/${it.content.id}`"
-            class="rec-card"
-          >
-            <span class="rank">{{ i + 1 }}</span>
-            <span
-              class="thumb"
-              :style="{ background: gradients[it.content.category] || gradients.etc }"
-            >{{ icons[it.content.category] || '📰' }}</span>
-            <div class="body">
-              <span class="cat">{{ it.content.category_display }}</span>
-              <h3>{{ it.content.title }}</h3>
-              <p class="reason">
-                <span class="ai-tag">AI</span> {{ it.reason }}
-              </p>
+        <!-- 번들(묶음) 추천 -->
+        <section
+          v-for="(bundle, bi) in rec.bundles"
+          :key="bi"
+          class="bundle"
+        >
+          <header class="bundle-head">
+            <div class="bundle-title">
+              <span class="bundle-no">묶음 {{ bi + 1 }}</span>
+              <h2>{{ bundle.title }}</h2>
             </div>
-            <span class="go">›</span>
-          </RouterLink>
-        </div>
+            <p class="storyline">
+              <span class="ai-tag">AI</span> {{ bundle.storyline }}
+            </p>
+          </header>
+
+          <div class="rec-list">
+            <RouterLink
+              v-for="it in bundle.items"
+              :key="it.content.id"
+              :to="`/contents/${it.content.id}`"
+              class="rec-card"
+            >
+              <span
+                class="thumb"
+                :style="{ background: gradients[it.content.category] || gradients.etc }"
+              >{{ icons[it.content.category] || '📰' }}</span>
+              <div class="body">
+                <span class="cat">{{ it.content.category_display }}</span>
+                <h3>{{ it.content.title }}</h3>
+                <p class="reason">{{ it.content.summary }}</p>
+              </div>
+              <span class="go">›</span>
+            </RouterLink>
+          </div>
+        </section>
 
         <div class="actions">
-          <button class="btn btn-outline" @click="fetchRecommend">🔄 다시 추천받기</button>
+          <button class="btn btn-outline" @click="rec.fetch()">🔄 다시 추천받기</button>
           <RouterLink to="/contents" class="btn btn-navy">전체 콘텐츠 보기 →</RouterLink>
         </div>
       </template>
@@ -197,23 +223,140 @@ onMounted(fetchRecommend)
   color: var(--navy);
   font-weight: 700;
 }
-.loading {
+/* 최초 진입 / 에러 안내 */
+.intro {
   text-align: center;
-  padding: 60px 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 48px 24px;
+  margin-top: 22px;
+  box-shadow: var(--shadow);
+}
+.intro-ico {
+  font-size: 2.6rem;
+}
+.intro h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 14px 0 8px;
+}
+.intro p {
   color: var(--text-sub);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 0 auto 20px;
 }
-.spinner {
-  display: inline-block;
-  width: 38px;
-  height: 38px;
-  border: 4px solid var(--line);
-  border-top-color: var(--navy);
+.intro .error {
+  color: #dc2626;
+  font-weight: 600;
+  padding: 0;
+}
+
+/* 스켈레톤 UI */
+.skeleton {
+  margin-top: 22px;
+}
+.sk-note {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 18px;
+}
+.sk {
+  position: relative;
+  overflow: hidden;
+  background: #e9ebf3;
+  border-radius: 8px;
+}
+.sk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: shimmer 1.3s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.sk-summary {
+  height: 60px;
+  border-radius: 14px;
+  margin: 0 0 24px;
+}
+.sk-bundle {
+  margin: 0 0 26px;
+}
+.sk-bundle-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sk-no {
+  width: 54px;
+  height: 20px;
   border-radius: 999px;
-  animation: spin 0.8s linear infinite;
-  margin-bottom: 16px;
 }
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.sk-title {
+  width: 180px;
+  height: 20px;
+}
+.sk-story {
+  display: block;
+  width: 70%;
+  height: 14px;
+  margin-bottom: 14px;
+}
+.sk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sk-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.sk-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.sk-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.sk-cat {
+  display: block;
+  width: 48px;
+  height: 14px;
+  border-radius: 6px;
+  margin-bottom: 9px;
+}
+.sk-line {
+  display: block;
+  width: 80%;
+  height: 13px;
+  margin-bottom: 7px;
+}
+.sk-line.short {
+  width: 55%;
+  margin-bottom: 0;
 }
 .error {
   text-align: center;
@@ -248,6 +391,37 @@ onMounted(fetchRecommend)
   border-radius: 999px;
   white-space: nowrap;
 }
+.bundle {
+  margin: 0 0 26px;
+}
+.bundle-head {
+  margin: 0 0 12px;
+}
+.bundle-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bundle-no {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(120deg, #1b2a59, #4f46e5);
+  padding: 3px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.bundle-title h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+.storyline {
+  margin: 8px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-sub);
+}
 .rec-list {
   display: flex;
   flex-direction: column;
@@ -266,14 +440,6 @@ onMounted(fetchRecommend)
 .rec-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
-}
-.rank {
-  width: 26px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--navy);
-  flex-shrink: 0;
 }
 .thumb {
   width: 56px;

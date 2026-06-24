@@ -8,13 +8,41 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     """프로필 카드 등에서 사용하는 회원 정보."""
 
-    level = serializers.IntegerField(read_only=True)
+    post_count = serializers.SerializerMethodField()
+    liked_post_count = serializers.SerializerMethodField()
+    liked_content_count = serializers.SerializerMethodField()
+    attendance_streak = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'nickname', 'profile_image',
-                  'region', 'points', 'level')
-        read_only_fields = ('points', 'level')
+                  'region', 'ebti_result',
+                  'post_count', 'liked_post_count', 'liked_content_count',
+                  'attendance_streak')
+
+    def get_post_count(self, obj):
+        return obj.posts.count()
+
+    def get_liked_post_count(self, obj):
+        return obj.liked_posts.count()
+
+    def get_liked_content_count(self, obj):
+        return obj.liked_contents.count()
+
+    def get_attendance_streak(self, obj):
+        """오늘(또는 어제)부터 거슬러 연속 출석한 일수."""
+        from datetime import date, timedelta
+
+        dates = set(obj.attendances.values_list('date', flat=True))
+        if not dates:
+            return 0
+        today = date.today()
+        cur = today if today in dates else today - timedelta(days=1)
+        streak = 0
+        while cur in dates:
+            streak += 1
+            cur -= timedelta(days=1)
+        return streak
 
 
 class RegisterSerializer(serializers.ModelSerializer):

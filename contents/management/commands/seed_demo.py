@@ -22,27 +22,25 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         demo, _ = User.objects.get_or_create(
             username='finedu_demo',
-            defaults={'nickname': '핀에듀지기', 'points': 480},
+            defaults={'nickname': '핀에듀지기'},
         )
         demo.nickname = '핀에듀지기'
-        demo.points = 480
         demo.set_password('finedu1234')
         demo.save()
 
-        # 랭킹용 추가 회원들
+        # 좋아요·게시글 작성용 추가 회원들
         members = [demo]
         roster = [
-            ('econ_master', '경제마스터', 1280),
-            ('saving_queen', '절약여왕', 1050),
-            ('young_invest', '주린이탈출', 760),
-            ('coin_lover', '코인러버', 540),
+            ('econ_master', '경제마스터'),
+            ('saving_queen', '절약여왕'),
+            ('young_invest', '주린이탈출'),
+            ('coin_lover', '코인러버'),
         ]
-        for uname, nick, pts in roster:
+        for uname, nick in roster:
             u, _ = User.objects.get_or_create(
                 username=uname, defaults={'nickname': nick}
             )
             u.nickname = nick
-            u.points = pts
             u.set_password('finedu1234')
             u.save()
             members.append(u)
@@ -134,6 +132,9 @@ class Command(BaseCommand):
             '부산': ('부산광역시청', '부산광역시 연제구 중앙대로 1001', 35.1796, 129.0756),
         }
         for i, (title, host, region, online, dday) in enumerate(events):
+            # 오프라인(또는 온·오프 병행) 행사는 지역 대표 좌표를 지도에 표시
+            offline = online in ('offline', 'both')
+            place = region_place.get(region)
             # 데모 데이터를 풍부하게 하기 위해 일부 이벤트의 접수 기간을 다양화
             if i == len(events) - 1:  # 마지막 이벤트는 마감된 이벤트로 시딩
                 start_dt = today - timedelta(days=10)

@@ -9,6 +9,9 @@ import {
   themes,
   personaFor,
 } from '@/data/ebti'
+import { useAuthStore } from '@/stores/auth'
+
+const auth = useAuthStore()
 
 /**
  * 경제 EBTI 테스트 (기획재정부 경제배움e+ 진단 기반)
@@ -80,8 +83,11 @@ function finish() {
     strongCount,
     persona: personaFor(strongCount),
   }
-  // 기획서: EBTI 결과는 로컬스토리지에 저장
   localStorage.setItem('ebtiResult', JSON.stringify(result.value))
+  // 로그인 상태면 서버에도 저장
+  if (auth.isLoggedIn) {
+    auth.updateProfile({ ebti_result: result.value }).catch(() => {})
+  }
   step.value = STEP.RESULT
 }
 

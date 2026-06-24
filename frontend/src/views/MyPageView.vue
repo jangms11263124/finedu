@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import api from '@/api'
 import { useAuthStore } from '@/stores/auth'
@@ -13,6 +13,14 @@ const tabs = [
   { key: 'liked-contents', label: '좋아요한 콘텐츠' },
 ]
 const activeTab = ref('posts')
+const tabsEl = ref(null)
+
+// 활동 현황 카드 클릭 → 해당 탭으로 전환하고 목록 위치로 스크롤
+function goTab(key) {
+  activeTab.value = key
+  loadTab(key)
+  nextTick(() => tabsEl.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+}
 
 const myPosts = ref([])
 const likedPosts = ref([])
@@ -94,9 +102,6 @@ async function save() {
 }
 
 /* ── 표시용 계산값 ─────────────────────── */
-const levelProgress = computed(() => (auth.user?.points ?? 0) % 100)
-const pointsToNext = computed(() => 100 - levelProgress.value)
-
 function fmt(dt) {
   return new Date(dt).toLocaleDateString('ko-KR', {
     year: '2-digit',
@@ -105,7 +110,11 @@ function fmt(dt) {
   })
 }
 
-onMounted(() => loadTab('posts'))
+onMounted(() => {
+  // 통계 카드용 최신 카운트 확보 (직접 진입 등으로 비어 있을 수 있어 한 번 더 갱신)
+  auth.fetchMe()
+  loadTab('posts')
+})
 </script>
 
 <template>
@@ -121,41 +130,96 @@ onMounted(() => loadTab('posts'))
         <div class="info">
           <div class="name-row">
             <h1>{{ auth.user?.nickname }}</h1>
-            <span class="lv-badge">Lv.{{ auth.user?.level }}</span>
+            <span v-if="auth.user?.attendance_streak" class="streak-badge">
+              🔥 연속 출석 {{ auth.user.attendance_streak }}일
+            </span>
           </div>
           <p class="sub">@{{ auth.user?.username }}</p>
           <p class="sub email" v-if="auth.user?.email">✉️ {{ auth.user.email }}</p>
-
-          <div class="lv-bar">
-            <div class="lv-bar-fill" :style="{ width: levelProgress + '%' }"></div>
-          </div>
-          <p class="lv-hint">
-            {{ auth.user?.points?.toLocaleString() }}P ·
-            다음 레벨까지 <strong>{{ pointsToNext }}P</strong>
-          </p>
         </div>
 
         <button class="btn btn-outline edit-btn" @click="startEdit">프로필 수정</button>
       </section>
 
-      <!-- 통계 -->
+      <!-- 나의 활동 현황 -->
+      <h2 class="section-title">나의 활동 현황</h2>
       <section class="stats">
-        <div class="stat">
-          <strong>{{ auth.user?.points?.toLocaleString() ?? 0 }}</strong>
-          <span>포인트</span>
+        <button class="stat" @click="goTab('posts')">
+          <span class="stat-ico ico-post">📝</span>
+          <div class="stat-body">
+            <strong>{{ auth.user?.post_count ?? 0 }}</strong>
+            <span>작성 글</span>
+          </div>
+        </button>
+        <button class="stat" @click="goTab('liked-posts')">
+          <span class="stat-ico ico-like">👍</span>
+          <div class="stat-body">
+            <strong>{{ auth.user?.liked_post_count ?? 0 }}</strong>
+            <span>좋아요한 글</span>
+          </div>
+        </button>
+        <button class="stat" @click="goTab('liked-contents')">
+          <span class="stat-ico ico-content">❤️</span>
+          <div class="stat-body">
+            <strong>{{ auth.user?.liked_content_count ?? 0 }}</strong>
+            <span>좋아요한 콘텐츠</span>
+          </div>
+        </button>
+      </section>
+
+      <!-- EBTI -->
+      <section class="ebti-card">
+        <div class="ebti-head">
+          <span class="section-label">경제 EBTI</span>
+          <RouterLink to="/ebti" class="ebti-retest">
+            {{ auth.user?.ebti_result ? '다시 검사하기' : 'EBTI 검사하기' }} →
+          </RouterLink>
         </div>
-        <div class="stat">
-          <strong>Lv.{{ auth.user?.level ?? 1 }}</strong>
-          <span>레벨</span>
+
+        <!-- 결과 없음 -->
+        <div v-if="!auth.user?.ebti_result" class="ebti-empty">
+          <span class="ebti-empty-ico">📋</span>
+          <p>아직 EBTI 검사를 하지 않았어요.</p>
+          <p class="ebti-empty-sub">검사를 완료하면 AI 추천이 더 정확해져요.</p>
         </div>
-        <div class="stat">
-          <strong>{{ myPosts.length }}</strong>
-          <span>작성 글</span>
-        </div>
+
+        <!-- 결과 있음 -->
+        <template v-else>
+          <div class="ebti-persona">
+            <span class="ebti-emoji">{{ auth.user.ebti_result.persona.emoji }}</span>
+            <div>
+              <p class="ebti-persona-name">{{ auth.user.ebti_result.persona.name }}</p>
+              <p class="ebti-persona-desc">{{ auth.user.ebti_result.persona.desc }}</p>
+            </div>
+            <span class="ebti-score-chip">
+              강점 {{ auth.user.ebti_result.strongCount }} / 5
+            </span>
+          </div>
+
+          <div class="ebti-breakdown">
+            <div
+              v-for="b in auth.user.ebti_result.breakdown"
+              :key="b.key"
+              class="ebti-row"
+            >
+              <span class="ebti-label">
+                {{ b.strong ? '✅' : '✏️' }} {{ b.name }}
+              </span>
+              <div class="ebti-bar">
+                <div
+                  class="ebti-fill"
+                  :class="{ strong: b.strong }"
+                  :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
+                ></div>
+              </div>
+              <span class="ebti-score">{{ b.score }}점</span>
+            </div>
+          </div>
+        </template>
       </section>
 
       <!-- 탭 -->
-      <nav class="tabs">
+      <nav ref="tabsEl" class="tabs">
         <button
           v-for="t in tabs"
           :key="t.key"
@@ -357,30 +421,201 @@ onMounted(() => loadTab('posts'))
   white-space: nowrap;
 }
 
-/* 통계 */
+/* 섹션 제목 */
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--navy);
+  margin: 26px 2px 12px;
+}
+
+/* 연속 출석 배지 */
+.streak-badge {
+  background: #fff3e6;
+  color: #c2680c;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* 나의 활동 현황 */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin: 18px 0 26px;
+  margin: 0 0 8px;
 }
 .stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 18px;
-  text-align: center;
+  padding: 18px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+}
+.stat:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--navy);
+}
+.stat-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+.ico-post {
+  background: #eef2ff;
+}
+.ico-like {
+  background: #e6f4f1;
+}
+.ico-content {
+  background: #fee2e2;
+}
+.stat-body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 .stat strong {
-  display: block;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--navy);
 }
-.stat span {
+.stat-body span {
   font-size: 0.8rem;
   color: var(--text-sub);
+  margin-top: 2px;
+}
+
+/* EBTI 카드 */
+.ebti-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+  margin-bottom: 18px;
+}
+.ebti-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.section-label {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+.ebti-retest {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+.ebti-retest:hover {
+  text-decoration: underline;
+}
+.ebti-empty {
+  text-align: center;
+  padding: 24px 0 10px;
+  color: var(--text-sub);
+}
+.ebti-empty-ico {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 10px;
+}
+.ebti-empty p {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.ebti-empty-sub {
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  margin-top: 4px;
+}
+.ebti-persona {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.ebti-emoji {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+.ebti-persona-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--navy);
+  white-space: pre-line;
+}
+.ebti-persona-desc {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+.ebti-score-chip {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--bg);
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.ebti-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ebti-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+}
+.ebti-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.ebti-bar {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.ebti-fill {
+  height: 100%;
+  background: var(--text-mute);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.ebti-fill.strong {
+  background: linear-gradient(90deg, var(--teal), var(--green));
+}
+.ebti-score {
+  font-size: 0.76rem;
+  color: var(--text-mute);
+  font-weight: 700;
+  text-align: right;
 }
 
 /* 탭 */
@@ -608,6 +843,9 @@ onMounted(() => loadTab('posts'))
   .edit-btn {
     grid-column: 1 / -1;
     width: 100%;
+  }
+  .stats {
+    grid-template-columns: 1fr;
   }
   .row {
     grid-template-columns: 1fr 60px 60px;
