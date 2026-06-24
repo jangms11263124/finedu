@@ -102,6 +102,17 @@ onMounted(load)
         <p>유튜브 영상으로 쉽고 재미있게 금융/경제 지식을 배워보세요.</p>
       </header>
 
+      <!-- AI 맞춤 추천 배너 -->
+      <RouterLink to="/ai-recommend" class="ai-banner">
+        <span class="ai-banner-glow"></span>
+        <div class="ai-banner-text">
+          <span class="ai-banner-badge">🤖 AI 맞춤 추천</span>
+          <h2>나에게 딱 맞는 콘텐츠가 궁금하다면?</h2>
+          <p>관심사 · 학습 이력 · EBTI 결과를 분석해 AI가 콘텐츠를 골라드려요.</p>
+        </div>
+        <span class="ai-banner-cta">맞춤 추천 받기 →</span>
+      </RouterLink>
+
       <!-- 검색바 -->
       <div class="search-bar">
         <select v-model="category" @change="search">
@@ -205,6 +216,74 @@ onMounted(load)
   margin-top: 8px;
   color: var(--text-sub);
   font-size: 0.92rem;
+}
+/* AI 맞춤 추천 배너 */
+.ai-banner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(120deg, #1b2a59, #4f46e5 60%, #7c3aed);
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 22px;
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.ai-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.ai-banner-glow {
+  position: absolute;
+  top: -40%;
+  right: -5%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 70%);
+  pointer-events: none;
+}
+.ai-banner-text {
+  position: relative;
+  z-index: 1;
+}
+.ai-banner-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+.ai-banner-text h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 10px 0 6px;
+}
+.ai-banner-text p {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.5;
+}
+.ai-banner-cta {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: #fff;
+  padding: 11px 18px;
+  border-radius: 10px;
+  white-space: nowrap;
+  transition: transform 0.16s ease;
+}
+.ai-banner:hover .ai-banner-cta {
+  transform: scale(1.04);
 }
 .search-bar {
   display: flex;
@@ -429,6 +508,15 @@ h3 {
   }
   .search-bar {
     flex-wrap: wrap;
+  }
+  .ai-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .ai-banner-cta {
+    align-self: stretch;
+    text-align: center;
   }
 }
 </style>

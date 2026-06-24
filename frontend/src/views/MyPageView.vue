@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import api from '@/api'
 import { useAuthStore } from '@/stores/auth'
@@ -13,6 +13,14 @@ const tabs = [
   { key: 'liked-contents', label: '좋아요한 콘텐츠' },
 ]
 const activeTab = ref('posts')
+const tabsEl = ref(null)
+
+// 활동 현황 카드 클릭 → 해당 탭으로 전환하고 목록 위치로 스크롤
+function goTab(key) {
+  activeTab.value = key
+  loadTab(key)
+  nextTick(() => tabsEl.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+}
 
 const myPosts = ref([])
 const likedPosts = ref([])
@@ -102,7 +110,11 @@ function fmt(dt) {
   })
 }
 
-onMounted(() => loadTab('posts'))
+onMounted(() => {
+  // 통계 카드용 최신 카운트 확보 (직접 진입 등으로 비어 있을 수 있어 한 번 더 갱신)
+  auth.fetchMe()
+  loadTab('posts')
+})
 </script>
 
 <template>
@@ -118,6 +130,9 @@ onMounted(() => loadTab('posts'))
         <div class="info">
           <div class="name-row">
             <h1>{{ auth.user?.nickname }}</h1>
+            <span v-if="auth.user?.attendance_streak" class="streak-badge">
+              🔥 연속 출석 {{ auth.user.attendance_streak }}일
+            </span>
           </div>
           <p class="sub">@{{ auth.user?.username }}</p>
           <p class="sub email" v-if="auth.user?.email">✉️ {{ auth.user.email }}</p>
@@ -126,12 +141,30 @@ onMounted(() => loadTab('posts'))
         <button class="btn btn-outline edit-btn" @click="startEdit">프로필 수정</button>
       </section>
 
-      <!-- 통계 -->
+      <!-- 나의 활동 현황 -->
+      <h2 class="section-title">나의 활동 현황</h2>
       <section class="stats">
-        <div class="stat">
-          <strong>{{ myPosts.length }}</strong>
-          <span>작성 글</span>
-        </div>
+        <button class="stat" @click="goTab('posts')">
+          <span class="stat-ico ico-post">📝</span>
+          <div class="stat-body">
+            <strong>{{ auth.user?.post_count ?? 0 }}</strong>
+            <span>작성 글</span>
+          </div>
+        </button>
+        <button class="stat" @click="goTab('liked-posts')">
+          <span class="stat-ico ico-like">👍</span>
+          <div class="stat-body">
+            <strong>{{ auth.user?.liked_post_count ?? 0 }}</strong>
+            <span>좋아요한 글</span>
+          </div>
+        </button>
+        <button class="stat" @click="goTab('liked-contents')">
+          <span class="stat-ico ico-content">❤️</span>
+          <div class="stat-body">
+            <strong>{{ auth.user?.liked_content_count ?? 0 }}</strong>
+            <span>좋아요한 콘텐츠</span>
+          </div>
+        </button>
       </section>
 
       <!-- EBTI -->
@@ -186,7 +219,7 @@ onMounted(() => loadTab('posts'))
       </section>
 
       <!-- 탭 -->
-      <nav class="tabs">
+      <nav ref="tabsEl" class="tabs">
         <button
           v-for="t in tabs"
           :key="t.key"
@@ -388,30 +421,83 @@ onMounted(() => loadTab('posts'))
   white-space: nowrap;
 }
 
-/* 통계 */
+/* 섹션 제목 */
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--navy);
+  margin: 26px 2px 12px;
+}
+
+/* 연속 출석 배지 */
+.streak-badge {
+  background: #fff3e6;
+  color: #c2680c;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* 나의 활동 현황 */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin: 18px 0 26px;
+  margin: 0 0 8px;
 }
 .stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 18px;
-  text-align: center;
+  padding: 18px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+}
+.stat:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--navy);
+}
+.stat-ico {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+.ico-post {
+  background: #eef2ff;
+}
+.ico-like {
+  background: #e6f4f1;
+}
+.ico-content {
+  background: #fee2e2;
+}
+.stat-body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 .stat strong {
-  display: block;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--navy);
 }
-.stat span {
+.stat-body span {
   font-size: 0.8rem;
   color: var(--text-sub);
+  margin-top: 2px;
 }
 
 /* EBTI 카드 */
@@ -757,6 +843,9 @@ onMounted(() => loadTab('posts'))
   .edit-btn {
     grid-column: 1 / -1;
     width: 100%;
+  }
+  .stats {
+    grid-template-columns: 1fr;
   }
   .row {
     grid-template-columns: 1fr 60px 60px;
