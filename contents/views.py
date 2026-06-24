@@ -96,8 +96,26 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = super().get_queryset()
         params = self.request.query_params
-        if status_ := params.get('status'):
+        
+        if app_status := params.get('app_status'):
+            import datetime
+            today = datetime.date.today()
+            from django.db.models import Q
+            if app_status == 'upcoming':
+                qs = qs.filter(start_date__gt=today)
+            elif app_status == 'ongoing':
+                qs = qs.filter(
+                    Q(start_date__lte=today) | Q(start_date__isnull=True),
+                    Q(end_date__gte=today) | Q(end_date__isnull=True),
+                    status='open'
+                )
+            elif app_status == 'closed':
+                qs = qs.filter(
+                    Q(end_date__lt=today) | Q(status__in=['closed', 'ended'])
+                )
+        elif status_ := params.get('status'):
             qs = qs.filter(status=status_)
+            
         if region := params.get('region'):
             qs = qs.filter(region=region)
         if online_type := params.get('online_type'):

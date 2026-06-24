@@ -126,27 +126,43 @@ class Command(BaseCommand):
             ('우리 동네 금융 사기 예방 교실', '금융감독원', '인천', 'offline', 20),
         ]
         for i, (title, host, region, online, dday) in enumerate(events):
+            # 데모 데이터를 풍부하게 하기 위해 일부 이벤트의 접수 기간을 다양화
+            if i == len(events) - 1:  # 마지막 이벤트는 마감된 이벤트로 시딩
+                start_dt = today - timedelta(days=10)
+                end_dt = today - timedelta(days=2)
+                status_val = 'closed'
+            elif i == len(events) - 2:  # 뒤에서 두번째는 접수 예정 이벤트로 시딩
+                start_dt = today + timedelta(days=3)
+                end_dt = today + timedelta(days=10)
+                status_val = 'open'
+            else:
+                start_dt = today
+                end_dt = today + timedelta(days=dday)
+                status_val = 'open' if dday >= 0 else 'closed'
+
             Event.objects.create(
                 title=title,
                 summary='실생활에 바로 쓰는 금융 지식을 배워보세요.',
                 host=host,
                 region=region,
                 online_type=online,
-                status='open' if dday >= 0 else 'closed',
-                start_date=today,
-                end_date=today + timedelta(days=dday),
+                status=status_val,
+                start_date=start_dt,
+                end_date=end_dt,
             )
 
         posts = [
-            '사회초년생인데 적금 추천 좀 부탁드려요',
-            '신용점수 빠르게 올리는 방법 공유합니다',
-            '월 50만원 투자 포트폴리오 점검 부탁',
-            '연말정산 환급 많이 받는 팁 정리',
-            '신용카드 vs 체크카드 뭐가 이득일까요?',
+            ('free', '사회초년생인데 적금 추천 좀 부탁드려요'),
+            ('info', '신용점수 빠르게 올리는 방법 공유합니다'),
+            ('qna', '월 50만원 투자 포트폴리오 점검 부탁'),
+            ('review', '청년 주택청약 가입하고 당첨된 생생한 후기!'),
+            ('study', '함께 경제 신문 매일 읽고 토론할 스터디원 구해요'),
+            ('free', '신용카드 vs 체크카드 뭐가 이득일까요?'),
+            ('info', '연말정산 환급 많이 받는 팁 정리'),
         ]
-        for i, title in enumerate(posts):
+        for i, (board_type, title) in enumerate(posts):
             Post.objects.create(
-                board='info' if i % 2 else 'free',
+                board=board_type,
                 title=title,
                 content='본문 내용입니다. 다양한 의견을 나눠주세요!',
                 author=demo,
