@@ -35,11 +35,6 @@ function logout() {
       </nav>
 
       <div class="nav-right">
-        <div class="search">
-          <span class="ico">🔍</span>
-          <input type="text" placeholder="검색어를 입력하세요" />
-        </div>
-
         <!-- 로그인 상태: 프로필 칩 → 마이페이지 -->
         <template v-if="auth.isLoggedIn">
           <RouterLink to="/mypage" class="profile-chip" title="마이페이지">
@@ -110,27 +105,6 @@ function logout() {
   align-items: center;
   gap: 10px;
 }
-.search {
-  width: 280px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 9px 16px;
-}
-.search .ico {
-  font-size: 0.85rem;
-}
-.search input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  outline: none;
-  font-size: 0.85rem;
-  width: 100%;
-}
 .btn.sm {
   padding: 8px 14px;
   font-size: 0.85rem;
@@ -190,8 +164,7 @@ function logout() {
   color: #dc2626;
 }
 @media (max-width: 980px) {
-  .menu,
-  .search {
+  .menu {
     display: none;
   }
 }
