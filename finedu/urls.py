@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/', include('contents.urls')),
     path('api/', include('community.urls')),
     path('api/', include('glossary.urls')),
+    path('api/', include('quiz.urls')),
 ]
 
 if settings.DEBUG:

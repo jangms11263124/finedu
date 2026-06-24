@@ -18,11 +18,18 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# .env 로드 (ANTHROPIC_API_KEY 등 비밀값 보관)
+# .env 로드 (API 키 등 비밀값 보관)
 load_dotenv(BASE_DIR / '.env')
 
-# Anthropic Claude API 키 (AI 콘텐츠 추천에 사용). 없으면 규칙 기반으로 대체.
-ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
+# AI 콘텐츠 추천 (2단계 RAG 파이프라인) — SSAFY GMS 게이트웨이 경유
+#  1단계 Retrieval : Gemini 임베딩 → 코사인 유사도로 후보 검색
+#  2단계 Generation: GPT-4o-mini Structured Outputs로 번들 추천 생성
+#  GMS는 실제 공급자 엔드포인트 앞에 https://gms.ssafy.io/gmsapi/ 를 붙이고
+#  쿼리스트링 ?key=$GMS_KEY 로 인증한다. 키 하나로 OpenAI·Gemini를 모두 호출.
+# 키가 없거나 오류가 나면 규칙 기반 추천으로 자동 대체된다.
+GMS_KEY = os.environ.get('GMS_KEY', '')
+GMS_BASE_URL = os.environ.get('GMS_BASE_URL', 'https://gms.ssafy.io/gmsapi')
+GEMINI_MODEL = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash-lite')
 
 
 # Quick-start development settings - unsuitable for production
@@ -56,6 +63,7 @@ INSTALLED_APPS = [
     'contents',
     'community',
     'glossary',
+    'quiz',
 ]
 
 MIDDLEWARE = [
