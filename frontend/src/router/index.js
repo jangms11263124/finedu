@@ -22,6 +22,12 @@ const router = createRouter({
       component: () => import('@/views/ContentsView.vue'),
     },
     {
+      path: '/ai-recommend',
+      name: 'ai-recommend',
+      component: () => import('@/views/AIRecommendView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/contents/:id',
       name: 'content-detail',
       component: () => import('@/views/ContentDetailView.vue'),

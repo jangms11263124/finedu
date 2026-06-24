@@ -10,10 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# .env 로드 (ANTHROPIC_API_KEY 등 비밀값 보관)
+load_dotenv(BASE_DIR / '.env')
+
+# Anthropic Claude API 키 (AI 콘텐츠 추천에 사용). 없으면 규칙 기반으로 대체.
+ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
 
 
 # Quick-start development settings - unsuitable for production

@@ -3,13 +3,30 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from . import ai
 from .models import Content, Event
 from .serializers import (
     ContentCommentSerializer,
     ContentSerializer,
     EventSerializer,
 )
+
+
+class AIRecommendView(APIView):
+    """POST /api/contents/ai-recommend/ — RAG 기반 AI 맞춤 콘텐츠 추천.
+
+    body: { ebti?: {...}, region?: "..." }  (EBTI는 프론트 localStorage에서 전달)
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        ebti = request.data.get('ebti')
+        region = request.data.get('region', '')
+        result = ai.recommend(request.user, ebti=ebti, region=region)
+        return Response(result)
 
 
 class ContentViewSet(viewsets.ModelViewSet):

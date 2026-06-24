@@ -9,6 +9,7 @@ class User(AbstractUser):
     profile_image = models.ImageField(
         '프로필 이미지', upload_to='profiles/', blank=True, null=True
     )
+    region = models.CharField('지역', max_length=30, blank=True)
     points = models.PositiveIntegerField('포인트', default=0)
 
     def __str__(self):
