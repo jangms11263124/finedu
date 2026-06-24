@@ -32,13 +32,3 @@ class MeView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
-
-
-class RankingView(generics.ListAPIView):
-    """GET /api/accounts/ranking/ — 포인트 순 사용자 랭킹 (커뮤니티)."""
-
-    serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
-
-    def get_queryset(self):
-        return User.objects.order_by('-points')[:10]

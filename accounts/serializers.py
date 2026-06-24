@@ -8,13 +8,10 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     """프로필 카드 등에서 사용하는 회원 정보."""
 
-    level = serializers.IntegerField(read_only=True)
-
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'nickname', 'profile_image',
-                  'region', 'points', 'level')
-        read_only_fields = ('points', 'level')
+                  'region', 'ebti_result')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
