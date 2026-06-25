@@ -1,15 +1,19 @@
 :root {
   /* finedu 디자인 토큰 */
-  --navy: #1b2a59;          /* 주요 버튼/로고 */
+  --navy: #1b2a59;
+  /* 주요 버튼/로고 */
   --navy-dark: #14204a;
-  --teal: #0f766e;          /* 히어로 그라데이션 */
+  --teal: #0f766e;
+  /* 히어로 그라데이션 */
   --teal-dark: #0b4f49;
-  --green: #16a34a;         /* 보조 액션 */
+  --green: #16a34a;
+  /* 보조 액션 */
   --green-dark: #15803d;
   --naver: #03c75a;
   --kakao: #fee500;
 
-  --bg: #eef0f8;            /* 페이지 배경 (연보라 그레이) */
+  --bg: #eef0f8;
+  /* 페이지 배경 (연보라 그레이) */
   --surface: #ffffff;
   --line: #e5e7f0;
   --text: #1f2430;
@@ -36,6 +40,7 @@ body {
   padding: 0;
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #app {
@@ -58,7 +63,11 @@ img {
   max-width: 100%;
 }
 
-h1, h2, h3, h4, p {
+h1,
+h2,
+h3,
+h4,
+p {
   margin: 0;
 }
 
@@ -81,31 +90,39 @@ h1, h2, h3, h4, p {
   padding: 12px 20px;
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s;
 }
+
 .btn:active {
   transform: translateY(1px);
 }
+
 .btn-navy {
   background: var(--navy);
   color: #fff;
 }
+
 .btn-navy:hover {
   background: var(--navy-dark);
 }
+
 .btn-green {
   background: var(--green);
   color: #fff;
 }
+
 .btn-green:hover {
   background: var(--green-dark);
 }
+
 .btn-outline {
   background: #fff;
   color: var(--navy);
   border: 1px solid var(--line);
 }
+
 .btn-outline:hover {
   border-color: var(--navy);
 }
+
 .btn-block {
   width: 100%;
 }
@@ -117,17 +134,20 @@ h1, h2, h3, h4, p {
   justify-content: space-between;
   margin-bottom: 18px;
 }
+
 .section-head h2 {
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.4px;
 }
+
 .section-head .sub {
   font-size: 0.85rem;
   color: var(--text-sub);
   margin-left: 10px;
   font-weight: 400;
 }
+
 .section-head .more {
   display: inline-flex;
   align-items: center;
@@ -137,15 +157,17 @@ h1, h2, h3, h4, p {
   color: var(--text-mute);
   transition: color 0.15s ease;
 }
+
 .section-head .more:hover {
   color: var(--navy);
 }
+
 .section-head .more .arrow-ico {
   width: 12px;
   height: 12px;
   transition: transform 0.15s ease;
 }
+
 .section-head .more:hover .arrow-ico {
   transform: translateX(2px);
 }
-
