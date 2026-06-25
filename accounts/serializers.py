@@ -11,6 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
     post_count = serializers.SerializerMethodField()
     liked_post_count = serializers.SerializerMethodField()
     liked_content_count = serializers.SerializerMethodField()
+    scrapped_content_count = serializers.SerializerMethodField()
+    scrapped_event_count = serializers.SerializerMethodField()
     attendance_streak = serializers.SerializerMethodField()
 
     class Meta:
@@ -18,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email', 'nickname', 'profile_image',
                   'region', 'ebti_result',
                   'post_count', 'liked_post_count', 'liked_content_count',
+                  'scrapped_content_count', 'scrapped_event_count',
                   'attendance_streak')
 
     def get_post_count(self, obj):
@@ -28,6 +31,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_liked_content_count(self, obj):
         return obj.liked_contents.count()
+
+    def get_scrapped_content_count(self, obj):
+        return obj.scrapped_contents.count()
+
+    def get_scrapped_event_count(self, obj):
+        return obj.scrapped_events.count()
 
     def get_attendance_streak(self, obj):
         """오늘(또는 어제)부터 거슬러 연속 출석한 일수."""
