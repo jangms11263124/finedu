@@ -12,9 +12,13 @@ const tabs = [
   { key: 'posts', label: '내가 쓴 글' },
   { key: 'liked-posts', label: '좋아요한 글' },
   { key: 'liked-contents', label: '좋아요한 콘텐츠' },
+  { key: 'scrap', label: '스크랩' },
 ]
 const activeTab = ref('posts')
 const tabsEl = ref(null)
+
+// 스크랩 탭 내부 토글 (콘텐츠 / 교육행사 분리)
+const scrapKind = ref('contents')
 
 // 활동 현황 카드 클릭 → 해당 탭으로 전환하고 목록 위치로 스크롤
 function goTab(key) {
@@ -26,6 +30,8 @@ function goTab(key) {
 const myPosts = ref([])
 const likedPosts = ref([])
 const likedContents = ref([])
+const scrapContents = ref([])
+const scrapEvents = ref([])
 const loading = ref(false)
 const loaded = ref({})
 
@@ -42,12 +48,23 @@ async function loadTab(tab) {
     } else if (tab === 'liked-contents') {
       const { data } = await api.get('/contents/', { params: { liked: 'me' } })
       likedContents.value = data
+    } else if (tab === 'scrap') {
+      // 스크랩한 콘텐츠 · 교육행사를 함께 불러온다
+      const [c, e] = await Promise.all([
+        api.get('/contents/', { params: { scrapped: 'me' } }),
+        api.get('/events/', { params: { scrapped: 'me' } }),
+      ])
+      scrapContents.value = c.data
+      scrapEvents.value = e.data
     }
     loaded.value[tab] = true
   } finally {
     loading.value = false
   }
 }
+
+const ddayLabel = (e) =>
+  e.d_day === null ? '접수마감' : e.d_day === 0 ? 'D-DAY' : `D-${e.d_day}`
 
 watch(activeTab, (t) => loadTab(t), { immediate: false })
 
@@ -114,17 +131,12 @@ function fmt(dt) {
 onMounted(() => {
   // 통계 카드용 최신 카운트 확보 (직접 진입 등으로 비어 있을 수 있어 한 번 더 갱신)
   auth.fetchMe()
-  
-  // URL 쿼리에 따른 초기 탭 활성화
-  if (route.query.tab && tabs.some(t => t.key === route.query.tab)) {
-    activeTab.value = route.query.tab
-  }
-  loadTab(activeTab.value)
-
-  // URL 쿼리에 프로필 편집 요청이 있는 경우 모달 즉시 실행
-  if (route.query.edit === 'true') {
-    startEdit()
-  }
+  // 홈 사이드바 "스크랩" 등에서 ?tab=... 으로 진입하면 해당 탭을 연다
+  const initial = tabs.some((t) => t.key === route.query.tab)
+    ? route.query.tab
+    : 'posts'
+  activeTab.value = initial
+  loadTab(initial)
 })
 
 // URL 쿼리 변화 실시간 감지
@@ -196,6 +208,15 @@ watch(
           <div class="stat-body">
             <strong>{{ auth.user?.liked_content_count ?? 0 }}</strong>
             <span>좋아요한 콘텐츠</span>
+          </div>
+        </button>
+        <button class="stat" @click="goTab('scrap')">
+          <span class="stat-ico ico-scrap">🔖</span>
+          <div class="stat-body">
+            <strong>
+              {{ (auth.user?.scrapped_content_count ?? 0) + (auth.user?.scrapped_event_count ?? 0) }}
+            </strong>
+            <span>스크랩</span>
           </div>
         </button>
       </section>
@@ -294,7 +315,7 @@ watch(
       </template>
 
       <!-- 좋아요한 콘텐츠 -->
-      <template v-else>
+      <template v-else-if="activeTab === 'liked-contents'">
         <div v-if="likedContents.length" class="content-grid">
           <RouterLink
             v-for="c in likedContents"
@@ -318,6 +339,74 @@ watch(
           </RouterLink>
         </div>
         <p v-else class="empty">아직 좋아요한 콘텐츠가 없어요.</p>
+      </template>
+
+      <!-- 스크랩 (콘텐츠 · 교육행사 분리) -->
+      <template v-else>
+        <div class="scrap-toggle">
+          <button
+            class="seg"
+            :class="{ on: scrapKind === 'contents' }"
+            @click="scrapKind = 'contents'"
+          >
+            콘텐츠 {{ scrapContents.length }}
+          </button>
+          <button
+            class="seg"
+            :class="{ on: scrapKind === 'events' }"
+            @click="scrapKind = 'events'"
+          >
+            교육행사 {{ scrapEvents.length }}
+          </button>
+        </div>
+
+        <!-- 스크랩한 콘텐츠 -->
+        <template v-if="scrapKind === 'contents'">
+          <div v-if="scrapContents.length" class="content-grid">
+            <RouterLink
+              v-for="c in scrapContents"
+              :key="c.id"
+              :to="`/contents/${c.id}`"
+              class="content-card"
+            >
+              <div class="thumb">
+                <img
+                  v-if="c.youtube_id"
+                  :src="`https://img.youtube.com/vi/${c.youtube_id}/mqdefault.jpg`"
+                  alt=""
+                />
+                <div v-else class="thumb-ph">📺</div>
+              </div>
+              <div class="card-body">
+                <span class="cat">{{ c.category_display }}</span>
+                <h3>{{ c.title }}</h3>
+                <p class="meta">👍 {{ c.like_count }} · 👁 {{ c.views.toLocaleString() }}</p>
+              </div>
+            </RouterLink>
+          </div>
+          <p v-else class="empty">아직 스크랩한 콘텐츠가 없어요.</p>
+        </template>
+
+        <!-- 스크랩한 교육행사 -->
+        <template v-else>
+          <ul v-if="scrapEvents.length" class="event-list">
+            <RouterLink
+              v-for="e in scrapEvents"
+              :key="e.id"
+              :to="`/events/${e.id}`"
+              class="event-row"
+            >
+              <span class="ev-dday" :class="{ urgent: e.d_day !== null && e.d_day <= 2 }">
+                {{ ddayLabel(e) }}
+              </span>
+              <span class="ev-title">{{ e.title }}</span>
+              <span class="ev-status" :class="e.status">{{ e.status_display }}</span>
+              <span class="ev-meta">{{ e.online_display }}</span>
+              <span class="ev-meta">{{ e.region || '온라인' }}</span>
+            </RouterLink>
+          </ul>
+          <p v-else class="empty">아직 스크랩한 교육행사가 없어요.</p>
+        </template>
       </template>
     </div>
 
@@ -490,7 +579,7 @@ watch(
 /* 나의 활동 현황 */
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
   margin: 0 0 8px;
 }
@@ -529,6 +618,9 @@ watch(
 }
 .ico-content {
   background: #fee2e2;
+}
+.ico-scrap {
+  background: #fff3e6;
 }
 .stat-body {
   display: flex;
@@ -744,6 +836,93 @@ watch(
   text-align: center;
 }
 
+/* 스크랩 내부 토글 (콘텐츠 / 교육행사) */
+.scrap-toggle {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  margin-bottom: 18px;
+}
+.seg {
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.seg.on {
+  background: #fff;
+  color: var(--navy);
+  box-shadow: var(--shadow);
+}
+
+/* 스크랩한 교육행사 목록 */
+.event-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.event-row {
+  display: grid;
+  grid-template-columns: 72px 1fr 72px 90px 90px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+}
+.event-row:last-child {
+  border-bottom: none;
+}
+.event-row:hover {
+  background: var(--bg);
+}
+.ev-dday {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #fff;
+  background: #2563eb;
+  padding: 4px 8px;
+  border-radius: 7px;
+  text-align: center;
+}
+.ev-dday.urgent {
+  background: #dc2626;
+}
+.ev-title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ev-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: #fff;
+  text-align: center;
+}
+.ev-status.open { background: var(--green); }
+.ev-status.closed { background: #d97706; }
+.ev-status.ended { background: #6b7280; }
+.ev-meta {
+  color: var(--text-mute);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 /* 콘텐츠 그리드 */
 .content-grid {
   display: grid;
@@ -895,13 +1074,19 @@ watch(
     width: 100%;
   }
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .row {
     grid-template-columns: 1fr 60px 60px;
   }
   .c-board,
   .row .c-date {
+    display: none;
+  }
+  .event-row {
+    grid-template-columns: 60px 1fr 64px;
+  }
+  .event-row .ev-meta {
     display: none;
   }
 }

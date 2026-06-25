@@ -116,22 +116,22 @@ onBeforeUnmount(stop)
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  min-height: 230px;
+  min-height: 320px;
+  width: 100%;
 }
 .track {
-  display: grid;
-}
-/* 모든 슬라이드를 같은 칸에 겹쳐 쌓아 전환 */
-.track > .hero {
-  grid-area: 1 / 1;
+  position: relative;
+  min-height: 320px;
+  width: 100%;
 }
 .hero {
-  position: relative;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   border-radius: 18px;
   color: #fff;
-  padding: 44px 40px;
-  min-height: 230px;
+  padding: 56px 48px;
+  min-height: 320px;
   display: flex;
   align-items: center;
 }

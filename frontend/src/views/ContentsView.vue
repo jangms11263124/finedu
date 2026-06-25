@@ -148,9 +148,15 @@ onMounted(load)
         >
           <div
             class="thumb"
-            :style="{ background: gradients[c.category] || gradients.etc }"
+            :style="c.youtube_id ? {} : { background: gradients[c.category] || gradients.etc }"
           >
-            <span class="emoji">{{ icons[c.category] || '📰' }}</span>
+            <img
+              v-if="c.youtube_id"
+              :src="`https://img.youtube.com/vi/${c.youtube_id}/mqdefault.jpg`"
+              :alt="c.title"
+              class="thumb-img"
+            />
+            <span v-else class="emoji">{{ icons[c.category] || '📰' }}</span>
             <span class="play">▶</span>
             <button
               class="heart"
@@ -382,9 +388,18 @@ onMounted(load)
 }
 .thumb {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   display: grid;
   place-items: center;
+  overflow: hidden;
+  background: #111;
+}
+.thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .emoji {
   font-size: 2.4rem;
