@@ -75,7 +75,7 @@ async function choose(i) {
 
 const resultText = computed(() => {
   if (!done.value) return ''
-  if (isCorrect.value) return '정답이에요! 🎉'
+  if (isCorrect.value) return '정답이에요!'
   const ans = quiz.value?.options?.[answerIndex.value]
   return ans ? `아쉬워요, 정답은 "${ans}"` : '아쉬워요!'
 })
@@ -89,16 +89,34 @@ watch(() => auth.isLoggedIn, () => load())
 <template>
   <div class="widget">
     <div class="head">
-      <span class="ico">💡</span>
+      <!-- 깔끔한 전구 SVG 아이콘 -->
+      <svg class="head-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+        <line x1="9" y1="18" x2="15" y2="18"></line>
+        <line x1="10" y1="22" x2="14" y2="22"></line>
+      </svg>
       <strong>오늘의 퀴즈</strong>
       <span class="ai-badge">AI</span>
     </div>
 
     <!-- 출석/정답 스트릭 -->
     <div v-if="authed && (attendanceStreak || correctStreak)" class="streaks">
-      <span class="streak">📅 {{ attendanceStreak }}일째 접속 중</span>
+      <span class="streak">
+        <!-- 깔끔한 달력 SVG 아이콘 -->
+        <svg class="streak-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        {{ attendanceStreak }}일째 접속 중
+      </span>
       <span v-if="correctStreak" class="streak hot">
-        🔥 {{ correctStreak }}일째 정답 중!
+        <!-- 깔끔한 별 SVG 아이콘 -->
+        <svg class="streak-icon hot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        {{ correctStreak }}일째 정답 중!
       </span>
     </div>
 
@@ -127,10 +145,7 @@ watch(() => auth.isLoggedIn, () => load())
       </p>
       <p v-if="done && explanation" class="explain">{{ explanation }}</p>
 
-      <p v-if="needLogin" class="hint">
-        <RouterLink to="/login">로그인</RouterLink>하면 정답 확인과
-        출석·연속 정답 기록이 저장돼요.
-      </p>
+      <p v-if="needLogin" class="hint"><RouterLink to="/login">로그인</RouterLink>하면 정답 확인과 출석·연속 정답 기록이 저장돼요.</p>
     </template>
 
     <p v-else class="skeleton">퀴즈를 불러오지 못했어요.</p>
@@ -150,6 +165,12 @@ watch(() => auth.isLoggedIn, () => load())
   align-items: center;
   gap: 7px;
   margin-bottom: 12px;
+}
+.head-icon {
+  width: 15px;
+  height: 15px;
+  color: #d97706; /* 호박색 전구 포인트 */
+  flex-shrink: 0;
 }
 .head strong {
   font-size: 0.95rem;
@@ -172,11 +193,24 @@ watch(() => auth.isLoggedIn, () => load())
 .streak {
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--navy);
-  background: #eef2ff;
-  border: 1px solid #ddd6fe;
+  color: var(--teal);
+  background: #f0fdfa;
+  border: 1px solid #b2f5ea;
   border-radius: 999px;
   padding: 4px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.streak-icon {
+  width: 11px;
+  height: 11px;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+.streak-icon.hot {
+  color: #d97706;
 }
 .streak.hot {
   color: #b45309;
@@ -189,10 +223,12 @@ watch(() => auth.isLoggedIn, () => load())
   padding: 8px 0;
 }
 .q {
-  font-size: 0.86rem;
-  line-height: 1.45;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--text);
   margin-bottom: 12px;
+  word-break: keep-all;
+  letter-spacing: -0.3px;
 }
 .opts {
   display: flex;
@@ -204,14 +240,19 @@ watch(() => auth.isLoggedIn, () => load())
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 10px;
+  padding: 10px 8px;
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-sub);
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  word-break: keep-all;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
 }
 .opt:hover:not(:disabled) {
   border-color: var(--navy);
+  background: rgba(27, 42, 89, 0.02);
 }
 .opt:disabled {
   cursor: default;
@@ -223,33 +264,40 @@ watch(() => auth.isLoggedIn, () => load())
 }
 .opt.wrong {
   background: #fee2e2;
-  border-color: #dc2626;
-  color: #dc2626;
+  border-color: #ef4444;
+  color: #b91c1c;
 }
 .result {
   margin-top: 12px;
   font-size: 0.82rem;
   font-weight: 700;
-  color: #dc2626;
+  color: #b91c1c;
   text-align: center;
 }
 .result.ok {
   color: var(--green-dark);
 }
 .explain {
-  margin-top: 8px;
-  font-size: 0.78rem;
-  line-height: 1.5;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  line-height: 1.6;
   color: var(--text-sub);
   background: var(--bg);
+  border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 9px 11px;
+  padding: 11px 13px;
+  word-break: keep-all;
+  white-space: pre-line;
+  letter-spacing: -0.2px;
 }
 .hint {
   margin-top: 10px;
   font-size: 0.78rem;
   color: var(--text-sub);
   text-align: center;
+  word-break: keep-all;
+  line-height: 1.45;
+  letter-spacing: -0.2px;
 }
 .hint a {
   color: var(--navy);
