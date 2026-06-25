@@ -65,7 +65,7 @@ class PostSerializer(_LikeMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'board', 'board_display', 'title', 'content',
+        fields = ('id', 'board', 'board_display', 'title', 'content', 'image',
                   'author', 'author_id', 'views', 'comment_count',
                   'like_count', 'is_liked', 'comments',
                   'created_at', 'updated_at')

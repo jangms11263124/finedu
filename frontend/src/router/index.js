@@ -17,14 +17,40 @@ const router = createRouter({
       component: () => import('@/views/SignupView.vue'),
     },
     {
+      path: '/contents',
+      name: 'contents',
+      component: () => import('@/views/ContentsView.vue'),
+    },
+    {
+      path: '/ai-recommend',
+      name: 'ai-recommend',
+      component: () => import('@/views/AIRecommendView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/contents/:id',
+      name: 'content-detail',
+      component: () => import('@/views/ContentDetailView.vue'),
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: () => import('@/views/EventsView.vue'),
+    },
+    {
+      path: '/events/:id',
+      name: 'event-detail',
+      component: () => import('@/views/EventDetailView.vue'),
+    },
+    {
+      path: '/glossary',
+      name: 'glossary',
+      component: () => import('@/views/GlossaryView.vue'),
+    },
+    {
       path: '/community',
       name: 'community',
       component: () => import('@/views/CommunityView.vue'),
-    },
-    {
-      path: '/community/ranking',
-      name: 'community-ranking',
-      component: () => import('@/views/CommunityRankingView.vue'),
     },
     {
       path: '/community/write',
@@ -47,6 +73,12 @@ const router = createRouter({
       path: '/ebti',
       name: 'ebti',
       component: () => import('@/views/EbtiView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: () => import('@/views/MyPageView.vue'),
       meta: { requiresAuth: true },
     },
   ],

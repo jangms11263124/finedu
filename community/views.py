@@ -37,12 +37,18 @@ class PostViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = super().get_queryset()
         params = self.request.query_params
+        user = self.request.user
         if params.get('popular') in ('1', 'true'):
             qs = qs.order_by('-views', '-created_at')
         if board := params.get('board'):
             qs = qs.filter(board=board)
         if q := params.get('q'):
             qs = qs.filter(title__icontains=q)
+        # 마이페이지: 내가 쓴 글 / 좋아요한 글
+        if params.get('author') == 'me' and user.is_authenticated:
+            qs = qs.filter(author=user)
+        if params.get('liked') == 'me' and user.is_authenticated:
+            qs = qs.filter(likes=user)
         return qs
 
     def perform_create(self, serializer):

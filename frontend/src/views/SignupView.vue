@@ -23,7 +23,27 @@ async function submit() {
     await auth.signup(form.value)
     router.push('/')
   } catch (e) {
-    errors.value = e.response?.data || { detail: '회원가입에 실패했습니다.' }
+    const rawErrors = e.response?.data || { detail: '회원가입에 실패했습니다.' }
+    const formatted = {}
+    for (const [key, val] of Object.entries(rawErrors)) {
+      if (Array.isArray(val)) {
+        formatted[key] = val.map(msg => {
+          if (typeof msg === 'string' && (msg.includes('blank') || msg.includes('비워둘'))) {
+            return '이 칸은 비워둘 수 없습니다.'
+          }
+          return msg
+        })
+      } else if (typeof val === 'string') {
+        if (val.includes('blank') || val.includes('비워둘')) {
+          formatted[key] = '이 칸은 비워둘 수 없습니다.'
+        } else {
+          formatted[key] = val
+        }
+      } else {
+        formatted[key] = val
+      }
+    }
+    errors.value = formatted
   } finally {
     loading.value = false
   }
@@ -33,8 +53,8 @@ async function submit() {
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <RouterLink to="/" class="logo">fin<span>edu</span></RouterLink>
-      <p class="lead">finedu와 함께 금융 공부를 시작해보세요</p>
+      <RouterLink to="/" class="logo">im fine <span>edu</span></RouterLink>
+      <p class="lead">im fine edu와 함께 금융 공부를 시작해보세요</p>
 
       <form @submit.prevent="submit">
         <label>아이디</label>
@@ -64,8 +84,18 @@ async function submit() {
       </form>
 
       <div class="divider"><span>SNS 계정으로 간편 가입</span></div>
-      <button class="btn social naver">N&nbsp; 네이버로 시작하기</button>
-      <button class="btn social kakao">💬&nbsp; 카카오로 시작하기</button>
+      <button class="btn social naver">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon">
+          <path d="M16.2 2H22v20h-5.8L10.2 11.2V22H4V2h5.8l6.2 10.8V2z"/>
+        </svg>
+        네이버로 시작하기
+      </button>
+      <button class="btn social kakao">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon">
+          <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.277.962-1.002 3.486-1.147 4.02-.182.68.225.67.472.506.195-.13 3.096-2.103 4.316-2.928.354.048.715.073 1.089.073 4.97 0 9-3.185 9-7.115S16.97 3 12 3z"/>
+        </svg>
+        카카오로 시작하기
+      </button>
 
       <p class="to-login">
         이미 계정이 있으신가요? <RouterLink to="/login">로그인</RouterLink>
@@ -167,6 +197,11 @@ form .btn {
 .social.kakao {
   background: var(--kakao);
   color: #3c1e1e;
+}
+.social-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
 }
 .to-login {
   margin-top: 20px;

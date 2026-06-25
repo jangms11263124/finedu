@@ -8,13 +8,78 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     """프로필 카드 등에서 사용하는 회원 정보."""
 
-    level = serializers.IntegerField(read_only=True)
+    post_count = serializers.SerializerMethodField()
+    liked_post_count = serializers.SerializerMethodField()
+    liked_content_count = serializers.SerializerMethodField()
+    scrapped_content_count = serializers.SerializerMethodField()
+    scrapped_event_count = serializers.SerializerMethodField()
+    attendance_streak = serializers.SerializerMethodField()
+    password = serializers.CharField(
+        write_only=True, required=False, validators=[validate_password]
+    )
+    password2 = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'nickname', 'profile_image',
-                  'points', 'level')
-        read_only_fields = ('points', 'level')
+                  'region', 'ebti_result',
+                  'post_count', 'liked_post_count', 'liked_content_count',
+                  'scrapped_content_count', 'scrapped_event_count',
+                  'attendance_streak', 'password', 'password2')
+
+    def validate(self, attrs):
+        password = attrs.get('password')
+        password2 = attrs.get('password2')
+        if password or password2:
+            if password != password2:
+                raise serializers.ValidationError(
+                    {'password2': '비밀번호가 일치하지 않습니다.'}
+                )
+        return attrs
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        validated_data.pop('password2', None)
+        
+        # 일반 필드 업데이트
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+            
+        if password:
+            instance.set_password(password)
+            
+        instance.save()
+        return instance
+
+    def get_post_count(self, obj):
+        return obj.posts.count()
+
+    def get_liked_post_count(self, obj):
+        return obj.liked_posts.count()
+
+    def get_liked_content_count(self, obj):
+        return obj.liked_contents.count()
+
+    def get_scrapped_content_count(self, obj):
+        return obj.scrapped_contents.count()
+
+    def get_scrapped_event_count(self, obj):
+        return obj.scrapped_events.count()
+
+    def get_attendance_streak(self, obj):
+        """오늘(또는 어제)부터 거슬러 연속 출석한 일수."""
+        from datetime import date, timedelta
+
+        dates = set(obj.attendances.values_list('date', flat=True))
+        if not dates:
+            return 0
+        today = date.today()
+        cur = today if today in dates else today - timedelta(days=1)
+        streak = 0
+        while cur in dates:
+            streak += 1
+            cur -= timedelta(days=1)
+        return streak
 
 
 class RegisterSerializer(serializers.ModelSerializer):

@@ -10,10 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# .env 로드 (API 키 등 비밀값 보관)
+load_dotenv(BASE_DIR / '.env')
+
+# AI 콘텐츠 추천 (2단계 RAG 파이프라인) — SSAFY GMS 게이트웨이 경유
+#  1단계 Retrieval : Gemini 2.5 Flash가 콘텐츠 목록과 사용자 프로필을 비교해
+#    Top 10 콘텐츠 선별 + 한 줄 요약 생성. GMS 인증: ?key=$GMS_KEY
+#  2단계 Generation: GPT-4o가 Top 10 + 사용자 상세 프로필로 번들 2개 생성.
+#    GMS 인증: Authorization: Bearer $GMS_KEY
+# 키가 없거나 오류가 나면 규칙 기반 추천으로 자동 대체된다.
+GMS_KEY = os.environ.get('GMS_KEY', '')
+GMS_BASE_URL = os.environ.get('GMS_BASE_URL', 'https://gms.ssafy.io/gmsapi')
+GEMINI_MODEL = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash-lite')
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,6 +62,8 @@ INSTALLED_APPS = [
     'accounts',
     'contents',
     'community',
+    'glossary',
+    'quiz',
 ]
 
 MIDDLEWARE = [
@@ -149,6 +167,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'finedu.pagination.OptionalPageNumberPagination',
+    'PAGE_SIZE': 12,
 }
 
 # Simple JWT

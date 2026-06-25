@@ -1,4 +1,4 @@
-# finedu 💰
+#  finedu 💰
 
 경제·금융 교육 플랫폼. **Django REST Framework** 백엔드 + **Vue 3 (Vite)** 프론트엔드로 구성된 RESTful 웹 앱입니다.
 
@@ -46,6 +46,12 @@ python manage.py runserver      # http://127.0.0.1:8000
 
 데모 계정: **finedu_demo / finedu1234**
 
+> **AI 추천 활성화(선택)**: 2단계 RAG 파이프라인으로 동작하며, 모델 호출은
+> [SSAFY GMS](https://gms.ssafy.io) 게이트웨이를 경유합니다.
+> 프로젝트 루트 `.env`에 `GMS_KEY=`(GMS 발급 키 하나)를 넣으면
+> ① Gemini 임베딩으로 후보를 검색하고 ② GPT-4o-mini가 3~4개씩 묶은 번들 추천을 생성합니다.
+> 키가 없으면 규칙 기반 추천으로 자동 대체됩니다.
+
 ### 2. 프론트엔드 (Vue)
 
 ```bash
@@ -65,8 +71,12 @@ npm run dev                     # http://localhost:5173
 | GET | `/api/contents/?popular=1` | 인기 콘텐츠 |
 | GET | `/api/events/` | 교육 행사·프로그램 |
 | GET | `/api/posts/?popular=1` | 인기 게시글 |
+| GET | `/api/contents/?page=1&q=&category=&ordering=` | 콘텐츠 목록(검색·정렬·페이지) |
+| GET | `/api/events/?page=1&region=&online_type=` | 교육 행사(지역·온오프라인 필터) |
+| GET | `/api/terms/?page=1&subject=&initial=&q=` | 경제 용어 사전(주제·두문자·검색) |
+| POST | `/api/contents/ai-recommend/` | AI 맞춤 콘텐츠 추천 (2단계 RAG · Gemini 임베딩 + GPT-4o-mini 번들) |
 | GET | `/api/contents/ranking/` | 커뮤니티 - 콘텐츠 좋아요 랭킹 |
-| GET | `/api/accounts/ranking/` | 커뮤니티 - 사용자 활동 랭킹 |
+| GET·POST | `/api/quiz/today/` | 오늘의 AI 퀴즈 조회·응답 (출석·연속 정답 기록) |
 | POST | `/api/contents/{id}/like/` | 콘텐츠 좋아요 토글 |
 | GET·POST | `/api/contents/{id}/comments/` | 콘텐츠 댓글 조회·작성 |
 
