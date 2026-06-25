@@ -70,7 +70,7 @@ onMounted(async () => {
 
 <template>
   <main class="home">
-    <div class="container layout">
+    <div class="layout">
       <!-- ===== 본문 ===== -->
       <div class="main-col">
         <!-- 히어로 배너 (캐러셀) -->
@@ -203,10 +203,11 @@ onMounted(async () => {
   padding: 26px 0 10px;
 }
 .layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 28px;
-  align-items: start;
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .main-col {
   display: flex;
@@ -215,9 +216,27 @@ onMounted(async () => {
   min-width: 0;
 }
 .side-col {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 28px);
+  width: 320px;
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+/* 사이드바를 넣을 공간이 부족하면(약 1850px 이하) 기존 2단 레이아웃으로 */
+@media (max-width: 1860px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 28px;
+    align-items: start;
+  }
+  .side-col {
+    position: static;
+    width: auto;
+  }
 }
 
 /* 추천 콘텐츠 잠금 (비로그인) */

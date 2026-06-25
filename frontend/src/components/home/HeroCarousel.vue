@@ -116,12 +116,12 @@ onBeforeUnmount(stop)
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  min-height: 230px;
+  min-height: 320px;
   width: 100%;
 }
 .track {
   position: relative;
-  min-height: 230px;
+  min-height: 320px;
   width: 100%;
 }
 .hero {
@@ -130,8 +130,8 @@ onBeforeUnmount(stop)
   overflow: hidden;
   border-radius: 18px;
   color: #fff;
-  padding: 44px 40px;
-  min-height: 230px;
+  padding: 56px 48px;
+  min-height: 320px;
   display: flex;
   align-items: center;
 }
