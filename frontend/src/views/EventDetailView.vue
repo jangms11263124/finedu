@@ -23,18 +23,30 @@ async function load() {
   try {
     const { data } = await api.get(`/events/${route.params.id}/`)
     event.value = data
-    loading.value = false
-    await nextTick()
-    if (data.latitude && data.longitude) {
-      initMap(data.latitude, data.longitude, data)
-    } else if (data.address) {
-      geocodeAndShow(data.address, data)
-    }
   } catch {
     alert('행사를 찾을 수 없습니다.')
     router.push('/events')
+    return
   } finally {
     loading.value = false
+  }
+  // 지도 초기화는 API 에러 catch 바깥에서 — 지도 오류가 잘못된 alert를 유발하지 않도록
+  await nextTick()
+  const data = event.value
+  if (data.latitude && data.longitude) {
+    // lat/lng가 있어도 Kakao SDK를 먼저 로드한 뒤 initMap 호출
+    if (!hasKakaoKey()) {
+      mapError.value = 'NO_KEY'
+    } else {
+      try {
+        await loadKakao()
+        initMap(data.latitude, data.longitude, data)
+      } catch (err) {
+        mapError.value = err.message === 'NO_KEY' ? 'NO_KEY' : 'LOAD_FAILED'
+      }
+    }
+  } else if (data.address) {
+    geocodeAndShow(data.address, data)
   }
 }
 
@@ -58,6 +70,7 @@ async function geocodeAndShow(address, e) {
 
 function initMap(lat, lng, e) {
   mapError.value = ''
+  if (!window.kakao?.maps) { mapError.value = 'NO_KEY'; return }
   const center = new window.kakao.maps.LatLng(lat, lng)
   const map = new window.kakao.maps.Map(mapEl.value, { center, level: 4 })
   const marker = new window.kakao.maps.Marker({ position: center })

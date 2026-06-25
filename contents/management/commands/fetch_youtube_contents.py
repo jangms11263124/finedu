@@ -4,7 +4,7 @@ Content 모델에 임포트합니다. 각 영상의 설명은 Gemini Flash(GMS �
 
 사용법:
   python manage.py fetch_youtube_contents
-  python manage.py fetch_youtube_contents --count 30        # 기본값
+  python manage.py fetch_youtube_contents --count 150       # 기본값
   python manage.py fetch_youtube_contents --clear           # 기존 YouTube 임포트 삭제 후 재수집
   python manage.py fetch_youtube_contents --no-summarize    # AI 요약 없이 원문 저장
 
@@ -28,60 +28,103 @@ SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
 GEMINI_MODEL = "gemini-2.5-flash-lite"
 
+# ── 검색 쿼리 (기본 사회초년생 금융 + EBTI 5개 주제 별 특화 쿼리) ──────────────
 QUERIES = [
-    # 기본 사회초년생 금융
+    # ── 기본 사회초년생 금융 ──────────────────────────────────────────────────
     "사회초년생 금융 교육",
     "사회초년생 재테크 기초",
-    "월급 관리 저축 방법",
     "경제 기초 강의 입문",
-    "주식 투자 기초 교육",
-    "금융 상품 이해 강의",
-    "사회초년생 연말정산 방법",
-    "청년 청약 주택 저축",
-    "신용점수 관리 방법",
-    "사회초년생 보험 가입",
-    "ISA 연금저축 ETF 초보",
     "경제 용어 기초 설명",
     "물가 금리 환율 쉬운 설명",
-    "사회초년생 통장 쪼개기",
     "직장인 세금 환급 방법",
-    # EBTI 소비·지출 관리
+    "사회초년생 연말정산 방법",
+    "청년 청약 주택 저축",
+
+    # ── EBTI 1 : 소비(지출) 관리 ─────────────────────────────────────────────
+    # tags: 소비지출관리, 소비지출, 소비, 지출, 합리적소비, 신용관리, 신용카드, 체크카드
     "합리적 소비 지출 관리 방법",
-    "신용카드 체크카드 사용법 비교",
-    "신용등급 신용점수 관리 방법",
+    "사회초년생 통장 쪼개기",
+    "월급 관리 저축 방법",
     "가계부 지출 줄이기 절약",
-    # EBTI 자산 관리
+    "소비 습관 개선 방법 절약",
+    "신용카드 체크카드 사용법 비교",
+    "신용점수 관리 방법 신용등급",
+    "과소비 방지 소비 계획 세우기",
+    "지출 줄이기 고정비 변동비 관리",
+
+    # ── EBTI 2 : 자산 관리 ───────────────────────────────────────────────────
+    # tags: 자산관리, 자산, 저축, 투자, 포트폴리오, 예금적금, 부채관리, 금융상품
     "포트폴리오 분산투자 방법 초보",
     "예금 적금 차이 비교",
-    "부채 대출 관리 방법",
+    "주식 투자 기초 교육",
     "금융상품 종류 비교 설명",
-    # EBTI 변화 대응
+    "ISA 연금저축 ETF 초보",
+    "부채 대출 관리 방법",
+    "목돈 마련 방법 사회초년생",
+    "자산 배분 투자 전략 초보",
+    "채권 ETF 펀드 차이 설명",
+    "월급 저축 투자 비율 방법",
+    "재테크 순서 사회초년생",
+
+    # ── EBTI 3 : 변화 대응 ───────────────────────────────────────────────────
+    # tags: 경제이슈, 기준금리, 물가, 환율, 정부정책, 경제전망, 팩트체크
     "기준금리 변화 재테크 영향",
     "환율 달러 경제 영향 설명",
     "인플레이션 물가 상승 대처법",
     "청년 금융 지원 정책 혜택",
-    # EBTI 위기 관리
+    "경제 뉴스 이해하는 방법",
+    "정부 청년 지원 제도 총정리",
+    "금리 인상 하락 재테크 전략",
+    "경제 지표 보는 방법 GDP 물가",
+    "환율 상승 하락 나에게 미치는 영향",
+
+    # ── EBTI 4 : 위기 관리 ───────────────────────────────────────────────────
+    # tags: 위기관리, 신용위험관리, 보이스피싱, 소비자보호, 소비자권리, 금융사기예방
     "보이스피싱 금융사기 예방 방법",
     "소비자 권리 환불 피해구제",
     "비상금 위기 대비 재테크",
-    # EBTI 노후 대비
+    "금융 사기 유형 피해 사례",
+    "신용 위기 대처 방법 연체",
+    "소비자 피해 대처법 신고 방법",
+    "불법 스팸 스미싱 보이스피싱 예방",
+    "긴급 자금 마련 비상금 통장",
+
+    # ── EBTI 5 : 노후 대비 ───────────────────────────────────────────────────
+    # tags: 노후대비, 노후설계, 연금, 보험, 은퇴자산, 생애주기
     "노후 연금 은퇴 준비 방법",
     "IRP 퇴직연금 연금저축 비교",
     "생애주기 재무설계 방법",
     "실손보험 생명보험 가입 방법",
+    "국민연금 이해 수령 방법",
+    "노후 준비 20대 30대 지금 시작",
+    "퇴직금 IRP 운용 방법",
+    "보험 종류 선택 방법 초보",
+    "은퇴 후 자산 관리 생활비",
 ]
 
+# ── 카테고리 매핑 (EBTI 태그 포함) ──────────────────────────────────────────
 CATEGORY_MAP = {
+    # 투자 계열
     "재테크": "invest",
     "주식": "invest",
     "투자": "invest",
     "포트폴리오": "invest",
     "ETF": "invest",
+    "채권": "invest",
+    "펀드": "invest",
+    "분산": "invest",
+    "자산배분": "invest",
+    # 저축 계열
     "저축": "saving",
     "적금": "saving",
     "예금": "saving",
     "절약": "saving",
     "가계부": "saving",
+    "통장": "saving",
+    "목돈": "saving",
+    "비상금": "saving",
+    "월급": "saving",
+    # 금융상품·신용 계열
     "금융상품": "finance",
     "금융 상품": "finance",
     "보험": "finance",
@@ -91,17 +134,34 @@ CATEGORY_MAP = {
     "ISA": "finance",
     "신용": "finance",
     "부채": "finance",
+    "퇴직": "finance",
+    "국민연금": "finance",
+    "실손": "finance",
+    "생명보험": "finance",
+    # 경제·변화 대응 계열
     "경제": "economy",
     "기초": "economy",
     "금리": "economy",
     "물가": "economy",
     "환율": "economy",
+    "인플레이션": "economy",
+    "경제지표": "economy",
+    "경제전망": "economy",
+    "정부정책": "economy",
+    "팩트체크": "economy",
+    "GDP": "economy",
+    # 사회·위기 관리 계열
     "사회": "society",
     "소비자": "society",
     "사기": "society",
     "보이스피싱": "society",
+    "스미싱": "society",
+    "피해구제": "society",
     "노후": "society",
     "은퇴": "society",
+    "생애주기": "society",
+    "위기": "society",
+    "연체": "society",
 }
 
 
@@ -114,12 +174,12 @@ def guess_category(title: str, description: str) -> str:
 
 
 class Command(BaseCommand):
-    help = "YouTube Data API로 사회초년생 금융·경제 교육 영상을 수집합니다."
+    help = "YouTube Data API로 사회초년생 금융·경제 + EBTI 5개 주제 교육 영상을 수집합니다."
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--count", type=int, default=30,
-            help="수집할 영상 수 (기본값: 30)",
+            "--count", type=int, default=150,
+            help="수집할 영상 수 (기본값: 150)",
         )
         parser.add_argument(
             "--clear", action="store_true",
@@ -148,7 +208,12 @@ class Command(BaseCommand):
             deleted, _ = Content.objects.filter(summary__contains=SOURCE_TAG).delete()
             self.stdout.write(f"기존 {deleted}건 삭제 완료")
 
-        video_ids = self._search_videos(api_key, options["count"])
+        target = options["count"]
+        self.stdout.write(
+            f"수집 목표: {target}개 | 쿼리 수: {len(QUERIES)}개 | AI 요약: {'ON' if use_ai else 'OFF'}\n"
+        )
+
+        video_ids = self._search_videos(api_key, target)
         self.stdout.write(f"검색된 영상 ID {len(video_ids)}개 → 상세 정보 수집 중...")
 
         details = self._fetch_video_details(api_key, video_ids)
@@ -187,7 +252,7 @@ class Command(BaseCommand):
                 is_recommended=True,
             )
             safe = title[:45].encode('cp949', errors='replace').decode('cp949')
-            self.stdout.write(f"  [{i:02d}/{len(details)}] ({label}) {safe}")
+            self.stdout.write(f"  [{i:03d}/{len(details)}] ({label}/{category}) {safe}")
             created += 1
 
         self.stdout.write(self.style.SUCCESS(f"\n수집 완료: {created}건 저장됨"))
@@ -195,7 +260,8 @@ class Command(BaseCommand):
     # ── YouTube API ──────────────────────────────────────────────────────────
 
     def _search_videos(self, api_key: str, target: int) -> list[str]:
-        per_query = max(target // len(QUERIES) + 2, 10)
+        # 쿼리당 최소 3개, 최대 50개 요청해 고르게 분배
+        per_query = max(target // len(QUERIES) + 1, 3)
         seen: set[str] = set()
         ids: list[str] = []
 
@@ -207,7 +273,7 @@ class Command(BaseCommand):
                 "part": "id",
                 "q": query,
                 "type": "video",
-                "videoCategoryId": "27",
+                "videoCategoryId": "27",   # Education
                 "relevanceLanguage": "ko",
                 "regionCode": "KR",
                 "maxResults": min(per_query, 50),
@@ -228,11 +294,12 @@ class Command(BaseCommand):
                     if len(ids) >= target:
                         break
 
-            self.stdout.write(f"  '{query}' → 누적 {len(ids)}건")
+            self.stdout.write(f"  '{query[:30]}' → 누적 {len(ids)}건")
             time.sleep(0.3)
 
         # Education 카테고리 필터 없이 보충
         if len(ids) < target:
+            self.stdout.write("Education 필터 없이 보충 수집 중...")
             for query in QUERIES:
                 if len(ids) >= target:
                     break
@@ -299,7 +366,6 @@ class Command(BaseCommand):
             resp = requests.post(url, params={"key": gms_key}, json=payload, timeout=30)
             resp.raise_for_status()
             parts = resp.json()["candidates"][0]["content"]["parts"]
-            # thought 파트 제외, 실제 응답 텍스트만 결합
             text = "".join(
                 p["text"] for p in parts if not p.get("thought", False)
             ).strip()

@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
 # AI 콘텐츠 추천 (2단계 RAG 파이프라인) — SSAFY GMS 게이트웨이 경유
-#  1단계 Retrieval : Gemini 임베딩 → 코사인 유사도로 후보 검색
-#  2단계 Generation: GPT-4o-mini Structured Outputs로 번들 추천 생성
-#  GMS는 실제 공급자 엔드포인트 앞에 https://gms.ssafy.io/gmsapi/ 를 붙이고
-#  쿼리스트링 ?key=$GMS_KEY 로 인증한다. 키 하나로 OpenAI·Gemini를 모두 호출.
+#  1단계 Retrieval : Gemini 2.5 Flash가 콘텐츠 목록과 사용자 프로필을 비교해
+#    Top 10 콘텐츠 선별 + 한 줄 요약 생성. GMS 인증: ?key=$GMS_KEY
+#  2단계 Generation: GPT-4o가 Top 10 + 사용자 상세 프로필로 번들 2개 생성.
+#    GMS 인증: Authorization: Bearer $GMS_KEY
 # 키가 없거나 오류가 나면 규칙 기반 추천으로 자동 대체된다.
 GMS_KEY = os.environ.get('GMS_KEY', '')
 GMS_BASE_URL = os.environ.get('GMS_BASE_URL', 'https://gms.ssafy.io/gmsapi')

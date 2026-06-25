@@ -23,7 +23,6 @@ const columns = [
     items: [
       { label: '경제 용어 사전', to: '/glossary' },
       { label: '교육 및 행사 안내', to: '/events' },
-      { label: '실시간 금리 비교 서비스', to: '#' },
     ]
   },
   {
@@ -31,7 +30,6 @@ const columns = [
     items: [
       { label: '금융 정보 공유', to: '/community' },
       { label: '공부 스터디 모집', to: '/community' },
-      { label: '이용후기 및 피드백', to: '/community' },
     ]
   }
 ]

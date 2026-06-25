@@ -1,0 +1,4915 @@
+[
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$XCLCJ4JWYshe1cyDxGsQmC$XBrFMKOPeWQOiKvtbXkcC7nyXDmAwIMMR2OaAz6ISD0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "finedu_demo",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-23T11:36:51.421Z",
+    "nickname": "핀에듀지기",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 20,
+          "strong": true,
+          "feedback": "합리적 소비를 실천하기 위해 꾸준히 노력하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 18,
+          "strong": true,
+          "feedback": "금융상품을 이해하고 자산을 계획적으로 관리하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 17,
+          "strong": true,
+          "feedback": "경제 뉴스와 정책 변화를 꾸준히 파악하며 잘 대응하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 7,
+          "strong": false,
+          "feedback": "보이스피싱·금융사기 예방, 비상금 마련 등 위기 대비에 신경을 더 써 주세요.",
+          "tags": [
+            "위기관리",
+            "신용위험관리",
+            "보이스피싱",
+            "소비자보호",
+            "소비자권리",
+            "금융사기예방"
+          ]
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 3,
+          "strong": false,
+          "feedback": "연금·보험 등으로 지금부터 노후를 준비해 보세요. 복리의 힘은 시작이 빠를수록 강해집니다.",
+          "tags": [
+            "노후대비",
+            "노후설계",
+            "연금",
+            "보험",
+            "은퇴자산",
+            "생애주기"
+          ]
+        }
+      ],
+      "strongCount": 3,
+      "persona": {
+        "min": 3,
+        "emoji": "💡",
+        "name": "경제 감각을 키우는\n성장형 인재",
+        "desc": "꽤 균형잡힌 경제 습관을 갖추고 있어요.\n나머지 영역도 강화하면 완벽해요."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$3pnCUXTpEriXrkpILxCla1$NocoQR6g29E/lmzKUDKzs9TaFoaiEVUfdrbXsNje66E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "econ_master",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-23T11:36:51.915Z",
+    "nickname": "경제마스터",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 19,
+          "strong": true,
+          "feedback": "합리적 소비를 실천하기 위해 꾸준히 노력하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 18,
+          "strong": true,
+          "feedback": "금융상품을 이해하고 자산을 계획적으로 관리하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 6,
+          "strong": false,
+          "feedback": "금리·환율·정부 정책 등 경제 환경 변화에 더 관심을 기울여 보세요.",
+          "tags": [
+            "경제이슈",
+            "기준금리",
+            "물가",
+            "환율",
+            "정부정책",
+            "경제전망",
+            "팩트체크"
+          ]
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 17,
+          "strong": true,
+          "feedback": "금융 사기와 위험 상황에 잘 대비하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 16,
+          "strong": true,
+          "feedback": "젊은 시절부터 노후를 체계적으로 준비하고 있어요.",
+          "tags": []
+        }
+      ],
+      "strongCount": 4,
+      "persona": {
+        "min": 4,
+        "emoji": "🏆",
+        "name": "탄탄한 경제 습관의\n금융 마스터",
+        "desc": "거의 모든 영역에서 건강한 경제 습관을 갖추고 있어요!\n이 상태를 유지하면 금융 고수가 될 수 있어요."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$dfzMWlHbskc60oJFR3HYh8$BYfrpXjXs0yyeaMISp4OcNGEeLHmqZLjS+/0d/WXP5I=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "saving_queen",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-23T11:36:52.395Z",
+    "nickname": "절약여왕",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 5,
+          "strong": false,
+          "feedback": "소비 계획을 세우고 지출을 점검하는 습관이 필요해요. 체크카드 활용과 가계부 작성을 시작해 보세요.",
+          "tags": [
+            "소비지출관리",
+            "소비지출",
+            "합리적소비",
+            "신용관리",
+            "신용카드",
+            "체크카드"
+          ]
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 15,
+          "strong": true,
+          "feedback": "금융상품을 이해하고 자산을 계획적으로 관리하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 18,
+          "strong": true,
+          "feedback": "경제 뉴스와 정책 변화를 꾸준히 파악하며 잘 대응하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 19,
+          "strong": true,
+          "feedback": "금융 사기와 위험 상황에 잘 대비하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 17,
+          "strong": true,
+          "feedback": "젊은 시절부터 노후를 체계적으로 준비하고 있어요.",
+          "tags": []
+        }
+      ],
+      "strongCount": 4,
+      "persona": {
+        "min": 4,
+        "emoji": "🏆",
+        "name": "탄탄한 경제 습관의\n금융 마스터",
+        "desc": "거의 모든 영역에서 건강한 경제 습관을 갖추고 있어요!\n이 상태를 유지하면 금융 고수가 될 수 있어요."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ggGtaflFnGtKFaqrOu1hSQ$UIoJ0VhA+eCgXbcJ3UvB03L+dWv7lrB3Zr5vDKd1vCQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "young_invest",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-23T11:36:52.886Z",
+    "nickname": "주린이탈출",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 16,
+          "strong": true,
+          "feedback": "합리적 소비를 실천하기 위해 꾸준히 노력하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 5,
+          "strong": false,
+          "feedback": "예금·적금부터 시작해 포트폴리오를 단계적으로 구성해 보세요.",
+          "tags": [
+            "자산관리",
+            "자산",
+            "저축",
+            "투자",
+            "포트폴리오",
+            "예금적금",
+            "부채관리",
+            "금융상품"
+          ]
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 14,
+          "strong": true,
+          "feedback": "경제 뉴스와 정책 변화를 꾸준히 파악하며 잘 대응하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 14,
+          "strong": true,
+          "feedback": "금융 사기와 위험 상황에 잘 대비하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 4,
+          "strong": false,
+          "feedback": "연금·보험 등으로 지금부터 노후를 준비해 보세요. 복리의 힘은 시작이 빠를수록 강해집니다.",
+          "tags": [
+            "노후대비",
+            "노후설계",
+            "연금",
+            "보험",
+            "은퇴자산",
+            "생애주기"
+          ]
+        }
+      ],
+      "strongCount": 3,
+      "persona": {
+        "min": 3,
+        "emoji": "💡",
+        "name": "경제 감각을 키우는\n성장형 인재",
+        "desc": "꽤 균형잡힌 경제 습관을 갖추고 있어요.\n나머지 영역도 강화하면 완벽해요."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$kw6pnmGIsCRNp3lOnqItug$MiUh4Xg0G6p6yDwdWFIgca+ygf5Prq1aNthome2lMMo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "coin_lover",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-23T11:36:53.390Z",
+    "nickname": "코인러버",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 15,
+          "strong": true,
+          "feedback": "합리적 소비를 실천하기 위해 꾸준히 노력하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 18,
+          "strong": true,
+          "feedback": "금융상품을 이해하고 자산을 계획적으로 관리하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 17,
+          "strong": true,
+          "feedback": "경제 뉴스와 정책 변화를 꾸준히 파악하며 잘 대응하고 있어요.",
+          "tags": []
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 5,
+          "strong": false,
+          "feedback": "보이스피싱·금융사기 예방, 비상금 마련 등 위기 대비에 신경을 더 써 주세요.",
+          "tags": [
+            "위기관리",
+            "신용위험관리",
+            "보이스피싱",
+            "소비자보호",
+            "소비자권리",
+            "금융사기예방"
+          ]
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 3,
+          "strong": false,
+          "feedback": "연금·보험 등으로 지금부터 노후를 준비해 보세요. 복리의 힘은 시작이 빠를수록 강해집니다.",
+          "tags": [
+            "노후대비",
+            "노후설계",
+            "연금",
+            "보험",
+            "은퇴자산",
+            "생애주기"
+          ]
+        }
+      ],
+      "strongCount": 3,
+      "persona": {
+        "min": 3,
+        "emoji": "💡",
+        "name": "경제 감각을 키우는\n성장형 인재",
+        "desc": "꽤 균형잡힌 경제 습관을 갖추고 있어요.\n나머지 영역도 강화하면 완벽해요."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$MrcyPUrXy2J0MkXDrHoiJw$2TjGwyrBeB8tbtbCCNXh/BmUXfSKwu6JIqdsiEZ1kak=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "asdfasdf",
+    "first_name": "",
+    "last_name": "",
+    "email": "asdf@naver.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-24T15:49:19.705Z",
+    "nickname": "asdfasdf",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 17,
+          "strong": true,
+          "feedback": "당신은 생활 속에서 합리적 소비를 실천하기 위해 노력하는 사람입니다. 합리적 소비는 경제생활을 하는 우리 모두에게 필요한 자세라고 할 수 있습니다. 원하는 모든 것을 가질 수 없기에 물건을 사기 전에는 꼭 필요한 물건인지 먼저 점검해 보는 시간을 갖는 것이 필요합니다. 자신의 소득을 넘어서는 과소비는 경계해야 하며, 신용 카드를 쓸 때는 연체하지 않도록 늘 주의를 기울여야 합니다. 당신이 지금처럼 계획적으로 소비할 수 있기를 항상 응원하겠습니다!",
+          "tags": []
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 13,
+          "strong": true,
+          "feedback": "일생을 살아가는 동안 목돈이 들어가는 일이 종종 발생합니다. 개인마다 각기 다른 선택을 하긴 하지만, 예를 들어 주택 마련, 결혼, 자녀 양육, 부모님 봉양, 입원 등 목돈이 필요한 일들이 우리에게 일어날 수 있습니다. 이런 일들에 대비해 돈을 계획적으로 모으는 한편, 금융 상품의 특징에 대한 이해를 바탕으로 자금 관리를 합리적으로 하려는 노력이 필요합니다. 당신의 합리적 자산 관리를 응원합니다!",
+          "tags": []
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 13,
+          "strong": true,
+          "feedback": "우리의 경제생활에 영향을 주는 대내외 변수가 매우 많습니다. 다행히 예측할 수 있는 변수들도 있지만 불행히도 전혀 예측할 수 없는 변수도 있습니다. 예측할 수 없는 변수까지 미리 파악할 순 없더라도, 경제생활에 도움이 되는 정부 정책, 법과 제도 등 예측 가능한 변수들에 꾸준히 관심을 두는 것이 좋습니다. 세상의 변화에 능동적으로 대응할 당신을 항상 응원합니다!",
+          "tags": []
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 2,
+          "strong": false,
+          "feedback": "삶을 살아가다 보면 경제적으로 위기에 처하는 순간이 오기도 합니다. 위기가 오지 않게 사전에 대비하는 것도 중요하지만, 위기가 닥쳤을 때 제대로 대처하는 것도 중요합니다. 삶의 현장에서 우리를 괴롭히는 위험한 순간들에 조금 더 주의를 기울여 주세요. 노동 현장에서 부당한 대우를 받지 않게, 신종 사기에 당하지 않게, 허위 광고나 과장 광고에 속지 않게 스스로를 잘 보호해 주세요!",
+          "tags": [
+            "위기관리",
+            "신용위험관리",
+            "보이스피싱",
+            "소비자보호",
+            "소비자권리",
+            "금융사기예방"
+          ]
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 0,
+          "strong": false,
+          "feedback": "노후 대비는 아무리 강조해도 지나치지 않습니다. 젊은 시절부터 소득과 자산을 체계적으로 관리해야 안정적인 노후 생활이 보장될 수 있습니다. 노후에 자금이 얼마나 필요할지 예상해 보고, 구체적인 계획을 세워 보험·연금 등으로 미리 대비할 수 있게 조금 더 신경을 써 주세요. 당신의 탄탄한 노후 대비, im fine edu가 계속 함께하겠습니다!",
+          "tags": [
+            "노후대비",
+            "노후설계",
+            "연금",
+            "보험",
+            "은퇴자산",
+            "생애주기"
+          ]
+        }
+      ],
+      "strongCount": 3,
+      "persona": {
+        "min": 2,
+        "emoji": "🧭",
+        "name": "방향을 잡아가는\n경제 탐색자",
+        "desc": "몇몇 영역에서는 좋은 습관을 갖추고 있어요.\n보완이 필요한 영역만 조금 더 챙기면\n빠르게 성장할 수 있는 유형입니다."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ebti_test_user",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-24T15:51:27.106Z",
+    "nickname": "테스트",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$QK1GQ3mnshTGWxA54rlf6R$/r14MlThkaK67TMkR4+onvk7ARP7qnZt7GvPCCDq9Mw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "zxcvzxcv",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-06-25T12:16:03.036Z",
+    "nickname": "zxcv",
+    "profile_image": "",
+    "region": "",
+    "ebti_result": {
+      "breakdown": [
+        {
+          "key": "spend",
+          "name": "소비(지출) 관리",
+          "score": 17,
+          "strong": true,
+          "feedback": "당신은 생활 속에서 합리적 소비를 실천하기 위해 노력하는 사람입니다. 합리적 소비는 경제생활을 하는 우리 모두에게 필요한 자세라고 할 수 있습니다. 원하는 모든 것을 가질 수 없기에 물건을 사기 전에는 꼭 필요한 물건인지 먼저 점검해 보는 시간을 갖는 것이 필요합니다. 자신의 소득을 넘어서는 과소비는 경계해야 하며, 신용 카드를 쓸 때는 연체하지 않도록 늘 주의를 기울여야 합니다. 당신이 지금처럼 계획적으로 소비할 수 있기를 항상 응원하겠습니다!",
+          "tags": []
+        },
+        {
+          "key": "asset",
+          "name": "자산 관리",
+          "score": 13,
+          "strong": true,
+          "feedback": "일생을 살아가는 동안 목돈이 들어가는 일이 종종 발생합니다. 개인마다 각기 다른 선택을 하긴 하지만, 예를 들어 주택 마련, 결혼, 자녀 양육, 부모님 봉양, 입원 등 목돈이 필요한 일들이 우리에게 일어날 수 있습니다. 이런 일들에 대비해 돈을 계획적으로 모으는 한편, 금융 상품의 특징에 대한 이해를 바탕으로 자금 관리를 합리적으로 하려는 노력이 필요합니다. 당신의 합리적 자산 관리를 응원합니다!",
+          "tags": []
+        },
+        {
+          "key": "change",
+          "name": "변화 대응",
+          "score": 17,
+          "strong": true,
+          "feedback": "우리의 경제생활에 영향을 주는 대내외 변수가 매우 많습니다. 다행히 예측할 수 있는 변수들도 있지만 불행히도 전혀 예측할 수 없는 변수도 있습니다. 예측할 수 없는 변수까지 미리 파악할 순 없더라도, 경제생활에 도움이 되는 정부 정책, 법과 제도 등 예측 가능한 변수들에 꾸준히 관심을 두는 것이 좋습니다. 세상의 변화에 능동적으로 대응할 당신을 항상 응원합니다!",
+          "tags": []
+        },
+        {
+          "key": "risk",
+          "name": "위기 관리",
+          "score": 5,
+          "strong": false,
+          "feedback": "삶을 살아가다 보면 경제적으로 위기에 처하는 순간이 오기도 합니다. 위기가 오지 않게 사전에 대비하는 것도 중요하지만, 위기가 닥쳤을 때 제대로 대처하는 것도 중요합니다. 삶의 현장에서 우리를 괴롭히는 위험한 순간들에 조금 더 주의를 기울여 주세요. 노동 현장에서 부당한 대우를 받지 않게, 신종 사기에 당하지 않게, 허위 광고나 과장 광고에 속지 않게 스스로를 잘 보호해 주세요!",
+          "tags": [
+            "위기관리",
+            "신용위험관리",
+            "보이스피싱",
+            "소비자보호",
+            "소비자권리",
+            "금융사기예방"
+          ]
+        },
+        {
+          "key": "retire",
+          "name": "노후 대비",
+          "score": 12,
+          "strong": false,
+          "feedback": "노후 대비는 아무리 강조해도 지나치지 않습니다. 젊은 시절부터 소득과 자산을 체계적으로 관리해야 안정적인 노후 생활이 보장될 수 있습니다. 노후에 자금이 얼마나 필요할지 예상해 보고, 구체적인 계획을 세워 보험·연금 등으로 미리 대비할 수 있게 조금 더 신경을 써 주세요. 당신의 탄탄한 노후 대비, im fine edu가 계속 함께하겠습니다!",
+          "tags": [
+            "노후대비",
+            "노후설계",
+            "연금",
+            "보험",
+            "은퇴자산",
+            "생애주기"
+          ]
+        }
+      ],
+      "strongCount": 3,
+      "persona": {
+        "min": 2,
+        "emoji": "🧭",
+        "name": "방향을 잡아가는\n경제 탐색자",
+        "desc": "몇몇 영역에서는 좋은 습관을 갖추고 있어요.\n보완이 필요한 영역만 조금 더 챙기면\n빠르게 성장할 수 있는 유형입니다."
+      }
+    },
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 81,
+  "fields": {
+    "title": "사회초년생 투자, 시작해도 될까?ㅣ사회초년생의 슬기로운 금융생활 1편 🎁 댓글이벤트🎁",
+    "summary": "[YouTube] 한국은행",
+    "body": "이 영상은 투자를 시작하려는 사회초년생들이 겪는 막막함을 해소하고 올바른 금융 습관을 형성하도록 돕습니다. 경제 전문가와 한국은행",
+    "category": "invest",
+    "youtube_id": "EwGBO81alsY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 44168,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:05.121Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 82,
+  "fields": {
+    "title": "사회초년생이 알아야 할 저축의 기초! 첫 금융은 너무 어.려.워!😥ㅣ염승환 이사 출연 금상첨화 1-1화",
+    "summary": "[YouTube] 금융위원회",
+    "body": "이 영상은 금융 전문가 염승환 이사와 함께 사회초년생을 위한 저축의 기초와 첫 금융 생활 가이드를 제공합니다. 시청자는 돈의 가치 변화와",
+    "category": "saving",
+    "youtube_id": "eo4YnrxLozs",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 106083,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:11.066Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 83,
+  "fields": {
+    "title": "[M.R.I] 사회초년생편 EP01 사회초년생 재테크는 시간과의 싸움!",
+    "summary": "[YouTube] 예금보험공사 예보TV",
+    "body": "이 영상은 사회초년생이 첫 월급을 받으며 주식이나 코인 같은 투자를 고민할 때, 무엇을 우선해야 할지 알려주는 금융 교육 콘텐츠입니다. 단순히 고",
+    "category": "invest",
+    "youtube_id": "cb6mKE2MBKE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 472,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:19.036Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 84,
+  "fields": {
+    "title": "반드시 알아야 하는 재테크 기초",
+    "summary": "[YouTube] 우리동네재테크",
+    "body": "이 영상은 사회초년생을 위한 필수적인 금융·경제 지식을 제공하며, 효과적인 재테크의 기초를 다지는 데 중점을 둡니다. 시청자는",
+    "category": "invest",
+    "youtube_id": "DcHkohOSdlk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 2399,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:26.040Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 85,
+  "fields": {
+    "title": "적금만 했을 때 1억 모으는 기간",
+    "summary": "[YouTube] 월급쟁이부자들TV",
+    "body": "이 영상은 사회초년생이 적금만으로 1억 원이라는 목표 금액을 모으는 데 걸리는 현실적인 기간을 구체적으로 보여줍니다. 이를 통해 적금만",
+    "category": "saving",
+    "youtube_id": "9A-zCx-_ePg",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1834216,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:32.806Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 86,
+  "fields": {
+    "title": "재테크 왕초보는 이렇게 시작하세요 #shorts",
+    "summary": "[YouTube] 부읽남TV_내집마련부터건물주까지",
+    "body": "이 영상은 재테크를 처음 시작하는 사회초년생을 위한 길잡이 역할을 합니다. 재테크 왕초보가 어떻게 공부를 시작하고 투자에 접근해야",
+    "category": "invest",
+    "youtube_id": "ZfsRUzymNkM",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 505836,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:40.306Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 87,
+  "fields": {
+    "title": "경제의 '시작과 끝' 금리! 아주굉장히매우 쉬운 설명 / 금리의 기초 (1부) / 이대호 기자 [야식잡썰 EP.79]",
+    "summary": "[YouTube] 와이스트릿 - 지식과 자산의 복리효과",
+    "body": "사회초년생을 위한 이 영상은 경제의 핵심 요소인 '금리'에 대한 아주 기본적인 이해를 제공합니다. 금리란 무엇인지, 그리고 왜 금리가 경제 전반에",
+    "category": "economy",
+    "youtube_id": "2Y02Ds9pIiw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 142706,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:46.814Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 88,
+  "fields": {
+    "title": "경제용어가 어렵나요? 이 영상 하나로 끝내 드립니다. (필수 용어 70개 - 기초편) | 부자의경제학",
+    "summary": "[YouTube] 부자의경제학",
+    "body": "이 영상은 사회초년생이 어렵게 느끼는 경제 용어들을 민수네 가족의 2020년부터 2024년까지의 4년간의 실제",
+    "category": "invest",
+    "youtube_id": "1WsqKRBFQ1Q",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 49953,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:33:53.935Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 89,
+  "fields": {
+    "title": "[주식용어 기초편] 주식 용어가 아직도 어렵나요? 이 영상 하나로 끝내 드립니다 (필수 용어 40개) | 부자의경제학",
+    "summary": "[YouTube] 부자의경제학",
+    "body": "이 영상은 사회초년생이 주식 투자를 시작할 때 가장 큰 장벽인 필수 금융 용어 40가지를 쉽고 체계적인 이야기 흐름으로 설명",
+    "category": "invest",
+    "youtube_id": "O_b4KoRle70",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 232169,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:00.076Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 90,
+  "fields": {
+    "title": "주식 기초 용어 총정리(설날특집 주식공부 1부)",
+    "summary": "[YouTube] 전인구경제연구소",
+    "body": "이 영상은 '주식 기초 용어 총정리'라는 제목처럼 사회초년생이 주식 투자를 시작하기 전 반드시 알아야 할 기본적인 금융 및 경제 용어들을 총정",
+    "category": "invest",
+    "youtube_id": "2X-a4t1m81g",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1138157,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:06.837Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 91,
+  "fields": {
+    "title": "금리란 무엇일까?",
+    "summary": "[YouTube] 3분차이",
+    "body": "이 영상은 뉴스나 은행에서 자주 접하는 '금리'가 정확히 무엇인지 그 기본적인 개념을 명확히 설명합니다. 사회초년생은 이 영상을 통해 금리",
+    "category": "economy",
+    "youtube_id": "XyC3yZLoC2M",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 143724,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:13.839Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 92,
+  "fields": {
+    "title": "환율기초 완전 쉬운 설명ㅣ 환율 변동의 영향, 환율과 주식 관계, 환율과 경제 관계, 환율 기초강의, 환율이 주가와 경제에 미치는 영향",
+    "summary": "[YouTube] 모르면 호구되는 경제상식",
+    "body": "이 영상은 사회초년생을 위한 금융·경제 관점에서 환율의 기초 개념을 쉽고 명확하게 설명합니다. 환율 변동이 우리 경제 전반과 주식",
+    "category": "invest",
+    "youtube_id": "mcndSu2_6fk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 162333,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:20.232Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 93,
+  "fields": {
+    "title": "환율이 떨어지면 손해인가요? | 환율이란 | 원달러환율",
+    "summary": "[YouTube] 3분차이",
+    "body": "이 영상은 사회초년생이 꼭 알아야 할 환율의 기본 개념을 쉽고 명확하게 설명합니다. 환율이 무엇인지, 그리고 환율이 오르내리는 원",
+    "category": "economy",
+    "youtube_id": "58COXu0tCIw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 164741,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:26.827Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 94,
+  "fields": {
+    "title": "연말정산 완벽 가이드, 올해는 세금 환급 받으세요",
+    "summary": "[YouTube] 세무아나",
+    "body": "사회초년생을 위한 이 영상은 연말정산 시 같은 연봉에도 세금 환급 여부가 달라지는 이유를 명확히 알려주고, 세금을 더 내",
+    "category": "economy",
+    "youtube_id": "l9z5jvtq6DY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 13475,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:33.815Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 95,
+  "fields": {
+    "title": "직장인 청년은 200만원 혜택 챙기세요!   #소득세감면 #직장인꿀팁",
+    "summary": "[YouTube] 오분세무_이민영세무사",
+    "body": "이 영상은 사회초년생이 금융·경제적 혜택을 누릴 수 있는 '중소기업 취업자 소득세 감면' 제도에 대해 알려줍니다. 만",
+    "category": "economy",
+    "youtube_id": "_QjtraWtcjI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 26202,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:40.536Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 96,
+  "fields": {
+    "title": "맞벌이부부 연말정산, 100% 환급 받는 법! 직장인 소득공제/세액공제",
+    "summary": "[YouTube] 구채희",
+    "body": "이 영상은 직장인, 특히 맞벌이부부가 연말정산을 통해 세금을 100% 환급받을 수 있는 핵심 노하우를 제공합니다.",
+    "category": "invest",
+    "youtube_id": "AIltj6PcXmY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 64190,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:49.167Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 97,
+  "fields": {
+    "title": "[직린이를 위한 연말정산] 사회초년생 연말정산 성공하려면?｜와우패스 최창우 회계사",
+    "summary": "[YouTube] 와우패스",
+    "body": "):**\n    *   3-4 sentences? Yes, 3 sentences.\n    *   Core content? Yes, covers 연말정산, 사회초년생, refund/bomb,",
+    "category": "saving",
+    "youtube_id": "GNWz4cXksTE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 456,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:55.565Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 98,
+  "fields": {
+    "title": "90%가 모르는 ISA계좌 팁",
+    "summary": "[YouTube] 금융초년생 경제가이더 채미",
+    "body": "",
+    "category": "finance",
+    "youtube_id": "62oOjYFCtGo",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1602056,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:34:55.565Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 99,
+  "fields": {
+    "title": "연말정산 때 세금 토해내는 이유 #shorts #연말정산",
+    "summary": "[YouTube] 국세청 경력 세무사 박세론이",
+    "body": "이 영상은 사회초년생이 연말정산 시 세금을 토해내는 주요 이유를 금융·경제 관점에서 명확히 설명해 줄 것입니다. 특히, 소득공",
+    "category": "economy",
+    "youtube_id": "GSnWFCX-p5k",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 150632,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:02.098Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 100,
+  "fields": {
+    "title": "기존의 청약통장은 해지하고 이걸로 갈아타세요! #청년주택드림 #청약 #청약통장 #주택청약 #부동산 #재테크",
+    "summary": "[YouTube] 재테크읽어주는 파일럿",
+    "body": "",
+    "category": "invest",
+    "youtube_id": "Tk6F2ZX5jqU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 757943,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:02.099Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 101,
+  "fields": {
+    "title": "청약통장 꿀팁1",
+    "summary": "[YouTube] 아영이네 행복주택",
+    "body": "이 영상은 사회초년생이 주택 마련의 첫걸음인 청약통장을 금융·경제 관점에서 현명하게 활용하는 핵심 노하우를 제공합니다. 청",
+    "category": "saving",
+    "youtube_id": "kMN-mZL1rrc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 219196,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:08.730Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 102,
+  "fields": {
+    "title": "알면 소름돋는 청약통장의 실제 사용 용도",
+    "summary": "[YouTube] 월급쟁이부자들TV",
+    "body": "이 영상은 사회초년생이 흔히 아는 아파트 청약 신청 외에, **청약통장이 가진 숨겨진 실제 사용 용도와 금융·경제적 가",
+    "category": "saving",
+    "youtube_id": "ZPAncI4HRls",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1085542,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:15.656Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 103,
+  "fields": {
+    "title": "가계부가 쉬워 지는 법 #가계부",
+    "summary": "[YouTube] 호호양  재테크",
+    "body": "이 영상은 사회초년생이 어려워할 수 있는 가계부 작성을 쉽고 효과적으로 할 수 있는 방법을 알려줍니다. 이를 통해 자신의 수입과 지출 흐름",
+    "category": "saving",
+    "youtube_id": "YqIx21vvc-U",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 270699,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:22.642Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 104,
+  "fields": {
+    "title": "[수입-지출관리] 10. 지출 관리 잘하는 방법 ( 비정기지출 지출관리 년단위지출관리 )",
+    "summary": "[YouTube] 재잘TV",
+    "body": "이 영상은 사회초년생이 간과하기 쉬운 비정기 지출을 효과적으로 관리하는 방법을 다룹니다. 월급을 예상치 못하게 잠식하는 자동차 보험료",
+    "category": "saving",
+    "youtube_id": "QklqA947GL0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3979,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:29.380Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 105,
+  "fields": {
+    "title": "통장 쪼개기 기초 이것부터 시작해보세요",
+    "summary": "[YouTube] 필쌤TV - 김경필의 머니트레이닝",
+    "body": "이 영상은 사회초년생이 효과적으로 월급을 관리하고 건강한 재정 습관을 형성하는 데 필수적인 '통장 쪼개기'의 기초적인 방법을",
+    "category": "saving",
+    "youtube_id": "TRE-mIvsWW4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 82713,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:35.650Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 106,
+  "fields": {
+    "title": "🔥뼈때림 주의🔥월급쟁이가 1억 모으는 현실적인 월급관리 시스템 4가지",
+    "summary": "[YouTube] 호호양  재테크",
+    "body": "✅4억 모은 맞벌이 초현실 생활비\nhttps://youtube.com/shorts/kzClKveZZyI\n\n✅호호양 인스타그램\nhttps://www.instagram.com/minimal__hoho\n\n\n0:00 인트로 (나를 믿지 마세요)\n1:25 첫번째 원칙 (이게 진리에요)\n2:40 두번째 원칙 (카드만 바꾸면 너무쉬워요)\n6:37 세번째 원칙 (초현실 통장쪼개기)\n11:26 네번째 원칙 (이것만 해도 저축목표 달성 빨라져요)\n\n\n#월급관리#돈모으기#1억모으기",
+    "category": "saving",
+    "youtube_id": "vsg6CIx6Uy0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 96916,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:35.913Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 107,
+  "fields": {
+    "title": "(Kor, Chi) 경제 위기에도 넘어지지 않는 현실적인 돈관리 전략 | 김경필 머니트레이닝랩 대표 @phill_ssam  | 추천 강연 강의 듣기 | 세바시 1918회",
+    "summary": "[YouTube] 세바시 강연 Sebasi Talk",
+    "body": "이 영상은 사회초년생이 제한된 월급으로 미래를 준비해야 하는 현실적인 금융 고민을 다룹니다. 김경필 대표는 경제 위기 속에서도 흔",
+    "category": "invest",
+    "youtube_id": "cx_SGJGKyxY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 908645,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:42.707Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 108,
+  "fields": {
+    "title": "30대에 늦게 알면 후회하는 돈관리법 총정리 [월급쟁이부자들 너나위 맛보기 강의]",
+    "summary": "[YouTube] 월급쟁이부자들TV",
+    "body": "이 영상은 사회초년생이 30대에 후회하지 않을 효율적인 돈 관리의 기초를 다지는 데 집중합니다. 특히, 소비를 효과적으로 통제하는 방법과 생활",
+    "category": "invest",
+    "youtube_id": "faYbObGoNXQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 248527,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:49.508Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 109,
+  "fields": {
+    "title": "30살 직장인, 고정지출 100만 원 줄인 썰🙀",
+    "summary": "[YouTube] 시골쥐의 도시생활",
+    "body": "이 영상은 사회초년생이 금융·경제 관점에서 고정지출을 효과적으로 관리하여 재정 건전성을 확보하는 방법을 제시합니다. 핵심은 모든 고정지출",
+    "category": "invest",
+    "youtube_id": "NwLlvEccjmc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 139700,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:35:56.147Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 110,
+  "fields": {
+    "title": "26살 3억 모은 짠순이, 1년 360만원 아낀 절약 꿀팁 5가지 [꽉잡아 짠테크🧂]",
+    "summary": "[YouTube] 와이스트릿 - 지식과 자산의 복리효과",
+    "body": "이 영상은 26세에 3억을 모은 '짠순이' 꽉작가가 사회초년생의 고질적인 문제인 '텅장'을 극복하고",
+    "category": "saving",
+    "youtube_id": "CKIZA6np3LM",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 172336,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:02.648Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 111,
+  "fields": {
+    "title": "직접 해본 생활비 줄이는 방법 6가지 절약노하우",
+    "summary": "[YouTube] 호호양  재테크",
+    "body": "✅4억 모은 맞벌이 초현실 생활비\nhttps://youtube.com/shorts/kzClKveZZyI\n\n✅호호양 인스타그램\nhttps://www.instagram.com/minimal__hoho\n\n\n\n월급도 적고 투자도 할줄 몰랐던 신혼때는 절약만큼 쉬운 돈모으기 방법이 없었어요.\n\n그래서 생활비를 300만원대에서 150만원 정도로 줄일수 있었고 그 시간 덕분에 빠르게 종잣돈을 불릴수 있게 되었습니다 :)\n\n처음시작할땐 이걸 언제까지 도대체 헤애하나 하면서 힘들때도 있었는데요. 지나고 보니 그렇게 긴 시간이 필요한건 아니더라구요. 오히려 그 시간들 덕분에 나이들어갈수록 점점더 여유로운 삶을 살게되어 감사할 따름입니다.🥰\n\n그러니 너무 늦었다고 생각하거나 시작부터 겁먹지 마시고 일단 해보세요! 그렇게 모인 돈이 여러분의 자산형성의 씨앗이 될겁니다 :) 화이팅!\n\n\n\n0:00 인트로\n0:11 시작\n0:55 생활비 절약, 첫번째 방법\n2:10 두번째 방법\n2:52 세번째 방법\n4:08 네번째 방법\n5:03 다섯번째 방법\n5:50 여섯번째 방법\n\n\n#생활비절약 #절약노하우",
+    "category": "invest",
+    "youtube_id": "6cgzvV-UgAI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 80581,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:02.981Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 112,
+  "fields": {
+    "title": "\"제발 부끄러울 정도로 아끼세요\" 가난한 사람들이 유독 공통적으로 집착하는 '이 소비' (김경필 작가 통합본)",
+    "summary": "[YouTube] 책과삶",
+    "body": "안녕하세요.\"책과삶\" 입니다.\n\n오늘은 김경필 머니 트레이너님과 할수록 가난해지는 소비에 대해 알아봤습니다.\n세상의 모든 감동과 지식을 전합니다.\n구독과 좋아요 꾸욱 눌러주시면 더욱 열심히 좋은 영상으로 보답하겠습니다.\n\n📖 김경필 머니 트레이너님의 ‘결국 당신은 아파트를 사게 된다’\nhttps://product.kyobobook.co.kr/detail/S000216921327\n\n#책과삶  #소비 #저축 #김경필\n\n00:00 남들보다 빨리 가난해지는 소비습관 1위\n14:37 결혼할 때 돈 달라는 자식, ‘이 한 마디’만 하세요\n31:00 친구 자식 결혼식에 축의금 10만원 내면 절대 안 되는 이유\n\n📗책과삶 멤버쉽 가입\nhttps://www.youtube.com/channel/UCgUaqrLRGLL-dHislR1e2TA/join",
+    "category": "saving",
+    "youtube_id": "blXsB1bK7R0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1612078,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:03.447Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 113,
+  "fields": {
+    "title": "정리 전문가의 소비 습관은? / 똑똑하게 소비하는 방법 4가지",
+    "summary": "[YouTube] 정희숙의 똑똑한 정리",
+    "body": "쇼핑 좋아하시나요? \n물건을 고를 때 기준은 무엇인가요?\n나의 소비 습관에 대해 생각해 본 적 있으신가요?\n\n\n영상 보시면서 똑똑하게 소비하는 방법에 대해 함께 생각해 보아요~ \n\n#소비 #습관 #정리 #똑똑한정리 #정희숙\n\n똑똑한정리 멤버십👇👇 https://www.youtube.com/channel/UC1a0JQT7R4uHIQYKNaJOVcw/join\n인스타 : https://www.instagram.com/sook3190/\n네이버 블로그 : https://blog.naver.com/sook3190/\n네이버 TV : https://tv.naver.com/sook3190\n1boon : https://1boon.kakao.com/sook3190/\n클래스 101 : 101creator.page.link/ENsK\n견적 문의 0507-1330-3190\nㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n(잘되는 집들의 비밀) 온라인 서점 바로가기\n예스24: https://zrr.kr/R9Bd\n교보문고: https://zrr.kr/IU9E\n알라딘: https://zrr.kr/0DtY",
+    "category": "economy",
+    "youtube_id": "osq0EnhRbq4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 13772,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:03.888Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 114,
+  "fields": {
+    "title": "거지로 만드는 미친 소비 습관! 지금 당장 '이것'부터 없애세요 (김경필 머니트레이너 2부)",
+    "summary": "[YouTube] 성정길",
+    "body": "📌촬영일 : 2025년 5월 9일(금)\n\n📢김경필 머니트레이너님을 소개합니다.\n✅유튜브 -  https://www.youtube.com/@UCNpCH0CgKC9xxGLmHuqGEsA \n\n🐋최고의 전문가들이 매주 투자전략을 강의합니다.\n성정길 공식 멤버십 \"고래돈공부\" \n📌지금 합류하기 : https://fanding.me/whalemoney_membership_month\n\n❤️문의 고객센터 : https://pf.kakao.com/_uLxjhG\n\n#재테크 #돈쭐남 #저축",
+    "category": "invest",
+    "youtube_id": "Y9MtNgOxz_c",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 35845,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:04.347Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 115,
+  "fields": {
+    "title": "신용카드랑 체크카드 중에 뭘 쓰는 게 더 좋을까요?? #카드 #신용카드 #체크카드 #추천 #혜택 #현금 #현금생활",
+    "summary": "[YouTube] 이서영변호사의 회생파산연구소",
+    "body": "",
+    "category": "finance",
+    "youtube_id": "S5yelN5L0os",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 74568,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:04.364Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 116,
+  "fields": {
+    "title": "신용카드vs체크카드 뭐가 더 유리할까요? #세무사 #세금 #연말정산",
+    "summary": "[YouTube] 세무천재서성우",
+    "body": "",
+    "category": "finance",
+    "youtube_id": "U35By3aG1oQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 22971,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:04.364Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 117,
+  "fields": {
+    "title": "신용카드 vs 체크카드 황금비율 알려드림! (feat. 연말정산 소득공제)",
+    "summary": "[YouTube] 돈독한언니, 돈공부는독하게!",
+    "body": "",
+    "category": "finance",
+    "youtube_id": "7yxs06LHCh0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 25961,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:04.383Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 118,
+  "fields": {
+    "title": "신용점수 관리방법에 대한 모든 것!!",
+    "summary": "[YouTube] 신용회복위원회 CCRS",
+    "body": "안녕하세요~!\n신용회복위원회 김예슬 심사역입니다.\n\n오늘은 신용점수 관리방법에 대해 준비하였습니다.\n21년부터 기존의 등급제에서 점수제로 변경되었는데요.\n\n이번 영상에서는 신용점수는 무료로 확인하는 방법, 신용점수 관리의 중요성, 신용점수 관리 꿀팁에 대해서 나눠보려고 합니다.\n\n함께 확인하시죠!",
+    "category": "finance",
+    "youtube_id": "Kc00r5TDRes",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3115,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:04.728Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 119,
+  "fields": {
+    "title": "\"700점 아래는 큰일납니다?!🤯\" 신용점수 1000점 맞는 가장 확실한 방법 | #신용점수1타강사",
+    "summary": "[YouTube] 서민금융진흥원",
+    "body": "🍀 EVENT🍀\n신용점수를 올릴 수 있는 모든 방법을 알려드립니다. #신용점수1타강사 1화 업로드와 함께\n구독자 여러분을 위한 댓글 이벤트를 준비했습니다.\n\nQ. 정책서민금융상품 이용자 등을 대상으로 금융 전문가가 고객님의 1:1 금융 주치의가 되어 신용·부채 상태를 진단하고 상담까지 진행하는 맞춤형 무료 컨설팅 서비스는?\n1) 족집게컨설팅\n2) 스피드1:1상담\n3) 신용·부채관리 컨설팅\n\n정답을 맞추시면 추첨을 통해 5만원 상당의 온누리 상품권💸을 드립니다!\n\n🚨🚨참여방법🚨🚨\n이벤트 기간 : 2025. 6. 4. ~ 6. 11.\n경품 : 50,000원 상당의 온누리 상품권(1명)\n\n참여방법 :\n1. 서민금융진흥원 유튜브 구독하기!\n2. 신용점수1타강사 1화 좋아요 누르기!\n2. 질문에 대한 답변 남기기!\n  \n당첨자 발표 : 6월 16일 월요일\n(참여해주신 분들 중 1명을 추첨하여 댓글로 안내)\n----------------------------------------\n#신용점수1타강사 에서는 신용점수를 올릴 수 있는 모든 방법을 알려드립니다.\n\n오늘은 1강. \"신용점수란 무엇인가\"에 대해 알려드립니다.\nNICE와 KCB의 차이, 신용점수 0점도 있는지 등 \n궁금했지만 어디에도 물어볼 수 없던 신용점수의 모든 것 #신용점수1타강사 에서 해결해 보세요\n\n00:00 신용점수1타강사 시작합니다\n01:39 신용점수가 무엇이고, 왜 중요할까 (feat. KCB, NICE)\n04:00 내 신용점수는 다른 사람과 비교해서 괜찮은 수준일까?\n05:00 신용점수 올리는 팁\n06:04 신용점수에 대해 무엇이든 물어보세요\n08:39 신용점수 조회하는 법\n09:15 오늘 강의 \"한줄평\"  \n\n#서민금융진흥원 #금융꿀팁공식채널 #금융상식 #신용관리 #신용회복 #신용카드 #신용등급 #신용평점\n----------------------------------------\n♥서민금융진흥원 SNS♥\n홈페이지 : https://www.kinfa.or.kr/main.do​\n네이버 블로그 :  htt",
+    "category": "finance",
+    "youtube_id": "9oeWSU1cUtg",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 17139,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:05.134Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 120,
+  "fields": {
+    "title": "#51.실전, 신용등급 관리방법, 신용이 좋으면 은행 대출이 될까? ★꼭 알아야 하는 신용관리 방법 ~!",
+    "summary": "[YouTube] 부룩이의 신용대출 연구소 (부룩이 TV)",
+    "body": "부룩이는 79년생입니다. \n16년 동안 대출 상담사 일을 했고 \n전문적인 상담을 위해 국가공인\n'신용상담사' 자격증을 취득했습니다.\n27살에 상담 일을 시작했고,\n평생의 업으로 생각하고 있습니다. \n시간이 지나도 항상 이 자리에,\n손 뻗으면 닿을 거리에 있겠습니다. \n고금리로 고생하나 은행 대출이 안돼 막막할 때, \n믿고 상담할 수 있는 사람이 되도록 \n노력하겠습니다.\n\n2021년 어렵게 얻은 첫아이가 태어났습니다. \n이웃집 아이가 웃어야 우리 집 아이도\n웃을 수 있다고 합니다.\n돈만 버는 것이 아니라, 도움을 주고받는\n사람이 되고 싶습니다.\n\n팟빵 정영진 최욱의 불금쇼 시즌 2에\n광고를 했고 그분들에게도 \n누 끼치지 않도록 늘 정직하고 \n바르게 상담하고 살아가려고 \n노력하고 있습니다.\n\n신용 관련 콘텐츠를 만드는\n대한민국 1등 인플루언서가 되고,\n'대출 지도'라는\n대출 백과사전 같은 책을 \n만들고 싶습니다.  \n\n유튜브 부룩이 TV, \n네이버 부룩이 금융상담소 블로그와\n네이버 카페, 네이버 부룩이TV\n공감, 구독 부탁드려요 ~~*^^*\n감사합니다. ♡​\n\n-------------------------------------------------*\n\n신용등급에 대해서 알려드리고 싶었습니다.     \n누구나 보면 아! 그렇구나 하는 그런 영상을 만들고    \n싶었습니다. \n\n신용등급은 왜 관리해야 하고, 어떻게 관리해야 하는지,      \n등등의 다양한 이야기를 담겠습니다. \n\n - 신용등급 시리즈      \n      \n#1 신용등급을 관리해야 하는 이유?      \n   -신용등급을 왜 관리해야 할까요? 신용등급이 낮으면 어떤       \n불이익을 받는지, 어떤 상황에 처해질 수 있는지에 관한 이야기 입니다. \nhttps://youtu.be/Py11JGBCkAU\n      \n#2. 나이스 지키미, 올크레딧(KCB) 알아보는 곳마다 신용등급이 다른 이유?      \n    - 알아보는 곳마다 신용등급을 다르게 이야기 합니다. \n A은행과 B 은행에서 말해주는 신",
+    "category": "saving",
+    "youtube_id": "kxSx1ipthsk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 591,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:05.397Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 121,
+  "fields": {
+    "title": "2026년 새해에는 저축, 투자, 소비 이렇게 해보자!",
+    "summary": "[YouTube] 필쌤TV - 김경필의 머니트레이닝",
+    "body": "2026년 새해 돈 관리의 시작 | Part 1\nPart 2 https://www.youtube.com/watch?v=hPz2mi3qNdk\nPart 3 https://www.youtube.com/watch?v=37XkITh0VrI\n\n2026년 새해를 맞아 저축·투자·소비 전략을 한번 정리했습니다.\n\n👉『김경필의 1억 만드는 짠테크 가계부 (2026)』도서 구매 링크\n     *  https://product.kyobobook.co.kr/detail/S000217570952\n\n👉『결국 당신은 아파트를 사게 된다』도서 구매 링크\n     *  교보문고 : https://product.kyobobook.co.kr/detail/S000216921327\n     *  예스24 : https://www.yes24.com/Product/Goods/148140293\n     *  알라딘 : https://www.aladin.co.kr/shop/wproduct.aspx?ISBN=K142030482&start=pnaver_02\n\n#김경필 #저축 #투자",
+    "category": "invest",
+    "youtube_id": "EArP59mXdac",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 66600,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:05.848Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 122,
+  "fields": {
+    "title": "절약습관과 목돈을 만들어주는 짠테크 가계부 쓰는법 / 누구나 쉽게 가계부 쓰는법 / 캘린더형 가계부 / 초보자를 위한 가계부쓰는법 / #Daybreak_RichAction",
+    "summary": "[YouTube] 데브,인간개조프로젝트",
+    "body": "#Daybreak_RichAction #짠테크 #가계부\n\n● 유튜브 : 인간개조프로젝트의 모든것\nhttps://youtu.be/xtqd08vlAsw\n\n● 네이버블로그 : 지하철출근길 블로그\nhttps://m.blog.naver.com/kikiworld25/221766315144\n\n● 인스타그램 : 자기계발, 소소한 일상\nhttps://www.instagram.com/dayb.reak\n\n\n안녕하세요. 인간개조프로젝트, :Daybreak입니다.\n\n오늘은 짠해서~ 짠한 짠테크 시간입니다.\n\n새해를 맞이해서 어떤 가계부를 사야할지 아직도 고민중이신가요?\n내가 가계부 열심히 써보겠다고, 구매했는데, \n책장에 1년을 그대로 방치했던 경험이 있으신가요?\n초반에는 열심히 썼는데,\n점점 갈수록 쓰기가 귀찮아서 결국 포기했던 경험있으신가요?\n\n이런 경험은 모두 소중합니다!\n그만큼 좋은 습관을 가지고 싶고,\n그만큼 돈을 절약해서 목돈을 만들고 싶은 의지가 분명히 있기때문입니다.\n\n2020년을 맞이해서 이 영상을 보고 계시는 분들께서는 \n분명 습관과 목돈이라는 두 마리의 토끼를 잡기위해 우리 영상을 보러 오셨다고 생각합니다. \n----\n그 답에 조금이라도 보답을 하기위해서\n오늘은 딱 5분만 투자해서 짠테크 가계부 쓰는 법에 대해서 \n제가 최근에 구입한 가계부와 사용법을 소개하고자 합니다.\n\n이 가계부와 2020년을 함께할 계획입니다.\n\n2018년! 2019년을 함께했던 \n가계부의 구성과는 크게 다르지않으나,\n제가 원하던 가계부를 구매 되어 너무 기쁩니다.\n\n이번 영상은 본 가계부를 홍보하는 영상이 아님을 알려드립니다.\n사전에 오해가 없으셨으면 합니다.\n\n먼저, 무엇보다도 이 가계부는\n가계부를 처음 쓰는 분들에게 가장 추천드리고 싶습니다.\n\n왜냐하면, 구성자체가 어렵지않습니다. \n한 번 보실까요? \n\n먼저, 캘린더 형식이고, 일자별로 항목을 쓸 수 있도록 5줄씩 구성되어있습니다.\n해당 브랜드의 유사한 가계부를 2년동안 써왔는데요. \n저의 경험상, 항목이 6줄을 넘는 경우는 드물었습니",
+    "category": "invest",
+    "youtube_id": "p0Y_KrGmTeU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 5094,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:06.113Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 123,
+  "fields": {
+    "title": "생활비 20% 줄이는 법 | 30일 로드맵: 고정비·구독·식비·교통 4스텝 #부자 #투자 #재테크 #shorts",
+    "summary": "[YouTube] 부의 나침반",
+    "body": "@부의나침반-Freedom\n한 달에 생활비 –20%를 목표로 세팅 하고 이후 유지까지 한 번에 정리했습니다.\n고정비 5%, 구독 3%·식비 7%, 교통 3% + 습관 2개 (알람·24시간 룰).\n절감된 금액은 자동이체로 자산(주식투자)으로 이동시키세요. (개인 상황에 따라 조정이 필요합니다.)\n\n#생활비절감 #지출관리 #가계부 #재테크 #절약팁",
+    "category": "invest",
+    "youtube_id": "EoaO1ocLHsc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 9182,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:06.375Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 124,
+  "fields": {
+    "title": "[CEO 수업📕] 경기 침체를 극복하는 비결 : '고정비' 다이어트_Diet of millionaires",
+    "summary": "[YouTube] 하우투비리치 HOWTOBERICH",
+    "body": "하우투비리치 구독하기 : https://bit.ly/3pZrZSa\n\n\n경기가 좋지 않아도\n생산을 중단 시킬 수 없는 업종에는\n\n철강, 화학 등\n기초 분야의 산업들이\n주로 포진하고 있어요. \n\n이들 업종 대부분은\n\n'고정비' 비중 또한 크다고 볼 수 있고, \n\n경기 흐름의 변화에 따른\n이익의 변화 역시\n\n매우 크죠\n\n\n#경기민감주 #FAANG #빅파마\n\n-------------------------------------------------------------------------------------------\n\n안녕하세요 하우투비리치 이수입니다.\n\n채널 하우투비리치는 어떻게 하면\n'금융'에 대해 제대로 배울 수 있을까?\n\n라는 물음에서 시작한 콘텐츠입니다.\n\n제대로 배울 환경이 마땅치 않았던 금융에 관한 모든 것을\n차근차근 체계적으로 큐레이션하여,\n\n좀 더 쉽고 재밌고 또 유익하게 전달해드리려 합니다.\n\n돈을 좀 더 제대로 알기 위해 역사, 종교, 인문학, 철학 등\n다양한 이야기를 해드리겠습니다.\n\n구독 많이 해주시고 늘 유익한 영상으로 찾아뵙겠습니다 :)",
+    "category": "economy",
+    "youtube_id": "SwE8jvy6Ij4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1655,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:06.631Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 125,
+  "fields": {
+    "title": "🔍 여러분을 성투로 이끌 투자방법 4가지ㅣ자산배분 배당투자 미국투자 가치투자ㅣ 투자마인드",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#투자방법 #자산배분투자 #배당투자 #미국투자 #가치투자\n\n안녕하세요 박곰희입니다!\n투자에 답은 없지만 보기는 있다고 생각하는데요,\n투자를 어떤 식으로 하면 좋을 지에 대한\n투자방법 4가지를 소개해드리고자 합니다.\n구독자분들께 도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 오늘의 주제 : 투자보기 4가지\n01:09 투자 방법1 : 자산배분투자\n03:30 투자 방법2 : 배당투자\n05:56 투자 방법3 : 미국지수투자\n08:50 투자 방법4 : 가치투자\n11:04 마무리인사\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n- 박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n- 박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n- 박곰희TV는 소속 금융사가 없습니다.\n- 박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n- 녹화일 : 2025년01월08일",
+    "category": "invest",
+    "youtube_id": "9RuZAAykJC8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 131866,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:06.886Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 126,
+  "fields": {
+    "title": "🖐️ 연금운용 5가지 방법ㅣ일단 계좌 열었는데 뭘 골라야 할지 모르겠다면?ㅣ연금저축",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#연금저축 #IRP #연금운용 \n\n안녕하세요 박곰희입니다!\n연금저축이나 IRP계좌는 노후준비의 목적이 아닌\n세액공제의 목적으로 개설되는 경우가 많습니다. \n개설 후엔 운용 관리를 시작해야 하는데요,\n운용에 대한 전략을 5가지로 정리해봤습니다!\n도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 연금운용 5가지 방법\n00:53 첫 번째 : CD금리 ETF\n01:59 두 번째 : TDF\n03:57 세 번째 : 자산배분\n05:05 네 번째 : 배당성장주\n06:33 다섯 번째 : 주식\n08:36 마무리\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n- 박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n- 박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n- 박곰희TV는 소속 금융사가 없습니다.\n- 박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n- 녹화일 : 2024년12월11일",
+    "category": "invest",
+    "youtube_id": "CsrdC4yQzWs",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 212478,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:07.186Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 127,
+  "fields": {
+    "title": "🙋 이제 막 투자를 시작하는 초보를 위한 투자방법 3가지 | ver.2025",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#주식초보 #주식공부 #투자시작\n\n안녕하세요 박곰희입니다.\n주식 투자를 해보고 싶은데, 어떻게 시작하면 좋을 지\n고민이신 곰곰이분들께 도움이 될 만한 영상을 준비했습니다.\n참고하셔서 꼭 좋은 결과를 얻을 수 있기를 바랍니다 :)\n\n📜 목차📜------------------------------------------\n00:00 투자를 시작하는 3가지 방법\n01:31 투자 = 등산\n04:21 펀드매니저 흉내내기\n09:40 건물주 흉내내기\n12:21 애널리스트 흉내내기\n16:58 마무리\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n박곰희TV는 소속 금융사가 없습니다.\n박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n녹화일 : 2025년8월25일",
+    "category": "invest",
+    "youtube_id": "LHy5UbdIAcs",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 198198,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:07.447Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 128,
+  "fields": {
+    "title": "4% 예금과 6% 적금 중 돈을 어디에 넣는 게 이득일까",
+    "summary": "[YouTube] 은근한 잡다한 지식",
+    "body": "은행에 돈을 맡길 때 예금과 적금 중 어디에 넣어야 더 이득이 될까요\n\n뇌를 채워줄 은덩어리 지식들 은근한 잡다한 지식\n시청해주셔서 감사합니다\n\n인스타 : https://www.instagram.com/eunjobz/\n후원 : https://toon.at/donate/silver-magazine\n문의 : 7hieut@gmail.com\n블로그 : https://pguin.tistory.com/2129\n\n#예금 #적금 #저금",
+    "category": "saving",
+    "youtube_id": "xmblym5ZXlg",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 79321,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:07.747Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 129,
+  "fields": {
+    "title": "돈 모으고 싶다면 꼭 알아야 하는 적금 예금 차이｜친절한 경제",
+    "summary": "[YouTube] 친절한 경제학",
+    "body": "“예금이 더 좋을까? 적금이 더 좋을까?”\n은행 창구에서, 모바일 앱을 열어보며\n누구나 한 번쯤 고민했던 질문입니다.\n\n사실 예금과 적금은 이자를 주는 방식은 같지만,\n목적과 유리한 사람이 완전히 다릅니다.\n\n이번 영상에서는\n\n✅ 예금이 유리한 사람의 특징\n\n✅ 적금을 선택해야 손해 보지 않는 상황\n\n✅ 같은 금리라도 실제 수익이 달라지는 이유\n\n✅ 왜 은행은 예금과 적금을 동시에 팔까?\n를 쉽고 명확하게 설명합니다.\n\n당신의 돈을 어디에 넣어야 가장 빨리 불어날지,\n이 영상 하나로 확실하게 판단할 수 있을 것입니다.\n\n🎓 [친절한 경제학]\n복잡한 금융을 누구나 이해할 수 있게.\n뉴스보다 쉽고, 교과서보다 현실적으로!",
+    "category": "saving",
+    "youtube_id": "JpuBk2DGf-4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1002,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:08.016Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 130,
+  "fields": {
+    "title": "예금 vs 적금, 예적금 이자 더 받는 방법 (세금우대, 새마을금고, 신협)",
+    "summary": "[YouTube] 부자공식, 파이프라인 만들기",
+    "body": "#예금 #적금 #돈모으기 #파킹통장 #재테크\n\n처음 돈 모으기 시작할땐\n예금 적금 처럼 안전한 방법으로 돈 모으기 시작하는데요\n\n예금 적금 예금자보호가 되다보니 조금이라도\n더 효율적으로 가입하는게 중요합니다\n\n그래서 예금 적금 파킹통장 세금우대저축 활용한\n이자 더 많이 받을 수 있는 방법들을 정리해봤습니다 :)\n\n\n00:00 예금 적금 이자 더 많이 받는 방법?\n01:00 예금 적금 핵심정리, 예시 비교\n02:12 예금 적금 한눈에 이해하기\n03:44 무조건 예금이 유리할까? 적금 파킹통장 활용법\n06:12 예금 적금 이자 최대 2배 이상 받는 방법\n09:18 예금 적금 특판, 세금우대저축 활용법\n10:35 예금 적금 파킹통장 특판 세금우대저축 전체비교",
+    "category": "invest",
+    "youtube_id": "GcoLXU0AzZE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 17307,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:08.297Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 131,
+  "fields": {
+    "title": "초등학생도 이해하는 주식투자 기초 개념",
+    "summary": "[YouTube] 마크의 지식서재",
+    "body": "#주식기초 #주식초보 #주식강의기초\n초등학생도 이해하는 주식투자 기초 개념\n\n1. 주식투자 기초 0:00\n2. 주식은 무엇일까 0:24\n3. 주식과 채권 및 증권 2:08\n4. 코스피와 코스닥 4:54\n5. 어떤 종목을 사야하는가 6:03\n\n* Reference\n(1) 주린이도 술술 읽는 친절한 주식책 - 최정희, 이슬기\n(2) 채사장 투자썰, 이길 수밖에 없는 주식투자 기본기 - 채사장 유니버스\n\n* Music\nBright Future – Silent Partner\nhttps://www.youtube.com/watch?v=j-eUXXW95Rg",
+    "category": "invest",
+    "youtube_id": "nqbKOvQ8x1s",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 737974,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:08.549Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 132,
+  "fields": {
+    "title": "2시간만에 주린이 탈출...주식투자 기초 완전 마스터 (18만원 상당의 선물까지!) / 주식투자 기초강의 / 이대호 와이스트릿 대표",
+    "summary": "[YouTube] 와이스트릿 - 지식과 자산의 복리효과",
+    "body": "주식투자 기초 강의 / 25년 6월 24일 녹화\n00:00 주린이 탈출합시다!\n02:08 주식이란\n04:04 시장의 기본 개념\n05:24 주식시장의 구분\n06:53 코스닥 지수의 비밀\n09:24 거래 시간\n11:39 주문 방법\n14:41 주문 체결 우선순위\n16:05 가격 제한폭\n20:35 시초가\n21:27 수급주체\n23:06 기관 투자자 분류\n27:29 기본적 분석의 기초\n31:21 안정성\n34:36 수익성\n40:44 성장성\n43:09 기업 발굴 방식\n45:16 밸류에이션의 기초\n47:17 PER에 담긴 의미\n50:47 밸류에이션은 '상대적'\n55:34 디스카운트와 프리미엄\n57:35 밸류 속에 숨은 의미\n01:01:10 BPS와 PBR\n01:05:30 PBR이 낮으면 무조건 좋다?\n01:07:16 ROE 자기자본이익률\n01:08:42 ROA 총자산이익률\n01:10:58 EV/EBITDA\n01:14:02 컨센서스\n01:16:11 주주환원\n01:21:05 황소와 곰, 불마켓 베어마켓\n01:22:14 기술적 분석의 기초\n01:33:43 투자자의 '눈' 공시란?\n01:40:01 공시 제출 시기\n01:41:04 헷갈릴 수 있는 것들\n01:45:19 완강하신 분들께 드리는 선물\n01:47:25 재무제표·공시를 봐야하는 이유\n01:50:06 재무제표 맛보기\n\n📌[이벤트] 주린이 탈출 영상을 다 들으시면 18만원 상당의 선물을 드립니다\n👉 https://forms.gle/QryYS3zV3NhNRe9BA\n\n🎬 (2부 이어보기) 기업분석 재무제표 기초강의 👉https://youtu.be/bFtO3EjqupU\n\n#주식 #주식투자 #주린이 #주식초보 #주식개념 #주식투자하는법 #주식강의 #주식기초 #이대호 #기초강의 #주린이탈출 #주린이기초 #주식기초강의",
+    "category": "invest",
+    "youtube_id": "BfxO1AZ1Xek",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1601870,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:08.831Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 133,
+  "fields": {
+    "title": "주식 기초 강의, 이 영상 하나로 완벽히 끝내세요｜실패 없는 주린이 투자 공부",
+    "summary": "[YouTube] 주식캐스터 여니",
+    "body": "#주린이 #주식기초 #주식하는법 #주식투자\n\n00:00 초보 투자자들이 손실을 보는 이유\n01:23 주식&상장이란?\n02:25 코스피/코스닥 차이\n05:00 시가총액이란?\n05:53 보통주/우선주 차이\n08:04 수급주체란?\n10:28 ETF란?\n12:04 인버스/레버리지란?",
+    "category": "invest",
+    "youtube_id": "vF9LuDhG82w",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 322885,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:09.114Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 134,
+  "fields": {
+    "title": "주식과 채권, 어떤 차이가 있을까?",
+    "summary": "[YouTube] 3분차이",
+    "body": "\"이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.\"\n주식에 처음 입문하시는 분은 주식과 채권의 차이가 무엇인지 궁금하실 텐데요. \n주식과 채권이 무엇인지 3분차이에서 기본만! 간단하게 정리해 드리겠습니다!\n\n'3분차이'는 여러분의 궁금증을 해결해드리는 채널입니다. \n영상이 도움이 되셨다면 구독과 좋아요 눌러주세요! 더 좋은 채널을 만드는 데 큰 도움이 됩니다😁 \n#주식 #채권 #증권",
+    "category": "invest",
+    "youtube_id": "XFgJ88xuk4g",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 127184,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:09.381Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 135,
+  "fields": {
+    "title": "'MMF'와 'CMA' 진짜 차이점은 뭘까? 단 3분 정리!",
+    "summary": "[YouTube] JNotes제이노츠",
+    "body": "이 영상에서 사용된 내용은 다음 출처에서 참고 및 인용하였습니다.\n1. https://www.mk.co.kr/news/special-edition/4554195\n2. https://topin.co.kr/contents_terms_5\n3. https://kbthink.com/main/asset-management/wealth-manage-tip/kbthink-original/202407/interestcalculator.html \n4. https://n.news.naver.com/mnews/article/015/0004773985?sid=101\n5. https://blog.naver.com/dream_asset/223232499385\n6. https://www.tossbank.com/articles/shortterm\n7. https://www.banksalad.com/articles/CMA%ED%86%B5%EC%9E%A5-CMA%EA%B3%84%EC%A2%8C-%EC%9C%84%ED%97%98%EC%84%B1-%EC%B6%94%EC%B2%9C-%EC%9B%90%EA%B8%88%EC%86%90%EC%8B%A4-%EC%9E%A5%EB%8B%A8%EC%A0%90\n\n#MMF #CMA #MMFCMA차이 #단기금융펀드 #단기금융상품 #자산관리계좌 #MMF란 #CMA란 #경제공부 #경제용어 #MMF펀드 #MMF형CMA",
+    "category": "invest",
+    "youtube_id": "AXiEDegsHA4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 17848,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:09.631Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 136,
+  "fields": {
+    "title": "ELS, ELF, ELT, ELD, ELB, DLS, ETF (금융상품 외계어 총정리)",
+    "summary": "[YouTube] 똑금TV",
+    "body": "#ELS #ELF #ELT #ELD #ELB #DLS #ETF\n헷갈리는 금융상품 용어정리와 상품의 차이점 정리해 보았습니다.\n\n#금융상품용어 #금융상품총정리 #파생상품용어정리 #금융상품용어정리",
+    "category": "invest",
+    "youtube_id": "DbN8E-wtTt8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 8316,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:09.894Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 137,
+  "fields": {
+    "title": "🤔 ISA를 할까? 연금저축을 할까?ㅣISA, 연금저축 비교ㅣ2025년리뉴얼",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#ISA #연금저축 #IRP\n\n안녕하세요 박곰희입니다!\n오늘은 많은 분들께서 헷갈려하시는\nISA와 연금저축을 비교하는 영상을 준비했습니다.\n구독자분들께 도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 ISA vs 연금저축\n00:41 계좌의 목적\n02:05 계좌개설 조건 및 혜택\n04:12 저축금 입금할 때\n06:58 계좌별 투자상품\n08:30 세제혜택\n13:30 중도인출\n15:16 만기 조건 및 혜택\n16:42 해지할 때\n18:07 계좌별 장단점\n20:40 마무리\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n박곰희TV는 소속 금융사가 없습니다.\n박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n녹화일 : 2025년7월9일",
+    "category": "invest",
+    "youtube_id": "574Oi3Jn_KQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1359538,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:10.165Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 138,
+  "fields": {
+    "title": "ISA·IRP·연금저축, 처음이라면 꼭 보세요ㅣ존리의 머니스쿨",
+    "summary": "[YouTube] 존리의 부자학교",
+    "body": "🏫 존리의 머니스쿨 멤버십 👉https://101.gg/4rF5rop\n지금 바로 가입하고 만나보는 머니스쿨 멤버십 혜택💸\n- 매일 만나보는 존리 대표님의 메세지\n- 주간 금융 뉴스레터\n- 주간 ETF 노후준비 시리즈\n- 월간 기업분석 스터디 \n- 월간 프라이빗 라이브 \n\n📣머니스쿨 공지 및 이용안내 오픈카카오톡방👉 https://open.kakao.com/o/g3y9qNbi\n\n- 홈페이지 https://www.johnleeschool.com\n- 이메일 contactus@johnleeschool.com\n\n🚫존리 사칭 계정 주의🚫\n- 절대 개인적으로 메세지를 보내지 않습니다.\n- 절대 투자목적으로 돈을 요구하지 않습니다. 절대로 돈을 입금하시면 안됩니다.\n- 절대 '종목추천'이나 '투자리딩'을 하지 않습니다",
+    "category": "invest",
+    "youtube_id": "xWiUe2_K-uo",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 358855,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:10.447Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 139,
+  "fields": {
+    "title": "ISA vs IRP vs 연금저축, 활용법 완벽 정리합니다 [김현우 소장 3부]",
+    "summary": "[YouTube] 부읽남TV_내집마련부터건물주까지",
+    "body": "📌 부동산 고민, 테이크어스에서 해결하세요.\nhttps://www.takeus.co.kr\n\n📌 사연 신청 및 강의 수강은?\nhttps://vvd.bz/K0N\n\n📘 『운명을 바꾸는 부동산 투자수업』\nhttp://bit.ly/3tML9k0\n\nISA vs IRP vs 연금저축, 활용법 완벽 정리합니다\n☞촬영일: 26년 1월 20일",
+    "category": "invest",
+    "youtube_id": "BhVnHlQ6pM0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 620847,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:10.714Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 140,
+  "fields": {
+    "title": "자본주의에서 빚을 갚으면 바보가 되는 이유😱 | 대출상환이 아닌 배당주를 모아야 하는 이유💸",
+    "summary": "[YouTube] 대배당들의 시대 : 평생월급 만들기",
+    "body": "안녕하세요 대배당 입니다 :)\n\n오늘은\n역설적으로 빚을 갚으면 부자가 될 수 없는 이유에 대해 말씀드리려고 합니다\n부채비율 관리는 매우 중요하지만,\n주변의 많은 사람들이 좋은 빚을 무작정 갚고 있는 것을 보고 영상을 만들었습니다\n\n구독과 좋아요는 큰 힘이 됩니다\n\n감사합니다\n\n#배당투자 #배당주 #빚",
+    "category": "invest",
+    "youtube_id": "c4N6RiFomYI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 39260,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:10.964Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 141,
+  "fields": {
+    "title": "빚을 가장 빨리 갚는 방법 5가지 알려드립니다",
+    "summary": "[YouTube] 이서영변호사의 회생파산연구소",
+    "body": "📞 즉시 상담 예약 : 1899-1440\n🔔 최적의 맞춤상담 신청\n🔸 개인회생/파산 : https://forms.gle/WwsHVovmWKv7QCcy7\n🔸 법인회생/파산 : https://forms.gle/DDxnuUroiH4VQ2r68\n🔔 이서영 변호사 직접상담 : https://bit.ly/4rFrsnk\n🔔 회생파산 선배님들의 진짜후기 : https://bit.ly/3eNZ3eN\n\n\n안녕하세요. 회생파산연구소 이서영변호사입니다.\n \n부채를 관리하기 위해 첫 단계는 부채 목록을 만드는 것입니다. \n개인회생이나 개인파산을 고려하기 전에, 현재 부채를 객관적으로 파악해야 합니다. \n신용등급을 높이려면 대출 건수를 줄이고, 이자율이 높은 부채부터 갚는 것이 중요합니다. \n또한, 개인회생이나 개인파산과 같은 공적 채무조정제도를 활용해 빚을 줄이고 추심에서 벗어나는 방법도 고려해야 합니다. \n저축보다는 일부 변제를 통해 부채를 줄이는 습관이 필요하며, 감당할 수 없는 부채는 반드시 전문가의 도움을 받는 것이 좋습니다.\n\n대한민국의 빚이 모두 사라지는 날까지 든든히 채무자의 편이 되겠습니다. \n\n\n#빚갚는법 #빚갚는방법 #빚갚는순서 #빚갚기\n#개인파산 #개인회생 #2023개인파산 #개인파산 #개인회생전문변호사 #개인파산전문변호사 #개인파산면책 #개인회생면책",
+    "category": "saving",
+    "youtube_id": "qR5wPZC7e_s",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 179713,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:11.230Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 142,
+  "fields": {
+    "title": "빚을 가장 빨리 갚는 방법 5가지 알려드립니다",
+    "summary": "[YouTube] 이서영변호사의 회생파산연구소",
+    "body": "\"변호사 직접상담\" 받고 싶다면? 1899-1440\n👉🏻 맞춤상담 신청양식 : https://forms.gle/VNcPBWuHNDGFWWjo6\n📌 방송출연모음 : linktr.ee/lawyerleesy\n📌 오시는길 : https://naver.me/FrKZ3DLW\n📌 개인회생/개인파산 의뢰인들의 후기가 궁금하다면 : https://bit.ly/3eNZ3eN\n\n\n#개인회생 #개인파산\n#빚갚는법 #빚갚는방법 #빚갚는순서 #빚갚기",
+    "category": "economy",
+    "youtube_id": "p3HzyFwT8pM",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 20027,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:11.480Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 143,
+  "fields": {
+    "title": "🗓️ 투자금이 적은 사회초년생의 투자 목표 세우기ㅣ구독자사연 | 댓글챌린지",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#구독자사연 #고민있어요 #사회초년생\n\n안녕하세요 박곰희입니다!\n구독자 분들께서 댓글로 남겨주신 사연을 모아\n도움을 드릴 수 있는 방법을 고민해보며\n비슷한 상황에 계신 분들께서도 참고하실 수 있는 영상을 준비했습니다!\n곰곰이 분들께 도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 20대 장기적인 투자 목표 세우기\n07:58 장기투자 목표 세우기 솔루션\n14:57 마무리(+예고편)\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n박곰희TV는 소속 금융사가 없습니다.\n박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n녹화일 : 2025년10월27일",
+    "category": "invest",
+    "youtube_id": "QKDR6b3cuHY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 71192,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:11.750Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 144,
+  "fields": {
+    "title": "삼성역 30대 직장인 현실 저축액",
+    "summary": "[YouTube] 싱글파이어",
+    "body": "#주식 #부동산 #투자 #직장인 \n삼성역에서 직장 다니는 회사원은 얼마 모았을까? 싱글파이어가 물어봤습니다!\n\n[출연 신청 및 비즈니스 문의]\nsinglefire@mt.co.kr",
+    "category": "invest",
+    "youtube_id": "utfw86RrMVE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3357889,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:12.014Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 145,
+  "fields": {
+    "title": "주식 투자 적립식으로 하면 절대 안 되는 이유(자산배분)ㅣ김성일 2부 [후랭이TV]@pension_wizard",
+    "summary": "[YouTube] 후랭이TV",
+    "body": "트럼프의 상호관세와 주식 폭락 시기의 투자 전략(자산배분), 미국 주식 투자와 자산배분 등에 대해 김성일 작가님과 이야기 나누어보았습니다.\n📌월 500 받는 연금 빌딩 짓는 법 https://vo.la/xCcvFB\n📌김성일TV https://vo.la/NPWLZ\n📌김성일 블로그 https://vo.la/YqbTdT\n📖마법의 연금 굴리기 https://vo.la/Ftlrh\n🐯후랭이TV 멤버십 https://vo.la/gfZRS\n🐯후랭이 블로그 https://vo.la/u9apW\n📷문의 kjh222376@naver.com\n\n#김성일 #주식 #재테크 #자산배분 #투자 \n\n\n『묻지마 투기꾼이 아닌 공부하는 투자자가 되겠습니다』\n\n\n【후랭이TV 구독하기】\nhttps://goo.gl/hu7v7V\n\n【Contact】\n🐯후랭이TV 멤버십 https://abit.ly/58xvlk\n🐯후랭이 블로그 https://abit.ly/clwfof\n📷문의 kjh222376@naver.com",
+    "category": "invest",
+    "youtube_id": "-pqQ5IgZLGM",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 40119,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:12.297Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 146,
+  "fields": {
+    "title": "개별채권을 할까? 채권ETF를 할까? 비교를 해봤습니다",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#채권 #채권ETF #개별채권 #알채권 #곰희스쿨\n\n안녕하세요 박곰희입니다!\n오늘은 알채권과 채권ETF를 비교하는 영상을 가져왔습니다.\n내 돈은 내 손으로 자산배분을 하고자 하시는 \n우리 구독자분들께 도움이 되었으면 좋겠습니다 :)\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n- 박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n- 박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n- 박곰희TV는 소속 금융사가 없습니다.\n- 박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n- 녹화일 : 2023년9월7일",
+    "category": "invest",
+    "youtube_id": "jJBjFzhHuz0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 229737,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:12.601Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 147,
+  "fields": {
+    "title": "👉🏻 채권 고르기 어렵다면 종합채권 ETF로 한방에 해결!",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#채권 #채권ETF #종합채권\n\n안녕하세요 박곰희입니다!\n고금리 시기에 투자하기 좋은 채권을\n보다 편리하고 안정적으로 활용할 수 있는\n종합채권 ETF에 대해 소개드리겠습니다.\n우리 구독자분들께 도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 인트로\n00:58 종합채권 ETF란?\n02:04 구분 기준1. 신용등급\n03:04 구분 기준2. 액티브 vs 패시브\n03:52 구분 기준3. 만기\n05:43 구분 기준4. 구성종목\n07:08 종합채권 ETF 활용법\n08:33 마무리\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n- 박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n- 박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n- 박곰희TV는 소속 금융사가 없습니다.\n- 박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n- 녹화일 : 2024년12월06일",
+    "category": "invest",
+    "youtube_id": "EIcc5PQrBQE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 113635,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:12.864Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 148,
+  "fields": {
+    "title": "개별채권 할까? 채권ETF 할까? 세상에서 가장 쉬운 채권ETF 설명ㅣ마경환의 채권 교실",
+    "summary": "[YouTube] 마쌤의 투자학교",
+    "body": "안녕하세요 채린이 여러분, 채권 교실 마경환 선생님입니다.\n채권 ETF 시작이 어려우신가요? 이번 1교시에서는 채권 ETF의 핵심 개념부터 금리와의 관계 초보 투자자들이 꼭 알아야 할 위험성까지... 여러분의 눈높이에 맞춰 쉽고 명확하게 설명해 드립니다.\n- 채권과 주식의 차이점 \n- 채권 ETF가 안전한 이유 \n- 원금 손실의 위험 \n- 초보 투자자 필독! 핵심 팁\n오늘 영상을 통해 채권 투자의 진입 장벽을 낮추고 현명한 투자자의 길로 나아가세요.\n다음주 2교시에서는 국내 채권 ETF를 비교 분석해 드릴 예정이니 기대해 주세요!\n \n아래는 GB투자자문이 고객과 소통하는 채널이니, 많은 정보 확인 부탁드립니다.\n홈페이지: http://www.gbadvisor.co.kr/",
+    "category": "invest",
+    "youtube_id": "hhSwtifXflk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 6228,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:13.147Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 149,
+  "fields": {
+    "title": "💼 월급300만원으로 1억 만드는 계획 현실적으로 세워주세요ㅣASK곰희 | ver.2025",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#자산배분 #투자계획 #2025년\n\n안녕하세요 박곰희입니다!\n오늘은 월급 300만원, 500만원을 가정하고 \n현실적인 투자계획을 세워봤습니다\n도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 월급 300만원 투자계획\n14:37 월급 500만원 투자계획\n23:15 투자방법 고르기\n29:41 마무리\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n- 박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n- 박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n- 박곰희TV는 소속 금융사가 없습니다.\n- 박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n- 녹화일 : 2024년12월30일",
+    "category": "invest",
+    "youtube_id": "n1hVZlHq-RA",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 156368,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:13.364Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 150,
+  "fields": {
+    "title": "백만원 - 오백만원 월급대 : 필쌤이 소득별 저축 비율을 정해드립니다.",
+    "summary": "[YouTube] 필쌤TV - 김경필의 머니트레이닝",
+    "body": "적은 소득일때는 몰랐는데, 소득이 높아져도, 저축액은 쉽게 늘지 않습니다.\n필쌤이 소득이 크거나, 작거나 상관이 없이 돈모으는 금액을 쉽게 알려드립니다.\n이대로만 실행하시고 따라 오시면 부자되게 만들어 드립니다.\n늦이 않았습니다. 지금부터가 행동으로 옮길때 입니다.\n\n👉 『딱 1억만 모읍시다』 온라인 서점 구매 링크\n        1. 교보문고 : https://bit.ly/4evLg60\n        2. 예스24 : https://bit.ly/4eNCZdU\n        3. 알라딘 : https://bit.ly/4f65DGS\n        4. 카톡 선물하기 : https://bit.ly/3Y9lttA\n\n👉 가벼운 학습지 X 필쌤\n\n제가 여러분에게 꼭 알려주고 싶었던 재테크의 노하우를 꾹꾹 담은 학습지가 출시되었습니다.\n나에게 맞는 소비 습관과 저축하는 방법부터, 경제 1도 모르는 사람도 경제 지표를 읽고 흐름을 읽어 결국에는 1억을 모을 수 있는 방법을 다~ 담았습니다!\n재테크를 하긴 해야겠는데 뭐부터 해야하는지 모르는 사람, 현재 내 월급으로 쉽게 1억을 만들고 싶은 사람들을 위해 열심히 만들었습니다.\n\n재태크를 쉽게 이해하고, 내 현재 상황에 맞게끔 재테크 로드맵을 짤 수 있도록 만들었으니까요. 1억 만들기 포기하지 마시고 하루 10분, 4주 동안만 따라와 주시면 됩니다!\n+ 특별히 지금 구매하는 분들에게는 재테크 기록일지, 2024 국가 정책 등 1억을 만들기 위해 필수로 알아야 하는 끝장판 자료집을 단 선착순 100명에게만 증정하니깐요! \n얼리버드 할인쿠폰까지 적용해서 가장 최저가에 재테크 로드맵 시작해 보세요!\n\n쿠폰코드 : money20000\n쿠폰 사용기간 : 10/21(화)~10/24(금)\nhttps://bit.ly/3BPFMVb\n\n\n🎯 집중해보세요. 영상 안에 설명이 되어있습니다. \n👉 필쌤TV는 계속 업데이트 됩니다. 기대해 주세요.\n✨ 유튜브에서 만나는 머니트레이닝 김경필 필쌤TV\n\n✋경제적 자유를 원하는 모든 이를 위한 채널\n🏃 김경",
+    "category": "invest",
+    "youtube_id": "r-kfj2PVUy4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 54433,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:13.616Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 151,
+  "fields": {
+    "title": "월급 300 직장인의 1억 모으기 저축 플랜",
+    "summary": "[YouTube] 구채희",
+    "body": "[평범한 부부가 5년 만에 10억 만든 방법: [신혼부부 10억 달성 로드맵]  강의중] ▼ https://me2.do/5UGB86x2\n채움 가계부 2024년 버전 신청하기] ▼ \nhttps://url.kr/smyuni\n\n[인스타그램] https://www.instagram.com/chaeheekoo/\n[블로그] https://blog.naver.com/hnzzang486\n\n[책] [갓 결혼한 여자의 재테크] ▼\nhttp://www.yes24.com/Product/Goods/69039879\n[책] [푼돈을 목돈으로 만드는 생활의 기술] ▼\nhttp://www.yes24.com/Product/Goods/77931660\n\n[비즈니스/출연 문의] hnzzang486@naver.com",
+    "category": "invest",
+    "youtube_id": "Cc3lfpXqvys",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 426546,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:13.864Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 152,
+  "fields": {
+    "title": "초보들은 그냥 외우세요! 평생 잃지 않는 ‘금액별 투자 우선순위’ 완전 정리",
+    "summary": "[YouTube] 재테크하는 일개미",
+    "body": "#초보투자 #투자방법 #금액별투자우선순 #연금저축펀드 #IRP #ISA #snp500 P500 #미국지수추종ETF #장기투자 #재테크하는일개미\n\n초보 투자자라면 반드시 알아야 할 ‘평생 잃지 않는 금액별 투자 우선순위’를 아주 쉽게 정리했습니다. 소득·나이에 따라 1년 투자 가능 금액은 1,000만 원부터 1억까지 제각각이지만, 결국 공통 고민은 같습니다. “뭐부터 넣어야 하지?” 오늘 영상에서는 연금저축펀드 600 → IRP 300 → 연금저축 추가 납입 900 → 중개형 ISA 2,000 → 절세계좌 3,800 이후 일반계좌 순서로, 누구나 그대로 따라 하면 되는 정답 구조를 알려드립니다. 단순 종목 추천이 아니라 세액공제·과세이연·강제 장기투자를 한 번에 가져가는 구조를 만들고, 미국 지수 추종 ETF를 중심으로 어떻게 노후 자산을 키워야 하는지 실제 사례와 함께 설명합니다. 1,000만 원 이하부터 5,000만 원 이상까지 금액대별 우선순위, 절대 하지 말아야 할 투자, 장기투자 로드맵, 그리고 제가 직접 운용한 연금저축펀드 성과까지 모두 공개합니다. 초보라면 그냥 이대로 외우세요. 10년 뒤 자산 구조가 완전히 달라집니다.\n\n📌 더 많은 재테크 꿀팁? 🍯\nhttps://www.youtube.com/playlist?list=PLnaAC9Wx6iWaoiSGnfWjd1bF3dxPNgyep\n\n📰 경제 뉴스 + 투자 인사이트\nhttps://www.youtube.com/playlist?list=PLnaAC9Wx6iWYWN817gnfZq-5gpt0s9xF8\n\n📈 절세계좌 꿀팁(연금저축펀드, ISA, IRP) 🍯\nhttps://www.youtube.com/playlist?list=PLnaAC9Wx6iWaXPHwXa-t_6b6IEZcHqdjP\n\n📩 비즈니스 및 제휴 문의\n이메일 : boknam0110@gmail.com\n(광고·협찬·콘텐츠 제휴 관련 문의는 위 메일로 부탁드립니다.)\n\n🙏 영상이 도움 되셨다면\n이 영상이 유익하셨다면 좋아요👍 눌러주시고,\n이 내용이 필요",
+    "category": "invest",
+    "youtube_id": "tTnj6Hm-NJw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 140230,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:14.115Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 153,
+  "fields": {
+    "title": "1. 기준금리란? #기준금리 #금리 #한국은행 #경제 #경제용어",
+    "summary": "[YouTube] 경제 인사이트",
+    "body": "경제 뉴스나 기사를 보다 보면\n자주 등장하는 ‘기준금리’\n\n금리(金利)는 빌려준 돈이나\n예금에 붙는 이자 비율을\n말하는데요.\n\n‘기준금리’는 쉽게\n한 나라의 기준이 되는 금리라고\n생각하면 됩니다.\n그렇다면 누가, 왜 정하는 걸까요?\n\n만약 기준금리가 없다면\n은행이 마음대로 금리를 \n설정하게 되고, 이 경우 금리가 \n급격하게 변동할 가능성이 커\n혼란을 불러오게 됩니다.\n그걸 방지하고자 우리나라는\n한국은행에서 기준금리를\n정하고 있는데요.\n\n이렇게 결정된 기준금리는\n예금, 대출 금리 등\n각종 금리의 기준이 되며\n경제의 방향을 조정합니다.\n\n경기가 나쁜 경우엔\n사람들이 쉽게 돈을 빌릴 수 있게\n기준금리를 낮춰\n시중의 돈의 양을 늘리고,\n\n반대로 시중에 돈이\n너무 많이 풀리면\n물가, 부동산 가격 상승 등의 \n부작용이 생기기에\n기준금리를 인상해\n소비를 줄이게 만듭니다.",
+    "category": "saving",
+    "youtube_id": "jG_3VaoKgXk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 13325,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:14.397Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 154,
+  "fields": {
+    "title": "기준금리, 연금 자산에 어떤 변화를 가져올까?",
+    "summary": "[YouTube] 속편한 경제학",
+    "body": "🔥 당신의 연금이 위협받고 있다는 사실, 알고 계셨나요? \n\n이번 영상에서는 역사 속 경제 위기와 금리 변동이 우리의 연금에 어떤 영향을 미치는지 알아봅니다. \n\n💡 혜택 1: 기준금리가 연금 자산에 미치는 영향 이해하기  \n💰 혜택 2: 안정적인 노후를 위한 자산 배분 전략 배우기  \n📈 혜택 3: 금융 시장의 변동성에 현명하게 대응하는 방법  \n\n여러분의 소중한 미래를 위해, 지식의 힘으로 스스로의 자산을 관리해 보세요. \n\n이 영상이 도움이 되셨다면 좋아요와 구독 부탁드립니다! 여러분의 응원이 제게 큰 힘이 됩니다. 다음 영상에서도 더 유용한 정보를 공유하겠습니다. 감사합니다.\n\n🕒 타임라인  \n0:00 소개  \n1:30 기준금리란 무엇인가?  \n3:00 연금 자산에 미치는 영향  \n5:00 역사적 사례: 금리 인상기  \n8:00 저금리 시대의 도전  \n10:00 현명한 대응 전략  \n12:00 결론 및 다음 영상 예고  \n\n구독해주시면 앞으로도 더 많은 유용한 정보로 찾아뵙겠습니다!\n\n#경제위기 #금리변동 #연금관리 #재테크 #시니어경제",
+    "category": "invest",
+    "youtube_id": "u4UKoFEeQiI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 9,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:14.647Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 155,
+  "fields": {
+    "title": "환율기초 완전 쉬운 설명ㅣ 환율 변동의 영향, 환율과 주식 관계, 환율과 경제 관계, 환율 기초강의, 환율이 주가와 경제에 미치는 영향",
+    "summary": "[YouTube] 크리스탈의 경제공부",
+    "body": "📺크리스탈TV 멤버십 https://vo.la/kQB7n\n🟢크리스탈 블로그 https://vo.la/LQ1AI\n⭐크리스탈 인스타 https://vo.la/a6qMT\n📰돈 버는 경제신문 읽기 https://bit.ly/45dLqdW\n📰경제신문스크랩 습관 만들기 https://vo.la/UJVa4\n📔『투자하려면 경제신문』 https://bit.ly/3wGPRze\n📈세상쉬운 주식기초 https://me2.do/FKpD82nT\n📈 세상쉬운 ETF기초 https://me2.do/56Yjqym5\n📩출연 신청 및 광고 문의 0701suj@gmail.com\n\n#환율기초 #환율강의 #환율주가",
+    "category": "invest",
+    "youtube_id": "YAKDUghyShw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 127807,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:14.866Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 156,
+  "fields": {
+    "title": "인플레이션은 무엇인가요?",
+    "summary": "[YouTube] 3분차이",
+    "body": "\"이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.\"\n경제뉴스에서 빠지지 않는 단어인 인플레이션! 과연 어떤 뜻일까요? 3분차이에서 기초개념을 잡아봅시다!\n\n#인플레 #인플레이션 #물가",
+    "category": "economy",
+    "youtube_id": "fpE3ac_PNMU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 114698,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:15.147Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 157,
+  "fields": {
+    "title": "[중3 사회] 5단원 3차시 물가상승",
+    "summary": "[YouTube] 워니비",
+    "body": "",
+    "category": "economy",
+    "youtube_id": "5bUffhw4crY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 119888,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:15.163Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 158,
+  "fields": {
+    "title": "인플레이션이 오면 ‘이런 사람들’이 돈을 법니다💰💰💰 | 돈을 빌려준 사람 VS 돈을 빌린 사람 | 물가 상승 | 경제 상식 | #박봄의쉬운경제",
+    "summary": "[YouTube] EBSi ",
+    "body": "#경제상식 #인플레이션 #물가상승 #대출\n#지식 #상식 #경제공부\nEBSi 국가대표 고교 강의 ▶ http://www.ebsi.co.kr",
+    "category": "finance",
+    "youtube_id": "i-S-QWOoqiE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 2205,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:15.417Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 159,
+  "fields": {
+    "title": "귀농귀촌 자금 및 지원 정책 보조 사업 총정리 ( 농업창업자금, 주택구입자금 / 청년 영농정착 지원, 귀촌인 창업정착 지원금)",
+    "summary": "[YouTube] 시골농부 천하대감",
+    "body": "귀농귀촌 자금 및 지원 정책 총정리\n-. 농업창업자금, 주택구입자금\n-. 청년 영농정착 지원금, 청년 귀촌인 창업정착 지원금\n- 교육 및 체험 지원 (농업기술센터, 귀농귀촌 살아보기 프로그램)\n-. 농어촌 주택 개량사업, 빈집 수리 및 리모델링 지원\n\n▶블로그 https://blog.naver.com/daegam0831\n▶인스타그램 https://www.instagram.com/daegamfarm/\n▶ 이메일 : hizonego@naver.com",
+    "category": "economy",
+    "youtube_id": "HYu5RF9Gm8o",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 5566,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:15.673Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 160,
+  "fields": {
+    "title": "#2026청년지원, #청년지원금, #청년정책, #청년혜택, #부모가챙기는정보, #자녀지원, #부모필수, #생활비절약, #청년월세지원, #국민취업지원, #청년도약장려금,",
+    "summary": "[YouTube] 바바라핵팁",
+    "body": "#2026청년지원 #청년지원금 #청년정책 #청년혜택 #부모가챙기는정보 #자녀지원 #부모필수 #생활비절약 #청년월세지원 #국민취업지원 #청년도약장려금 #청년적금 #이사비지원 #운전면허지원 #도시가스캐시백 #정부지원 #복지정보 #생활꿀팁 #중장년필독 #쇼츠\n지금 신청안하면 사라집니다\n2026 청년 지원정책\n\n1. 청년도약장려금\n   6개월 이상 재직 시 2년간 480~720만 원\n\n2. 국민취업지원\n   구직 중 월 60만 원씩 6개월\n\n3. 청년 월세 지원\n   만 19~34세, 월 최대 20만 원, 중위소득 60%\n\n4. 청년 미래적금\n   연소득 6천만 원 이하, 월 최대 50만 원, 3년 약 2,200만 원\n\n5. 이사비 지원\n   독립·이사 시 현금 최대 100만 원\n\n6. 운전면허 지원금\n   만 18~34세, 최대 약 70만 원\n\n7. 도시가스 캐시백\n   전년 대비 사용량 줄이면 환급\n\n8. 청년 식비 지원\n   점심 20% 지원, 전국 240개 대학, 아침 제공\n\n이 영상이 도움 되셨다면 *구독*\n이영상이 필요한 분들이 떠올랐다면   *공유*\n매 주 업데이트 되는 정보 놓치고 싶지 않다면   *구독* 과 * 알림설정*   \n 부탁드려요!^^",
+    "category": "saving",
+    "youtube_id": "2EsIsEcHqfA",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 55500,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:15.917Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 161,
+  "fields": {
+    "title": "2026년 생활에 도움되는 \"달라지는\" 금융정책.zip [90초금융]  #청년미래적금 등",
+    "summary": "[YouTube] 금융위원회",
+    "body": "#2026년달라지는제도 #2026년금융정책 #이달금 \n\n1️⃣ #청년미래적금 ('26. 6월 출시) \n✔️ 19세~34세 청년이 3년 저금하면 최대 2천만 원 이상 수령\n✔️ 저축 금액에 금리 외에 정부기여금이 지급되는 비과세 적금 상품\n\n2️⃣ #햇살론 통합·개편\n✔️ 근로자햇살론 + 햇살론 뱅크 → 햇살론 일반보증\n✔️ 햇살론 15 + 최저신용자 특례보증 → 햇살론 특례보증\n     * 햇살론 특례보증 금리:   연 12.5%로 인하\n\n3️⃣ #불법사금융예방대출 금리 인하\n✔️ 불법사금융예방대출 연 금리 12.5%!\n  * 전액 상환 시 납부한 총 이자의 50% 페이백 ▶ 실질 금리 연 6.3% 수준\n    (사회적배려대상자 : 연 4.95%)\n\n4️⃣ #은행대리업서비스 ('26. 2분기)\n✔️ 전국 20여개 총괄 우체국(지역 협의 중)에서 은행 서비스 이용\n✔️ 4대 은행(KB, 신한, 우리, 하나) 대출상품 판매 · 운영개시",
+    "category": "saving",
+    "youtube_id": "VQxjfQFNxz0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 287784,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:16.175Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 162,
+  "fields": {
+    "title": "경제 모르면 인생 나락 가는 이유 | 경제학 10분 컷 핥아먹기",
+    "summary": "[YouTube] 지식은 날리지 [Jisik is Knowledge]",
+    "body": "도서 정보\n\n「위대한 경제학 고전 30권을 1권으로 읽는 책」\n\n교보문고 https://bit.ly/41pW4fO\n알라딘 https://bit.ly/3XVSOpB\n예스24 https://bit.ly/3ZdkU1f\n\n---------------------------------------------------------------------------\n영상 오류가 있습니다😭\n\n1:39 - 로크의 만인의 만인에 대한 투쟁 → 홉스의 만인의 만인에 대한 투쟁\n---------------------------------------------------------------------------\n\nJTBC 차이나는 클라스 화제의 경제학자 홍기훈 교수가\n바쁜 현대인들을 위해 \n위대한 고전 경제학 30권을 1권으로 낼름!\n날먹할 수 있는 교양서를 출간했습니다!\n\n경제학은 단순한 학문이 아니라,\n사람들의 생각과 행동 방식을 결정하는\n자본주의 시대 가장 중요한 인문학이자 철학!\n\n세상이 너의 패배는 나의 승리! 제로섬 게임을 믿었던,\n자유무역과 분업이 당연하지 않았던,\n그 때 그 시대는 과연 어떤 모습이었을까?\n\n세상은 왜, 언제부터 이렇게 서로 연결되기 시작한 것일까?\n\n경제학을 공부하면 세상이 보인다! 뿌뿌뿡!!\n\n---------------------------------------------------------------------------\n\n🎵Music provided by 브금대통령\n🎵Track : Jane The Spy -   \n🎵Track : Piggy Cake\n🎵Track : 나의 교양",
+    "category": "economy",
+    "youtube_id": "8eWMGsP_YzY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1189800,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:16.418Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 163,
+  "fields": {
+    "title": "주린이를 위한 기초 차트 보는 법(놀면뭐하니 주식공부하자)",
+    "summary": "[YouTube] 전인구경제연구소",
+    "body": "전인구의 주식투자 일주일만의 뽀개기  도서 신청\nhttps://bit.ly/3twqNa1 \n2월의 재테크 특강  (강남) 신청\nhttps://bit.ly/3pUryrp\n실시간온라인스터디(주1회) 신청\nhttps://bit.ly/3tFjRb1\n클래스101 워런버핏의 적정주가 찾는 법 강의신청\nhttps://bit.ly/39QXveD\n사이다경제 왕초보주식투자 온라인강의 신청\nhttps://bit.ly/2LnsQfo",
+    "category": "invest",
+    "youtube_id": "s-iXhlDLQdw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3143113,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:16.665Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 164,
+  "fields": {
+    "title": "\"라면 아닙니다\" 한국에서 전쟁 나면 무조건 챙겨야 할 3가지 #전인범",
+    "summary": "[YouTube] 달란트투자",
+    "body": "※ 출연자에 대한 인신공격, 근거 없는 비난, 욕설, 비속어를 포함한 댓글은 무통보 삭제될 수 있습니다. 성숙한 소통 문화 형성에 동참해주시기 바랍니다. 감사합니다.\n\n※ 사전 협의 없이 달란트투자에서 제작 및 게시한 영상, 자료의 무단 복제 및 재가공하는 행위를 금합니다.\n\n※ 본 영상에서 다루는 내용은 투자 권유가 아니며, 각 개인의 투자 판단에 대한 책임을 지지 않습니다.",
+    "category": "invest",
+    "youtube_id": "AS5urHehPwU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 15579907,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:16.938Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 165,
+  "fields": {
+    "title": "나라에서 보조금 주는데 왜 안받으세요? 💰#정부지원사업 #청년정책",
+    "summary": "[YouTube] 예프리 Yefree",
+    "body": "💸나라에서 보조금 지원해주는데 왜 안받으세요?\n\n✅ 내가 지금 받을 수 있는 정부 보조금 확인하는 방법\n1. 포털 사이트에 ‘보조금24’ 검색한다\n2. ‘내(가족)가 받을 수 있는 보조금 한번에 확인,신청’ 글자를 확인한다\n3. 밑에 있는 ‘로그인하고 맞춤혜택 조회하기’ 버튼을 누른다\n\n(아이폰은 정부24 앱을 통해서 확인 가능!)\n\n✅ 다양한 정부 지원금 종류\n1. 국민내일배움카드\n2.구직자 취업역량강화 프로그램\n3. 구직자 취업지원 서비스 제공\n4. 국민취업지원제도\n5. 농식품 벤처 창업 활성화 지원\n6. 도전 K-스타트업\n7. 버팀목전세자금대출\n8. 분양전환 공공임대 및 공공분양 주택공급\n9. 소상공인 경영교육 지원\n10. 외식분야 창업 지원\n11. 장기전세 주택공급\n12. 주거안정 월세대출\n13. 청년전용창업자금\n14. 해외취업지원\n15. 통합공공임대주택 공급\n16. 청년마음건강지원사업\n17. 경기도 청넌 면접수당\n18. 기술 경영 컨설팅\n19. 무료 법률상담 서비스\n20. 무료 소송대리 서비스 (청년미취업자 및 대학생)\n\n등등등\n\n나에게 맞는 맞춤 혜택은 홈페이지에서 더 확인하세요 ✨\n\n#정부보조금지원 #청년정책",
+    "category": "finance",
+    "youtube_id": "ouaTi6F-ktU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 545506,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:17.197Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 166,
+  "fields": {
+    "title": "[유튜버 1분만X고용노동부] 국민취업지원제도!",
+    "summary": "[YouTube] 고용노동부",
+    "body": "✅국민취업지원제도는 취업을 원하는 사람에게 취업지원서비스를 종합적으로 제공하고 저소득 구직자에게 생계를 위한 최소한의 소득도 지원하는 한국형 실업부조입니다.\n\n✅ 맞춤형 취업상담, 직업훈련, 일경험, 일자리 소개, 구직촉진수당, 취업활동비용 등 참여자의 구직활동을 위한 다양한 혜택을 제공합니다. \n\n✅나에게 꼭 필요한 지원을 더 알아보세요!\n\n국민취업지원제도  www.kua.go.kr",
+    "category": "economy",
+    "youtube_id": "EpLBMlVehh4",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 103850,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:17.460Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 167,
+  "fields": {
+    "title": "[통합본] \"돈이 자꾸 어디서 나와!\" 결국 AI 투자 피로감 덮쳤다..미 금리인상 공포에 막대한 수급 전쟁이 치를 무서운 대가 / 교양이를 부탁해 / 명강의 다시보기",
+    "summary": "[YouTube] 교양이를 부탁해",
+    "body": "00:00 엔비디아를 정점으로 돈이 도는 AI 피라미드, 바깥 자금은 얼마나 들어오고 있을까\n03:10 AI 투자는 폭증하는데 빅테크의 현금은 왜 줄어들기 시작했을까\n06:05 AI 설비를 빚으로 짓는다… 테크 기업 신용등급이 흔들리는 이유\n11:13 AI끼리 돈을 돌려서는 부족하다… 제조업으로 번져야 진짜 성장인 이유\n16:05 AI에 돈이 몰릴수록 제조업 투자는 줄어든다? ‘구축 효과’의 경고\n19:43 은행이 대출 문턱을 높이면 AI 투자부터 흔들리는 이유\n25:54 미국 30년물 금리가 다시 오른다… AI 버블을 누를 첫 번째 압박\n32:24 전쟁비용이 커질수록 미국 정부는 AI를 얼마나 더 밀어줄 수 있을까\n41:07 클로드가 커질수록 애저는 딜레마에 빠진다… AI 경쟁의 새 균열\n43:02 돈보다 먼저 막힐 수 있다… 변압기·전력·주민 반대가 AI 버블을 멈추는 순간\n\n미국 연방준비제도(Fed)의 추가 금리 인상 가능성이 부각되면서 대형 기술주를 중심으로 매도세가 확산돼 뉴욕증시가 장 초반 큰 폭으로 하락했다. AP통신에 따르면 23일 오전 9시 53분(미 동부시간) 기준 스탠더드앤드푸어스(S&P)500지수는 1.0% 하락했고, 나스닥 종합지수는 1.5% 떨어졌다. 다우존스30 산업평균지수도 97포인트(0.2%) 하락하며 약세를 나타냈다. 이번 하락은 연준이 연말 이전 기준금리를 최소 한 차례 추가 인상할 가능성을 시사한 데 따른 투자심리 위축이 영향을 미친 것으로 풀이된다. 시장에서는 연내 금리 인상 가능성을 약 90% 수준으로 반영하고 있다.\n\n\n\n\n\n\n[교양이 제작진]\n브랜드·IP 디렉터: 한동훈 / 작가: 손예원•유진경 / 편집: 김초아•현승호•손규범 / 콘텐츠디자인: 옥지수•최흥락 / 촬영: 박우진 / 인턴: 백가은•이다진\n\n[비즈니스 문의]\n교양이를 부탁해, 출연•협찬•콘텐츠 문의: sbs_explained@sbs.co.kr\n\n들을수록 똑똑해지는 지식뉴스, 교양이를 부탁해 @sbs_explained\nCopyright Ⓒ SBS. All r",
+    "category": "invest",
+    "youtube_id": "HHumi96rCxo",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 43415,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:17.697Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 168,
+  "fields": {
+    "title": "금리 인상 공포에 속지 마세요, 주식시장 절대 쉽게 무너지지 않습니다 | 주식정음 ep.28",
+    "summary": "[YouTube] 경제의 창 WE",
+    "body": "금리 인상=주식 하락? 교과서적인 공포에 속아 피 같은 주식을 던지지 마세요. 금리 인상기에 주식시장이 무너지지 않는 진짜 이유와 흔들림 없는 투자 전략을 공개합니다.\n\n📌 [삼성증권 X 오로라] 내 자산의 바른 길, '오로라 주식정음' 출시\n      시장의 소음 속에서 '진짜' 수익을 찾는 방법.\n      경제의 창:WE가 자신 있게 추천하는 모델포트폴리오 상품입니다.\n👉 1:1 상세 상담 받기: https://pf.kakao.com/_LePhn/chat\n\n00:00 금리 인상=하락? 교과서적인 오해\n01:42 금리 인하 시기에 투자가 더 위험한 이유\n03:47 금리 인상 발표 시점의 주가 흐름\n05:10 양적 긴축 시기에 주식시장이 오르는 원리\n08:10 제약바이오 등 금리 인하 수혜주 주의보\n09:01 금리 인상 공포를 이겨내는 주도주 전략\n\n#국내주식 #FOMC #금리인상 #주식투자전략 #경제의창\n\n⚠️ 투자 유의 사항 \n본 영상은 정보 제공 및 교육 목적이며, 특정 종목의 매수·매도를 권유하지 않습니다. 모든 투자의 책임은 투자자 본인에게 있으며, 결과에 대해 채널은 법적 책임을 지지 않습니다. 신중한 판단으로 성투하시길 바랍니다.\n'경제의 창:WE'는 여러분의 건강하고 성공적인 자산 형성을 응원합니다.",
+    "category": "invest",
+    "youtube_id": "cjKFVrAtJTU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1416,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:17.940Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 169,
+  "fields": {
+    "title": "기준금리 인상국면에 채권 투자전략은? - 홍춘욱",
+    "summary": "[YouTube] 홍춘욱의 경제강의노트",
+    "body": "#채권 #미국국채 #한국국채\n안녕하세요. 이코노미스트 홍춘욱입니다.\n채권가격이 하락 중입니다. 기준금리가 인상되면서 채권가격은 폭락했고 이번 가격의 하락은 2005년 이후 가장 격렬했습니다. 금리는 인상하는데 채권을 사야할까요? 영상을 통해 알려드리겠습니다.\n오늘도 경청해주셔서 감사합니다.\n\n올해 전국에 계신 패밀리스터디 분들과 대면으로 더욱 자주 만나뵙고 소통하는 자리를 만들도록 하겠습니다^^ \n💰https://academy.tantanselect.com/academy?code=84",
+    "category": "invest",
+    "youtube_id": "Q_suudk26qk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 29967,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:18.166Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 170,
+  "fields": {
+    "title": "GDP와 경제성장률의 개념! 이 영상 보고나면 쉬워질껄",
+    "summary": "[YouTube] 금융 읽어주는 여자 천덩이",
+    "body": "백투더 베이직!\n상식중의 상식이지만 설명하라고 하면\n은근 우물쭈물거리게되는 #GDP 와 #경제성장률\n우리나라 경제전망을 예측하기위해서는 각종 경제지표를 읽을 줄 알아야 하는데\n그 중 가장 기본인 GDP와 경제성장률에 대해 준비했어요~!\n\n영상봐주셔서 감사합니다^^",
+    "category": "economy",
+    "youtube_id": "zDlaU1qYlmk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 30817,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:18.414Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 171,
+  "fields": {
+    "title": "[이패스코리아] 금융용어 : 경기파악지표(GDP)",
+    "summary": "[YouTube] 이패스TV",
+    "body": "http://www.epasskorea.com\r\n\r\n뉴스,신문에서 자주 듣는 금융관련 용어 모르면, 기사부터 이해하기 힘듭니다.\r\n어려운 금융용어, 이패스코리아의 무료강의로 쉽게 접근하세요.\r\n\r\n-본강의는 이패스코리아에서 제공하는 무료강의로 저희 사이트에서 전체 강의를 무료로 수강 가능합니다. -",
+    "category": "economy",
+    "youtube_id": "I52Mx6KrnOQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 451,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:18.676Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 172,
+  "fields": {
+    "title": "버블 터지기 전 반드시 나타나는 신호 '1가지' #오건영 #경제위기",
+    "summary": "[YouTube] 달란트투자",
+    "body": "※ 출연자에 대한 인신공격, 근거없는 비난, 욕설, 비속어를 포함한 댓글은 무통보 삭제될 수 있습니다. 성숙한 소통 문화 형성에 동참해주시기 바랍니다. 감사합니다.\n\n※ 사전 협의 없이 달란트투자에서 제작 및 게시한 영상, 자료의 무단 복제 및 재가공하는 행위를 금합니다.",
+    "category": "invest",
+    "youtube_id": "PevdVam2UBU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 383866,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:18.931Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 173,
+  "fields": {
+    "title": "좋은 걸까, 나쁜 걸까? 환율 하락이 우리에게 미치는 영향💸 #박봄 #경제 #지식 #상식 #ebsi",
+    "summary": "[YouTube] EBSi ",
+    "body": "EBSi 국가대표 고교 강의 ▶ http://www.ebsi.co.kr",
+    "category": "economy",
+    "youtube_id": "Zxr_0daXEOU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 75717,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:19.181Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 174,
+  "fields": {
+    "title": "보이스피싱 예방 교육",
+    "summary": "[YouTube] 한국금융투자협회",
+    "body": "사례로 살펴본 보이스피싱 예방 및 대응요령",
+    "category": "society",
+    "youtube_id": "qB3xm0onu40",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 16377,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:19.422Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 175,
+  "fields": {
+    "title": "(범금융권 금융사기 피해예방 홍보 TF) 보이스피싱 대응 요령",
+    "summary": "[YouTube] 은행연합회",
+    "body": "-  「범금융권 금융사기 피해예방 홍보 TF」에서 제작한 보이스피싱 대응 요령 영상을 소개합니다.\n\n-  영상 내용을 참고하셔서 보이스피싱 피해 의심 상황 발생 시 신속하게 대처하세요!",
+    "category": "society",
+    "youtube_id": "bAlw8c5GIUc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 94,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:19.714Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 176,
+  "fields": {
+    "title": "보이스피싱 당했다면? 즉시 이렇게 하세요! (피해구제 꿀팁)#보이스피싱 #피해구제 #금융사기 #개인정보보호 #사기예방",
+    "summary": "[YouTube] 아빠의 시선 : 쌍둥이로그",
+    "body": "보이스피싱 피해구제, 이것만 알면 당신의 돈을 지킬 수 있습니다! 더 자세한 정보와 피해구제 신청서, 환급절차 등은 아래 링크를 꼭 복사해서 들어가보세요. 여러분의 재산을 지키는 핵심 정보가 기다리고 있습니다. 링크 복사는 필수!\nhttps://m.site.naver.com/1svbh",
+    "category": "society",
+    "youtube_id": "LTsLH1ywNNc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3899,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:19.964Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 177,
+  "fields": {
+    "title": "[소비자상담 민원썰] 소비자원에 민원접수📞 전 반드시 봐야할 영상",
+    "summary": "[YouTube] 한국소비자원",
+    "body": "#한국소비자원 #소비자상담 #1372 #민원 \n\n소비문제로 속앓이 해보신 적 있으신분들! \n혼자 끙끙 앓지 마시고 국번없이 1372로 연락주세요~\n\n소비자원에서는 의류/생활용품/자동차 등의 상품부터 \n여행/교육/문화 등 각종 서비스는 물론 금융/의료 등 전문 분야까지 \n소비 생활 전반의 모든 피해를 상담하고 있습니다. \n\n소비자상담 단계를 통해 해결되지 않는 문제는 \n피해구제-분쟁조정 단계를 거칠 수 있습니다. \n\n▼ 답변 골라보기 클릭! ▼\n\n00:00 인트로\n00:23 출연자 소개 \n00:34 제일 자주 받는 질문은? \n00:56 코로나19가 상담전화에 어떤 영향?\n1:21 코로나19로 인한 위약금 문제, 당부의 말은?\n1:55 가장 황당했던 민원은?\n2:36 기억에 남는 민원은?\n2:59 민원인들이 잘 모르는 소비자피해 예방법은?\n4:02 (OX퀴즈) 상담 전 소비자원 홈페이지를 통해 나와 비슷한 질문에 대한 답을 알 수 있다?\n4:20 (OX퀴즈) 의류의 세탁 서비스 상담까지 진행된다?\n4:57 (OX퀴즈) 소비자원은 사업자에게 문제해결을 강요할 수 있다?\n5:13 (OX퀴즈) 소비자원을 통해 사업자에게 사과를 요청할 수 있다?\n5:35 (OX퀴즈) 소비자원은 항상 소비자의 편이다?\n5:51 마지막 한마디",
+    "category": "society",
+    "youtube_id": "Q93iXEQFDBY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 63281,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:20.214Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 178,
+  "fields": {
+    "title": "중도해지와 소비자의권리",
+    "summary": "[YouTube] 경기도소비자단체협의회",
+    "body": "#환불원정 #환불 #소비자\n\n계속거래란 1개월 이상 계속 또는 부정기적인 계약으로, 대금환급의 제한 또는 위약금에 관한 약정이 있는 거래를 말한다. \n헬쓰, 요가, 피부관리, 온라인 강의, 렌탈 서비스 등이 포함된다.\n계속거래 중요조항은  '소비자가 언제든지 계약을 해지할 수 있으며', '계속거래업자는 소비자에게 손실을 현저하게 초과하는 위약금을 청구해서는 안 된다'이다. \n장기간 계약하는 거래 해지 시, 사업자와 소비자간 위약금 분쟁이 많이 발생한다. 방문판매법에 이러한 규정을 두어 분쟁의 소지를 줄이려 한다.",
+    "category": "society",
+    "youtube_id": "oFF8BEk2egM",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 12788,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:20.447Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 179,
+  "fields": {
+    "title": "14차시 소비자 피해 구제 관련 제도 by.퐝쌤",
+    "summary": "[YouTube] JWJW",
+    "body": "3. 청소년의 자원 관리와 자립 \n2) 책임 있는 소비 생활\n[소비자 피해 구제 관련 제도]\n\n#온라인수업 #기술가정 #청소년소비자 #책임있는소비생활 #소비자피해 #리콜제도 #청약철회제도 #내용증명 #소비자단체소송\n-----------------------------------------------------------------------------\n♬BGM\n*Tong tong (통통) by 이혜린, 공유마당, CC BY\n*Walking by 김현정, 공유마당, CC BY",
+    "category": "society",
+    "youtube_id": "0_3_dEYZDJY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 674,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:20.697Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 180,
+  "fields": {
+    "title": "비상금 얼마 모아야하는지 딱 정해드립니다",
+    "summary": "[YouTube] 머니하이",
+    "body": "안지향에서 차근차근 재테크 공부를 시작해보세요! ☺️\n🔗https://www.anjihyang.com/",
+    "category": "invest",
+    "youtube_id": "n5E7TN3LnkQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 16238,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:21.037Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 181,
+  "fields": {
+    "title": "월 저축액 7~80만원씩 하면 안되는 이유  #돈쭐남 #김경필",
+    "summary": "[YouTube] 부티플 - 부의 배수를 높여라",
+    "body": "※ 출연자에 대한 인신공격, 근거 없는 비난, 욕설, 비속어를 포함한 댓글은 무통보 삭제될 수 있습니다. 성숙한 소통 문화 형성에 동참해주시기 바랍니다. 감사합니다.\n\n※ 사전 협의 없이 부티플에서 제작 및 게시한 영상, 자료의 무단 복제 및 재가공하는 행위를 금합니다.\n\n※ 본 영상에서 다루는 내용은 투자 권유가 아니며, 각 개인의 투자 판단에 대한 책임을 지지 않습니다.\n\n돈쭐남 신간 『딱 1억만 모읍시다』 저자 강연회& 도서 구매 링크\n▶ 저자 강연회 : https://han.gl/BxmI1\n\n- 교보문고 : https://han.gl/n0RgU\n- 예스24 : https://han.gl/t0QGW\n- 알라딘 : https://han.gl/4LuOH\n- 카톡 선물하기 : https://han.gl/lF4DQ",
+    "category": "invest",
+    "youtube_id": "45JxVhpeT0o",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 890514,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:21.297Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 182,
+  "fields": {
+    "title": "(성장) 보이스피싱 피해사례 및 예방법(금융감독원) 3편 | 대출사기형 피해사례",
+    "summary": "[YouTube] 공부하는 사장 | 공사장TV",
+    "body": "○ 교육명 : 보이스피싱 피해사례 및 예방법(금융감독원)\n○ 교육기관 :  금융감독원\n○ 교육 설명 : \n\n금융감독원이 주최하는 보이스피싱 피해사례 및 예방법 관련 교육입니다. \n총 4편으로 구성되어 있으며 많은 시청 부탁드립니다.\n\n1편 : 보이스피싱 피해사례 및 예방법\n2편 : 메신저피싱 피해사례\n3편 : 대출사기형 피해사례\n4편 : 기관사칭형 피해사례",
+    "category": "finance",
+    "youtube_id": "FiGVuQNv8TU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 620,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:21.547Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 183,
+  "fields": {
+    "title": "대출사기 유형3가지. 절대조심!! [행복재무상담센터 오영일센터장]",
+    "summary": "[YouTube] Happy 오영일",
+    "body": "알고도 당하는 대출사기\n한번 더 조심하고 또 조심하세요.",
+    "category": "finance",
+    "youtube_id": "eRg4p4qp6ZQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 44353,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:21.815Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 184,
+  "fields": {
+    "title": "비상장주식 4대 거래사기 유형 분석",
+    "summary": "[YouTube] 협상가 류재언변호사 ",
+    "body": "#비상장주식 #사기 #스타트업 #비상장주식거래 #사기피해 #류재언 #류재언변호사 #비상장\n안녕하세요 협상전문가, 류재언 변호사입니다.",
+    "category": "invest",
+    "youtube_id": "RhG3iqRvc8s",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 22259,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:22.050Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 185,
+  "fields": {
+    "title": "신용카드 연체 결제 밀리면 어떻게되는지 1일/5일/90일/6개월까지 기간별로 싹 알려드림",
+    "summary": "[YouTube] 이서영변호사의 회생파산연구소",
+    "body": "📞 즉시 상담 예약 : 1899-1440\n🔔 최적의 맞춤상담 신청\n🔸 개인회생/파산 : https://forms.gle/WwsHVovmWKv7QCcy7\n🔸 법인회생/파산 : https://forms.gle/DDxnuUroiH4VQ2r68\n🔔 이서영 변호사 직접상담 : https://bit.ly/4rFrsnk\n🔔 회생파산 선배님들의 진짜후기 : https://bit.ly/3eNZ3eN\n\n안녕하세요. 회생파산연구소 이서영변호사입니다.\n \n신용카드 연체는 개인회생이나 개인파산을 고려해야 할 중요한 신호입니다. \n\n연체가 90일 이상 지속되면 장기연체자로 등록되어 신용도에 큰 타격을 입을 수 있으며, 이때 개인회생이나 개인파산 절차를 통해 채무를 해결할 수 있습니다. \n\n개인회생은 소득이 있는 경우 채무를 재조정해 상환을 돕고, 개인파산은 채무를 전액 면제받을 수 있는 방법입니다. \n장기 연체 상태에서는 개인회생이나 개인파산을 조기에 고려해 빠른 해결책을 찾는 것이 중요합니다.\n\n대한민국의 빚이 모두 사라지는 날까지 든든히 채무자의 편이 되겠습니다. \n\n\n#신용카드연체 #신용카드연체5일 #신용카드연체막는방법 #신용카드연체후기 #신용카드연체한달 #신용카드연체지급명령 #신용카드연체2주 #신용카드연체압류 #신용카드연체방문 #신용카드연체율 #신용카드연체시 #신용카드연체압류 #카드연체 #연체자대출 #리볼빙\n#카드리볼빙\n#개인파산 #개인회생 #2023개인파산 #개인파산 #개인회생전문변호사 #개인파산전문변호사 #개인파산면책 #개인회생면책",
+    "category": "finance",
+    "youtube_id": "k0aJ7g0QetI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 627417,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:22.331Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 186,
+  "fields": {
+    "title": "IMF보다 더한 위기 온다. 현금 95%는 반드시 여기로 옮겨라 #김대종",
+    "summary": "[YouTube] 달란트투자",
+    "body": "※ 출연자에 대한 인신공격, 근거 없는 비난, 욕설, 비속어를 포함한 댓글은 무통보 삭제될 수 있습니다. 성숙한 소통 문화 형성에 동참해주시기 바랍니다. 감사합니다.\n\n※ 사전 협의 없이 달란트투자에서 제작 및 게시한 영상, 자료의 무단 복제 및 재가공하는 행위를 금합니다.\n\n※ 본 영상에서 다루는 내용은 투자 권유가 아니며, 각 개인의 투자 판단에 대한 책임을 지지 않습니다.",
+    "category": "invest",
+    "youtube_id": "gPRYOh13fb8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1061125,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:22.600Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 187,
+  "fields": {
+    "title": "카드값 못 갚으면 어떻게 돼요?? #신용카드 #카드대금 #카드값 #연체 #연체자",
+    "summary": "[YouTube] 이서영변호사의 회생파산연구소",
+    "body": "",
+    "category": "finance",
+    "youtube_id": "7jGOejanAzE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 92143,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:22.615Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 188,
+  "fields": {
+    "title": "국민신문고 민원의 정말 무서운 점",
+    "summary": "[YouTube] 디지트 TV : 건축콘텐츠연구소",
+    "body": "디지트TV 출연신청 👉 https://naver.me/GUteyyjP\n2026 신입공채 대비 특별할인👉 https://pacer.kr/portfolio_apply_26/#\n※ 더 많은 정보는 더보기 클릭!\n\n[건축 꿀정보]\n라이노 8 필수 명령어 👉 https://blog.naver.com/dbxkrvk3/223987923222\n스케치업 환경설정 👉 https://blog.naver.com/dbxkrvk3/223982839029\n스케치업 단축키파일 👉 https://blog.naver.com/dbxkrvk3/223982792808\n\n[디지트 SNS]\n디지트 인스타 👉 https://instagram.com/digit.tv\n디지트 블로그 👉 https://blog.naver.com/dbxkrvk3\n건축 굿즈 👉 https://marpple.shop/kr/archi_link\n\n*좋아요와 댓글, 구독은 저에게 큰 힘이 됩니다 !ㅅ!",
+    "category": "economy",
+    "youtube_id": "Ga6aJ-5404A",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 46529,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:22.867Z",
+    "likes": [
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 189,
+  "fields": {
+    "title": "[전자상거래법 온라인 교육콘텐츠 사업자편] 2. 사업자의 금지행위 및 판매금지 품목",
+    "summary": "[YouTube] 공정거래위원회 TV",
+    "body": "#온라인쇼핑몰 #환불 #전자상거래 \n\n전자상거래로 구매한 제품에 문제가 있다면?\n청약철회부터 소비자 피해 대응 방안까지 영상으로 만나보세요!\n\n📢공정위 유튜브 구독하기 https://goo.gl/18jRAB\n\n▶공정위 페이스북 https://goo.gl/2kZRZF\n▶공정위 트위터 https://twitter.com/kftcnews\n▶공정위 네이버 블로그 https://blog.naver.com/ftc_news\n▶공정위 인스타 https://goo.gl/2QxGPe\n▶공정위 홈페이지 http://www.ftc.go.kr/",
+    "category": "society",
+    "youtube_id": "1X_Q_M0H8aw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 7766,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:23.105Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 190,
+  "fields": {
+    "title": "[전자상거래법 온라인 교육콘텐츠 소비자편] 1. 청약철회",
+    "summary": "[YouTube] 공정거래위원회 TV",
+    "body": "#온라인쇼핑몰 #환불 #전자상거래 \n\n전자상거래로 구매한 제품에 문제가 있다면?\n청약철회부터 소비자 피해 대응 방안까지 영상으로 만나보세요!\n\n📢공정위 유튜브 구독하기 https://goo.gl/18jRAB\n\n▶공정위 페이스북 https://goo.gl/2kZRZF\n▶공정위 트위터 https://twitter.com/kftcnews\n▶공정위 네이버 블로그 https://blog.naver.com/ftc_news\n▶공정위 인스타 https://goo.gl/2QxGPe\n▶공정위 홈페이지 http://www.ftc.go.kr/",
+    "category": "society",
+    "youtube_id": "wNM6g9rJWtI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 7911,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:23.350Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 191,
+  "fields": {
+    "title": "스미싱 문자 링크 클릭 했을때 사기 피해 막는법 , 3편 스미싱 문자 사기 대응법",
+    "summary": "[YouTube] 우리가 찾던 정보",
+    "body": "실수로 스미싱 문자 링크를 클릭하면 어떻게 되고 어떻게 대응해야만 피해를 미리 막을 수 있는지 그 대응 조치법을 소개합니다.\n가족, 지인, 부모님께도 알려드리세요~\n\n[1편] 영상에서는  스미싱 사기 유형과 사례를 소개합니다\nhttps://www.youtube.com/watch?v=m5WgAsFh8yY&t=9s\n\n[2편] 영상에서는  스미싱 예방 방법을 소개합니다.\nhttps://www.youtube.com/watch?v=iIJ78AoXk0g",
+    "category": "society",
+    "youtube_id": "_heZ9Ol4LS8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 83746,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:23.599Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 192,
+  "fields": {
+    "title": "지긋지긋한 불법 스팸, 그만 받고 싶어요!",
+    "summary": "[YouTube] 방송미디어통신위원회",
+    "body": "지긋지긋한 스팸 문자와 전화 때문에\n하루에도 수십번 스트레스에 시달렸던 적이 있나요?\n\n최근 신고된 휴대전화 스팸 유형은 어떤 것들이 있을까요?\n또 지능형 스팸 차단 서비스에 대해 알아봅시다!\n\n✒️제작 : 13기 국민정책기자단 유성민기자 \n\n#스팸문자 #스미싱 #지능형스팸차단서비스 #스팸차단 #스팸 #스팸전화#방송통신위원회",
+    "category": "society",
+    "youtube_id": "5_v38ev_RfA",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 227,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:23.882Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 193,
+  "fields": {
+    "title": "금융사기대처방법,스미싱대처법,스미싱당했을때,스미싱문자클릭,스마싱링크클릭,스미싱문자차단,스팸문자차단,스팸문자신고",
+    "summary": "[YouTube] 꿀짱 SNS마케팅 TV",
+    "body": "금융사기대처방법,스미싱대처법,스마싱당했을때,스미싱문자클릭,스마싱링크클릭,스미싱문자차단,스팸문자차단,스팸문자신고하는 방법에 대한 동영상입니다.꿀짱 SNS마케팅 TV의 동영상을 시청해주셔서 대단히 감사합니다.현재 한국마케팅경영실천연구소,한국농업미래뉴스 인터넷신문 대표이자 한국벤처농업대학에서 SNS마케팅 동아리를 지도하는 지도교수로 활동하고 있으며 블로그마케팅,SNS마케팅,스마트스토어,유튜브 홍보마케팅을 비롯한 SNS홍보마케팅 등 강의/컨설팅을 진행하고 있는 꿀짱 김용근입니다. 전국에 SNS마케팅을 년간 500~800시간 재능기부하고 있는 비영리민간단체 1004재능기부단장으로 전국의 농업현장 및 소상공인을 대상으로 온라인 홍보마케팅 재능기부를 하고 있어요 \n또한 일반행정사,ISO인증심사원,농촌진흥청 SNS활동전문위원,농촌진흥청 재능기부강사,광주제대군인지원센터 온라인 마케팅 멘트, 전국의 밤을잊은농부들이 운영하는 밤농프리마켓,밤농써포터즈를 비롯하여 전국의 농어업인,귀농,귀촌,소상공인,자영업자들이 혼자서도 SNS마케팅 공부를 할수 있도록 아주 쉽고 누구가 한번에 따라할수 있는 온라인 마케팅 및 SNS마케팅을 배우고자 하시는 분들을 위하여 동영상을 제작하여 올리고 있어요  \n\n꿀짱 유튜브 :  http://www.youtube.com/c/snsfarm\n한국농업미래뉴스 : http://thefarmnews.co.kr\n꿀짱 블로그 : https://blog.naver.com/kyg0524ka\n네이버카페 :  https://cafe.naver.com/snsfarm\n페이스북 :  http://www.facebook.com/blogfarm \n인스타그램 : https://www.instagram.com/kyg8608\n네이버tv : https://tv.naver.com/1004sns\n\n#금융사기대처법 #스미싱대처법 #스팸문자차단",
+    "category": "society",
+    "youtube_id": "it4kdOK8Z_Y",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 623,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:24.148Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 194,
+  "fields": {
+    "title": "💰 비상금 통장 만드는 꿀팁 3가지 (돈 모으는 사람들의 비밀)",
+    "summary": "[YouTube] 꿀머니노트",
+    "body": "돈을 모으는 사람들은 무조건 ‘비상금 통장’을 따로 관리합니다.\n오늘은 비상금 통장을 똑똑하게 만드는 꿀팁 3가지를 알려드립니다.\n\n👉 영상 보고 바로 따라 해 보세요!\n\n#비상금 #저축습관 #돈모으는방법 #재테크기초",
+    "category": "invest",
+    "youtube_id": "GK02uMu9gf8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1459,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:24.417Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 195,
+  "fields": {
+    "title": "비상금 왜 모아야 할까?? 얼마나 모아야 하지?? #비상금 #비상금대출 #빚 #현금생활 #카드론",
+    "summary": "[YouTube] 이서영변호사의 회생파산연구소",
+    "body": "",
+    "category": "saving",
+    "youtube_id": "kQldNvVt7Zo",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 8875,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:24.427Z",
+    "likes": [
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 196,
+  "fields": {
+    "title": "진짜 필요한 비상금은 얼마일까? 한국인을 위한 현실적인 저축 가이드",
+    "summary": "[YouTube] 민수투자",
+    "body": "한국인을 위한 현실적인 비상금 저축 가이드 | 진짜 필요한 금액은 얼마일까요?\n\n새벽에 천장을 바라보며 \"내일 차가 고장나면 어쩌지?\"라는 불안한 생각을 해보신 적 있으신가요? 대부분의 전문가들은 3-6개월치 생활비를 비상금으로 모아두라고 하지만, 이것이 모든 사람에게 적합한 조언일까요?\n\nhttps://youtu.be/_2rrKhrM3PE\n\n이 영상에서는 한국인의 실제 상황에 맞는 현실적인 비상금 계획을 알려드립니다. 최근 연구에 따르면 한국인 중 44%만이 100만원의 긴급 상황을 저축으로 대처할 수 있다고 합니다. 그렇다면 당신의 상황에 맞는 진짜 비상금은 얼마일까요?\n\n✅ 당신의 상황별 맞춤형 비상금 계산법 \n✅ 서울, 부산 등 대도시와 지방의 차이를 고려한 비상금 규모 \n✅ 작은 금액으로도 시작할 수 있는 단계별 저축 전략 \n✅ MMF, 단기예금, 고금리 입출금통장을 활용한 효율적인 비상금 관리법 \n✅ 비상금과 고금리 부채 사이의 균형 맞추기 \n✅ 인플레이션 시대에 비상금의 구매력을 지키는 방법\n\n놀랍게도 단 200만원의 비상금만 있어도 당신의 재정적 스트레스를 크게 줄일 수 있습니다. 완벽한 비상금을 모으지 못했다고 시작조차 하지 않는 것보다, 일주일에 25,000원씩이라도 저축을 시작하는 것이 중요합니다.\n\n고용보험, 국민건강보험 등 한국의 사회안전망을 고려한 실용적인 조언과 함께, 당신의 직업 안정성과 가족 상황에 맞는 맞춤형 비상금 전략을 배워보세요.\n이 영상은 교육 목적으로 제작되었으며, 개인의 상황은 다를 수 있습니다. 중요한 재정 결정을 내리기 전에 전문가와 상담하는 것을 권장합니다.\n\n⚠️ 투자 및 재테크 유의사항 ⚠️\n\n본 채널의 모든 콘텐츠는 개인적인 견해와 학습·정보 제공을 위한 것이며, 특정 투자 권유나 금융 상품 추천이 아닙니다.\n\n모든 투자 결정은 반드시 본인의 판단과 책임하에 이루어져야 합니다.\n주식, 부동산, 펀드 등 다양한 금융투자는 원금 손실 위험이 존재하며, 과거의 성과가 앞으로의 수익을 보장하지 않습니다.\n\n#비상금",
+    "category": "invest",
+    "youtube_id": "WkIZ2KWuj-o",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 5356,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:24.681Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 197,
+  "fields": {
+    "title": "50대에 시작하는 노후자산 관리 ( 노후준비를 위한 7가지 체크리스트 )ㅣ김동엽 상무 [은퇴스쿨]",
+    "summary": "[YouTube] 조선일보 머니",
+    "body": "#노후준비 #퇴직소득세 #퇴직급여 #왕개미연구소\n💵 50대에 시작하는 노후 준비! 정년까지 남은 시간이 많지 않은 만큼 시행착오를 되풀이할 수 없습니다! \n\n노후소득 확보를 위해선 어떤 것을 준비해야 할까요?\n노후준비에서 꼭 필요한 7가지 포인트를 함께 점검해보겠습니다🧐\n\n🎥타임라인\n00:16 오프닝\n00:42 50대 노후준비 늦은걸까?\n01:32 ①연금맞벌이 가능한가? \n03:31 국민연금 임의계속가입\n05:19 ②임금피크제\n05:51 퇴직금 관리하는 방법\n08:26 ③명예퇴직 \n09:19 ④소득공백기\n10:01 ⑤은퇴 후 보험료\n12:48 ⑥주담대 상환\n14:56 ⑦은퇴자금 마련\n16:38 마무리 \n\n건강한 노후를 위한 똑똑한 준비!\n지금부터 준비하는 은퇴스쿨👨‍🏫\n\n#감액제도 #주택연금 #노후준비 #은퇴 #왕개미연구소",
+    "category": "finance",
+    "youtube_id": "GorAK11-h0g",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 360790,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:24.965Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 198,
+  "fields": {
+    "title": "노후 준비 50 부터 시작하세요. 은퇴 이후 부자 되는 사람들의 공통점",
+    "summary": "[YouTube] 필쌤TV - 김경필의 머니트레이닝",
+    "body": "\"내 나이가 벌써 50인데 노후 준비 시작하기엔 너무 늦은 거 아닐까?\" \n이렇게 생각하며 지레 포기하시는 분들 많으시죠? 냉정하게 말씀드립니다. \n50대에 시작해도 절대 늦지 않습니다.\n\n그런데 여러분, 혹시 노후 준비를 오직 '돈(연금, 퇴직금)'으로만 계산하고 계신가요? \"나는 주택연금, 국민연금 합치면 한 달에 500만 원 나오니까 준비 끝이야!\"라고 안심하셨다면, 오늘 영상 보시고 정신 바짝 차리셔야 합니다.\n\n지금 당장 내 눈앞에 '부족한 노후 생활비'가 얼마인지 정확히 계산하지 못한다면, 여러분의 노후 준비는 아직 시작 안 한 겁니다. 오늘 영상 끝까지 보시고 함께 작은 부자가 될 수 있는 발판을 마련해보시죠!\n\n👉『딱 50부터 노후 준비합시다』도서 구매 링크\n     * 카톡 선물하기 : https://han.gl/2Y2CM\n     * 교보문고 : https://han.gl/8x8mM\n     * 예스24 : https://han.gl/EgQW4\n     * 알라딘 : https://han.gl/7Cz4a\n\n#김경필 #돈쭐남 #노후준비 #은퇴설계 #50대재테크 #연금 #주택연금 #국민연금 #생활력 #노후생활비계산 #파이어족",
+    "category": "invest",
+    "youtube_id": "hcG7w_G6toY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 32622,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:25.215Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 199,
+  "fields": {
+    "title": "\"노후준비 이게 가장 쉬운 방법입니다\" 연금 월 500씩 평생 나오는 마술입니다. ( 연금박사 이영주 대표 )",
+    "summary": "[YouTube] 경제 원탑",
+    "body": "\"노후준비 이게 가장 쉬운 방법입니다\" 연금 월 500씩 평생 나오는 마술입니다. ( 연금박사 이영주 대표 )\n\n📌 연금박사 이영주 대표님의 유튜브 [연금박사] 링크 \n👉 https://www.youtube.com/@UCD9mxN8o9qLei1MbzroeP_A \n\n📌 조진표 대표의 무료특강 신청 링크 \n👉 https://onetopplus.co.kr/free_masterclass\n\n✨ [조진표 대표의 동행 프로젝트] 👉 https://buly.kr/882gstI\n\n📌 경제원탑 협업/광고 문의\n👉 https://forms.gle/cfDa9SJpiaG6pGLEA\n\n😎경제원탑의 구독자가 되어주세요\n👉https://url.kr/ugmj59\n\n촬영일: 2026.04.02\n\n※모든 투자에 대한 책임은 투자자 본인에 있으며,  본 방송 정보는 참고 사항일 뿐입니다.\n\n#연금 #노후 #투자 #재무설계 #연금저축 #노후대비 #은퇴 #연금박사\n\n0:00 인트로\n00:50 국민연금은 현 제도의 '이런' 구조를 고려한 전략적 선택이 필요합니다.\n07:06 연금을 '이렇게' 결합하면, 누구나 노후 월 500만 원은 현실이 됩니다.\n15:38 DB형은 연봉 상승률이 높을 때, DC형은 '이 경우'에 더 유리합니다. 상황에 맞게 선택하세요\n23:09 자산의 규모보다 '이것'을 확보하는 것이 진짜 노후 준비입니다.\n\n✔ 출연 신청/제휴 문의: vibeshift23@gmail.com",
+    "category": "invest",
+    "youtube_id": "ZWZ7jC-Na1c",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3242,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:25.437Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 200,
+  "fields": {
+    "title": "👴👵 연금저축과 IRP의 결정적인 차이",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#연금 #연금저축 #IRP #연금계좌  \n\n안녕하세요 박곰희입니다!\n연금저축과 IRP의 공통점과 차이점을 정리했습니다.\n내 돈은 내 손으로 자산배분을 하고자 하시는 \n우리 구독자분들께 도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜------------------------------------------\n00:00 연금저축 vs IRP\n01:30 연금계좌\n02:23 계좌의 탄생\n03:47 계좌개설할 때\n05:26 저축금을 넣을 때\n07:14 세액공제를 받을 때\n09:43 상품을 선택할 때\n14:44 수익이 났을 때\n15:45 중도인출할 때\n17:51 대출받을 때\n19:21 해지할 때\n21:56 연금을 수령할 때\n23:01 마무리 인사\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n- 박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n- 박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n- 박곰희TV는 소속 금융사가 없습니다.\n- 박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n- 녹화일 : 2023년11월1일",
+    "category": "invest",
+    "youtube_id": "wI6Kd-BJqqk",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1302486,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:25.715Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 201,
+  "fields": {
+    "title": "👍🏻 IRP 사용설명서 | 개인형 퇴직연금 계좌 | ver2025",
+    "summary": "[YouTube] 박곰희TV",
+    "body": "#퇴직연금 #DB #DC #IRP #노후준비\n\n안녕하세요 박곰희입니다!\n오늘은 계속해서 꾸준히 성장하고 있는\n노후대비 계좌인 IRP에 대한 영상을 준비했습니다.\n구독자분들께 도움이 되었으면 좋겠습니다 :)\n\n📜 목차📜--------------------------------------------\n00:00 IRP2025\n00:53 결론\n01:37 노후준비 해야하나요?\n04:42 IRP란?\n06:46 IRP의 가입대상\n07:03 IRP의 납입한도\n08:07 IRP의 세제혜택\n11:33 IRP의 상품운용\n13:01 언제 연금으로 받나요?\n16:12 중간에 해지하면?\n17:18 IRP의 현황\n18:05 IRP의 장점\n18:47 IRP의 단점\n19:36 IRP의 이전제도\n20:28 ISA 만기자금 연금전환\n21:07 마무리\n\n📚박곰희 연금 부자 수업📚--------------------\n드디어 연금 책이 나왔습니다! 많은 관심 부탁드립니다🤗\n교보문고: http://bit.ly/3TsbTjy\n예스24: http://bit.ly/40JqCdJ\n알라딘: http://bit.ly/4eDk3PP\n영풍문고: http://bit.ly/4lj1tig\n\n💡기억해주세요💡-------------------------------------\n박곰희TV는 많은 사람들이 스스로 자산관리 하는 방법을 익히는 것을 목표로 하고 있습니다.\n박곰희TV는 '종목추천'이나 '투자리딩'을 하지 않습니다.\n박곰희TV는 소속 금융사가 없습니다.\n박곰희TV에서 진행하는 광고성 컨텐츠는 모두 '광고임'을 표기할 것을 약속드립니다.\n녹화일 : 2025년05월30일",
+    "category": "invest",
+    "youtube_id": "2bLy034D5LA",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 417870,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:25.950Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 202,
+  "fields": {
+    "title": "여러분의 생애 주기에 맞춘 재무설계 팁을 드립니다. #예금보험공사 #이혜성 #김경필 #재무설계 #경제교육 #금융교육",
+    "summary": "[YouTube] 예금보험공사 예보TV",
+    "body": "여러분~ 재무설계 어떻게 해야할지 감이 오시나요? 본편을 보면 감이 올겁니다! 모두 경제 마음의 편지 1편을 클릭해주세요!!",
+    "category": "saving",
+    "youtube_id": "OVDfi_wZx5U",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 3812,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:26.199Z",
+    "likes": [
+      [
+        "finedu_demo"
+      ],
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 203,
+  "fields": {
+    "title": "슬기로운 경제생활 ep5. 생애주기별 재무설계",
+    "summary": "[YouTube] 강남구립 역삼청소년센터",
+    "body": "5편 생애주기별 재무설계\n\n후기청소년 시기의 재무목표와 재무설계방법에 대해 알아봅시다.\n\n[슬기로운 경제생활] 시리즈는 청소년들이 일상생활에서 활용할 수 있는 경제 상식을 전달하는 영상입니다. 앞으로 많은 관심과 시청바랍니다. \n\n※슬기로운 경제생활은 금융감독원 경제교육 교재를 바탕으로 제작되었습니다.\n※ 자막을 선택하시면 한국어 자막을 보실 수 있습니다.",
+    "category": "economy",
+    "youtube_id": "DmWMBYJrcOE",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 5090,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:26.450Z",
+    "likes": [
+      [
+        "finedu_demo"
+      ],
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 204,
+  "fields": {
+    "title": "[통합사회2] 11차시￨금융생활설계￨",
+    "summary": "[YouTube] 워니비",
+    "body": "검수 : 박형준 선생님",
+    "category": "society",
+    "youtube_id": "dG7V7WgH5Yg",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 75714,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:26.699Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 205,
+  "fields": {
+    "title": "실비보험(실손보험) 온라인으로 단독가입하기!! 4세대 단독실비 집에서 온라인으로 가입하는 방법 알려드리겠습니다!!",
+    "summary": "[YouTube] 보험단기학교",
+    "body": "안녕하세요!  보험단기학교 김권일본부장입니다\n\n그동안 단독 실손 의료보험 (단독실비보험)만 가입하기 힘드셨을텐데요\n온라인에서 아주 간단하게 가입하는 방법이 있습니다^^\n\n보험다모아 홈페이지를 통해 4세대 실비보험을 아주 간단하고\n보험사비교를 통해 가장 저렴하게 가입하는 방법을 알려드리도록 하겠습니다\n\n아무리 경제적인 형편이 어려워도 실비보험 하나만큼은 반드시 가지고 있어야 합니다!  저렴한 보험료로 병원비를 대비할 수 있기 때문에 꼭 준비해주세요\n\n\n📞 보험단기학교 연락처\n김권일본부장 : 010-9996-7540\n\n⭐ 1:1 카카오 채널 상담\nhttp://pf.kakao.com/_iCxfxcG/chat\n\n⭐ 1:1 오픈 카톡 상담\nhttps://open.kakao.com/o/stDoePAg\n\n🌈 평일에는 밤12시까지 사무실에서 근무하고 있고,\n주말에도 항상 상담 가능하니 언제든 시간대 신경쓰지 마시고 편하게 문의주세요!\n\n#실비보험 #실손보험 #4세대실손보험 #4세대실손보험 #실비보험 #실손보험 #4세대실손보험전환 #4세대실비보험 #4세대실손보험할증 #4세대실손보험단점",
+    "category": "finance",
+    "youtube_id": "-PcIl1acu1U",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 13910,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:26.950Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 206,
+  "fields": {
+    "title": "#495. 오는 4월 1일부터 90세까지 실손가입이 가능해집니다. 부모님 실비보험 꼭 챙겨드리세요! [반값 보험료 만들기 495]",
+    "summary": "[YouTube] 반값 보험료 만들기",
+    "body": "✔ 이번 영상 소개 : 2025/4/1부터 노후실손, 유병자실손이 90세까지 가입이 가능해집니다. 이내용 꼭 숙지하시고 부모님 보험 꼭 챙겨드리세요 : )\n\n\n✔ 아이셀렉트 접속은 이곳에서  ↓\n    👉 https://www.isel.co.kr/ \n  *9개 보험 설계안을 집에서 무료로!*\n  *보험대리점 세 곳 매칭 시스템 - iselect*\n\n\n✔ 아이셀렉트와 함께 할 보험대리점 지점/지사를 찾습니다 ^^ \n    보험 대리점 참여 접수는 이곳에서 ↓\n    👉 https://forms.gle/FnMHTsu3EU5r17i56\n    👉 접수 일정 : 상시\n    많은 지원과 관심 부탁드립니다 : )\n\n\n📚 『반값 보험료 만들기』 개정판 책이 출시되었습니다. (2023.08.24 출간)\n - 개정판 도서 구매\n👉 예스24: https://url.kr/b52za3\n👉 교보문고: https://url.kr/t4mbdi\n👉 알라딘: https://url.kr/hm9ibx\n\n\n📌🎤[강의/강연/출연 문의] ➡  jjoshua@hanmail.net\n\n\n📌 클래스101 강의 출시\n     '보험으로 돈 버는 재테크! 반값 보험료 대작전' 출시\n👉 클래스 무료 체험 및 할인 구독 \n     https://101creator.page.link/s4fu\n👉 클래스 소개 \n     https://class101.net/plus/ko/products/62b03e8c71c118000edb8b76?\n\n          ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n          ||    [RFM] Royalty Free Music - ForArtist                                    || \n          ||    Song : Cats Cats Cats -    • 귀여워서 눌러주고 싶은 고양이 (행복냥 / 저작권 걱정 없는 BGM...       || \n          ||    Song : Kitten -     • Kitten (고",
+    "category": "invest",
+    "youtube_id": "db_JVFuUkw0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 15720,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:27.199Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 207,
+  "fields": {
+    "title": "[100만뷰] 실비보험 가입 할 때 이 항목은 절대 넣지 마라! - 실비보험 필요없는 항목 베스트3 [닥터인사이드]",
+    "summary": "[YouTube] 닥터인사이드",
+    "body": "#실비보험 #실손보험 #실손의료보험\n\n0:00 인트로\n1:01 보험 종류가 너무 많은데 뭘 가입해야 하나요?\n3:08 종합보험 가입 시 고려해야 할 항목 베스트3\n3:27 종합보험 가입 시 필요 없는 항목 베스트3\n4:56 실제 예시\n\n안녕하세요. 닥터인사이드입니다. 구독 좋아요 알림설정 부탁드립니다!\n\n의사는 과연 어떻게 실비보험(실손)을 들었을까요? \n의사가 추천하는 실비보험(실손)을 들 때 꼭! 알고 있으면 좋은 꿀팁 알려드립니다!\n보험 가입 준비하시는 분이나 혹시 가지고 계신 분들도 영상 보시고 점검하시는 시간 가져보시길 바랄게요!!\n\n✅️ [최대71% 할인] 전문의가 직접 개발한 영양제 : 필리데이 상점\nhttps://pilleday.com/\n\n✅️ [최대71% 할인] 전문의가 직접 개발한 영양제 : 필리데이 스마트스토어\nhttps://smartstore.naver.com/pilleday\n\n✅️ 필리데이 인스타\nhttps://instagram.com/pilleday_\n\n✅️ 유튜브 닥터인사이드 인스타\nhttps://instagram.com/junbum_kwon\n\n✅️ 유튜브 제휴 및 문의 : doctorinsides@gmail.com\n\n✅️ 필리데이 영양제 제휴 및 문의 : pilleday2024@gmail.com",
+    "category": "finance",
+    "youtube_id": "PtKoB_ibdik",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1055432,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:27.465Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 208,
+  "fields": {
+    "title": "연금수령보다 일시금 수령이 더 유리한 5가지 경우",
+    "summary": "[YouTube] 연금박사",
+    "body": "국민연금은 대부분 연금 형태로 받는 것이 유리합니다.\n하지만 예외도 있습니다.\n💡 어떤 분들에게는 '일시금 수령'이 훨씬 더 유리할 수 있다는 사실, 알고 계셨나요?\n\n이번 영상에서는\n📍연금 대신 일시금으로 받는 것이 더 유리한 5가지 경우를 알려드립니다.\n\n내가 해당되는 경우인지,\n지금 바로 영상에서 확인해보세요!\n\n#국민연금일시금 #국민연금일시불 #국민연금수령\n\n-------------------------------------------------\n🔔 연금에 대한 모든 궁금증, 지금 바로 상담 신청하세요!\n【전화】 1800-3624 \n【홈페이지】 www.100-500.kr\n【이메일】 100-500@naver.com",
+    "category": "finance",
+    "youtube_id": "XtGjG3_dbs8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 80183,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:27.685Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 209,
+  "fields": {
+    "title": "놓치면 후회합니다  국민연금을 받기 위해 반드시 체크해야 할 14가지 최종관문",
+    "summary": "[YouTube] 연금박사",
+    "body": "00:00 국민연금을 수령하기 위한 최종 관문에 대해서 알려드립니다\n00:39 국민연금 수령 전에 최종적으로 확인해야 할 게 있습니다\n01:08 혹시라도 놓칠 수 있는 건 공단에서 다 확인해 줍니다\n03:18 연금 받기 전 총 14가지를 확인합니다\n05:39 지급 결정 통지서 도달되기 전에 신청 내용을 바꿀 수 있습니다\n07:25 연령 도달되기 3개월 전에 안내문이 발송됩니다\n07:52 불가피하게 신청을 못 해도 나중에 소급해서 지급해 드립니다\n08:22 본인 인증을 하면 비대면 신청도 가능합니다\n\n\n🔔 연금에 대한 모든 궁금증, 연금박사에서 해결해 드립니다.\n【전화】 1800-3624 \n【홈페이지】 www.100-500.kr\n【이메일】 100-500@naver.com",
+    "category": "finance",
+    "youtube_id": "fFsNaS0EIlw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 373255,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:27.932Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 210,
+  "fields": {
+    "title": "국민연금 수령자가 모르면 손해보는 부양가족연금 지금 바로 신청하세요.",
+    "summary": "[YouTube] 연금부자연구소",
+    "body": "#국민연금 #부양가족연금 #기초연금\n\n부양가족연금에 대해 자세히 정리해보았습니다.\n배우자, 자녀, 부모 등 가족이 어떤 조건에서 연금을 받을 수 있는지,\n수급 대상자 요건과 실제 지급 금액은 어떻게 계산되는지 구체적인 예시와 함께 설명드립니다.\n\n또한, 부양가족연금과 유족연금의 차이, 중복 수급 가능 여부, 수급 시기와 절차 등\n실제로 연금이 필요한 상황에서 꼭 알아야 할 핵심 정보만 쏙쏙 정리했습니다.\n이번 영상 꼭 끝까지 시청하시고, 필요한 가족에게도 공유해주세요.\n\n※ 영상목차 ※\n00:00:00 부양가족연금 반드시 신청하세요\n00:01:25 부양가족 연금제도 설명\n00:02:11 부양가족연금 신청 가능한 사람은?\n00:03:45 부양가족연금 얼마나 받을 수 있을까?\n00:04:50 부양가족연금 미적용 대상자와 신청방법!\n-------------------------------------------------\n※ 연금부자연구소 상담하기 ※\nhttps://y2sup1.mycafe24.com/",
+    "category": "finance",
+    "youtube_id": "op-A1JMt6tM",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 288532,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:28.166Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 211,
+  "fields": {
+    "title": "55세부터 시작해도 가능한 노후 자산 증가 비밀을 공개합니다.",
+    "summary": "[YouTube] 부자가속 경제학",
+    "body": "🔥 당신은 50세 이상이고, 노후 준비가 늦었다고 생각하고 계신가요? 이 영상이 그 생각을 바꿔줄 것입니다!\n55세부터도 시작 가능한 노후 자산 증가 비밀을 공개합니다.\n\n💰 혜택 1: 월 백오십만 원만으로 10년 후 자산 10억 원 달성!  \n💪 혜택 2: 연금저축펀드의 세금 혜택을 통해 자산 성장 극대화!  \n📈 혜택 3: 나스닥100을 통한 장기 투자 전략으로 안정적인 노후 보장!  \n\n당신의 미래를 위한 스마트한 선택을 해보세요! 지금 시작하세요!  \n\n🕒 타임라인:  \n0:00 소개  \n1:30 50세, 55세의 현실  \n3:00 연금저축펀드의 중요성  \n5:00 50세 시작 시나리오  \n10:00 55세 시작 시나리오  \n15:00 실천 전략  \n17:00 마무리  \n\n구독과 좋아요 부탁드립니다! 함께 더 나은 미래를 만들어 나가요!\n\n#노후자산 #경제정보 #재테크전략 #투자전략 #연금저축",
+    "category": "invest",
+    "youtube_id": "6rM-anoCDYc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 100961,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:28.417Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 212,
+  "fields": {
+    "title": "\"세금 아끼려면 '이 순서대로' 담으세요\" 50대부터 인생 역전하는 노후 준비 전략 (존리 대표 3부)",
+    "summary": "[YouTube] 책과삶",
+    "body": "안녕하세요.\"책과삶\" 입니다.\n\n오늘은 존리 대표님과 연금저축펀드에 대해 알아봤습니다.\n세상의 모든 감동과 지식을 전합니다.\n구독과 좋아요 꾸욱 눌러주시면 더욱 열심히 좋은 영상으로 보답하겠습니다.\n\n📖존리 대표님의 ‘존리의 부자되기 습관’\nhttps://product.kyobobook.co.kr/detail/S000219129355\n\n#책과삶 #존리 #연금저축펀드 #ISA #노후\n\n00:00 오프닝\n00:23 \"안 만들면 손해입니다\" 하루라도 젊을 때, '이 계좌' 무조건 만드세요 \n00:54 \"연금저축 할까? ISA 할까?\" 고민되면 이대로만 해보세요 \n01:20 \"노후 준비하려면 필수입니다\" 연금저축펀드 계좌를 무조건 만들어야 하는 이유 \n01:29 연금저축펀드 가입하면 '이만큼' 세금 덜 낼 수 있습니다 \n03:02 \"저라면 돈 '이렇게' 불립니다\" 투자 필승 전략 공개합니다 \n04:09 \"한국 ETF vs 미국 ETF?\"  ETF는 죽어라 '이것만' 사세요 \n05:33 \"투자 3년할 거면 하지 마세요\"  투자 기간 최소 'n년' 이상입니다 \n05:57 “50세에 후회해도 늦습니다” 노후 준비를 위한 필승 투자 전략 \n06:49 “무조건 55세까지 기다리세요” 연금 저축 펀드 중도 해지하면 불리한 이유 \n07:37 “부자들은 이걸 다 끊었어요” 당신이 부자가 되지 못하는 이유\n\n\n📗책과삶 블로그\nhttps://blog.naver.com/booksnlife_\n📗책과삶 멤버쉽 가입\nhttps://www.youtube.com/channel/UCgUaqrLRGLL-dHislR1e2TA/join",
+    "category": "invest",
+    "youtube_id": "Du4ZVn_Ec48",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 520040,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:28.667Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 213,
+  "fields": {
+    "title": "퇴직연금 DC, IRP 계좌 운용 방법 - 2024-Ep.2",
+    "summary": "[YouTube] NH투자증권",
+    "body": "퇴직연금 DC, IRP 계좌 운용 방법\n#퇴직연금 #연금투자 #DC #irp \n\n[2025.09.01 예금자보호안내문 개정]\n * 이 퇴직연금은 예금자보호법에 따라 예금보호 대상 금융상품으로 운용되는 적립금에 대하여 다른 보호상품과는 별도로 1인당 \"1억원까지(운용되는 금융상품 판매회사별 보호상품 합산)\"보호됩니다.\n\n퇴직연금(DC,IRP), 투자를 할 수 있다는 사실 알고 계셨나요? \n쌓여만 가는 퇴직연금을 무관심으로 방치하기만 했다면\n투자할 수 있는 상품의 종류와 한도 그리고 \n퇴직연금 투자를 할 때 꼭 알아야 할 투자 원칙에 대해 알아보도록 하겠습니다.\n\n\n🔔퇴직연금(DC, IRP) 계좌 운용 방법\n\n😎NH투자증권 100세시대연구소 리포트자료는(http://www.nhqv.com/the100)에서 자세하게 확인 가능합니다.\n🔔퇴직연금에 대한 전문 콘텐츠를 지속적으로 받아보고 싶다면?\n👉[NH투자증권 퇴직연금] 친구 톡 : http://pf.kakao.com/_TebAG/friend\n🔔구독! 좋아요! 알림 설정!\n🔔연금 투자에 궁금한 게 있다면? 댓글 ㄱㄱ\n\n※ NH투자증권 준법감시인 심사필 제 2024-1093호(2024.04.26 ~ 2025.04.25)",
+    "category": "invest",
+    "youtube_id": "ZwaRS8E1mQ8",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 70061,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:28.928Z",
+    "likes": [],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 214,
+  "fields": {
+    "title": "개인형 퇴직연금, 이것 뭐예요~?ㅣ2025 최신판 IRP 총정리 / 신한투자증권",
+    "summary": "[YouTube] 알파TV - 신한투자증권 [공식 유튜브 채널]",
+    "body": "노후준비 필수 아이템, 개인형 퇴직연금 IRP💰\n헷갈릴 필요 없이 7분만에 마스터하고 효율적으로 노후자금 준비하기😎\n\n[타임라인]\n0:35 퇴직연금이란\n1:38 IRP 왜 필요할까?\n1:57 IRP 과세혜택\n3:14 IRP 세액공제\n4:12 개인형퇴직연금 IRP\n5:14 자주 묻는 질문\n5:46 IRP 계좌 이용 시 유의할 점\n6:29 퇴직연금 실물이전 서비스\n\n\n신한투자증권 공식 유튜브 채널 (Shinhan Securities Official YouTube Channel) 신한 알파TV 입니다. \n\n[링크] \n홈페이지 https://shinhansec.com \n페이스북   https://facebook.com/shinhansecurities  \n인스타그램   https://instagram.com/shinhansec_official\n네이버블로그 https://blog.naver.com/shinhansec_official \n\nCopyright Ⓒ 알파TV – 신한투자증권[공식 유튜브 채널] . All rights reserved. 무단 전재, 재배포 및 AI학습 이용을 금합니다.\n\n\n[투자자 유의사항]\n※ 투자자는 금융상품에 대하여 신한투자증권으로부터 충분한 설명을 받을 권리가 있으며, 가입전 상품설명서 및 약관을 반드시 읽어보시기 바랍니다. \n※ 이 퇴직연금은 예금자보호법에 따라 예금보호 대상 금융상품으로 운용되는 적립금에 대하여 다른 보호상품과는 별도로 1인당 \"1억 원까지\"  (운용되는 금융상품 판매회사별 보호상품 합산) 보호됩니다. \n※ 금융투자상품은 자산가격 변동, 환율변동, 신용등급 하락 등에 따라 투자원금의 손실 (0~100%)이 발생할 수 있으며, 그 손실은 투자자에게 귀속됩니다. \n※ 과세기준 및 과세방법은 향후 세법개정 등에 따라 변동 될 수 있습니다. \n※  IRP 계약기간 만료 전 중도해지하거나 계약기간 종료 후 연금 이외의 형태로 수령하는 경우 세액공제 받은 납입원금 및 수익에 대해 기타소득세(16.5%) 세율이 부과될 수 있습니다. \n",
+    "category": "invest",
+    "youtube_id": "1Pq-ob1Ndok",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 115774,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:29.198Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 215,
+  "fields": {
+    "title": "[보험 종류 총정리] 가입 전부터 머리 아파서 보험금은 구경도 못하겠네…😢 │생애주기금융 EP.20",
+    "summary": "[YouTube] 신한금융희망재단",
+    "body": "살다 보면 크고 작은 사고로 위험을 맞이할 수 있죠.\n그럴 때를 대비해서 우리는 ‘보험’이라는 것에 가입해요.\n\n하지만 보험의 종류가 너무나도 다양해서\n나에게 맞는 보험이 무엇인지 모르겠다고요?🤔\n\n여러분을 위해 보험의 종류를 싹 정리했어요.\n나에게 핏한 보험을 골라 현명한 미래 대비하세요! 🙂\n\n쉽고 새로운 금융 지식 '신한이지(easy)'에서 만나요!\n▶https://bit.ly/4cVPxPT",
+    "category": "finance",
+    "youtube_id": "xqGVYIXbSNg",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 7727,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:29.433Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 216,
+  "fields": {
+    "title": "[성인금융교육] 13편 - 보험의 개념과 종류",
+    "summary": "[YouTube] 금융감독원(Financial Supervisory Service)",
+    "body": "- 보험의 개념 \n보험은 사고 등으로부터 발생하는 손실에 대비하기 위해 다수가 보험료를 납입하였다가 사고가 발생한 사람에게 보험금을 지급하는 제도 \n\n- 보험의 종류 \n사회보험 VS 민영보험, 생명보험 VS 손해보험, 저축성보험 VS 보장성보험 등 보험의 구분 방법",
+    "category": "saving",
+    "youtube_id": "_-cjcMEc4Ho",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 17568,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:29.697Z",
+    "likes": [
+      [
+        "finedu_demo"
+      ],
+      [
+        "saving_queen"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 217,
+  "fields": {
+    "title": "\"60·70대 평균 자산은 00억원?\" 은퇴 후 90%가 고민하는 현실적인 생활비 (이상건 센터장 통합본)",
+    "summary": "[YouTube] 책과삶",
+    "body": "안녕하세요.\"책과삶\" 입니다.\n\n오늘은 이상건 센터장님과 은퇴 후 노후 자산에 대한 이야기를 나눠봤습니다.\n세상의 모든 감동과 지식을 전합니다.\n구독과 좋아요 꾸욱 눌러주시면 더욱 열심히 좋은 영상으로 보답하겠습니다.\n\n📖 이상건 센터장님이 강력 추천하는 경제도서  ‘롭 딕스’의 돈의 가격’\nhttps://product.kyobobook.co.kr/detail/S000219054609 \n\n#책과삶 #이상건 #노후 #투자\n\n00:00 은퇴한 60대 또래들은 통장에 얼마 모았을까?\n15:56 1천만원 있다면 ‘이것’만 사서 불리세요\n\n📗책과삶 블로그\nhttps://blog.naver.com/booksnlife_ \n📗책과삶 멤버쉽 가입\nhttps://www.youtube.com/channel/UCgUaqrLRGLL-dHislR1e2TA/join",
+    "category": "invest",
+    "youtube_id": "wf4CZd5FUhI",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 289795,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:29.932Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 218,
+  "fields": {
+    "title": "은퇴 후 생활비, 진짜 얼마 필요할까? (1인 vs 부부 현실 기준 총정리)",
+    "summary": "[YouTube] 백세인생창고",
+    "body": "\"은퇴하면 한 달에 얼마면 살 수 있을까?\"\n누구나 한 번쯤 해보는 막연한 고민, 오늘 확실하게 숫자로 정리해 드립니다.\n이번 영상에서는 2025년 최신 통계 자료를 바탕으로, **[1인 가구]**와 **[부부 가구]**로 나누어 '최소한의 품위를 지키는 기본 생활비'와 '여행과 취미를 즐기는 여유 생활비'는 각각 얼마나 필요한지 현실적으로 분석합니다.\n✅ 식비, 주거비, 그리고 가장 무서운 '의료비'\n✅ 1인 가구 vs 부부 가구, 항목별 지출 차이 분석\n✅ 내 연금 수령액과 비교해보는 나의 노후 준비 상태\n\n막연한 불안감 대신, 정확한 숫자로 나의 노후를 계획하고 싶다면, 이번 영상을 끝까지 시청하시기 바랍니다.\n\n#노후생활비, #은퇴자금, #노후준비, #50대, #60대, #국민연금, #은퇴설계, #재테크, #돈공부, #shorts\n\n※ 본 영상은 통계 자료를 바탕으로 한 평균 금액이며, 개인의 거주 지역, 건강 상태, 생활 방식에 따라 실제 지출은 크게 달라질 수 있습니다. 참고 자료로만 활용하시기 바랍니다.",
+    "category": "invest",
+    "youtube_id": "Gv2UfuPe5iU",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 392943,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:30.215Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 219,
+  "fields": {
+    "title": "은퇴 후 노후생활비의 중요한 진실 5가지",
+    "summary": "[YouTube] 연금부자연구소",
+    "body": "#국민연금 #퇴직연금 #노후준비 #은퇴 #퇴직 \n\n국민연금연구원에서 진행한 제10차 국민 노후보장패널조사에서 50대 이상 중고령자들이 생각하는 ‘적정 노후 생활비’는요. 부부 기준 월 297만원으로 나타났는데요. 과연 이 금액이면 정말 충분할까요? \n오늘은 여러분이 반드시 알아야 할 은퇴 후 노후생활비의 중요한 진실 5가지를 알려드리겠습니다.\n\n※ 영상목차 ※\n00:01:28 은퇴 후 생활비는 줄어들지 않습니다\n00:03:03 여가생활비가 2배 이상 증가합니다\n00:03:45 집에 있는 시간이 늘어나면서 고정비가 증가합니다\n00:05:05 예상치 못한 비정기 지출이 발생합니다\n00:06:48 정확한 노후생활비 계산법\n00:08:50 그럼 어떻게 준비해야 할까요?\n-------------------------------------------------\n※ 연금부자연구소 상담하기 ※\nhttps://y2sup1.mycafe24.com/",
+    "category": "finance",
+    "youtube_id": "C0VYuz7sVAc",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 50233,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:30.448Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 220,
+  "fields": {
+    "title": "[KSD 나눔재단] 사회 새내기 금융교육 - 1편 금융생활의 이해",
+    "summary": "[YouTube] 한국예탁결제원",
+    "body": "고등학교 3학년 학생교육을 위해 제작된\nKSD 나눔재단 사회 새내기 금융교육 [금융생활의 이해] 입니다.\n\n채널 : 한국예탁결제원\n\n\n▶ 한국예탁결제원 홈페이지 : http://www.ksd.or.kr\n▶ 나눔재단 홈페이지 : https://nanum.ksd.or.kr/\n▶ 한국예탁결제원 유튜브 구독하기 : https://bit.ly/2M9Cy3i\n\n\n시장과 함께 성장하는 혁신 금융플랫폼\nThriving with the Market, the Innovative Financial Platform\n\n감사합니다.",
+    "category": "society",
+    "youtube_id": "LfDJgFoPi4E",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 7397,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:30.665Z",
+    "likes": [
+      [
+        "coin_lover"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 221,
+  "fields": {
+    "title": "은행에서, 인터넷에서 묻지말고 이 영상 하나 보세요┃무자비하고, 급속도로 변하는 금융시대에서 부자로 살아남으려면, 꼭 알아야 할 기본 금융 지식┃다큐프라임 자본주의┃#골라듄다큐",
+    "summary": "[YouTube] EBSDocumentary (EBS 다큐)",
+    "body": "“의사들이 하는 선서, ‘금융권’에도 있어야만 해요. 하지만 우리는 그런 것이 없어요” 누구나 부자를 선망한다. 그러나 누구나 부자가 될 수는 없다. \n부자들은 우리와 무엇이 다를까? 그들은 우리가 모르는 무언가를 알고 있는 것은 아닐까? 무자비하고, 급속도로 변화하는 금융자본주의 세상. \n부자로 살려면, 무엇을 알아야하는것인지, 기본적으로 꼭 알고가야할 금융지식은 무엇인지 함께 들여다보자 \n✔ 프로그램명 : 다큐프라임 자본주의 3부 - 금융지능은 있는가\n✔방송 일자 : 2013.09.07\n\n#다큐프라임 #자본주의 #다큐프라임자본주의 #금융자본주의 #부자되기 #저축 #주식 #티끌모아태산 #\n고금리시대 #저금리시대 #금융시장 #금리 #펀드 #보험 #채권 #금융자산",
+    "category": "invest",
+    "youtube_id": "mHI9dUnnCes",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 2301492,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:30.916Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 222,
+  "fields": {
+    "title": "진짜 아무것도 몰라도 알아두면 돈 버는 공부｜이진우와 경제 마스터 1편｜나의 두 번째 교과서｜알고e즘",
+    "summary": "[YouTube] EBSCulture (EBS 교양)",
+    "body": "경제 공부, 어디서부터 시작해야 할까? 사회인이 되니 ‘돈 공부’의 필요성을 절감하지만, 막상 시작하려니 막막하다는 사람이 많다. 투자에 대한 정보는 넘쳐나는데, ‘질 좋은 정보’를 가려내기가 쉽지 않다.\n \n교과서에서 배운 내용을 교양 지식처럼 만나보기 위해 기획된 [나의 두 번째 교과서]에서 이진우가 친절한 ‘경제 선생님’으로 변신해 실생활에 꼭 필요한 경제 지식을 전한다. 수많은 경제 전문가, 기업인 등을 만난 경험을 바탕으로 딱딱하고 어렵게만 느껴지던 과목 ‘경제’, ‘금융’을 편안하고 알기 쉽게 설명한다.\n\n이진우는 8강에 걸쳐 통화량, 리스크, 금리와 환율, 부동산, 부채, 경제 위기, 선진국의 조건, 경제적 선택 등 복잡해 보이는 경제 개념들을 재치 있는 비유와 일상적인 예시를 통해 쉽고 재미있게 풀어낸다. 경제 공부에 필요한 기초 개념부터 성공하는 투자의 기본까지, 누구나 이해할 수 있는 쉬운 설명과 함께 이진우 대표의 노하우를 만나볼 수 있다.\n\n\n▷ 1강 통화량, 우리가 재테크를 하는 이유 (00:00)\n\n시중에 풀린 돈의 양, 즉 ‘통화량’은 계속해서 늘어나고 있다. 우리나라의 경우 매년 약 7%씩 통화량이 증가 중으로, 10년마다 약 2배씩 돈이 늘어나는 셈이다. 이렇게 돈이 계속 늘어나는 사회에서 재테크는 필수다. 자산이 매년 7%씩 증가하지 않으면 남들보다 가난해지기 때문이다. 그렇다면 돈의 양이 늘어나는 것은 우리에게 좋은 일일까, 나쁜 일일까? 재테크에 대한 부담이 커지지만, 돈을 벌 수 있는 기회가 늘어난다는 장점도 있다. 이처럼 돈의 양이 증가하는 세상, 우리의 생존법은 무엇인지 알아본다.\n \n▷ 2강 리스크, 투자에서 승리하는 법 (27:20)\n\n초보 투자자들이 흔히 하는 질문이 있다. “주식, 어떤 종목을 사야 할까요?”, “부동산, 지금 사거나 팔아도 될까요?” 이진우 대표는 이 질문을 ‘반대로’ 해야 한다고 답한다. 주식은 종목보다 ‘매수∙매도 시기’가 중요하고, 부동산은 사고파는 시기보다 ‘무엇을’ 살지가 더 중요하기 ",
+    "category": "invest",
+    "youtube_id": "45BACPG6jPQ",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1369359,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:31.178Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 223,
+  "fields": {
+    "title": "“이걸 모르면 3년을 버립니다” 사회초년생이 꼭 알아야하는 재테크 로드맵 5단계",
+    "summary": "[YouTube] 김짠부",
+    "body": "찐짠이들!❤️ 오늘은 \"월급 200만 원 사회초년생 재테크 로드맵\" 가져왔어용!\n사실 이 주제 만들면서 과거의 제가 너무 생각나고..그때의 저한테 너무 보여주고 싶은 영상이더라고요😭 제가 딱 그 월급이었거든요. (사실 더 적었음ㅎ) \"재테크는 월급 많은 사람들이나 하는 거지~\" 하면서 ㄹㅇ 욜로족의 끝으로 살았던 ㄴr….⭐️ 근데 진짜 월급 200도 충분히 가능해요. 대신 순서가 정말 중요합니다!\n\n오늘 영상 보고 댓글 남겨주는 찐짠이들 중 5명 추첨해서 커피 쿠폰 보내드릴게요☕️\n(당첨자 발표: 2026년 5월 21일 유튜브 커뮤니티)\n\n부자되는 복리 계산기 👉🏻 https://arcway.co.kr/\n\n인스타그램 👉🏻 https://www.instagram.com/zzan.boo\n문의 👉🏻 support@trusgroup.co.kr",
+    "category": "invest",
+    "youtube_id": "faVfC98mt0c",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 245493,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:31.415Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 224,
+  "fields": {
+    "title": "새해맞이 재테크 마음먹은 사회 초년생 주목..! 알아두면 좋을 재테크 팁 정리해 봄 /스브스뉴스",
+    "summary": "[YouTube] 스브스뉴스 SUBUSUNEWS",
+    "body": "예·적금이 오히려 손해라는 요즘,\n이제 젊은 세대에게 재테크는 선택이 아니라 생존 전략이 됐는데요.\n\n지금 이 순간 생존의 위협을 느끼고 있을 사회 초년생을 위해,\n절약 습관을 만드는 방법부터,\n최근 주목받고 있는 흥미로운 핀테크 서비스까지!\n\n재테크 시작 전 알아두면 좋을 다양한 팁을\n스브스뉴스가 정리해 봤습니다.\n\n#재테크 #아임인 #핀테크\n\n✔ 뉴스에는 위아래가 없다, 스브스뉴스\n\n\n- 비즈니스 문의 -\n브랜디드 콘텐츠 기획/제작 문의: branded@sbs.co.kr\n기업/브랜드 채널 컨설팅 및 기획/제작 문의: solution@sbs.co.kr\n\n- 링크 -\n허티: https://heartyfabric.com\n- 스브스뉴스 제작진이 만들어가는 지속가능한 패브릭 브랜드\n\nInstagram :  https://www.instagram.com/subusunews\nFacebook :  https://www.facebook.com/subusunews\n홈페이지 : https://news.sbs.co.kr/news/subusuNews.do?plink=GNB&cooper=SBSNEWS\n\n\nCopyright Ⓒ SBS. All rights reserved. 무단 전재, 재배포 및 AI학습 이용 금지",
+    "category": "invest",
+    "youtube_id": "tY3eQUNGWew",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 399802,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:31.649Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 225,
+  "fields": {
+    "title": "사회초년생이라면 꼭 봐야 할 금융 상식💸저축과 투자 기초, 그리고 사기까지 | 이건머니",
+    "summary": "[YouTube] ONN온닥터TV",
+    "body": "사회초년생이 반드시 알아야 할 저축 습관, 투자 상식, 금융 기초를\n쉽고 현실적으로 알려드립니다\n\n-월급 통장 관리법 (통장쪼개기)\n-금융사기\n\n\n#사회초년생재테크 #이건머니 #저축과투자 #금융상식 #통장관리 #비상금 #투자기초 #사회초년생돈관리 #재테크첫걸음 #초보금융교육 #월급관리 \n\n\n\n대국민 건강 주치의, ONN닥터TV\nSK Btv 270번\nKT Genie TV 262번\nLG헬로비전 245번\nJCN울산중앙방송155번",
+    "category": "invest",
+    "youtube_id": "HAA-TEXm4n0",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 109,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:31.866Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 226,
+  "fields": {
+    "title": "미래교육 플러스 - 금융을 알아야 세상이 보인다 1부- 삶을 위한 금융교육_#001",
+    "summary": "[YouTube] EBSCulture (EBS 교양)",
+    "body": "공식 홈페이지 : http://home.ebs.co.kr/futureedu/main   금융을 알아야 세상이 보인다 1부- 삶을 위한 금융교육,\n\n삶을 위한 금융교육 코로나19로 실물경제가 얼어붙었고 이후, 금융시장 변화에 대비해야 된다는 이야기가 나오고 있습니다. 금융은 개개인의 자산뿐만 아니라, 국가 경제에도 큰 영향...\n\n모두가 행복한 교육을 꿈꾸는대한민국 대표 교육전문가들의 유쾌한 토크가 시작된다! 미래교육 플러스. \n\n성적보다 역량에 집중해야 아이의 미래가 보인다,\n\nMC 신종호. 역사란 사람을 만나는 것-MC 최태성,",
+    "category": "economy",
+    "youtube_id": "Cz0WujIBmGY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 31130,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:32.115Z",
+    "likes": [
+      [
+        "finedu_demo"
+      ],
+      [
+        "econ_master"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 227,
+  "fields": {
+    "title": "연금저축, IRP, ISA만 있으면 저축 계좌 필요없다고? ㄷㄷ💰ㅣ타이머 / 14F",
+    "summary": "[YouTube] 14F 일사에프",
+    "body": "개인연금을 지금 당장 시작해야 하는 이유는?\n연금 전문가, 김성일 작가와 함께하는 머니타임🪙\n\n00:00 미리 보기\n00:45 오늘의 재테크 도우미\n01:13 사회 초년생에게 연금이란?\n01:37 연금 빨리 시작해야 하는 이유\n02:26 이자소득세라는 함정\n03:00 답은 개인연금에 있다\n03:20 연금의 3층 구조 개념 다지기\n04:22 개인연금의 장점\n05:11 개인연금 실제 효과 계산해 보기\n07:22 사회 초년생도 연금 꼭 해야 하나요?\n08:47 연금이 중도인출이 가능하다고?\n10:18 개인연금의 단점은?\n11:15 ISA 개념 다지기\n11:32 ISA 계좌 만들어야 하는 이유\n13:41 연금은 한 달에 얼마 넣나요?\n15:03 연금 납입 시 배분 비율은?\n15:47 연금 투자를 위한 자산 배분은?\n18:16 연금 투자를 위한 분산 비율은?\n19:11 연금 투자를 위한 추천 종목은?\n20:51 연금 투자 실천 방법은?\n\n#재테크 #연금 #ISA #IRP #연금저축 #저축 #노후 #절세",
+    "category": "invest",
+    "youtube_id": "EohbxcEnCYw",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 2739658,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:32.399Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 228,
+  "fields": {
+    "title": "2026 사회초년생 투자 가이드",
+    "summary": "[YouTube] 머니코믹스 Money Comics",
+    "body": "2026년에는 돈 많이 버시고, 새해복 많이 받으세요!\n\n#주식은지금 #머니코믹스 #투자 #투자교육 #투자전략 #한국주식 #미국주식 #슈카 #알상무 #니니 #사회초년생 #투자마인드 #sk하이닉스 #삼성전자",
+    "category": "invest",
+    "youtube_id": "1iCsWmrFIds",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 688900,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:32.615Z",
+    "likes": [
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 229,
+  "fields": {
+    "title": "20대가 꼭 알아야 할 왕초보 재테크 용어 | 경제 공부 시작할 때 필수시청! 🪄",
+    "summary": "[YouTube] 옌마드Yenmad",
+    "body": "초등학생도 이해할 수 있을만큼 쉽게 정리했어요 🩷\n또 원하는 주제 있다면 댓글 남겨줘요~~!\n\n✔️ 이 영상은 유료광고를 포함하지 않습니다.\n✔️ 본 채널의 모든 콘텐츠에 대한 무단 도용과, 협의되지 않은 상업적 목적의 사용을 금합니다.\n\n✨ 옌마드가 운영하는 성장 커뮤니티\nhttps://gamit.kr/\n\n⌛️ Timeline\n00:00 | INTRO\n00:43 | 1. 예금 ・ 적금\r\n01:33 | 2. 금리 (기준금리 ・ 고정금리 ・ 변동금리)\n03:32 | 3. 자산 ・ 부채 (순자산?)\n04:31 | 4. 주식\n05:23 | 5. 코스피 ・ 코스닥\n06:04 | 6. 재무제표\r\n06:35 | 7. 상장\n07:18 | 8. 배당 (현금배당 ・ 주식배당)\n08:14 | 9. 채권\n08:52 | 10. ETF 투자\r\n09:28 | 11. 공모주 (공모 ・ 공모주 청약)\n10:13 | 12. 청약\r\n11:04 | 13. 신용점수\n12:02 | 14. 제 1 ・ 2금융권\n13:07 | 15. 연금\n13:38 | OUTRO\n\n💌 INSTAGRAM : https://www.instagram.com/yennmad\n💌 CONTACT : parkyena1107@naver.com\n\n#경제지식 #경제용어 #재테크 #경제공부",
+    "category": "invest",
+    "youtube_id": "d6YG-QSixiY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 52635,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:32.867Z",
+    "likes": [
+      [
+        "finedu_demo"
+      ],
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.content",
+  "pk": 230,
+  "fields": {
+    "title": "초등학생도 이해하기 쉽게 설명하는 ETF의 모든 것 | 투자 기초",
+    "summary": "[YouTube] 보통사람의 재테크 사관학교 ",
+    "body": "#자산관리 #etf투자  #ETF추천 #재테크 #S&P500\n\n챕터별로 쉽게 찾아볼 수 있어.\n\n00:00 ETF투자를 공부해야 하는 이유\n01:19 ETF 투자 규모\n02:35 ETF가 무엇인지 초등학생도 이해할수 있게 설명\n06:07 ETF의 장점 \n11:28 ETF 단점\n12:11 연령대별 ETF 투자 방법\n14:10 ETF 잘못 투자하고 있는 사례 \n17:10 S&P500 전망\n18:12 ETF투자 정리\n\nETF는 이제 선택이 아니라 필수야. \n한국 ETF 자산 규모가 2020년 52조에서 2025년 200조로 성장하는 걸 보면, \n대부분의 투자자가 이미 ETF를 통해 \n안정적인 자산 증식과 분산투자를 실천하고 있다는 걸 알 수 있어. \nETF는 개별주식의 불안정성을 줄이고, \n소액으로도 글로벌 대표 기업들의 주주가 될 수 있는 \n가장 효율적인 투자 수단이야. \n\n이 영상에서는 ETF의 기본 개념부터 \n성장형, 배당형, 채권형 등 나이와 목표에 맞는 투자 전략까지, \n초보자도 바로 실행할 수 있는 방법을 알려줄 거야. \n\n지금 시작하지 않으면 남들보다 늦을 수 있어.\n단순하고 꾸준한 ETF 투자가 결국 자산 격차를 만드는 핵심 열쇠니까.\n\n📌20대~60대를 위한, 은퇴 준비를 처음부터 끝까지 정리한 전자책도 받아가세요.\n✔ 연금저축 / IRP / ISA 계좌 어떻게 활용하는지\n✔ 어떤 ETF를 어떤 비율로 모아야 하는지\n✔ 은퇴 후 자산 인출 방법\n✔ 노후자금 관리 방법\n유튜브에서는 설명하기 어려운 실전 투자 전략까지 모두 정리했습니다.\n👉 https://bit.ly/4cVyiAw\n\n#ETF투자 #초보투자자  #주식투자  #분산투자  #경제공부  #소액투자  #etf리밸런싱 #ETF쉽게  #투자공부  #자산관리  #금융공부  #ETFinvesting  #돈공부 #재테크기초",
+    "category": "invest",
+    "youtube_id": "rX4Y23mh1XY",
+    "external_url": "",
+    "thumbnail": "",
+    "views": 1648859,
+    "is_recommended": true,
+    "is_popular": false,
+    "created_at": "2026-06-25T12:36:33.099Z",
+    "likes": [
+      [
+        "finedu_demo"
+      ],
+      [
+        "young_invest"
+      ]
+    ],
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 29,
+  "fields": {
+    "title": "[용인시] 청년 경제 리더십 캠프",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "[용인시] 청년 경제 리더십 캠프 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "offline",
+    "host": "용인시",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-24",
+    "place_name": "경기도청",
+    "address": "경기도 수원시 영통구 도청로 30",
+    "latitude": 37.275,
+    "longitude": 127.0095,
+    "created_at": "2026-06-24T14:55:20.853Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 30,
+  "fields": {
+    "title": "[경기도] 2026 핀테크 실무 인재 양성 과정",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "[경기도] 2026 핀테크 실무 인재 양성 과정 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "both",
+    "host": "경기도",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-25",
+    "place_name": "경기도청",
+    "address": "경기도 수원시 영통구 도청로 30",
+    "latitude": 37.275,
+    "longitude": 127.0095,
+    "created_at": "2026-06-24T14:55:20.868Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 31,
+  "fields": {
+    "title": "[김포시] 배달 노동자 안전교육 및 금융설계 기초",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "[김포시] 배달 노동자 안전교육 및 금융설계 기초 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "offline",
+    "host": "김포시",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-26",
+    "place_name": "경기도청",
+    "address": "경기도 수원시 영통구 도청로 30",
+    "latitude": 37.275,
+    "longitude": 127.0095,
+    "created_at": "2026-06-24T14:55:20.868Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 32,
+  "fields": {
+    "title": "2024 경기 기술학교 「드론 및 데이터 분석 과정」",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "2024 경기 기술학교 「드론 및 데이터 분석 과정」 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "offline",
+    "host": "경기도",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-26",
+    "place_name": "경기도청",
+    "address": "경기도 수원시 영통구 도청로 30",
+    "latitude": 37.275,
+    "longitude": 127.0095,
+    "created_at": "2026-06-24T14:55:20.884Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 33,
+  "fields": {
+    "title": "[경기도] 2024 경기청년 글로벌 경제 특사단",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "[경기도] 2024 경기청년 글로벌 경제 특사단 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "online",
+    "host": "경기도",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-26",
+    "place_name": "",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "created_at": "2026-06-24T14:55:20.884Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 34,
+  "fields": {
+    "title": "2024년 경기 기술학교 「AICE BASIC 취득 과정」",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "2024년 경기 기술학교 「AICE BASIC 취득 과정」 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "both",
+    "host": "경기도",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-26",
+    "place_name": "경기도청",
+    "address": "경기도 수원시 영통구 도청로 30",
+    "latitude": 37.275,
+    "longitude": 127.0095,
+    "created_at": "2026-06-24T14:55:20.900Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 35,
+  "fields": {
+    "title": "대졸 미취업자를 위한 하이테크 과정 교육생 모집",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "대졸 미취업자를 위한 하이테크 과정 교육생 모집 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "대전",
+    "online_type": "offline",
+    "host": "한국기술교육원",
+    "start_date": "2026-06-24",
+    "end_date": "2026-06-29",
+    "place_name": "대전광역시청",
+    "address": "대전광역시 서구 둔산로 100",
+    "latitude": 36.3504,
+    "longitude": 127.3845,
+    "created_at": "2026-06-24T14:55:20.900Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 36,
+  "fields": {
+    "title": "[수원시] 하반기 소상공인 마케팅 지원 사업 설명회",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "[수원시] 하반기 소상공인 마케팅 지원 사업 설명회 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "경기도",
+    "online_type": "offline",
+    "host": "수원시",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-02",
+    "place_name": "경기도청",
+    "address": "경기도 수원시 영통구 도청로 30",
+    "latitude": 37.275,
+    "longitude": 127.0095,
+    "created_at": "2026-06-24T14:55:20.916Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 37,
+  "fields": {
+    "title": "청소년 경제 캠프 2025 여름 특강",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "청소년 경제 캠프 2025 여름 특강 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "서울",
+    "online_type": "offline",
+    "host": "한국금융교육원",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-04",
+    "place_name": "서울특별시청",
+    "address": "서울특별시 중구 세종대로 110",
+    "latitude": 37.5663,
+    "longitude": 126.9779,
+    "created_at": "2026-06-24T14:55:20.916Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 38,
+  "fields": {
+    "title": "사회초년생 자산관리 온라인 클래스",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "사회초년생 자산관리 온라인 클래스 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "온라인",
+    "online_type": "online",
+    "host": "핀에듀 아카데미",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-06",
+    "place_name": "",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "created_at": "2026-06-24T14:55:20.932Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 39,
+  "fields": {
+    "title": "금융 데이터로 보는 경제 트렌드 세미나",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "금융 데이터로 보는 경제 트렌드 세미나 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "서울",
+    "online_type": "both",
+    "host": "서울경제연구소",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-08",
+    "place_name": "서울특별시청",
+    "address": "서울특별시 중구 세종대로 110",
+    "latitude": 37.5663,
+    "longitude": 126.9779,
+    "created_at": "2026-06-24T14:55:20.932Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 40,
+  "fields": {
+    "title": "시니어를 위한 노후 자산 설계 워크숍",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "시니어를 위한 노후 자산 설계 워크숍 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "부산",
+    "online_type": "offline",
+    "host": "국민연금공단",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-10",
+    "place_name": "부산광역시청",
+    "address": "부산광역시 연제구 중앙대로 1001",
+    "latitude": 35.1796,
+    "longitude": 129.0756,
+    "created_at": "2026-06-24T14:55:20.948Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 41,
+  "fields": {
+    "title": "대학생 모의 주식 투자 대회",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "대학생 모의 주식 투자 대회 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "서울",
+    "online_type": "online",
+    "host": "한국거래소",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-12",
+    "place_name": "",
+    "address": "",
+    "latitude": null,
+    "longitude": null,
+    "created_at": "2026-06-24T14:55:20.953Z",
+    "scraps": []
+  }
+},
+{
+  "model": "contents.event",
+  "pk": 42,
+  "fields": {
+    "title": "우리 동네 금융 사기 예방 교실",
+    "summary": "실생활에 바로 쓰는 금융 지식을 배워보세요.",
+    "body": "우리 동네 금융 사기 예방 교실 프로그램입니다. 금융·경제 역량을 키우고 싶은 누구나 참여할 수 있어요. 사전 신청 후 안내에 따라 참석해 주세요.",
+    "thumbnail": "",
+    "status": "open",
+    "region": "인천",
+    "online_type": "offline",
+    "host": "금융감독원",
+    "start_date": "2026-06-24",
+    "end_date": "2026-07-14",
+    "place_name": "인천광역시청",
+    "address": "인천광역시 남동구 정각로 29",
+    "latitude": 37.4563,
+    "longitude": 126.7052,
+    "created_at": "2026-06-24T14:55:20.953Z",
+    "scraps": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 20,
+  "fields": {
+    "board": "info",
+    "title": "사회초년생 첫 월급 관리 어떻게 해야 할까요?",
+    "content": "이번 달부터 직장 생활을 시작했어요. 월급이 들어왔는데 어떻게 관리해야 할지 막막합니다. 통장 쪼개기를 해야 한다고 들었는데 어떤 비율로 나눠야 할지 조언 부탁드려요.",
+    "image": "",
+    "author": [
+      "finedu_demo"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:32.980Z",
+    "updated_at": "2026-06-25T15:03:32.980Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 21,
+  "fields": {
+    "board": "qna",
+    "title": "연말정산 처음 해보는데 뭐가 뭔지 모르겠어요",
+    "content": "회사에서 연말정산 서류 제출하라고 하는데 공제 항목이 너무 많아서 헷갈려요. 사회초년생이 꼭 챙겨야 할 공제 항목이 뭐가 있을까요?",
+    "image": "",
+    "author": [
+      "finedu_demo"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:32.997Z",
+    "updated_at": "2026-06-25T15:03:32.997Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 22,
+  "fields": {
+    "board": "info",
+    "title": "미국 기준금리 인하 가능성과 우리 재테크 전략",
+    "content": "연준이 금리를 내릴 것 같다는 뉴스가 계속 나오는데, 이게 우리나라 금리와 환율에 어떤 영향을 줄지 분석해봤습니다. 채권·달러·주식 각각 어떤 전략이 좋을지 의견 나눠봐요.",
+    "image": "",
+    "author": [
+      "econ_master"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.097Z",
+    "updated_at": "2026-06-25T15:03:33.097Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 23,
+  "fields": {
+    "board": "free",
+    "title": "환율 1400원 돌파... 지금 달러 사야 할까요?",
+    "content": "원달러 환율이 심상치 않네요. 달러 예금이나 달러 ETF를 지금 시점에 사는 게 맞는 전략일까요? 아니면 더 기다려야 할까요?",
+    "image": "",
+    "author": [
+      "econ_master"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.114Z",
+    "updated_at": "2026-06-25T15:03:33.114Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 24,
+  "fields": {
+    "board": "info",
+    "title": "한국 GDP 성장률 전망과 투자 시사점",
+    "content": "최근 발표된 경제 지표들을 보면 성장 둔화 신호가 보입니다. 수출 주도 경제에서 이런 변화가 어떤 의미인지, 투자 포트폴리오를 어떻게 조정해야 할지 이야기해봐요.",
+    "image": "",
+    "author": [
+      "econ_master"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.114Z",
+    "updated_at": "2026-06-25T15:03:33.114Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 25,
+  "fields": {
+    "board": "review",
+    "title": "6개월 가계부 작성 후기 — 월 50만원 절약 성공!",
+    "content": "올해 초부터 가계부를 쓰기 시작했는데 6개월 만에 월 지출을 50만원이나 줄였어요. 제가 사용하는 가계부 앱과 항목 분류 방법을 공유할게요. 특히 구독 서비스 정리만으로도 월 3만원이 절약됐어요!",
+    "image": "",
+    "author": [
+      "saving_queen"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.217Z",
+    "updated_at": "2026-06-25T15:03:33.217Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 26,
+  "fields": {
+    "board": "info",
+    "title": "신용카드 vs 체크카드, 사회초년생은 어떤 게 나을까?",
+    "content": "신용카드는 포인트 적립이 좋고 체크카드는 연말정산 공제율이 높은데, 저는 체크카드 위주로 사용하면서 소비 습관을 먼저 잡는 게 맞다고 생각해요. 여러분의 생각은?",
+    "image": "",
+    "author": [
+      "saving_queen"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.223Z",
+    "updated_at": "2026-06-25T15:03:33.223Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 27,
+  "fields": {
+    "board": "qna",
+    "title": "월급의 몇 %를 저축해야 할까요?",
+    "content": "현재 월급의 30%를 저축 중인데 너무 적은 건지 모르겠어요. 사회초년생 평균 저축률이 어느 정도인가요? 더 늘리려면 어디서 줄여야 할지 팁 부탁드려요.",
+    "image": "",
+    "author": [
+      "saving_queen"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.231Z",
+    "updated_at": "2026-06-25T15:03:33.231Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 28,
+  "fields": {
+    "board": "info",
+    "title": "주린이 탈출 1년 후기 — ETF로 수익률 15% 달성",
+    "content": "작년 이맘때 처음 주식을 시작했는데 코스피 지수 추종 ETF와 S&P500 ETF 반반 투자로 1년 수익률 15%를 달성했어요. 개별주식 욕심 버리고 ETF에 집중한 게 정답이었던 것 같아요.",
+    "image": "",
+    "author": [
+      "young_invest"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.331Z",
+    "updated_at": "2026-06-25T15:03:33.331Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 29,
+  "fields": {
+    "board": "qna",
+    "title": "ISA 계좌와 연금저축 중 뭘 먼저 채워야 할까요?",
+    "content": "두 계좌 다 세제 혜택이 있다고 하는데 자금이 한정적일 때 어떤 걸 우선해야 하는지 고민이에요. 세금 절약 측면에서 어떤 순서로 투자하는 게 맞을까요?",
+    "image": "",
+    "author": [
+      "young_invest"
+    ],
+    "views": 1,
+    "created_at": "2026-06-25T15:03:33.347Z",
+    "updated_at": "2026-06-25T15:03:33.347Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 30,
+  "fields": {
+    "board": "study",
+    "title": "재테크 스터디 모집 — 매주 토요일 오전",
+    "content": "같이 재테크 공부할 분들 모집합니다! 주제는 ETF 투자, 포트폴리오 구성, 세금 최적화 등이에요. 초보자도 환영합니다. 카카오톡 오픈채팅으로 연락주세요.",
+    "image": "",
+    "author": [
+      "young_invest"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.347Z",
+    "updated_at": "2026-06-25T15:03:33.347Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 31,
+  "fields": {
+    "board": "info",
+    "title": "보이스피싱 실제 경험담 — 이렇게 당할 뻔했어요",
+    "content": "얼마 전 실제로 보이스피싱 전화를 받았어요. 검사 사칭이었는데 처음엔 정말 진짜인 줄 알았어요. 제가 눈치챈 포인트와 신고 방법을 공유할게요. 다들 조심하세요!",
+    "image": "",
+    "author": [
+      "coin_lover"
+    ],
+    "views": 0,
+    "created_at": "2026-06-25T15:03:33.448Z",
+    "updated_at": "2026-06-25T15:03:33.448Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 32,
+  "fields": {
+    "board": "qna",
+    "title": "실손보험 vs 암보험, 20대에 어떤 걸 먼저 가입해야 할까요?",
+    "content": "보험 설계사들이 이것저것 권유하는데 뭘 믿어야 할지 모르겠어요. 20대 사회초년생 입장에서 보험 우선순위가 어떻게 되는지 알려주실 분 있나요?",
+    "image": "",
+    "author": [
+      "coin_lover"
+    ],
+    "views": 1,
+    "created_at": "2026-06-25T15:03:33.448Z",
+    "updated_at": "2026-06-25T15:03:33.448Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 33,
+  "fields": {
+    "board": "info",
+    "title": "금융감독원 파인(FINE) 사이트 — 금융사기 예방의 필수템",
+    "content": "금감원 파인 사이트에서 금융회사 등록 여부 확인, 불법 금융업체 조회 등 다양한 서비스를 무료로 이용할 수 있어요. 특히 보이스피싱·불법 대출 사기 예방에 꼭 필요한 사이트예요.",
+    "image": "",
+    "author": [
+      "coin_lover"
+    ],
+    "views": 12,
+    "created_at": "2026-06-25T15:03:33.448Z",
+    "updated_at": "2026-06-25T15:03:33.448Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 4,
+  "fields": {
+    "post": 22,
+    "author": [
+      "finedu_demo"
+    ],
+    "parent": null,
+    "content": "저도 비슷한 고민이었는데 통장 쪼개기 정말 도움 됐어요!",
+    "created_at": "2026-06-25T15:03:33.464Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 5,
+  "fields": {
+    "post": 23,
+    "author": [
+      "finedu_demo"
+    ],
+    "parent": null,
+    "content": "연말정산은 국세청 홈택스에서 자동 채워주는 기능 이용하면 편해요.",
+    "created_at": "2026-06-25T15:03:33.464Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 6,
+  "fields": {
+    "post": 25,
+    "author": [
+      "econ_master"
+    ],
+    "parent": null,
+    "content": "금리 인하 시기에는 채권 ETF가 유리하다고 생각해요.",
+    "created_at": "2026-06-25T15:03:33.481Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 7,
+  "fields": {
+    "post": 26,
+    "author": [
+      "econ_master"
+    ],
+    "parent": null,
+    "content": "환율 리스크 헷지를 위해 환노출 상품과 환헤지 상품을 혼합하는 전략도 고려해보세요.",
+    "created_at": "2026-06-25T15:03:33.481Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 8,
+  "fields": {
+    "post": 27,
+    "author": [
+      "econ_master"
+    ],
+    "parent": null,
+    "content": "경제 지표 분석 잘 하셨네요. 저도 비슷한 생각이에요.",
+    "created_at": "2026-06-25T15:03:33.497Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 9,
+  "fields": {
+    "post": 28,
+    "author": [
+      "saving_queen"
+    ],
+    "parent": null,
+    "content": "저도 가계부 쓰기 시작했는데 외식비가 생각보다 너무 많이 나오더라고요.",
+    "created_at": "2026-06-25T15:03:33.497Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 10,
+  "fields": {
+    "post": 29,
+    "author": [
+      "saving_queen"
+    ],
+    "parent": null,
+    "content": "체크카드 연말정산 공제율 30%라 저도 체크카드 위주로 써요!",
+    "created_at": "2026-06-25T15:03:33.515Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 11,
+  "fields": {
+    "post": 30,
+    "author": [
+      "saving_queen"
+    ],
+    "parent": null,
+    "content": "저축률 50% 도전 중인데 생활비 줄이는 게 쉽지 않네요.",
+    "created_at": "2026-06-25T15:03:33.515Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 12,
+  "fields": {
+    "post": 31,
+    "author": [
+      "young_invest"
+    ],
+    "parent": null,
+    "content": "저도 ETF 위주로 투자하는데 맞는 방향인 것 같아요!",
+    "created_at": "2026-06-25T15:03:33.515Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 13,
+  "fields": {
+    "post": 32,
+    "author": [
+      "young_invest"
+    ],
+    "parent": null,
+    "content": "ISA 계좌 먼저 꽉 채우고 남는 돈으로 연금저축 넣는 게 일반적으로 맞다고 해요.",
+    "created_at": "2026-06-25T15:03:33.531Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 14,
+  "fields": {
+    "post": 33,
+    "author": [
+      "young_invest"
+    ],
+    "parent": null,
+    "content": "분산투자가 진리입니다. 한 종목에 몰빵하면 멘탈이 흔들려요.",
+    "created_at": "2026-06-25T15:03:33.531Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 15,
+  "fields": {
+    "post": 20,
+    "author": [
+      "coin_lover"
+    ],
+    "parent": null,
+    "content": "보이스피싱 전화 끊고 바로 경찰에 신고하는 게 정답이에요.",
+    "created_at": "2026-06-25T15:03:33.549Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.comment",
+  "pk": 16,
+  "fields": {
+    "post": 21,
+    "author": [
+      "coin_lover"
+    ],
+    "parent": null,
+    "content": "20대는 실손보험이 최우선이라고 들었어요. 암보험은 30대 이후에 가입해도 늦지 않다고.",
+    "created_at": "2026-06-25T15:03:33.559Z",
+    "likes": []
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 61,
+  "fields": {
+    "subject": "society",
+    "term": "0.5인 가구",
+    "description": "싱글족 가구의 한 유형으로, 한 명이 거주하지만 생활 방식이나 소비 행태는 1인 가구와 다른 형태를 보이는 가구를 이르는 말.",
+    "initial": "0-9",
+    "created_at": "2026-06-24T14:55:21.486Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 62,
+  "fields": {
+    "subject": "management",
+    "term": "1인 창조기업",
+    "description": "개인이 사장이면서 직원인 기업을 의미한다. 창의적인 아이디어, 기술, 전문성 등을 바탕으로 새로운 서비스를 제공한다.",
+    "initial": "0-9",
+    "created_at": "2026-06-24T14:55:21.486Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 63,
+  "fields": {
+    "subject": "economy",
+    "term": "1인당 국민소득",
+    "description": "국민이 일정 기간 동안 벌어들인 소득을 인구수로 나눈 값. 한 나라 국민의 평균적인 소득 수준을 보여주는 대표 지표다.",
+    "initial": "0-9",
+    "created_at": "2026-06-24T14:55:21.502Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 64,
+  "fields": {
+    "subject": "science",
+    "term": "20-20-20 계획",
+    "description": "유럽연합(EU)이 추진한 온실가스·에너지 효율·재생에너지 관련 기후·에너지 통합 목표 계획.",
+    "initial": "0-9",
+    "created_at": "2026-06-24T14:55:21.502Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 65,
+  "fields": {
+    "subject": "finance",
+    "term": "2차 시장",
+    "description": "이미 발행된 증권이 투자자들 사이에서 거래되는 시장. 유통시장이라고도 하며 주식·채권 거래가 이뤄진다.",
+    "initial": "0-9",
+    "created_at": "2026-06-24T14:55:21.517Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 66,
+  "fields": {
+    "subject": "economy",
+    "term": "가산금리",
+    "description": "기준금리에 신용도 등의 조건에 따라 덧붙이는 금리. 위험이 클수록 가산금리가 높아진다.",
+    "initial": "ㄱ",
+    "created_at": "2026-06-24T14:55:21.517Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 67,
+  "fields": {
+    "subject": "economy",
+    "term": "경기순환",
+    "description": "경제가 호황과 불황을 주기적으로 반복하는 현상. 확장·후퇴·수축·회복의 국면을 거친다.",
+    "initial": "ㄱ",
+    "created_at": "2026-06-24T14:55:21.533Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 68,
+  "fields": {
+    "subject": "finance",
+    "term": "공매도",
+    "description": "주가 하락이 예상될 때 주식을 빌려서 판 뒤, 가격이 내리면 되사서 갚아 차익을 얻는 투자 기법.",
+    "initial": "ㄱ",
+    "created_at": "2026-06-24T14:55:21.533Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 69,
+  "fields": {
+    "subject": "economy",
+    "term": "기준금리",
+    "description": "한 나라의 중앙은행이 금융기관과 거래할 때 기준이 되는 정책 금리. 시중 금리의 기준이 된다.",
+    "initial": "ㄱ",
+    "created_at": "2026-06-24T14:55:21.549Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 70,
+  "fields": {
+    "subject": "finance",
+    "term": "내부자 거래",
+    "description": "기업 내부 정보를 이용해 주식을 거래하여 부당 이득을 취하는 불공정 거래 행위.",
+    "initial": "ㄴ",
+    "created_at": "2026-06-24T14:55:21.553Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 71,
+  "fields": {
+    "subject": "economy",
+    "term": "디플레이션",
+    "description": "물가가 지속적으로 하락하는 현상. 소비·투자 위축으로 경기 침체를 부를 수 있다.",
+    "initial": "ㄷ",
+    "created_at": "2026-06-24T14:55:21.553Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 72,
+  "fields": {
+    "subject": "economy",
+    "term": "레버리지",
+    "description": "타인 자본(부채)을 지렛대 삼아 자기자본 수익률을 높이는 투자 전략.",
+    "initial": "ㄹ",
+    "created_at": "2026-06-24T14:55:21.569Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 73,
+  "fields": {
+    "subject": "society",
+    "term": "리쇼어링",
+    "description": "해외에 진출한 기업이 본국으로 다시 돌아오는 현상.",
+    "initial": "ㄹ",
+    "created_at": "2026-06-24T14:55:21.569Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 74,
+  "fields": {
+    "subject": "economy",
+    "term": "명목금리",
+    "description": "물가 상승률을 반영하지 않은 표면상의 금리. 실질금리와 구분된다.",
+    "initial": "ㅁ",
+    "created_at": "2026-06-24T14:55:21.586Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 75,
+  "fields": {
+    "subject": "finance",
+    "term": "뮤추얼펀드",
+    "description": "다수 투자자의 자금을 모아 운용하고 그 수익을 투자자에게 배분하는 회사형 투자신탁.",
+    "initial": "ㅁ",
+    "created_at": "2026-06-24T14:55:21.586Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 76,
+  "fields": {
+    "subject": "economy",
+    "term": "베이시스 포인트",
+    "description": "금리나 수익률을 나타내는 단위로 0.01%p를 1bp라고 한다.",
+    "initial": "ㅂ",
+    "created_at": "2026-06-24T14:55:21.603Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 77,
+  "fields": {
+    "subject": "finance",
+    "term": "분산투자",
+    "description": "여러 자산에 나누어 투자해 위험을 줄이는 투자 방법.",
+    "initial": "ㅂ",
+    "created_at": "2026-06-24T14:55:21.610Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 78,
+  "fields": {
+    "subject": "economy",
+    "term": "스태그플레이션",
+    "description": "경기 침체 속에서 물가가 함께 오르는 현상.",
+    "initial": "ㅅ",
+    "created_at": "2026-06-24T14:55:21.618Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 79,
+  "fields": {
+    "subject": "management",
+    "term": "스톡옵션",
+    "description": "회사가 임직원에게 일정 가격에 자사 주식을 살 수 있도록 부여하는 권리.",
+    "initial": "ㅅ",
+    "created_at": "2026-06-24T14:55:21.619Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 80,
+  "fields": {
+    "subject": "economy",
+    "term": "양적완화",
+    "description": "중앙은행이 국채 등을 매입해 시중에 돈을 푸는 통화 정책.",
+    "initial": "ㅇ",
+    "created_at": "2026-06-24T14:55:21.619Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 81,
+  "fields": {
+    "subject": "finance",
+    "term": "ETF",
+    "description": "특정 지수를 추종하며 주식처럼 거래소에서 사고팔 수 있는 상장지수펀드.",
+    "initial": "E",
+    "created_at": "2026-06-24T14:55:21.636Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 82,
+  "fields": {
+    "subject": "economy",
+    "term": "인플레이션",
+    "description": "물가가 지속적으로 오르는 현상. 화폐 가치가 떨어진다.",
+    "initial": "ㅇ",
+    "created_at": "2026-06-24T14:55:21.648Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 83,
+  "fields": {
+    "subject": "finance",
+    "term": "자기자본비율",
+    "description": "기업의 총자본 중 자기자본이 차지하는 비율. 재무 건전성을 나타낸다.",
+    "initial": "ㅈ",
+    "created_at": "2026-06-24T14:55:21.656Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 84,
+  "fields": {
+    "subject": "economy",
+    "term": "잠재성장률",
+    "description": "한 나라가 물가를 자극하지 않으면서 달성할 수 있는 최대 성장률.",
+    "initial": "ㅈ",
+    "created_at": "2026-06-24T14:55:21.659Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 85,
+  "fields": {
+    "subject": "science",
+    "term": "체리피킹",
+    "description": "자신에게 유리한 것만 골라 취하는 행위를 비유하는 말.",
+    "initial": "ㅊ",
+    "created_at": "2026-06-24T14:55:21.669Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 86,
+  "fields": {
+    "subject": "finance",
+    "term": "콜옵션",
+    "description": "정해진 가격에 자산을 살 수 있는 권리.",
+    "initial": "ㅋ",
+    "created_at": "2026-06-24T14:55:21.669Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 87,
+  "fields": {
+    "subject": "economy",
+    "term": "테이퍼링",
+    "description": "중앙은행이 양적완화 규모를 점진적으로 축소하는 것.",
+    "initial": "ㅌ",
+    "created_at": "2026-06-24T14:55:21.686Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 88,
+  "fields": {
+    "subject": "finance",
+    "term": "파생상품",
+    "description": "주식·채권 등 기초자산의 가치 변동에 따라 가격이 정해지는 금융상품.",
+    "initial": "ㅍ",
+    "created_at": "2026-06-24T14:55:21.686Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 89,
+  "fields": {
+    "subject": "economy",
+    "term": "한계소비성향",
+    "description": "추가 소득 중 소비로 지출되는 비율.",
+    "initial": "ㅎ",
+    "created_at": "2026-06-24T14:55:21.704Z"
+  }
+},
+{
+  "model": "glossary.term",
+  "pk": 90,
+  "fields": {
+    "subject": "society",
+    "term": "BTI",
+    "description": "금융 성향을 유형화한 지표로, 소비·자산·위기 관리 등을 진단한다.",
+    "initial": "B",
+    "created_at": "2026-06-24T14:55:21.704Z"
+  }
+},
+{
+  "model": "quiz.dailyquiz",
+  "pk": 1,
+  "fields": {
+    "date": "2026-06-24",
+    "question": "예금자보호법상 1인당 보호 한도는 보통 얼마까지일까요?",
+    "options": [
+      "1천만 원",
+      "5천만 원",
+      "1억 원"
+    ],
+    "answer_index": 1,
+    "explanation": "한 금융회사당 원금과 이자를 합쳐 5천만 원까지 보호돼요.",
+    "source": "fallback",
+    "created_at": "2026-06-24T14:42:02.030Z"
+  }
+},
+{
+  "model": "quiz.dailyquiz",
+  "pk": 3,
+  "fields": {
+    "date": "2026-06-25",
+    "question": "다음 중 '내부자 거래'에 해당하는 것은 무엇인가요?",
+    "options": [
+      "회사의 재무제표를 보고 주식 투자 결정을 내리는 것",
+      "상장폐지 정보를 미리 알고 주식을 대량 매도하는 것",
+      "증권사 리포트를 보고 투자 유망 종목을 매수하는 것",
+      "최신 경제 뉴스를 보고 환율 변동에 대비하는 것"
+    ],
+    "answer_index": 1,
+    "explanation": "내부자 거래는 미공개된 중요 정보를 이용하여 부당한 이득을 취하는 불법 행위입니다. 상장폐지 정보는 일반 투자자가 알 수 없는 중요한 정보에 해당해요.",
+    "source": "ai",
+    "created_at": "2026-06-24T15:08:39.050Z"
+  }
+},
+{
+  "model": "quiz.dailyquiz",
+  "pk": 4,
+  "fields": {
+    "date": "2026-06-26",
+    "question": "투자의 위험을 줄이기 위해 여러 자산에 나누어 투자하는 것을 무엇이라고 할까요?",
+    "options": [
+      "레버리지 투자",
+      "분산 투자",
+      "집중 투자",
+      "단기 투자"
+    ],
+    "answer_index": 1,
+    "explanation": "맞아요! 분산 투자는 위험을 관리하는 똑똑한 투자 방법이랍니다. 여러 곳에 나누어 담아두면 혹시라도 한 곳에서 손해가 나더라도 다른 곳에서 만회할 수 있어요.",
+    "source": "ai",
+    "created_at": "2026-06-25T15:04:00.980Z"
+  }
+},
+{
+  "model": "quiz.quizattempt",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "finedu_demo"
+    ],
+    "quiz": 3,
+    "selected_index": 2,
+    "is_correct": false,
+    "created_at": "2026-06-25T15:03:33.564Z"
+  }
+},
+{
+  "model": "quiz.quizattempt",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "econ_master"
+    ],
+    "quiz": 3,
+    "selected_index": 2,
+    "is_correct": false,
+    "created_at": "2026-06-25T15:03:33.564Z"
+  }
+},
+{
+  "model": "quiz.quizattempt",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "saving_queen"
+    ],
+    "quiz": 3,
+    "selected_index": 1,
+    "is_correct": true,
+    "created_at": "2026-06-25T15:03:33.581Z"
+  }
+},
+{
+  "model": "quiz.quizattempt",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "young_invest"
+    ],
+    "quiz": 3,
+    "selected_index": 2,
+    "is_correct": false,
+    "created_at": "2026-06-25T15:03:33.581Z"
+  }
+},
+{
+  "model": "quiz.quizattempt",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "coin_lover"
+    ],
+    "quiz": 3,
+    "selected_index": 1,
+    "is_correct": true,
+    "created_at": "2026-06-25T15:03:33.598Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "finedu_demo"
+    ],
+    "date": "2026-06-24",
+    "created_at": "2026-06-24T14:42:32.972Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "finedu_demo"
+    ],
+    "date": "2026-06-25",
+    "created_at": "2026-06-24T15:00:51.144Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "asdfasdf"
+    ],
+    "date": "2026-06-25",
+    "created_at": "2026-06-24T15:49:20.785Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "zxcvzxcv"
+    ],
+    "date": "2026-06-25",
+    "created_at": "2026-06-25T12:16:04.188Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "finedu_demo"
+    ],
+    "date": "2026-06-26",
+    "created_at": "2026-06-25T15:04:00.998Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "econ_master"
+    ],
+    "date": "2026-06-26",
+    "created_at": "2026-06-25T15:04:13.622Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "saving_queen"
+    ],
+    "date": "2026-06-26",
+    "created_at": "2026-06-25T15:05:26.621Z"
+  }
+},
+{
+  "model": "quiz.attendance",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "young_invest"
+    ],
+    "date": "2026-06-26",
+    "created_at": "2026-06-25T15:07:53.865Z"
+  }
+}
+]
