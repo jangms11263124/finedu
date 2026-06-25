@@ -32,6 +32,16 @@ export const useAuthStore = defineStore('auth', () => {
     if (!access.value) return
     try {
       const { data } = await api.get('/accounts/me/')
+      // 서버에 ebti_result가 없지만 localStorage에 있으면 → 자동 동기화
+      if (!data.ebti_result) {
+        const local = localStorage.getItem('ebtiResult')
+        if (local) {
+          try {
+            data.ebti_result = JSON.parse(local)
+            api.patch('/accounts/me/', { ebti_result: data.ebti_result }).catch(() => {})
+          } catch {}
+        }
+      }
       user.value = data
     } catch {
       logout()

@@ -55,6 +55,9 @@ function go(i) {
 function next() {
   go(current.value + 1)
 }
+function prev() {
+  go(current.value - 1)
+}
 
 function start() {
   stop()
@@ -96,6 +99,18 @@ onBeforeUnmount(stop)
         </div>
       </section>
     </transition-group>
+
+    <!-- 좌우 화살표 -->
+    <button class="arrow arrow-left" aria-label="이전 배너" @click="prev">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="arrow arrow-right" aria-label="다음 배너" @click="next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
 
     <!-- 우측 하단 점 네비게이션 -->
     <div class="dots">
@@ -176,6 +191,36 @@ onBeforeUnmount(stop)
 .c1 { right: 30px; top: 40px; font-size: 4rem; }
 .c2 { right: 120px; top: 110px; }
 .c3 { right: 20px; bottom: 36px; }
+
+/* 화살표 */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.18s, transform 0.18s;
+}
+.arrow svg {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+.arrow:hover {
+  color: #fff;
+}
+.arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+.arrow-left  { left: 8px; }
+.arrow-right { right: 8px; }
 
 /* 점 네비게이션 */
 .dots {

@@ -246,7 +246,7 @@ watch(
               <p class="ebti-persona-desc">{{ auth.user.ebti_result.persona.desc }}</p>
             </div>
             <span class="ebti-score-chip">
-              강점 {{ auth.user.ebti_result.strongCount }} / 5
+              강점 {{ auth.user.ebti_result.strongCount }} / 5 &nbsp;·&nbsp; 총점 {{ auth.user.ebti_result.breakdown.reduce((s, b) => s + (b.normalizedScore ?? Math.round(b.ratio * 20)), 0) }} / 100
             </span>
           </div>
 
@@ -266,7 +266,7 @@ watch(
                   :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
                 ></div>
               </div>
-              <span class="ebti-score">{{ b.score }}점</span>
+              <span class="ebti-score">{{ b.normalizedScore ?? Math.round(b.ratio * 20) }}<small>/20</small></span>
             </div>
           </div>
         </template>
@@ -725,20 +725,19 @@ watch(
 }
 .ebti-row {
   display: grid;
-  grid-template-columns: 120px 1fr 40px;
+  grid-template-columns: auto 1fr 52px;
   align-items: center;
   gap: 10px;
 }
 .ebti-label {
   font-size: 0.82rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 .ebti-bar {
   height: 8px;
-  background: var(--bg);
+  background: var(--line);
   border-radius: 999px;
-  overflow: hidden;
-  border: 1px solid var(--line);
 }
 .ebti-fill {
   height: 100%;
@@ -750,10 +749,16 @@ watch(
   background: linear-gradient(90deg, var(--teal), var(--green));
 }
 .ebti-score {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: var(--text-mute);
   font-weight: 700;
   text-align: right;
+  white-space: nowrap;
+}
+.ebti-score small {
+  font-size: 0.65rem;
+  font-weight: 500;
+  opacity: 0.7;
 }
 
 /* 탭 */
