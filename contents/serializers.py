@@ -22,6 +22,7 @@ class ContentSerializer(serializers.ModelSerializer):
     comment_count = serializers.IntegerField(read_only=True)
     is_liked = serializers.SerializerMethodField()
     is_scrapped = serializers.SerializerMethodField()
+    thumbnail = serializers.SerializerMethodField()
 
     class Meta:
         model = Content
@@ -30,6 +31,13 @@ class ContentSerializer(serializers.ModelSerializer):
                   'like_count', 'scrap_count', 'comment_count',
                   'is_liked', 'is_scrapped', 'is_recommended',
                   'is_popular', 'created_at')
+
+    def get_thumbnail(self, obj):
+        if obj.thumbnail:
+            return obj.thumbnail.url if hasattr(obj.thumbnail, 'url') else obj.thumbnail
+        if obj.youtube_id:
+            return f'https://img.youtube.com/vi/{obj.youtube_id}/mqdefault.jpg'
+        return None
 
     def get_is_liked(self, obj):
         user = self.context.get('request').user if self.context.get('request') else None

@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import api from '@/api'
 import Pagination from '@/components/common/Pagination.vue'
+import { getEventTheme } from '@/utils/eventTheme'
 
 const regions = [
   '지역 선택',
@@ -129,8 +130,13 @@ onMounted(load)
           :to="`/events/${e.id}`"
           class="card"
         >
-          <div class="thumb">
-            <span class="emoji">🎓</span>
+          <div class="thumb" :style="getEventTheme(e).image ? {} : { background: getEventTheme(e).gradient }">
+            <img v-if="getEventTheme(e).image" :src="getEventTheme(e).image" :alt="e.title" class="thumb-img" />
+            <template v-else>
+              <span class="icon main">{{ getEventTheme(e).icons[0] }}</span>
+              <span class="icon sub1">{{ getEventTheme(e).icons[1] }}</span>
+              <span class="icon sub2">{{ getEventTheme(e).icons[2] }}</span>
+            </template>
             <span class="dday" :class="getEventStatus(e)">
               {{ ddayLabel(e) }}
             </span>
@@ -229,12 +235,37 @@ onMounted(load)
   background: linear-gradient(135deg, #0b1f3a, #133a5e 60%, #0f766e);
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
-.emoji {
-  font-size: 2.6rem;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
-  position: relative;
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.icon {
+  position: absolute;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+  user-select: none;
+  pointer-events: none;
   z-index: 2;
+}
+.icon.main {
+  font-size: 3rem;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-60%);
+}
+.icon.sub1 {
+  font-size: 1.7rem;
+  right: 66px;
+  top: 12px;
+  opacity: 0.85;
+}
+.icon.sub2 {
+  font-size: 1.5rem;
+  right: 14px;
+  bottom: 12px;
+  opacity: 0.75;
 }
 .dday {
   position: absolute;

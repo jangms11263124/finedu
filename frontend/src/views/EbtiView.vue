@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import {
   SCALE,
@@ -66,14 +66,16 @@ function finish() {
   const breakdown = themes.map((t) => {
     const score = totals[t.key]
     const strong = score >= threshold
+    const ratio = (score - THEME_MIN) / (THEME_MAX - THEME_MIN)
     return {
       key: t.key,
       name: t.name,
       score,
-      ratio: (score - THEME_MIN) / (THEME_MAX - THEME_MIN),
+      normalizedScore: Math.round(ratio * 20), // 20점 만점으로 정규화 (5개 합산 최대 100점)
+      ratio,
       strong,
       feedback: strong ? t.strong : t.weak,
-      tags: strong ? [] : t.tags, // 보완 영역에만 추천 태그 노출 (원본과 동일)
+      tags: strong ? [] : t.tags,
     }
   })
 
@@ -92,9 +94,22 @@ function finish() {
 }
 
 function restart() {
+  localStorage.removeItem('ebtiResult')
   step.value = STEP.INTRO
   result.value = null
 }
+
+onMounted(() => {
+  const saved = localStorage.getItem('ebtiResult')
+  if (saved) {
+    try {
+      result.value = JSON.parse(saved)
+      step.value = STEP.RESULT
+    } catch {
+      localStorage.removeItem('ebtiResult')
+    }
+  }
+})
 </script>
 
 <template>
@@ -151,7 +166,7 @@ function restart() {
           <span class="p-emoji">{{ result.persona.emoji }}</span>
           <h1 class="p-name">{{ result.persona.name }}</h1>
           <p class="p-desc">{{ result.persona.desc }}</p>
-          <span class="p-score">강점 영역 {{ result.strongCount }} / 5</span>
+          <span class="p-score">강점 영역 {{ result.strongCount }} / 5 &nbsp;·&nbsp; 총점 {{ result.breakdown.reduce((s, b) => s + (b.normalizedScore ?? Math.round(b.ratio * 20)), 0) }} / 100</span>
         </div>
 
         <!-- 역량별 점수 막대 -->
@@ -167,7 +182,7 @@ function restart() {
                 :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
               ></div>
             </div>
-            <span class="r-score">{{ b.score }}점</span>
+            <span class="r-score">{{ b.normalizedScore ?? Math.round(b.ratio * 20) }}<small>/20</small></span>
           </div>
         </div>
 
@@ -392,20 +407,19 @@ function restart() {
 }
 .row {
   display: grid;
-  grid-template-columns: 130px 1fr 44px;
+  grid-template-columns: 140px 1fr 52px;
   align-items: center;
   gap: 12px;
 }
 .r-label {
   font-size: 0.86rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 .r-bar {
   height: 9px;
-  background: #fff;
+  background: var(--line);
   border-radius: 999px;
-  overflow: hidden;
-  border: 1px solid var(--line);
 }
 .r-fill {
   height: 100%;
@@ -417,10 +431,16 @@ function restart() {
   background: linear-gradient(90deg, var(--teal), var(--green));
 }
 .r-score {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-mute);
   font-weight: 700;
   text-align: right;
+  white-space: nowrap;
+}
+.r-score small {
+  font-size: 0.68rem;
+  font-weight: 500;
+  opacity: 0.7;
 }
 
 /* 역량별 상세 */
@@ -489,8 +509,8 @@ function restart() {
   .card {
     padding: 30px 22px;
   }
-  .row {
-    grid-template-columns: 96px 1fr 40px;
+  .r-label {
+    font-size: 0.8rem;
   }
 }
 </style>

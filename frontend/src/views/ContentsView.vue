@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import api from '@/api'
 import { useAuthStore } from '@/stores/auth'
@@ -91,7 +91,21 @@ async function toggleLike(c) {
   c.like_count = data.like_count
 }
 
-onMounted(load)
+function applyQuery() {
+  if (route.query.q) keyword.value = String(route.query.q)
+  if (route.query.category) category.value = String(route.query.category)
+}
+
+watch(() => route.query, () => {
+  applyQuery()
+  page.value = 1
+  load()
+})
+
+onMounted(() => {
+  applyQuery()
+  load()
+})
 </script>
 
 <template>

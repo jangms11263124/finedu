@@ -1,4 +1,4 @@
-from django.db.models import Count, F
+from django.db.models import Count, F, Q
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -12,6 +12,40 @@ from .serializers import (
     ContentSerializer,
     EventSerializer,
 )
+
+# EBTI 추천 태그 → 실제 검색어 확장 매핑
+# 태그 자체로는 영상 제목에 잘 안 나오므로 유의어·관련어로 OR 검색
+EBTI_SYNONYMS = {
+    '소비지출관리': ['소비', '지출', '가계부', '통장관리'],
+    '소비지출':    ['소비', '지출'],
+    '합리적소비':  ['소비', '절약', '지출'],
+    '신용관리':    ['신용', '신용점수', '신용등급'],
+    '신용카드':    ['신용카드', '카드'],
+    '체크카드':    ['체크카드', '체크'],
+    '자산관리':    ['자산', '재테크', '돈관리'],
+    '포트폴리오':  ['포트폴리오', '분산투자', '자산배분'],
+    '예금적금':    ['예금', '적금', '저축'],
+    '부채관리':    ['대출', '부채', '빚'],
+    '금융상품':    ['금융상품', 'ISA', 'ETF', '연금저축'],
+    '기준금리':    ['금리', '기준금리', '이자'],
+    '물가':        ['물가', '인플레이션'],
+    '환율':        ['환율', '달러', '외환'],
+    '정부정책':    ['청약', '정책', '지원금', '청년혜택'],
+    '경제전망':    ['경제', '전망', '시황'],
+    '팩트체크':    ['경제', '금리', '환율', '물가'],
+    '위기관리':    ['비상금', '위기', '대비'],
+    '신용위험관리':['신용', '연체', '대출위험'],
+    '보이스피싱':  ['보이스피싱', '금융사기', '사기'],
+    '소비자보호':  ['소비자', '환불', '소비자권리'],
+    '소비자권리':  ['소비자', '권리', '피해구제'],
+    '금융사기예방':['금융사기', '사기예방', '보이스피싱'],
+    '노후대비':    ['노후', '은퇴', '연금'],
+    '노후설계':    ['노후', '재무설계', '은퇴'],
+    '연금':        ['연금', 'IRP', '연금저축', '퇴직연금'],
+    '보험':        ['보험', '실손', '생명보험'],
+    '은퇴자산':    ['은퇴', '노후', '은퇴준비', '노후자금'],
+    '생애주기':    ['생애주기', '재무설계', '인생계획', '재테크'],
+}
 
 
 class AIRecommendView(APIView):
@@ -51,8 +85,14 @@ class ContentViewSet(viewsets.ModelViewSet):
         if params.get('scrapped') == 'me' and self.request.user.is_authenticated:
             qs = qs.filter(scraps=self.request.user)
         if q := params.get('q'):
-            qs = (qs.filter(title__icontains=q)
-                  | qs.filter(summary__icontains=q)).distinct()
+            # EBTI 태그면 유의어로 확장, 아니면 그대로 사용
+            terms = EBTI_SYNONYMS.get(q, [q])
+            q_filter = Q()
+            for term in terms:
+                q_filter |= Q(title__icontains=term)
+                q_filter |= Q(summary__icontains=term)
+                q_filter |= Q(body__icontains=term)
+            qs = qs.filter(q_filter).distinct()
         ordering = params.get('ordering')
         if ordering == 'views':
             qs = qs.order_by('-views')
