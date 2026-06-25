@@ -80,6 +80,8 @@ function startEdit() {
   form.value = {
     nickname: auth.user?.nickname || '',
     email: auth.user?.email || '',
+    password: '',
+    password2: '',
   }
   imageFile.value = null
   imagePreview.value = ''
@@ -97,6 +99,16 @@ function onFile(e) {
 async function save() {
   saving.value = true
   saveError.value = ''
+
+  // 비밀번호 입력 매칭 검사
+  if (form.value.password || form.value.password2) {
+    if (form.value.password !== form.value.password2) {
+      saveError.value = '새 비밀번호가 일치하지 않습니다.'
+      saving.value = false
+      return
+    }
+  }
+
   try {
     let payload
     if (imageFile.value) {
@@ -104,13 +116,23 @@ async function save() {
       payload.append('nickname', form.value.nickname)
       payload.append('email', form.value.email)
       payload.append('profile_image', imageFile.value)
+      if (form.value.password) {
+        payload.append('password', form.value.password)
+        payload.append('password2', form.value.password2)
+      }
     } else {
       payload = { nickname: form.value.nickname, email: form.value.email }
+      if (form.value.password) {
+        payload.password = form.value.password
+        payload.password2 = form.value.password2
+      }
     }
     await auth.updateProfile(payload)
     editing.value = false
   } catch (err) {
     saveError.value =
+      err.response?.data?.password?.[0] ||
+      err.response?.data?.password2?.[0] ||
       err.response?.data?.nickname?.[0] ||
       err.response?.data?.email?.[0] ||
       '저장에 실패했어요. 다시 시도해주세요.'
@@ -120,6 +142,13 @@ async function save() {
 }
 
 /* ── 표시용 계산값 ─────────────────────── */
+const getDisplayScore = (score) => {
+  if (score > 20) {
+    return Math.round((score - 6) / 24 * 20)
+  }
+  return score
+}
+
 function fmt(dt) {
   return new Date(dt).toLocaleDateString('ko-KR', {
     year: '2-digit',
@@ -176,11 +205,15 @@ watch(
           <div class="name-row">
             <h1>{{ auth.user?.nickname }}</h1>
             <span v-if="auth.user?.attendance_streak" class="streak-badge">
-              🔥 연속 출석 {{ auth.user.attendance_streak }}일
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="inline-icon flame-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925 3.546 5.974 5.974 0 0 1-2.133-1A3.75 3.75 0 0 0 12 18Z" /></svg>
+              연속 출석 {{ auth.user.attendance_streak }}일
             </span>
           </div>
           <p class="sub">@{{ auth.user?.username }}</p>
-          <p class="sub email" v-if="auth.user?.email">✉️ {{ auth.user.email }}</p>
+          <p class="sub email" v-if="auth.user?.email">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="inline-icon email-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+            {{ auth.user.email }}
+          </p>
         </div>
 
         <button class="btn btn-outline edit-btn" @click="startEdit">프로필 수정</button>
@@ -190,28 +223,36 @@ watch(
       <h2 class="section-title">나의 활동 현황</h2>
       <section class="stats">
         <button class="stat" @click="goTab('posts')">
-          <span class="stat-ico ico-post">📝</span>
+          <span class="stat-ico ico-post">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="stat-svg post-color"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+          </span>
           <div class="stat-body">
             <strong>{{ auth.user?.post_count ?? 0 }}</strong>
             <span>작성 글</span>
           </div>
         </button>
         <button class="stat" @click="goTab('liked-posts')">
-          <span class="stat-ico ico-like">👍</span>
+          <span class="stat-ico ico-like">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="stat-svg like-color"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.602.729H13.48c-.408 0-.812-.1-1.185-.292a10.14 10.14 0 0 1-1.664-1.04l-.083-.066a9.753 9.753 0 0 0-2.285-1.242c-.227-.086-.467-.13-.709-.13H1.5v-7.375h5.133Z" /></svg>
+          </span>
           <div class="stat-body">
             <strong>{{ auth.user?.liked_post_count ?? 0 }}</strong>
             <span>좋아요한 글</span>
           </div>
         </button>
         <button class="stat" @click="goTab('liked-contents')">
-          <span class="stat-ico ico-content">❤️</span>
+          <span class="stat-ico ico-content">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="stat-svg content-color"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+          </span>
           <div class="stat-body">
             <strong>{{ auth.user?.liked_content_count ?? 0 }}</strong>
             <span>좋아요한 콘텐츠</span>
           </div>
         </button>
         <button class="stat" @click="goTab('scrap')">
-          <span class="stat-ico ico-scrap">🔖</span>
+          <span class="stat-ico ico-scrap">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="stat-svg scrap-color"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>
+          </span>
           <div class="stat-body">
             <strong>
               {{ (auth.user?.scrapped_content_count ?? 0) + (auth.user?.scrapped_event_count ?? 0) }}
@@ -225,14 +266,10 @@ watch(
       <section class="ebti-card">
         <div class="ebti-head">
           <span class="section-label">경제 EBTI</span>
-          <RouterLink to="/ebti" class="ebti-retest">
-            {{ auth.user?.ebti_result ? '다시 검사하기' : 'EBTI 검사하기' }} →
-          </RouterLink>
         </div>
 
         <!-- 결과 없음 -->
         <div v-if="!auth.user?.ebti_result" class="ebti-empty">
-          <span class="ebti-empty-ico">📋</span>
           <p>아직 EBTI 검사를 하지 않았어요.</p>
           <p class="ebti-empty-sub">검사를 완료하면 AI 추천이 더 정확해져요.</p>
         </div>
@@ -246,7 +283,7 @@ watch(
               <p class="ebti-persona-desc">{{ auth.user.ebti_result.persona.desc }}</p>
             </div>
             <span class="ebti-score-chip">
-              강점 {{ auth.user.ebti_result.strongCount }} / 5
+              강점 {{ auth.user.ebti_result.strongCount }} / 5 , 총점 {{ auth.user.ebti_result.breakdown.reduce((sum, b) => sum + getDisplayScore(b.score), 0) }}점
             </span>
           </div>
 
@@ -257,19 +294,30 @@ watch(
               class="ebti-row"
             >
               <span class="ebti-label">
-                {{ b.strong ? '✅' : '✏️' }} {{ b.name }}
+                <svg v-if="b.strong" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="breakdown-icon strong-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="breakdown-icon normal-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                </svg>
+                {{ b.name }}
               </span>
               <div class="ebti-bar">
                 <div
                   class="ebti-fill"
                   :class="{ strong: b.strong }"
-                  :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
+                  :style="{ width: (getDisplayScore(b.score) / 20 * 100) + '%' }"
                 ></div>
               </div>
-              <span class="ebti-score">{{ b.score }}점</span>
+              <span class="ebti-score">{{ getDisplayScore(b.score) }}/20</span>
             </div>
           </div>
         </template>
+
+        <!-- EBTI 실행/재시험 버튼 박스 -->
+        <RouterLink to="/ebti" class="ebti-action-box">
+          {{ auth.user?.ebti_result ? '경제 EBTI 다시 검사하기' : '경제 EBTI 검사 시작하기' }}
+        </RouterLink>
       </section>
 
       <!-- 탭 -->
@@ -304,8 +352,14 @@ watch(
               {{ p.title }}
               <span v-if="p.comment_count" class="cc">[{{ p.comment_count }}]</span>
             </span>
-            <span class="c-meta">👍 {{ p.like_count }}</span>
-            <span class="c-meta">👁 {{ p.views.toLocaleString() }}</span>
+            <span class="c-meta">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="meta-icon like-meta-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.602.729H13.48c-.408 0-.812-.1-1.185-.292a10.14 10.14 0 0 1-1.664-1.04l-.083-.066a9.753 9.753 0 0 0-2.285-1.242c-.227-.086-.467-.13-.709-.13H1.5v-7.375h5.133Z" /></svg>
+              {{ p.like_count }}
+            </span>
+            <span class="c-meta">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="meta-icon view-meta-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.43 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+              {{ p.views.toLocaleString() }}
+            </span>
             <span class="c-date">{{ fmt(p.created_at) }}</span>
           </RouterLink>
         </ul>
@@ -329,12 +383,19 @@ watch(
                 :src="`https://img.youtube.com/vi/${c.youtube_id}/mqdefault.jpg`"
                 alt=""
               />
-              <div v-else class="thumb-ph">📺</div>
+              <div v-else class="thumb-ph">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="tv-placeholder-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" /></svg>
+              </div>
             </div>
             <div class="card-body">
               <span class="cat">{{ c.category_display }}</span>
               <h3>{{ c.title }}</h3>
-              <p class="meta">👍 {{ c.like_count }} · 👁 {{ c.views.toLocaleString() }}</p>
+              <p class="meta">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="meta-icon like-meta-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.602.729H13.48c-.408 0-.812-.1-1.185-.292a10.14 10.14 0 0 1-1.664-1.04l-.083-.066a9.753 9.753 0 0 0-2.285-1.242c-.227-.086-.467-.13-.709-.13H1.5v-7.375h5.133Z" /></svg>
+                {{ c.like_count }} · 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="meta-icon view-meta-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.43 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                {{ c.views.toLocaleString() }}
+              </p>
             </div>
           </RouterLink>
         </div>
@@ -375,12 +436,19 @@ watch(
                   :src="`https://img.youtube.com/vi/${c.youtube_id}/mqdefault.jpg`"
                   alt=""
                 />
-                <div v-else class="thumb-ph">📺</div>
+                <div v-else class="thumb-ph">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="tv-placeholder-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z" /></svg>
+                </div>
               </div>
               <div class="card-body">
                 <span class="cat">{{ c.category_display }}</span>
                 <h3>{{ c.title }}</h3>
-                <p class="meta">👍 {{ c.like_count }} · 👁 {{ c.views.toLocaleString() }}</p>
+                <p class="meta">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="meta-icon like-meta-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.602.729H13.48c-.408 0-.812-.1-1.185-.292a10.14 10.14 0 0 1-1.664-1.04l-.083-.066a9.753 9.753 0 0 0-2.285-1.242c-.227-.086-.467-.13-.709-.13H1.5v-7.375h5.133Z" /></svg>
+                  {{ c.like_count }} · 
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="meta-icon view-meta-ico"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.43 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                  {{ c.views.toLocaleString() }}
+                </p>
               </div>
             </RouterLink>
           </div>
@@ -437,6 +505,14 @@ watch(
           <label class="field">
             <span>이메일</span>
             <input v-model="form.email" type="email" placeholder="이메일" />
+          </label>
+          <label class="field">
+            <span>새 비밀번호 (선택)</span>
+            <input v-model="form.password" type="password" placeholder="변경할 새 비밀번호" />
+          </label>
+          <label class="field">
+            <span>새 비밀번호 확인</span>
+            <input v-model="form.password2" type="password" placeholder="비밀번호 다시 입력" />
           </label>
 
           <p v-if="saveError" class="err">{{ saveError }}</p>
@@ -658,17 +734,32 @@ watch(
   font-weight: 800;
   color: var(--navy);
 }
-.ebti-retest {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--teal);
+.ebti-action-box {
+  display: block;
+  width: fit-content;
+  margin: 10px auto 0;
+  text-align: center;
+  background: var(--bg);
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  text-decoration: none;
 }
-.ebti-retest:hover {
-  text-decoration: underline;
+.ebti-action-box:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(27, 42, 89, 0.15);
 }
 .ebti-empty {
   text-align: center;
-  padding: 24px 0 10px;
+  padding: 4px 0 6px;
   color: var(--text-sub);
 }
 .ebti-empty-ico {
@@ -693,8 +784,17 @@ watch(
   flex-wrap: wrap;
 }
 .ebti-emoji {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  background: #f8fafc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--line);
 }
 .ebti-persona-name {
   font-size: 1rem;
@@ -707,6 +807,7 @@ watch(
   color: var(--text-sub);
   margin-top: 3px;
   line-height: 1.5;
+  white-space: pre-line;
 }
 .ebti-score-chip {
   margin-left: auto;
@@ -725,25 +826,45 @@ watch(
 }
 .ebti-row {
   display: grid;
-  grid-template-columns: 120px 1fr 40px;
+  grid-template-columns: 146px 1fr 64px;
   align-items: center;
   gap: 10px;
 }
 .ebti-label {
   font-size: 0.82rem;
   font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.breakdown-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.strong-icon {
+  color: var(--teal);
+}
+.normal-icon {
+  color: var(--text-mute);
 }
 .ebti-bar {
+  position: relative;
   height: 8px;
   background: var(--bg);
   border-radius: 999px;
   overflow: hidden;
   border: 1px solid var(--line);
+  transform: translateZ(0); /* WebKit/Blink clipping bug fix */
 }
 .ebti-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
   background: var(--text-mute);
-  border-radius: 999px;
+  border-radius: 0 999px 999px 0; /* Left side square for perfect alignment, right side rounded */
   transition: width 0.4s ease;
 }
 .ebti-fill.strong {
@@ -754,6 +875,7 @@ watch(
   color: var(--text-mute);
   font-weight: 700;
   text-align: right;
+  white-space: nowrap;
 }
 
 /* 탭 */
@@ -1089,5 +1211,74 @@ watch(
   .event-row .ev-meta {
     display: none;
   }
+}
+
+/* 이모지 대체용 SVG 아이콘 스타일 */
+.inline-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+.flame-icon {
+  width: 13px;
+  height: 13px;
+  color: #ea580c;
+  vertical-align: -1px;
+}
+.email-icon {
+  color: var(--text-sub);
+}
+.stat-svg {
+  width: 22px;
+  height: 22px;
+}
+.post-color { color: #4f46e5; }
+.like-color { color: #0d9488; }
+.content-color { color: #e11d48; }
+.scrap-color { color: #ea580c; }
+
+.ebti-empty-svg {
+  width: 44px;
+  height: 44px;
+  color: var(--text-mute);
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.breakdown-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  display: inline-block;
+}
+.strong-icon {
+  color: var(--green);
+}
+.normal-icon {
+  color: var(--text-mute);
+}
+
+.meta-icon {
+  width: 13px;
+  height: 13px;
+  vertical-align: -2px;
+  display: inline-block;
+  margin-right: 3px;
+}
+.like-meta-ico {
+  color: var(--teal);
+}
+.view-meta-ico {
+  color: var(--text-mute);
+}
+
+.tv-placeholder-ico {
+  width: 48px;
+  height: 48px;
+  color: var(--text-mute);
+  opacity: 0.6;
 }
 </style>

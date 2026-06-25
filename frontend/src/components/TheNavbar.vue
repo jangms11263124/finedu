@@ -25,7 +25,7 @@ function logout() {
 <template>
   <header class="nav">
     <div class="container nav-inner">
-      <RouterLink to="/" class="logo">fin<span>edu</span></RouterLink>
+      <RouterLink to="/" class="logo">im fine <span>edu</span></RouterLink>
 
       <nav class="menu">
         <template v-for="m in menus" :key="m.label">
@@ -100,6 +100,7 @@ function logout() {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding-right: 20px;
 }
 .btn.sm {
   padding: 8px 14px;

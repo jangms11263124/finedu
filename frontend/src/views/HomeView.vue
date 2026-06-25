@@ -79,7 +79,7 @@ onMounted(async () => {
         <!-- AI 추천 콘텐츠 -->
         <section class="block">
           <div class="section-head">
-            <h2> AI 추천 콘텐츠<span class="sub">나에게 딱 맞는 콘텐츠를 추천해드려요</span></h2>
+            <h2> 추천 콘텐츠<span class="sub">나에게 딱 맞는 콘텐츠를 추천해드려요</span></h2>
             <RouterLink :to="auth.isLoggedIn ? '/ai-recommend' : '/login'" class="more">
               <span>더보기</span>
               <svg class="arrow-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -369,10 +369,7 @@ onMounted(async () => {
     grid-template-columns: 1fr;
   }
   .side-col {
-    position: static;
-    max-width: 480px;
-    width: 100%;
-    margin: 20px auto 0;
+    display: none;
   }
 }
 @media (max-width: 768px) {

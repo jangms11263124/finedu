@@ -209,7 +209,7 @@ onMounted(load)
   min-height: 72vh;
 }
 .narrow {
-  max-width: 820px;
+  max-width: 800px;
 }
 .back {
   display: inline-flex;

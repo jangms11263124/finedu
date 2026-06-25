@@ -330,7 +330,7 @@ def _generate(candidates, signals, limit):
     signal_summary = '\n'.join(signal_lines) if signal_lines else '- (신규 사용자, 데이터 없음)'
 
     system = (
-        '당신은 금융 교육 플랫폼 finedu의 따뜻하고 친근한 AI 큐레이터입니다.\n'
+        '당신은 금융 교육 플랫폼 im fine edu의 따뜻하고 친근한 AI 큐레이터입니다.\n'
         '아래 두 가지를 JSON으로 응답하세요.\n\n'
         '[1] summary (문자열)\n'
         '사용자 데이터를 분석했다는 느낌이 들도록, 실제 관심사·커뮤니티 활동·EBTI 결과·'

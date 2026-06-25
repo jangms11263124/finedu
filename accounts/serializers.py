@@ -14,6 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
     scrapped_content_count = serializers.SerializerMethodField()
     scrapped_event_count = serializers.SerializerMethodField()
     attendance_streak = serializers.SerializerMethodField()
+    password = serializers.CharField(
+        write_only=True, required=False, validators=[validate_password]
+    )
+    password2 = serializers.CharField(write_only=True, required=False)
 
     class Meta:
         model = User
@@ -21,7 +25,31 @@ class UserSerializer(serializers.ModelSerializer):
                   'region', 'ebti_result',
                   'post_count', 'liked_post_count', 'liked_content_count',
                   'scrapped_content_count', 'scrapped_event_count',
-                  'attendance_streak')
+                  'attendance_streak', 'password', 'password2')
+
+    def validate(self, attrs):
+        password = attrs.get('password')
+        password2 = attrs.get('password2')
+        if password or password2:
+            if password != password2:
+                raise serializers.ValidationError(
+                    {'password2': '비밀번호가 일치하지 않습니다.'}
+                )
+        return attrs
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        validated_data.pop('password2', None)
+        
+        # 일반 필드 업데이트
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+            
+        if password:
+            instance.set_password(password)
+            
+        instance.save()
+        return instance
 
     def get_post_count(self, obj):
         return obj.posts.count()

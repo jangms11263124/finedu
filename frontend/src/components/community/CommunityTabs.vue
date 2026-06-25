@@ -5,7 +5,7 @@
   <header class="c-head">
     <div>
       <h1>커뮤니티</h1>
-      <p>finedu 회원들과 다양한 금융 지식과 정보를 자유롭게 나누어보세요.</p>
+      <p>im fine edu 회원들과 다양한 금융 지식과 정보를 자유롭게 나누어보세요.</p>
     </div>
   </header>
 </template>

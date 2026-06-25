@@ -64,13 +64,13 @@ function finish() {
 
   const threshold = THEME_MIN + (THEME_MAX - THEME_MIN) * STRONG_RATIO
   const breakdown = themes.map((t) => {
-    const score = totals[t.key]
-    const strong = score >= threshold
+    const rawScore = totals[t.key]
+    const score = Math.round((rawScore - THEME_MIN) / (THEME_MAX - THEME_MIN) * 20)
+    const strong = rawScore >= threshold
     return {
       key: t.key,
       name: t.name,
-      score,
-      ratio: (score - THEME_MIN) / (THEME_MAX - THEME_MIN),
+      score, // 0 to 20 점 배점으로 환산
       strong,
       feedback: strong ? t.strong : t.weak,
       tags: strong ? [] : t.tags, // 보완 영역에만 추천 태그 노출 (원본과 동일)
@@ -89,6 +89,13 @@ function finish() {
     auth.updateProfile({ ebti_result: result.value }).catch(() => {})
   }
   step.value = STEP.RESULT
+}
+
+const getDisplayScore = (score) => {
+  if (score > 20) {
+    return Math.round((score - 6) / 24 * 20)
+  }
+  return score
 }
 
 function restart() {
@@ -151,7 +158,7 @@ function restart() {
           <span class="p-emoji">{{ result.persona.emoji }}</span>
           <h1 class="p-name">{{ result.persona.name }}</h1>
           <p class="p-desc">{{ result.persona.desc }}</p>
-          <span class="p-score">강점 영역 {{ result.strongCount }} / 5</span>
+          <span class="p-score">강점 영역 {{ result.strongCount }} / 5 , 총점 {{ result.breakdown.reduce((sum, b) => sum + getDisplayScore(b.score), 0) }}점</span>
         </div>
 
         <!-- 역량별 점수 막대 -->
@@ -164,10 +171,10 @@ function restart() {
               <div
                 class="r-fill"
                 :class="{ strong: b.strong }"
-                :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
+                :style="{ width: (getDisplayScore(b.score) / 20 * 100) + '%' }"
               ></div>
             </div>
-            <span class="r-score">{{ b.score }}점</span>
+            <span class="r-score">{{ getDisplayScore(b.score) }}/20</span>
           </div>
         </div>
 
@@ -205,7 +212,7 @@ function restart() {
   min-height: 72vh;
 }
 .narrow {
-  max-width: 640px;
+  max-width: 720px;
 }
 .card {
   background: #fff;
@@ -370,6 +377,7 @@ function restart() {
   line-height: 1.6;
   max-width: 440px;
   margin: 0 auto 14px;
+  white-space: pre-line;
 }
 .p-score {
   display: inline-block;
@@ -392,25 +400,34 @@ function restart() {
 }
 .row {
   display: grid;
-  grid-template-columns: 130px 1fr 44px;
+  grid-template-columns: 146px 1fr 64px;
   align-items: center;
   gap: 12px;
 }
 .r-label {
   font-size: 0.86rem;
   font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .r-bar {
+  position: relative;
   height: 9px;
   background: #fff;
   border-radius: 999px;
   overflow: hidden;
   border: 1px solid var(--line);
+  transform: translateZ(0); /* WebKit/Blink clipping bug fix */
 }
 .r-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
   background: var(--text-mute);
-  border-radius: 999px;
+  border-radius: 0 999px 999px 0; /* Left side square for perfect alignment, right side rounded */
   transition: width 0.5s ease;
 }
 .r-fill.strong {
@@ -421,6 +438,7 @@ function restart() {
   color: var(--text-mute);
   font-weight: 700;
   text-align: right;
+  white-space: nowrap;
 }
 
 /* 역량별 상세 */
@@ -490,7 +508,7 @@ function restart() {
     padding: 30px 22px;
   }
   .row {
-    grid-template-columns: 96px 1fr 40px;
+    grid-template-columns: 96px 1fr 52px;
   }
 }
 </style>

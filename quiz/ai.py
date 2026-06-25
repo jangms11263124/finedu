@@ -96,7 +96,7 @@ def _ai_quiz(seed_date):
 
     hints = _terms_hint()
     system = (
-        '당신은 금융 교육 플랫폼 finedu의 퀴즈 출제자입니다. '
+        '당신은 금융 교육 플랫폼 im fine edu의 퀴즈 출제자입니다. '
         '경제·금융·투자 상식에 관한 객관식 퀴즈를 정확히 하나 만드세요. '
         '보기(options)는 2~4개, 정답은 정확히 1개이며, answer_index는 0부터 시작하는 '
         '정답 보기의 인덱스입니다. 문제(question)는 한국어로 간결하게, '

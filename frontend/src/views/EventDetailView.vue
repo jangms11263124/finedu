@@ -80,7 +80,12 @@ onMounted(load)
 <template>
   <main class="detail">
     <div class="container narrow">
-      <RouterLink to="/events" class="back">‹ 행사 목록</RouterLink>
+      <RouterLink to="/events" class="back">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="back-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+        <span>행사 목록</span>
+      </RouterLink>
 
       <p v-if="loading" class="empty">불러오는 중...</p>
 
@@ -173,16 +178,26 @@ onMounted(load)
   min-height: 72vh;
 }
 .narrow {
-  max-width: 760px;
+  max-width: 800px;
 }
 .back {
-  display: inline-block;
-  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
   font-size: 0.86rem;
+  font-weight: 600;
   color: var(--text-sub);
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 .back:hover {
+  transform: translateX(-3px);
   color: var(--navy);
+}
+.back-icon {
+  width: 14px;
+  height: 14px;
 }
 .empty {
   text-align: center;

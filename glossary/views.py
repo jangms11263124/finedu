@@ -1,5 +1,7 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 
 from .models import Term
 from .serializers import TermSerializer
@@ -23,3 +25,10 @@ class TermViewSet(viewsets.ModelViewSet):
             qs = (qs.filter(term__icontains=q)
                   | qs.filter(description__icontains=q))
         return qs.distinct()
+
+    @action(detail=False, methods=['get'])
+    def initials(self, request):
+        """DB에 실제 존재하는 모든 두문자 목록을 반환."""
+        used_initials = Term.objects.values_list('initial', flat=True).distinct()
+        used_initials = [x for x in used_initials if x]
+        return Response(used_initials)
