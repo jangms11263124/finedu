@@ -47,6 +47,9 @@ class ContentViewSet(viewsets.ModelViewSet):
         # 마이페이지: 좋아요한 콘텐츠
         if params.get('liked') == 'me' and self.request.user.is_authenticated:
             qs = qs.filter(likes=self.request.user)
+        # 마이페이지: 스크랩한 콘텐츠
+        if params.get('scrapped') == 'me' and self.request.user.is_authenticated:
+            qs = qs.filter(scraps=self.request.user)
         if q := params.get('q'):
             qs = (qs.filter(title__icontains=q)
                   | qs.filter(summary__icontains=q)).distinct()
@@ -88,6 +91,21 @@ class ContentViewSet(viewsets.ModelViewSet):
             liked = True
         return Response({'liked': liked, 'like_count': content.likes.count()})
 
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def scrap(self, request, pk=None):
+        """스크랩 토글."""
+        content = self.get_object()
+        user = request.user
+        if content.scraps.filter(pk=user.pk).exists():
+            content.scraps.remove(user)
+            scrapped = False
+        else:
+            content.scraps.add(user)
+            scrapped = True
+        return Response(
+            {'scrapped': scrapped, 'scrap_count': content.scraps.count()}
+        )
+
     @action(detail=True, methods=['get', 'post'],
             permission_classes=[IsAuthenticatedOrReadOnly])
     def comments(self, request, pk=None):
@@ -112,7 +130,11 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = super().get_queryset()
         params = self.request.query_params
-        
+
+        # 마이페이지: 스크랩한 교육 행사
+        if params.get('scrapped') == 'me' and self.request.user.is_authenticated:
+            qs = qs.filter(scraps=self.request.user)
+
         if app_status := params.get('app_status'):
             import datetime
             today = datetime.date.today()
@@ -182,3 +204,18 @@ class EventViewSet(viewsets.ModelViewSet):
             .order_by('status_priority', F('end_date').asc(nulls_last=True), '-created_at')
         )
         return qs
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def scrap(self, request, pk=None):
+        """교육 행사 스크랩 토글."""
+        event = self.get_object()
+        user = request.user
+        if event.scraps.filter(pk=user.pk).exists():
+            event.scraps.remove(user)
+            scrapped = False
+        else:
+            event.scraps.add(user)
+            scrapped = True
+        return Response(
+            {'scrapped': scrapped, 'scrap_count': event.scraps.count()}
+        )

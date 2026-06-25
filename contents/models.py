@@ -21,6 +21,7 @@ class Content(models.Model):
         '카테고리', max_length=20, choices=CATEGORY_CHOICES, default='economy'
     )
     youtube_id = models.CharField('유튜브 영상 ID', max_length=20, blank=True)
+    external_url = models.URLField('외부 링크', blank=True)
     thumbnail = models.ImageField(
         '썸네일', upload_to='contents/', blank=True, null=True
     )
@@ -30,6 +31,12 @@ class Content(models.Model):
         related_name='liked_contents',
         blank=True,
         verbose_name='좋아요',
+    )
+    scraps = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='scrapped_contents',
+        blank=True,
+        verbose_name='스크랩',
     )
     is_recommended = models.BooleanField('추천 콘텐츠', default=False)
     is_popular = models.BooleanField('인기 콘텐츠', default=False)
@@ -44,6 +51,10 @@ class Content(models.Model):
     @property
     def like_count(self):
         return self.likes.count()
+
+    @property
+    def scrap_count(self):
+        return self.scraps.count()
 
     @property
     def comment_count(self):
@@ -99,6 +110,12 @@ class Event(models.Model):
         '진행 방식', max_length=10, choices=ONLINE_CHOICES, default='offline'
     )
     host = models.CharField('주최', max_length=100, blank=True)
+    scraps = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='scrapped_events',
+        blank=True,
+        verbose_name='스크랩',
+    )
     start_date = models.DateField('시작일', blank=True, null=True)
     end_date = models.DateField('종료일', blank=True, null=True)
     # 카카오맵 표시용 위치 정보 (오프라인 행사)
@@ -113,6 +130,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def scrap_count(self):
+        return self.scraps.count()
 
     @property
     def d_day(self):
