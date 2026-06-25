@@ -46,6 +46,18 @@ async function toggleLike() {
   content.value.like_count = data.like_count
 }
 
+async function toggleScrap() {
+  if (!auth.isLoggedIn) {
+    if (confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+      router.push({ name: 'login', query: { redirect: route.fullPath } })
+    }
+    return
+  }
+  const { data } = await api.post(`/contents/${content.value.id}/scrap/`)
+  content.value.is_scrapped = data.scrapped
+  content.value.scrap_count = data.scrap_count
+}
+
 async function addComment() {
   if (!newComment.value.trim()) return
   const { data } = await api.post(`/contents/${content.value.id}/comments/`, {
@@ -86,17 +98,24 @@ onMounted(load)
       <p v-if="loading" class="empty">불러오는 중...</p>
 
       <template v-else-if="content">
-        <!-- 유튜브 영상 -->
-        <div class="player">
+        <!-- 유튜브 영상 또는 외부 링크 -->
+        <div class="player" v-if="embedUrl">
           <iframe
-            v-if="embedUrl"
             :src="embedUrl"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
           ></iframe>
-          <div v-else class="no-video">영상이 등록되지 않았습니다.</div>
+        </div>
+        <div v-else-if="content.external_url" class="external-link-banner">
+          <span class="ext-icon">🔗</span>
+          <div>
+            <p class="ext-label">외부 교육 사이트</p>
+            <a :href="content.external_url" target="_blank" rel="noopener noreferrer" class="btn btn-navy ext-btn">
+              사이트 바로가기
+            </a>
+          </div>
         </div>
 
         <!-- 정보 -->
@@ -118,23 +137,42 @@ onMounted(load)
             </span>
           </div>
           <p class="body">{{ content.body }}</p>
-          <button class="like" :class="{ on: content.is_liked }" @click="toggleLike">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="heart-icon"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-              />
-            </svg>
-            <span>좋아요 {{ content.like_count }}</span>
-          </button>
+          <div class="actions">
+            <button class="like" :class="{ on: content.is_liked }" @click="toggleLike">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="heart-icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                />
+              </svg>
+              <span>좋아요 {{ content.like_count }}</span>
+            </button>
+            <button class="scrap" :class="{ on: content.is_scrapped }" @click="toggleScrap">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="bookmark-icon"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+                />
+              </svg>
+              <span>{{ content.is_scrapped ? '스크랩됨' : '스크랩' }} {{ content.scrap_count }}</span>
+            </button>
+          </div>
         </div>
 
         <!-- 댓글 -->
@@ -219,6 +257,30 @@ onMounted(load)
   color: #fff;
   font-size: 0.9rem;
 }
+.external-link-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 32px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0b1f3a, #133a5e);
+  color: #fff;
+}
+.ext-icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+.ext-label {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 10px;
+}
+.ext-btn {
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 10px 24px;
+  border-radius: 8px;
+}
 .info {
   margin-top: 22px;
   padding-bottom: 24px;
@@ -263,7 +325,13 @@ onMounted(load)
   color: var(--text-sub);
   white-space: pre-wrap;
 }
-.like {
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.like,
+.scrap {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -305,6 +373,30 @@ onMounted(load)
   0% { transform: scale(1); }
   50% { transform: scale(1.35); }
   100% { transform: scale(1); }
+}
+.scrap:hover {
+  border-color: var(--teal);
+  background-color: #f0faf8;
+}
+.scrap.on {
+  background: #e6f4f1;
+  border-color: var(--teal);
+  color: var(--teal);
+}
+.bookmark-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+  fill: transparent;
+  stroke: var(--text-sub);
+}
+.scrap:hover .bookmark-icon {
+  stroke: var(--teal);
+}
+.scrap.on .bookmark-icon {
+  fill: var(--teal);
+  stroke: var(--teal);
+  animation: heart-bounce 0.4s ease;
 }
 .comments {
   margin-top: 26px;

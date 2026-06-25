@@ -29,9 +29,9 @@ async function submit() {
       <span class="lv">@{{ auth.user?.username }}</span>
     </div>
     <div class="prof-menu">
-      <a href="#">📚 내 학습</a>
-      <a href="#">🔖 스크랩</a>
-      <a href="#">⚙️ 설정</a>
+      <RouterLink to="/mypage">📚 내 학습</RouterLink>
+      <RouterLink to="/mypage?tab=scrap">🔖 스크랩</RouterLink>
+      <RouterLink to="/mypage">⚙️ 설정</RouterLink>
     </div>
     <button class="logout" @click="auth.logout()">로그아웃</button>
   </div>

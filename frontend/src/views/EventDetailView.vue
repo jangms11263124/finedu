@@ -2,10 +2,12 @@
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import api from '@/api'
+import { useAuthStore } from '@/stores/auth'
 import { hasKakaoKey, loadKakao } from '@/utils/kakaoMap'
 
 const route = useRoute()
 const router = useRouter()
+const auth = useAuthStore()
 
 const event = ref(null)
 const loading = ref(true)
@@ -55,6 +57,18 @@ async function initMap(e) {
   }
 }
 
+async function toggleScrap() {
+  if (!auth.isLoggedIn) {
+    if (confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+      router.push({ name: 'login', query: { redirect: route.fullPath } })
+    }
+    return
+  }
+  const { data } = await api.post(`/events/${event.value.id}/scrap/`)
+  event.value.is_scrapped = data.scrapped
+  event.value.scrap_count = data.scrap_count
+}
+
 function fmtDate(d) {
   return d ? d.replaceAll('-', '.') : ''
 }
@@ -83,6 +97,23 @@ onMounted(load)
           <span class="status" :class="event.status">{{ event.status_display }}</span>
           <h1>{{ event.title }}</h1>
           <p class="summary">{{ event.summary }}</p>
+          <button class="scrap" :class="{ on: event.is_scrapped }" @click="toggleScrap">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="bookmark-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+              />
+            </svg>
+            <span>{{ event.is_scrapped ? '스크랩됨' : '스크랩' }} {{ event.scrap_count }}</span>
+          </button>
         </div>
 
         <!-- 정보 테이블 -->
@@ -208,6 +239,50 @@ onMounted(load)
 .summary {
   color: var(--text-sub);
   font-size: 0.95rem;
+}
+.scrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.scrap:hover {
+  border-color: var(--teal);
+  background-color: #f0faf8;
+}
+.scrap.on {
+  background: #e6f4f1;
+  border-color: var(--teal);
+  color: var(--teal);
+}
+.bookmark-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+  fill: transparent;
+  stroke: var(--text-sub);
+}
+.scrap:hover .bookmark-icon {
+  stroke: var(--teal);
+}
+.scrap.on .bookmark-icon {
+  fill: var(--teal);
+  stroke: var(--teal);
+  animation: scrap-pop 0.4s ease;
+}
+@keyframes scrap-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 .info {
   margin: 0 0 26px;
