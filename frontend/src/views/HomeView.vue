@@ -344,13 +344,18 @@ onMounted(async () => {
 }
 
 /* 반응형 */
-@media (max-width: 980px) {
+@media (max-width: 1299.98px) {
   .layout {
     grid-template-columns: 1fr;
   }
   .side-col {
     position: static;
+    max-width: 480px;
+    width: 100%;
+    margin: 20px auto 0;
   }
+}
+@media (max-width: 768px) {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
