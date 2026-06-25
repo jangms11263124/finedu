@@ -21,7 +21,7 @@ export function loadKakao() {
   loaderPromise = new Promise((resolve, reject) => {
     const script = document.createElement('script')
     script.src =
-      `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KEY}&autoload=false`
+      `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KEY}&libraries=services&autoload=false`
     script.onload = () => window.kakao.maps.load(() => resolve(window.kakao))
     script.onerror = () => reject(new Error('LOAD_FAILED'))
     document.head.appendChild(script)

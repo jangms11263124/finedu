@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import {
   SCALE,
@@ -73,7 +73,7 @@ function finish() {
       score, // 0 to 20 점 배점으로 환산
       strong,
       feedback: strong ? t.strong : t.weak,
-      tags: strong ? [] : t.tags, // 보완 영역에만 추천 태그 노출 (원본과 동일)
+      tags: strong ? [] : t.tags,
     }
   })
 
@@ -99,9 +99,22 @@ const getDisplayScore = (score) => {
 }
 
 function restart() {
+  localStorage.removeItem('ebtiResult')
   step.value = STEP.INTRO
   result.value = null
 }
+
+onMounted(() => {
+  const saved = localStorage.getItem('ebtiResult')
+  if (saved) {
+    try {
+      result.value = JSON.parse(saved)
+      step.value = STEP.RESULT
+    } catch {
+      localStorage.removeItem('ebtiResult')
+    }
+  }
+})
 </script>
 
 <template>
@@ -415,7 +428,7 @@ function restart() {
 .r-bar {
   position: relative;
   height: 9px;
-  background: #fff;
+  background: var(--line);
   border-radius: 999px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -434,7 +447,7 @@ function restart() {
   background: linear-gradient(90deg, var(--teal), var(--green));
 }
 .r-score {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-mute);
   font-weight: 700;
   text-align: right;

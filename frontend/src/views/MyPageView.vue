@@ -852,7 +852,7 @@ watch(
 .ebti-bar {
   position: relative;
   height: 8px;
-  background: var(--bg);
+  background: var(--line);
   border-radius: 999px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -871,7 +871,7 @@ watch(
   background: linear-gradient(90deg, var(--teal), var(--green));
 }
 .ebti-score {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: var(--text-mute);
   font-weight: 700;
   text-align: right;

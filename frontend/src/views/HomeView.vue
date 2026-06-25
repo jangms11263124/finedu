@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import api from '@/api'
 import ContentCard from '@/components/home/ContentCard.vue'
@@ -20,50 +20,100 @@ const popular = ref([])
 const events = ref([])
 const posts = ref([])
 
-function getEbti() {
+const loadingContents = ref(true)
+const loadingRec = ref(true)
+
+// 콘텐츠 캐시 (5분 TTL)
+const CACHE_KEY = 'home_cache'
+const CACHE_TTL = 5 * 60 * 1000
+
+// AI 추천 캐시 키 (사용자별, TTL 없음)
+const recCacheKey = computed(() => `home_rec_${auth.user?.id ?? 'anon'}`)
+
+function loadCache() {
   try {
-    return JSON.parse(localStorage.getItem('ebtiResult') || 'null')
-  } catch {
-    return null
-  }
+    const raw = localStorage.getItem(CACHE_KEY)
+    if (!raw) return null
+    const { ts, data } = JSON.parse(raw)
+    if (Date.now() - ts > CACHE_TTL) return null
+    return data
+  } catch { return null }
+}
+
+function saveCache(data) {
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data })) } catch {}
+}
+
+function loadRecCache() {
+  try {
+    const raw = localStorage.getItem(recCacheKey.value)
+    return raw ? JSON.parse(raw) : null
+  } catch { return null }
+}
+
+function saveRecCache(data) {
+  try { localStorage.setItem(recCacheKey.value, JSON.stringify(data)) } catch {}
+}
+
+function applyData({ pop, ev, ps, lat }) {
+  popular.value = (pop || []).slice(0, 16)
+  events.value = (ev || []).slice(0, 16)
+  posts.value = (ps || []).slice(0, 5)
+  latest.value = (lat || []).slice(0, 16)
+}
+
+function getEbti() {
+  try { return JSON.parse(localStorage.getItem('ebtiResult') || 'null') } catch { return null }
 }
 
 onMounted(async () => {
+  // 캐시 즉시 표시
+  const cached = loadCache()
+  if (cached) { applyData(cached); loadingContents.value = false }
+
+  const cachedRec = loadRecCache()
+  if (cachedRec?.length) { recommended.value = cachedRec; loadingRec.value = false }
+
+  // 비로그인이면 추천 로딩 상태 즉시 해제 (로그인 유도 표시)
+  if (!auth.isLoggedIn) loadingRec.value = false
+
+  // 콘텐츠 fetch (항상 최신으로 갱신)
   try {
-    const promises = [
-      api.get('/contents/', { params: { popular: 1 } }),
+    const [pop, ev, ps, lat] = await Promise.all([
+      api.get('/contents/', { params: { ordering: 'views' } }),
       api.get('/events/', { params: { status: 'open' } }),
       api.get('/posts/', { params: { popular: 1 } }),
-      api.get('/contents/'), // 최신 콘텐츠
-    ]
+      api.get('/contents/'),
+    ])
+    const fresh = { pop: pop.data || [], ev: ev.data || [], ps: ps.data || [], lat: lat.data || [] }
+    applyData(fresh)
+    saveCache(fresh)
+  } catch (e) {
+    console.error('콘텐츠 로딩 실패', e)
+  } finally {
+    loadingContents.value = false
+  }
 
-    let recPromise
-    if (auth.isLoggedIn) {
-      recPromise = api.post('/contents/ai-recommend/', {
+  // AI 추천 — 캐시가 없을 때만 fetch
+  if (auth.isLoggedIn && !cachedRec?.length) {
+    try {
+      const res = await api.post('/contents/ai-recommend/', {
         ebti: getEbti(),
         region: auth.user?.region || '',
-      }).then(res => {
-        return (res.data.items || []).map(it => it.content)
-      }).catch(err => {
-        console.error('AI 추천 실패, 기본 추천 로드', err)
-        return api.get('/contents/', { params: { recommended: 1 } }).then(res => res.data)
       })
-    } else {
-      recPromise = api.get('/contents/', { params: { recommended: 1 } }).then(res => res.data)
+      const rec = (res.data.items || []).map(it => it.content).slice(0, 16)
+      recommended.value = rec
+      if (rec.length) saveRecCache(rec)
+    } catch {
+      try {
+        const res = await api.get('/contents/', { params: { recommended: 1 } })
+        const rec = (res.data || []).slice(0, 16)
+        recommended.value = rec
+        if (rec.length) saveRecCache(rec)
+      } catch {}
+    } finally {
+      loadingRec.value = false
     }
-
-    const [pop, ev, ps, lat, rec] = await Promise.all([
-      ...promises,
-      recPromise
-    ])
-
-    popular.value = (pop.data || []).slice(0, 16)
-    events.value = (ev.data || []).slice(0, 16)
-    posts.value = (ps.data || []).slice(0, 5)
-    latest.value = (lat.data || []).slice(0, 16)
-    recommended.value = (rec || []).slice(0, 16)
-  } catch (e) {
-    console.error('홈 데이터 로딩 실패', e)
   }
 })
 </script>
@@ -87,24 +137,38 @@ onMounted(async () => {
               </svg>
             </RouterLink>
           </div>
-          <div class="rec-wrap">
-            <div :class="{ blurred: !auth.isLoggedIn }">
-              <CardCarousel :items="recommended" v-slot="{ item }">
-                <ContentCard :content="item" />
-              </CardCarousel>
+
+          <!-- 비로그인 -->
+          <div v-if="!auth.isLoggedIn" class="rec-wrap">
+            <div class="skel-row static">
+              <div v-for="n in 4" :key="n" class="skel-card"><div class="skel-thumb static"></div><div class="skel-body"><div class="skel-line w80 static"></div><div class="skel-line w60 static"></div><div class="skel-line w40 mt8 static"></div></div></div>
             </div>
-            <div v-if="!auth.isLoggedIn" class="rec-lock">
+            <div class="rec-lock">
               <div class="lock-box">
                 <p class="lock-title">나만을 위한 맞춤 콘텐츠가 기다리고 있어요</p>
                 <p class="lock-desc">로그인하면 관심사에 딱 맞는 콘텐츠를 추천해드려요.</p>
                 <RouterLink to="/login" class="btn btn-navy">로그인하고 추천받기 →</RouterLink>
-                <p class="lock-sub">
-                  아직 회원이 아니신가요?
-                  <RouterLink to="/signup">회원가입</RouterLink>
-                </p>
+                <p class="lock-sub">아직 회원이 아니신가요? <RouterLink to="/signup">회원가입</RouterLink></p>
               </div>
             </div>
           </div>
+
+          <!-- 로그인 + 로딩 중 -->
+          <div v-else-if="loadingRec" class="skel-row">
+            <div v-for="n in 4" :key="n" class="skel-card"><div class="skel-thumb"></div><div class="skel-body"><div class="skel-line w80"></div><div class="skel-line w60"></div><div class="skel-line w40 mt8"></div></div></div>
+          </div>
+
+          <!-- 로그인 + 추천 데이터 없음 -->
+          <div v-else-if="!recommended.length" class="rec-empty">
+            <p class="rec-empty-title">아직 추천 콘텐츠가 없어요</p>
+            <p class="rec-empty-desc">관심 분야를 설정하면 나에게 딱 맞는 콘텐츠를 추천해드려요.</p>
+            <RouterLink to="/ai-recommend" class="btn btn-navy">AI 추천 받기 →</RouterLink>
+          </div>
+
+          <!-- 로그인 + 추천 데이터 있음 -->
+          <CardCarousel v-else :items="recommended" v-slot="{ item }">
+            <ContentCard :content="item" />
+          </CardCarousel>
         </section>
 
         <!-- 최신 콘텐츠 -->
@@ -118,7 +182,10 @@ onMounted(async () => {
               </svg>
             </RouterLink>
           </div>
-          <CardCarousel :items="latest" v-slot="{ item }">
+          <div v-if="loadingContents && !latest.length" class="skel-row">
+            <div v-for="n in 4" :key="n" class="skel-card"><div class="skel-thumb"></div><div class="skel-body"><div class="skel-line w80"></div><div class="skel-line w60"></div><div class="skel-line w40 mt8"></div></div></div>
+          </div>
+          <CardCarousel v-else :items="latest" v-slot="{ item }">
             <ContentCard :content="item" />
           </CardCarousel>
         </section>
@@ -134,7 +201,10 @@ onMounted(async () => {
               </svg>
             </RouterLink>
           </div>
-          <CardCarousel :items="popular" v-slot="{ item }">
+          <div v-if="loadingContents && !popular.length" class="skel-row">
+            <div v-for="n in 4" :key="n" class="skel-card"><div class="skel-thumb"></div><div class="skel-body"><div class="skel-line w80"></div><div class="skel-line w60"></div><div class="skel-line w40 mt8"></div></div></div>
+          </div>
+          <CardCarousel v-else :items="popular" v-slot="{ item }">
             <ContentCard :content="item" />
           </CardCarousel>
         </section>
@@ -150,7 +220,10 @@ onMounted(async () => {
               </svg>
             </RouterLink>
           </div>
-          <CardCarousel :items="events" v-slot="{ item }">
+          <div v-if="loadingContents && !events.length" class="skel-row">
+            <div v-for="n in 4" :key="n" class="skel-card"><div class="skel-thumb skel-thumb-event"></div><div class="skel-body"><div class="skel-line w80"></div><div class="skel-line w60"></div><div class="skel-line w40 mt8"></div></div></div>
+          </div>
+          <CardCarousel v-else :items="events" v-slot="{ item }">
             <EventCard :event="item" />
           </CardCarousel>
         </section>
@@ -166,7 +239,15 @@ onMounted(async () => {
               </svg>
             </RouterLink>
           </div>
-          <ul class="post-list">
+          <ul v-if="loadingContents && !posts.length" class="post-list">
+            <li v-for="n in 5" :key="n" class="skel-post-row">
+              <span class="skel-rank"></span>
+              <span class="skel-badge"></span>
+              <span class="skel-line flex1"></span>
+              <span class="skel-line w60 skel-info"></span>
+            </li>
+          </ul>
+          <ul v-else class="post-list">
             <RouterLink
               v-for="(p, i) in posts"
               :key="p.id"
@@ -237,6 +318,116 @@ onMounted(async () => {
     position: static;
     width: auto;
   }
+}
+
+/* ===== 스켈레톤 UI ===== */
+@keyframes shimmer {
+  0%   { background-position: -600px 0 }
+  100% { background-position: 600px 0 }
+}
+.skel-row {
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  padding: 4px 2px;
+}
+.skel-card {
+  flex: 0 0 calc((100% - 48px) / 4);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.skel-thumb {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(90deg, #e8eaf0 25%, #f4f5f8 50%, #e8eaf0 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.skel-thumb-event {
+  aspect-ratio: 16 / 9;
+}
+.skel-body {
+  padding: 13px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.skel-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e8eaf0 25%, #f4f5f8 50%, #e8eaf0 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.skel-line.w80 { width: 80%; }
+.skel-line.w60 { width: 60%; }
+.skel-line.w40 { width: 40%; }
+.skel-line.flex1 { flex: 1; }
+.skel-line.mt8 { margin-top: 4px; }
+
+/* 게시글 스켈레톤 */
+.skel-post-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.skel-post-row:last-child { border-bottom: none; }
+.skel-rank {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #e8eaf0 25%, #f4f5f8 50%, #e8eaf0 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.skel-badge {
+  width: 48px;
+  height: 20px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #e8eaf0 25%, #f4f5f8 50%, #e8eaf0 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+.skel-info { height: 12px; border-radius: 6px; flex-shrink: 0; }
+
+/* AI 추천 없음 CTA */
+.rec-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.rec-empty-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+.rec-empty-desc {
+  font-size: 0.86rem;
+  color: var(--text-sub);
+}
+.rec-empty .btn {
+  margin-top: 6px;
+  padding: 10px 22px;
+  font-size: 0.88rem;
+}
+
+/* 비로그인 정적 회색 카드 (애니메이션 없음) */
+.skel-thumb.static,
+.skel-line.static {
+  background: #e8eaf0;
+  animation: none;
 }
 
 /* 추천 콘텐츠 잠금 (비로그인) */

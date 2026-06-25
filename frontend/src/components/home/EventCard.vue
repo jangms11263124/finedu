@@ -1,21 +1,26 @@
 <script setup>
+import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import { getEventTheme } from '@/utils/eventTheme'
 
-defineProps({
+const props = defineProps({
   event: { type: Object, required: true },
 })
 
-const statusClass = {
-  open: 'open',
-  closed: 'closed',
-  ended: 'ended',
-}
+const theme = computed(() => getEventTheme(props.event))
+
+const statusClass = { open: 'open', closed: 'closed', ended: 'ended' }
 </script>
 
 <template>
   <RouterLink :to="`/events/${event.id}`" class="ev-card">
-    <div class="thumb">
-      <span class="emoji">🎓</span>
+    <div class="thumb" :style="theme.image ? {} : { background: theme.gradient }">
+      <img v-if="theme.image" :src="theme.image" :alt="event.title" class="thumb-img" />
+      <template v-else>
+        <span class="icon main">{{ theme.icons[0] }}</span>
+        <span class="icon sub1">{{ theme.icons[1] }}</span>
+        <span class="icon sub2">{{ theme.icons[2] }}</span>
+      </template>
       <span class="badge" :class="statusClass[event.status]">
         {{ event.status_display }}
       </span>
@@ -47,13 +52,38 @@ const statusClass = {
 .thumb {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, #0b4f49, #0f766e 55%, #15803d);
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
-.emoji {
-  font-size: 2.4rem;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.icon {
+  position: absolute;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+  user-select: none;
+  pointer-events: none;
+}
+.icon.main {
+  font-size: 3.2rem;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-60%);
+}
+.icon.sub1 {
+  font-size: 1.8rem;
+  right: 72px;
+  top: 14px;
+  opacity: 0.85;
+}
+.icon.sub2 {
+  font-size: 1.6rem;
+  right: 16px;
+  bottom: 14px;
+  opacity: 0.75;
 }
 .badge {
   position: absolute;
@@ -65,15 +95,9 @@ const statusClass = {
   border-radius: 999px;
   color: #fff;
 }
-.badge.open {
-  background: var(--green);
-}
-.badge.closed {
-  background: #d97706;
-}
-.badge.ended {
-  background: #6b7280;
-}
+.badge.open   { background: var(--green); }
+.badge.closed { background: #d97706; }
+.badge.ended  { background: #6b7280; }
 .body {
   padding: 14px 16px 18px;
 }
@@ -91,7 +115,6 @@ h3 {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  /* 제목이 1줄이든 2줄이든 항상 2줄 높이를 확보해 카드 높이를 통일 */
   min-height: calc(1.4em * 2);
 }
 .period {

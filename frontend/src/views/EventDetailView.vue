@@ -4,6 +4,7 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import api from '@/api'
 import { useAuthStore } from '@/stores/auth'
 import { hasKakaoKey, loadKakao } from '@/utils/kakaoMap'
+import { getEventTheme } from '@/utils/eventTheme'
 
 const route = useRoute()
 const router = useRouter()
@@ -24,7 +25,11 @@ async function load() {
     event.value = data
     loading.value = false
     await nextTick()
-    if (data.latitude && data.longitude) initMap(data)
+    if (data.latitude && data.longitude) {
+      initMap(data.latitude, data.longitude, data)
+    } else if (data.address) {
+      geocodeAndShow(data.address, data)
+    }
   } catch {
     alert('행사를 찾을 수 없습니다.')
     router.push('/events')
@@ -33,28 +38,36 @@ async function load() {
   }
 }
 
-async function initMap(e) {
+async function geocodeAndShow(address, e) {
   mapError.value = ''
-  if (!hasKakaoKey()) {
-    mapError.value = 'NO_KEY'
-    return
-  }
+  if (!hasKakaoKey()) { mapError.value = 'NO_KEY'; return }
   try {
     const kakao = await loadKakao()
-    const center = new kakao.maps.LatLng(e.latitude, e.longitude)
-    const map = new kakao.maps.Map(mapEl.value, { center, level: 4 })
-    const marker = new kakao.maps.Marker({ position: center })
-    marker.setMap(map)
-    // 장소명 말풍선
-    const iw = new kakao.maps.InfoWindow({
-      content:
-        `<div style="padding:6px 10px;font-size:12px;font-weight:600;white-space:nowrap">`
-        + (e.place_name || e.region) + `</div>`,
+    const geocoder = new kakao.maps.services.Geocoder()
+    geocoder.addressSearch(address, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        initMap(parseFloat(result[0].y), parseFloat(result[0].x), e)
+      } else {
+        mapError.value = 'GEOCODE_FAILED'
+      }
     })
-    iw.open(map, marker)
   } catch (err) {
     mapError.value = err.message === 'NO_KEY' ? 'NO_KEY' : 'LOAD_FAILED'
   }
+}
+
+function initMap(lat, lng, e) {
+  mapError.value = ''
+  const center = new window.kakao.maps.LatLng(lat, lng)
+  const map = new window.kakao.maps.Map(mapEl.value, { center, level: 4 })
+  const marker = new window.kakao.maps.Marker({ position: center })
+  marker.setMap(map)
+  const iw = new window.kakao.maps.InfoWindow({
+    content:
+      `<div style="padding:6px 10px;font-size:12px;font-weight:600;white-space:nowrap">`
+      + (e.place_name || e.region) + `</div>`,
+  })
+  iw.open(map, marker)
 }
 
 async function toggleScrap() {
@@ -91,8 +104,13 @@ onMounted(load)
 
       <template v-else-if="event">
         <!-- 헤더 배너 -->
-        <div class="banner">
-          <span class="emoji">🎓</span>
+        <div class="banner" :style="getEventTheme(event).image ? {} : { background: getEventTheme(event).gradient }">
+          <img v-if="getEventTheme(event).image" :src="getEventTheme(event).image" :alt="event.title" class="banner-img" />
+          <template v-else>
+            <span class="b-icon main">{{ getEventTheme(event).icons[0] }}</span>
+            <span class="b-icon sub1">{{ getEventTheme(event).icons[1] }}</span>
+            <span class="b-icon sub2">{{ getEventTheme(event).icons[2] }}</span>
+          </template>
           <span class="dday" :class="{ urgent: event.d_day !== null && event.d_day <= 2 }">
             {{ ddayLabel(event) }}
           </span>
@@ -150,7 +168,7 @@ onMounted(load)
         <section class="map-sec">
           <h2>오시는 길</h2>
 
-          <template v-if="event.latitude && event.longitude">
+          <template v-if="event.latitude && event.longitude || event.address">
             <div ref="mapEl" class="map"></div>
             <p v-if="mapError === 'NO_KEY'" class="map-msg">
               🗺️ 카카오맵 키가 설정되지 않았습니다.
@@ -160,10 +178,14 @@ onMounted(load)
             <p v-else-if="mapError === 'LOAD_FAILED'" class="map-msg">
               지도를 불러오지 못했습니다. 키와 사이트 도메인 등록을 확인해주세요.
             </p>
+            <p v-else-if="mapError === 'GEOCODE_FAILED'" class="map-msg">
+              주소를 지도에 표시하지 못했습니다.
+            </p>
             <p v-else class="addr">📍 {{ event.place_name }} · {{ event.address }}</p>
           </template>
 
-          <p v-else class="online-note">💻 온라인으로 진행되는 행사입니다.</p>
+          <p v-else-if="event.online_type === 'online' || event.online_type === 'both'" class="online-note">💻 온라인으로 진행되는 행사입니다.</p>
+          <p v-else class="no-map-note">📍 장소 정보가 아직 등록되지 않았습니다.</p>
         </section>
 
         <RouterLink to="/events" class="btn btn-navy block">목록으로 돌아가기</RouterLink>
@@ -213,9 +235,34 @@ onMounted(load)
   place-items: center;
   overflow: hidden;
 }
-.banner .emoji {
-  font-size: 3.4rem;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.b-icon {
+  position: absolute;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  user-select: none;
+  pointer-events: none;
+}
+.b-icon.main {
+  font-size: 4.5rem;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-55%);
+}
+.b-icon.sub1 {
+  font-size: 2.6rem;
+  right: 160px;
+  top: 16px;
+  opacity: 0.8;
+}
+.b-icon.sub2 {
+  font-size: 2.2rem;
+  right: 40px;
+  bottom: 16px;
+  opacity: 0.7;
 }
 .dday {
   position: absolute;
@@ -374,7 +421,8 @@ onMounted(load)
   font-size: 0.88rem;
   color: var(--text-sub);
 }
-.online-note {
+.online-note,
+.no-map-note {
   background: var(--bg);
   border-radius: 12px;
   padding: 28px;
