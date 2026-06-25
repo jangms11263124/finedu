@@ -212,6 +212,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 38px;
+  min-width: 0;
 }
 .side-col {
   display: flex;

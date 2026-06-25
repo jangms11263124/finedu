@@ -117,16 +117,16 @@ onBeforeUnmount(stop)
   border-radius: 18px;
   overflow: hidden;
   min-height: 230px;
+  width: 100%;
 }
 .track {
-  display: grid;
-}
-/* 모든 슬라이드를 같은 칸에 겹쳐 쌓아 전환 */
-.track > .hero {
-  grid-area: 1 / 1;
+  position: relative;
+  min-height: 230px;
+  width: 100%;
 }
 .hero {
-  position: relative;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   border-radius: 18px;
   color: #fff;
