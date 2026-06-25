@@ -9,10 +9,10 @@ const auth = useAuthStore()
 const slides = computed(() => [
   {
     kicker: '금융 교육 플랫폼',
-    title: ['똑똑한 경제 습관,', 'finedu와 함께'],
+    title: ['똑똑한 경제 습관,', 'im fine edu와 함께'],
     desc: '경제 용어부터 금융 상품까지, 누구나 쉽게 배우는 금융 교육',
     cta: '지금 시작하기 →',
-    to: auth.isLoggedIn ? '/ebti' : '/login',
+    to: '/contents',
     gradient: 'linear-gradient(120deg, #0b4f49 0%, #0f766e 55%, #15803d 120%)',
     art: ['💰', '📈', '🪙'],
   },
@@ -93,6 +93,7 @@ onBeforeUnmount(stop)
           <RouterLink :to="s.to" class="btn btn-green">{{ s.cta }}</RouterLink>
         </div>
         <div class="hero-art">
+          <div class="art-bg-glow"></div>
           <span class="coin c1">{{ s.art[0] }}</span>
           <span class="coin c2">{{ s.art[1] }}</span>
           <span class="coin c3">{{ s.art[2] }}</span>
@@ -177,20 +178,67 @@ onBeforeUnmount(stop)
 }
 .hero-art {
   position: absolute;
-  right: 30px;
-  top: 0;
-  bottom: 0;
-  width: 240px;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+}
+.art-bg-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  filter: blur(24px);
+  z-index: 0;
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 0.4; }
 }
 .coin {
   position: absolute;
-  font-size: 3rem;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+  transition: transform 0.3s ease;
+  z-index: 1;
 }
-.c1 { right: 30px; top: 40px; font-size: 4rem; }
-.c2 { right: 120px; top: 110px; }
-.c3 { right: 20px; bottom: 36px; }
+.c1 {
+  font-size: 4.0rem;
+  top: 15px;
+  right: 15px;
+  animation: float-c1 5s ease-in-out infinite;
+}
+.c2 {
+  font-size: 3.2rem;
+  bottom: 15px;
+  left: 15px;
+  animation: float-c2 4.5s ease-in-out infinite;
+}
+.c3 {
+  font-size: 3.2rem;
+  top: 75px;
+  left: 80px;
+  animation: float-c3 5.5s ease-in-out infinite;
+}
+
+@keyframes float-c1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+@keyframes float-c2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-6deg); }
+}
+@keyframes float-c3 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(8deg); }
+}
 
 /* 화살표 */
 .arrow {
@@ -257,18 +305,40 @@ onBeforeUnmount(stop)
   opacity: 0;
 }
 
+@media (max-width: 900px) {
+  .hero-text {
+    max-width: 60%;
+  }
+  .hero-art {
+    right: 20px;
+    transform: translateY(-50%) scale(0.85);
+  }
+}
+@media (max-width: 768px) {
+  .hero-text {
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-art {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.7);
+    opacity: 0.25;
+    z-index: 1;
+  }
+}
 @media (max-width: 560px) {
   .hero {
     padding: 34px 26px;
-  }
-  .hero-text {
-    max-width: 100%;
   }
   .hero-text h1 {
     font-size: 1.6rem;
   }
   .hero-art {
-    opacity: 0.35;
+    right: 5px;
+    transform: translateY(-50%) scale(0.55);
+    opacity: 0.15;
   }
 }
 </style>

@@ -64,15 +64,13 @@ function finish() {
 
   const threshold = THEME_MIN + (THEME_MAX - THEME_MIN) * STRONG_RATIO
   const breakdown = themes.map((t) => {
-    const score = totals[t.key]
-    const strong = score >= threshold
-    const ratio = (score - THEME_MIN) / (THEME_MAX - THEME_MIN)
+    const rawScore = totals[t.key]
+    const score = Math.round((rawScore - THEME_MIN) / (THEME_MAX - THEME_MIN) * 20)
+    const strong = rawScore >= threshold
     return {
       key: t.key,
       name: t.name,
-      score,
-      normalizedScore: Math.round(ratio * 20), // 20점 만점으로 정규화 (5개 합산 최대 100점)
-      ratio,
+      score, // 0 to 20 점 배점으로 환산
       strong,
       feedback: strong ? t.strong : t.weak,
       tags: strong ? [] : t.tags,
@@ -91,6 +89,13 @@ function finish() {
     auth.updateProfile({ ebti_result: result.value }).catch(() => {})
   }
   step.value = STEP.RESULT
+}
+
+const getDisplayScore = (score) => {
+  if (score > 20) {
+    return Math.round((score - 6) / 24 * 20)
+  }
+  return score
 }
 
 function restart() {
@@ -166,7 +171,7 @@ onMounted(() => {
           <span class="p-emoji">{{ result.persona.emoji }}</span>
           <h1 class="p-name">{{ result.persona.name }}</h1>
           <p class="p-desc">{{ result.persona.desc }}</p>
-          <span class="p-score">강점 영역 {{ result.strongCount }} / 5 &nbsp;·&nbsp; 총점 {{ result.breakdown.reduce((s, b) => s + (b.normalizedScore ?? Math.round(b.ratio * 20)), 0) }} / 100</span>
+          <span class="p-score">강점 영역 {{ result.strongCount }} / 5 , 총점 {{ result.breakdown.reduce((sum, b) => sum + getDisplayScore(b.score), 0) }}점</span>
         </div>
 
         <!-- 역량별 점수 막대 -->
@@ -179,10 +184,10 @@ onMounted(() => {
               <div
                 class="r-fill"
                 :class="{ strong: b.strong }"
-                :style="{ width: Math.max(b.ratio * 100, 4) + '%' }"
+                :style="{ width: (getDisplayScore(b.score) / 20 * 100) + '%' }"
               ></div>
             </div>
-            <span class="r-score">{{ b.normalizedScore ?? Math.round(b.ratio * 20) }}<small>/20</small></span>
+            <span class="r-score">{{ getDisplayScore(b.score) }}/20</span>
           </div>
         </div>
 
@@ -220,7 +225,7 @@ onMounted(() => {
   min-height: 72vh;
 }
 .narrow {
-  max-width: 640px;
+  max-width: 720px;
 }
 .card {
   background: #fff;
@@ -385,6 +390,7 @@ onMounted(() => {
   line-height: 1.6;
   max-width: 440px;
   margin: 0 auto 14px;
+  white-space: pre-line;
 }
 .p-score {
   display: inline-block;
@@ -407,7 +413,7 @@ onMounted(() => {
 }
 .row {
   display: grid;
-  grid-template-columns: 140px 1fr 52px;
+  grid-template-columns: 146px 1fr 64px;
   align-items: center;
   gap: 12px;
 }
@@ -415,16 +421,26 @@ onMounted(() => {
   font-size: 0.86rem;
   font-weight: 600;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .r-bar {
+  position: relative;
   height: 9px;
   background: var(--line);
   border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transform: translateZ(0); /* WebKit/Blink clipping bug fix */
 }
 .r-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
   background: var(--text-mute);
-  border-radius: 999px;
+  border-radius: 0 999px 999px 0; /* Left side square for perfect alignment, right side rounded */
   transition: width 0.5s ease;
 }
 .r-fill.strong {
@@ -436,11 +452,6 @@ onMounted(() => {
   font-weight: 700;
   text-align: right;
   white-space: nowrap;
-}
-.r-score small {
-  font-size: 0.68rem;
-  font-weight: 500;
-  opacity: 0.7;
 }
 
 /* 역량별 상세 */
@@ -509,8 +520,8 @@ onMounted(() => {
   .card {
     padding: 30px 22px;
   }
-  .r-label {
-    font-size: 0.8rem;
+  .row {
+    grid-template-columns: 96px 1fr 52px;
   }
 }
 </style>

@@ -15,14 +15,15 @@ const subjects = [
   { key: 'science', label: '과학' },
 ]
 const consonants = 'ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ'.split('')
-const alphabets1 = '0-9ABCDEFGHIJKLMNO'.match(/0-9|[A-Z]/g)
-const alphabets2 = 'PQRSTUVWXYZ'.match(/[A-Z]/g)
+const alphabets1 = '0-9ABCDEFGHIJKLMN'.match(/0-9|[A-Z]/g)
+const alphabets2 = 'OPQRSTUVWXYZ'.match(/[A-Z]/g)
 
 const items = ref([])
 const count = ref(0)
 const page = ref(1)
 const totalPages = ref(1)
 const loading = ref(true)
+const usedInitials = ref([])
 
 const subject = ref('')
 const initial = ref('')
@@ -96,6 +97,13 @@ watch(
 )
 
 onMounted(async () => {
+  try {
+    const res = await api.get('/terms/initials/')
+    usedInitials.value = res.data
+  } catch (err) {
+    console.error('Failed to fetch initials:', err)
+  }
+
   const q = route.query.term
   if (q) {
     await handleTermQuery(q)
@@ -119,11 +127,11 @@ onMounted(async () => {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="label-icon"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.637 10.637Z" /></svg>
             검색어로 찾기
           </span>
-          <select v-model="subject" @change="search">
+          <select v-model="subject" class="subject-select" @change="search">
             <option v-for="s in subjects" :key="s.key" :value="s.key">{{ s.label }}</option>
           </select>
           <input v-model="keyword" placeholder="검색어를 입력하세요" @keyup.enter="search" />
-          <button class="btn btn-navy" @click="search">검색</button>
+          <button class="btn btn-navy search-btn" @click="search">검색</button>
         </div>
         <div class="row initials">
           <span class="label">
@@ -132,11 +140,12 @@ onMounted(async () => {
           </span>
           <div class="chips-group">
             <div class="chips">
-              <button :class="{ on: initial === '' }" @click="pickInitial('')">전체</button>
+              <button :class="{ on: initial === '', wide: true }" @click="pickInitial('')">전체</button>
               <button
                 v-for="c in consonants"
                 :key="c"
-                :class="{ on: initial === c }"
+                :class="{ on: initial === c, disabled: !usedInitials.includes(c) }"
+                :disabled="!usedInitials.includes(c)"
                 @click="pickInitial(c)"
               >{{ c }}</button>
             </div>
@@ -144,7 +153,8 @@ onMounted(async () => {
               <button
                 v-for="a in alphabets1"
                 :key="a"
-                :class="{ on: initial === a }"
+                :class="{ on: initial === a, wide: a === '0-9', disabled: !usedInitials.includes(a) }"
+                :disabled="!usedInitials.includes(a)"
                 @click="pickInitial(a)"
               >{{ a }}</button>
             </div>
@@ -152,7 +162,8 @@ onMounted(async () => {
               <button
                 v-for="a in alphabets2"
                 :key="a"
-                :class="{ on: initial === a }"
+                :class="{ on: initial === a, disabled: !usedInitials.includes(a) }"
+                :disabled="!usedInitials.includes(a)"
                 @click="pickInitial(a)"
               >{{ a }}</button>
             </div>
@@ -226,15 +237,19 @@ onMounted(async () => {
 .finder {
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow);
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+.finder:hover {
+  box-shadow: var(--shadow-hover);
 }
 .row {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 18px;
+  padding: 12px 20px;
   border-bottom: 1px solid var(--line);
 }
 .row:last-child {
@@ -243,29 +258,25 @@ onMounted(async () => {
 .label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
-  width: 120px;
+  width: 160px;
   font-size: 0.86rem;
   font-weight: 700;
   color: var(--text);
 }
 .label-icon {
-  width: 15px;
-  height: 15px;
-  stroke: var(--text-sub);
+  width: 16px;
+  height: 16px;
+  stroke: var(--navy);
 }
-.row select,
-.row input {
+.row select {
   height: 40px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 0 12px;
+  padding: 0 30px 0 12px;
   font-size: 0.85rem;
   outline: none;
-}
-.row select {
-  padding-right: 30px;
   background: #fff;
   appearance: none;
   -webkit-appearance: none;
@@ -274,34 +285,59 @@ onMounted(async () => {
   background-repeat: no-repeat;
   background-size: 16px;
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.subject-select {
+  width: 120px;
+  flex-shrink: 0;
+}
+.row input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.row select:hover,
+.row input:hover {
+  border-color: var(--navy-dark);
 }
 .row select:focus,
-.row select:hover,
-.row input:focus,
-.row input:hover {
+.row input:focus {
   border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(27, 42, 89, 0.1);
 }
 .row .btn {
   height: 40px;
   padding: 0 20px;
   font-size: 0.88rem;
   border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.row input:focus {
-  border-color: var(--navy);
+.search-btn {
+  width: 80px;
+  padding: 0 !important;
+  flex-shrink: 0;
+}
+.row .btn:hover {
+  background: var(--navy-dark);
+  box-shadow: 0 4px 12px rgba(27, 42, 89, 0.15);
 }
 .row.initials {
   align-items: flex-start;
-  padding: 18px;
+  padding: 14px 20px;
 }
 .row.initials .label {
-  margin-top: 8px;
+  margin-top: 6px;
 }
 .chips-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   flex: 1;
 }
 .chips {
@@ -314,27 +350,47 @@ onMounted(async () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 34px;
-  height: 34px;
-  padding: 0 10px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   border-radius: 8px;
   border: 1px solid var(--line);
   background: #fff;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.86rem;
+  font-weight: 600;
   color: var(--text-sub);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.chips button.wide {
+  width: auto;
+  min-width: 48px;
+  padding: 0 10px;
 }
 .chips button:hover {
   border-color: var(--navy);
   color: var(--navy);
-  background: var(--bg);
+  background: #f8fafc;
+  transform: translateY(-1px);
 }
 .chips button.on {
-  background: var(--navy);
+  background: linear-gradient(135deg, var(--navy), #253366);
   border-color: var(--navy);
   color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(27, 42, 89, 0.2);
+  font-weight: 700;
+}
+.chips button:disabled,
+.chips button.disabled {
+  background: #f8fafc;
+  color: var(--text-mute);
+  border-color: var(--line);
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none !important;
+  box-shadow: none !important;
+  pointer-events: none;
 }
 .count {
   margin: 18px 0 10px;
@@ -475,19 +531,33 @@ onMounted(async () => {
 }
 
 @media (max-width: 720px) {
-  .label {
-    width: 100%;
-    margin-bottom: 6px;
-  }
-  .row {
-    flex-wrap: wrap;
-  }
   .thead,
   .trow {
     grid-template-columns: 36px 64px 1fr;
   }
   .t-desc {
     display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .label {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .subject-select {
+    width: 100%;
+  }
+  .row input {
+    width: 100%;
+    flex: none;
+  }
+  .search-btn {
+    width: 100%;
   }
 }
 </style>

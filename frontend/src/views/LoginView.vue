@@ -29,7 +29,7 @@ async function submit() {
 <template>
   <div class="auth-page">
     <div class="auth-card">
-      <RouterLink to="/" class="logo">fin<span>edu</span></RouterLink>
+      <RouterLink to="/" class="logo">im fine <span>edu</span></RouterLink>
       <p class="lead">다시 만나서 반가워요</p>
 
       <form @submit.prevent="submit">
@@ -62,8 +62,18 @@ async function submit() {
 
       <div class="divider"><span>SNS 계정으로 간편 로그인</span></div>
 
-      <button class="btn social naver">N&nbsp; 네이버 로그인</button>
-      <button class="btn social kakao">💬&nbsp; 카카오 로그인</button>
+      <button class="btn social naver">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon">
+          <path d="M16.2 2H22v20h-5.8L10.2 11.2V22H4V2h5.8l6.2 10.8V2z"/>
+        </svg>
+        네이버 로그인
+      </button>
+      <button class="btn social kakao">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="social-icon">
+          <path d="M12 3c-4.97 0-9 3.185-9 7.115 0 2.557 1.707 4.8 4.27 6.054-.277.962-1.002 3.486-1.147 4.02-.182.68.225.67.472.506.195-.13 3.096-2.103 4.316-2.928.354.048.715.073 1.089.073 4.97 0 9-3.185 9-7.115S16.97 3 12 3z"/>
+        </svg>
+        카카오 로그인
+      </button>
     </div>
   </div>
 </template>
@@ -178,5 +188,10 @@ form .btn {
 .social.kakao {
   background: var(--kakao);
   color: #3c1e1e;
+}
+.social-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
 }
 </style>
