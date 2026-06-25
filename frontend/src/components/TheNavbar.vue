@@ -1,9 +1,13 @@
 <script setup>
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink, useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 const auth = useAuthStore()
 const router = useRouter()
+const route = useRoute()
+
+const isHome = computed(() => route.path === '/')
 
 const menus = [
   { label: '콘텐츠 보기', to: '/contents' },
@@ -34,20 +38,11 @@ function logout() {
         </template>
       </nav>
 
-      <div class="nav-right">
+      <div class="nav-right" :class="{ 'hide-on-desktop-home': isHome }">
         <!-- 로그인 상태: 프로필 칩 → 마이페이지 -->
         <template v-if="auth.isLoggedIn">
           <RouterLink to="/mypage" class="profile-chip" title="마이페이지">
-            <img
-              v-if="auth.user?.profile_image"
-              :src="auth.user.profile_image"
-              class="chip-img"
-              alt=""
-            />
-            <span v-else class="chip-avatar">
-              {{ (auth.user?.nickname || 'U').charAt(0) }}
-            </span>
-            <span class="chip-name">{{ auth.user?.nickname }}</span>
+            {{ auth.user?.nickname }}
           </RouterLink>
           <button class="btn-logout" @click="logout">로그아웃</button>
         </template>
@@ -72,6 +67,7 @@ function logout() {
   align-items: center;
   height: 64px;
   gap: 28px;
+  padding-right: 0;
 }
 .logo {
   font-size: 1.5rem;
@@ -110,47 +106,27 @@ function logout() {
   font-size: 0.85rem;
 }
 .profile-chip {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 12px 5px 6px;
+  justify-content: center;
+  padding: 8px 14px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy);
+  white-space: nowrap;
   transition: border-color 0.12s, box-shadow 0.12s;
 }
 .profile-chip:hover {
   border-color: var(--navy);
   box-shadow: var(--shadow);
 }
-.chip-avatar,
-.chip-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  flex-shrink: 0;
-}
-.chip-avatar {
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--teal), var(--navy));
-  color: #fff;
-  font-weight: 800;
-  font-size: 0.85rem;
-}
-.chip-img {
-  object-fit: cover;
-}
-.chip-name {
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--navy);
-  white-space: nowrap;
-}
 .btn-logout {
   background: transparent;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   padding: 8px 14px;
   font-size: 0.82rem;
   font-weight: 600;
@@ -159,13 +135,37 @@ function logout() {
   transition: background 0.12s, color 0.12s, border-color 0.12s;
 }
 .btn-logout:hover {
-  background: #fee2e2;
-  border-color: #fca5a5;
-  color: #dc2626;
+  background: rgba(220, 38, 38, 0.05);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+@media (min-width: 1300px) {
+  .hide-on-desktop-home {
+    display: none !important;
+  }
 }
 @media (max-width: 980px) {
   .menu {
     display: none;
+  }
+  .nav-right {
+    gap: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .nav-inner {
+    gap: 10px;
+  }
+  .logo {
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+  }
+  .profile-chip {
+    padding: 6px 10px;
+  }
+  .btn-logout {
+    padding: 6px 10px;
+    font-size: 0.75rem;
   }
 }
 </style>

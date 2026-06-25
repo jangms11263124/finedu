@@ -106,7 +106,7 @@ onMounted(load)
       <RouterLink to="/ai-recommend" class="ai-banner">
         <span class="ai-banner-glow"></span>
         <div class="ai-banner-text">
-          <span class="ai-banner-badge">🤖 AI 맞춤 추천</span>
+          <span class="ai-banner-badge">AI 맞춤 추천</span>
           <h2>나에게 딱 맞는 콘텐츠가 궁금하다면?</h2>
           <p>관심사 · 학습 이력 · EBTI 결과를 분석해 AI가 콘텐츠를 골라드려요.</p>
         </div>

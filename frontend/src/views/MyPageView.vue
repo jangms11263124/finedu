@@ -138,6 +138,28 @@ onMounted(() => {
   activeTab.value = initial
   loadTab(initial)
 })
+
+// URL 쿼리 변화 실시간 감지
+watch(
+  () => route.query.tab,
+  (newTab) => {
+    if (newTab && tabs.some(t => t.key === newTab)) {
+      activeTab.value = newTab
+      loadTab(newTab)
+    }
+  }
+)
+
+watch(
+  () => route.query.edit,
+  (newEdit) => {
+    if (newEdit === 'true') {
+      startEdit()
+    } else {
+      editing.value = false
+    }
+  }
+)
 </script>
 
 <template>
@@ -454,14 +476,27 @@ onMounted(() => {
 .avatar-lg {
   width: 84px;
   height: 84px;
-  border-radius: 999px;
+  border-radius: 22px; /* 스쿼클 */
   background: linear-gradient(135deg, var(--teal), var(--navy));
   color: #fff;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   font-size: 2.1rem;
   font-weight: 800;
   overflow: hidden;
+  box-shadow: 0 6px 18px rgba(20, 32, 74, 0.12);
+  border: 3px solid #ffffff;
+}
+.avatar-lg span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+  padding-bottom: 4px; /* 대형 아바타 정렬 보정 */
 }
 .avatar-lg img {
   width: 100%;
@@ -978,6 +1013,10 @@ onMounted(() => {
   width: 64px;
   height: 64px;
   font-size: 1.5rem;
+  border-radius: 18px; /* 모달 내 아바타 둥글기 */
+}
+.avatar-lg.sm span {
+  padding-bottom: 3px; /* 소형 아바타 정렬 보정 */
 }
 .file-btn {
   font-size: 0.84rem;
