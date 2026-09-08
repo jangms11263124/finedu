@@ -36,7 +36,10 @@ GEMINI_MODEL = os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash-lite')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0n5mkbfpw9^^=+p(velmlq1f!$(m%m_u#j+f)acnzed*llzdxe'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-dev-only-do-not-use-in-production',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
