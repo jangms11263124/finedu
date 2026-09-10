@@ -14,18 +14,17 @@
 ## 목차
 
 1. [프로젝트 개요](#1-프로젝트-개요)
-2. [팀 구성](#2-팀-구성)
-3. [기술 스택](#3-기술-스택)
-4. [서비스 아키텍처](#4-서비스-아키텍처)
-5. [주요 기능](#5-주요-기능)
-6. [AI 기능 상세](#6-ai-기능-상세)
-7. [사용자 인증 방식](#7-사용자-인증-방식)
-8. [데이터 수집 방법](#8-데이터-수집-방법)
-9. [API 명세](#9-api-명세)
-10. [데이터베이스 설계](#10-데이터베이스-설계)
-11. [프로젝트 구조](#11-프로젝트-구조)
-12. [설치 및 실행](#12-설치-및-실행)
-13. [환경 변수](#13-환경-변수)
+2. [기술 스택](#2-기술-스택)
+3. [서비스 아키텍처](#3-서비스-아키텍처)
+4. [주요 기능](#4-주요-기능)
+5. [AI 기능 상세](#5-ai-기능-상세)
+6. [사용자 인증 방식](#6-사용자-인증-방식)
+7. [데이터 수집 방법](#7-데이터-수집-방법)
+8. [API 명세](#8-api-명세)
+9. [데이터베이스 설계](#9-데이터베이스-설계)
+10. [프로젝트 구조](#10-프로젝트-구조)
+11. [설치 및 실행](#11-설치-및-실행)
+12. [환경 변수](#12-환경-변수)
 
 ---
 
@@ -46,33 +45,7 @@
 
 ---
 
-## 2. 팀 구성
-
-2인 팀(팀장: 백엔드·데이터 수집 파이프라인 중심) 중 **프론트엔드 전반과 AI 추천 연동**을 담당했습니다.
-
-<table>
-  <tr>
-    <td align="center">
-      <img src="https://img.shields.io/badge/Frontend-42B883?style=for-the-badge&logo=vuedotjs&logoColor=white"/>
-      <img src="https://img.shields.io/badge/AI-009688?style=for-the-badge&logo=openai&logoColor=white"/>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img width="130" src="https://github.com/jangms11263124.png" /><br/>
-      <a href="https://github.com/jangms11263124">장민석</a>
-    </td>
-  </tr>
-</table>
-
-- **Vue 3 SPA 화면 전반** — 홈, 콘텐츠 목록·상세, 마이페이지, 네비게이션 바·사이드 위젯, 전역 스타일
-- **AI 추천 서비스 페이지** — 추천 번들 UX와 Pinia 기반 추천 캐시
-- JWT 로그인 연동(Axios 인터셉터), EBTI 결과 localStorage 동기화 등 인증 플로우 프론트 구현
-- 백엔드 contents 도메인 일부 보완
-
-
-
-## 3. 기술 스택
+## 2. 기술 스택
 
 <div>
   <img src="https://img.shields.io/badge/Vue%203-42B883?style=for-the-badge&logo=vuedotjs&logoColor=white"/>
@@ -128,44 +101,50 @@
 
 ---
 
-## 4. 서비스 아키텍처
+## 3. 서비스 아키텍처
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         사용자 브라우저                           │
-│                    Vue 3 SPA (Vite, port 5173)                  │
-│   Pinia Store (auth / recommend)  ←→  Axios (JWT 인터셉터)       │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │ HTTP / REST API
-┌──────────────────────────▼──────────────────────────────────────┐
-│                  Django REST Framework (port 8000)               │
-│  accounts │ contents │ community │ glossary │ quiz               │
-│                    JWT 인증 미들웨어                              │
-└──────────┬─────────────────────────────┬───────────────────────┘
-           │                             │
-  ┌────────▼────────┐         ┌──────────▼──────────────┐
-  │  SQLite DB      │         │  SSAFY GMS AI Gateway    │
-  │  (ORM)         │         │  ┌─────────────────────┐ │
-  └─────────────────┘         │  │  Gemini 2.5 Flash   │ │
-                              │  │  (Stage 1: Retrieve) │ │
-  ┌─────────────────┐         │  ├─────────────────────┤ │
-  │ YouTube Data    │         │  │  GPT-4o             │ │
-  │ API v3         │         │  │  (Stage 2: Generate) │ │
-  └────────┬────────┘         │  └─────────────────────┘ │
-           │ 데이터 수집       └──────────────────────────┘
-  ┌────────▼────────┐
-  │ econedu.go.kr  │
-  │ (크롤링)        │
-  └─────────────────┘
+> 💡 **붉은 테두리로 강조된 블록**이 직접 기획·개발을 담당한 영역입니다 (Vue 3 프론트엔드 전반 · AI 추천 UX).
+
+```mermaid
+graph LR
+    classDef myPart fill:#ffe4e4,stroke:#ff4d4d,stroke-width:3px,color:#000;
+
+    subgraph Client["사용자 브라우저"]
+        FE["Vue 3 SPA (Vite)<br/>Pinia · Axios JWT 인터셉터<br/>AI 추천 UX · EBTI 테스트"]:::myPart
+    end
+
+    subgraph Backend["Django REST Framework"]
+        API["accounts · contents · community<br/>glossary · quiz"]
+        AIENGINE["contents/ai.py<br/>2단계 RAG 추천 엔진"]
+        DB[(SQLite)]
+    end
+
+    subgraph GMS["SSAFY GMS AI Gateway"]
+        GEM["Gemini 2.5 Flash<br/>Stage 1 · 검색/선별"]
+        GPT["GPT-4o<br/>Stage 2 · 번들 생성"]
+    end
+
+    subgraph Collect["데이터 수집 (Management Command)"]
+        YT["YouTube Data API v3"]
+        ECON["경제배움e+ 크롤링"]
+    end
+
+    FE -->|"REST API · JWT"| API
+    API --> DB
+    API --> AIENGINE
+    AIENGINE -->|"Stage 1"| GEM
+    AIENGINE -->|"Stage 2"| GPT
+    YT --> API
+    ECON --> API
 ```
 
 ---
 
-## 5. 주요 기능
+## 4. 주요 기능
 
 ![홈 화면](docs/images/screenshot_home.png)
 
-### 5.1 EBTI 금융 성향 테스트
+### 4.1 EBTI 금융 성향 테스트
 
 ![EBTI 테스트](docs/images/screenshot_ebti.png)
 
@@ -184,13 +163,13 @@
 - 결과는 `localStorage`에 저장, 로그인 후 백엔드와 동기화
 - AI 추천의 핵심 입력 신호로 활용
 
-### 5.2 AI 맞춤형 콘텐츠 추천
+### 4.2 AI 맞춤형 콘텐츠 추천
 
 ![AI 추천](docs/images/screenshot_ai_recommend.png)
 
-→ [AI 기능 상세 섹션](#6-ai-기능-상세) 참고
+→ [AI 기능 상세 섹션](#5-ai-기능-상세) 참고
 
-### 5.3 콘텐츠 라이브러리
+### 4.3 콘텐츠 라이브러리
 
 ![콘텐츠 라이브러리](docs/images/screenshot_contents.png)
 
@@ -203,7 +182,7 @@
 | **개인화** | 좋아요·스크랩 기록 유지 |
 | **댓글** | 로그인 사용자 댓글 작성 |
 
-### 5.4 금융 교육 행사
+### 4.4 금융 교육 행사
 
 ![금융 교육 행사](docs/images/screenshot_events.png)
 
@@ -214,20 +193,20 @@
 - **Kakao Maps** 오프라인 행사 위치 지도 표시
 - 스크랩(북마크) 기능
 
-### 5.5 오늘의 퀴즈
+### 4.5 오늘의 퀴즈
 
 - **AI 생성 일일 퀴즈** (Gemini Flash, GPT-4o 중 하나)
 - 하루 1회 응시 제한, 결과 및 해설 제공
 - 틀린 퀴즈 주제 → AI 추천 신호로 활용
 - 출석 체크 연동 (연속 출석일 계산)
 
-### 5.6 경제 용어 사전
+### 4.6 경제 용어 사전
 
 - **초성 인덱스** 검색 (한글 초성 자동 추출 로직)
 - 분야별 필터 (경제, 경영, 금융, 사회과학 등)
 - 키워드 전문 검색
 
-### 5.7 커뮤니티
+### 4.7 커뮤니티
 
 ![커뮤니티](docs/images/screenshot_community.png)
 
@@ -245,9 +224,9 @@
 
 ---
 
-## 6. AI 기능 상세
+## 5. AI 기능 상세
 
-### 6.1 개요
+### 5.1 개요
 
 im fine edu의 AI 추천 엔진은 **2단계 RAG(Retrieval-Augmented Generation) 파이프라인**으로 구성됩니다. 단순 협업 필터링이나 키워드 매칭을 넘어, 사용자의 다차원 행동 데이터를 종합해 **스토리텔링이 있는 학습 경로**를 제시합니다.
 
@@ -255,7 +234,7 @@ AI API는 모두 **SSAFY GMS(Gateway Management Service)**를 통해 호출하�
 
 ---
 
-### 6.2 사용자 신호(Signal) 수집
+### 5.2 사용자 신호(Signal) 수집
 
 추천 요청 시 다음 7가지 신호를 수집해 AI 프롬프트에 포함합니다.
 
@@ -271,7 +250,7 @@ AI API는 모두 **SSAFY GMS(Gateway Management Service)**를 통해 호출하�
 
 ---
 
-### 6.3 Stage 1: Gemini 2.5 Flash — 검색 및 선별
+### 5.3 Stage 1: Gemini 2.5 Flash — 검색 및 선별
 
 ```
 입력: 상위 60개 콘텐츠(corpus) + 7가지 사용자 신호
@@ -286,7 +265,7 @@ AI API는 모두 **SSAFY GMS(Gateway Management Service)**를 통해 호출하�
 
 ---
 
-### 6.4 Stage 2: GPT-4o — 번들 생성 및 개인화
+### 5.4 Stage 2: GPT-4o — 번들 생성 및 개인화
 
 ```
 입력: Gemini가 선별한 Top 10 콘텐츠 + 사용자 상세 프로필
@@ -320,7 +299,7 @@ AI API는 모두 **SSAFY GMS(Gateway Management Service)**를 통해 호출하�
 
 ---
 
-### 6.5 규칙 기반 폴백(Fallback)
+### 5.5 규칙 기반 폴백(Fallback)
 
 AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
 
@@ -334,7 +313,7 @@ AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
 
 ---
 
-### 6.6 일일 퀴즈 AI 생성
+### 5.6 일일 퀴즈 AI 생성
 
 매일 Gemini Flash를 사용해 금융 관련 4지선다 퀴즈를 자동 생성합니다.
 
@@ -348,7 +327,7 @@ AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
 
 ---
 
-### 6.7 YouTube 영상 AI 요약
+### 5.7 YouTube 영상 AI 요약
 
 데이터 수집 시 각 YouTube 영상 설명문을 Gemini Flash로 요약합니다.
 
@@ -361,9 +340,9 @@ AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
 
 ---
 
-## 7. 사용자 인증 방식
+## 6. 사용자 인증 방식
 
-### 7.1 인증 방식: JWT (JSON Web Token)
+### 6.1 인증 방식: JWT (JSON Web Token)
 
 **사용 라이브러리**: `djangorestframework-simplejwt 5.5.1`
 
@@ -372,7 +351,7 @@ AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
 | Access Token | 2시간 | API 요청 인증 |
 | Refresh Token | 14일 | Access Token 재발급 |
 
-### 7.2 회원가입 플로우
+### 6.2 회원가입 플로우
 
 ```
 1. POST /api/accounts/register/
@@ -387,7 +366,7 @@ AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
 4. 회원가입 성공 → 프론트에서 자동 로그인 호출
 ```
 
-### 7.3 로그인 플로우
+### 6.3 로그인 플로우
 
 ```
 1. POST /api/accounts/login/ (Simple JWT TokenObtainPairView)
@@ -402,7 +381,7 @@ AI API 장애 또는 GMS 키 미설정 시 자동으로 폴백합니다.
    Authorization: Bearer {access_token}
 ```
 
-### 7.4 Axios JWT 인터셉터
+### 6.4 Axios JWT 인터셉터
 
 ```javascript
 // src/api/index.js
@@ -421,7 +400,7 @@ api.interceptors.response.use(null, error => {
 })
 ```
 
-### 7.5 사용자 모델 (Custom User)
+### 6.5 사용자 모델 (Custom User)
 
 `AbstractUser`를 상속해 금융 교육 서비스에 맞는 필드를 추가했습니다.
 
@@ -434,7 +413,7 @@ api.interceptors.response.use(null, error => {
 | `region` | CharField | 거주 지역 |
 | `ebti_result` | JSONField | EBTI 테스트 결과 |
 
-### 7.6 EBTI 동기화
+### 6.6 EBTI 동기화
 
 EBTI 테스트는 로그인 없이 응시 가능하며, 결과를 `localStorage`에 임시 저장합니다. 이후 로그인 시 서버와 자동 동기화됩니다.
 
@@ -451,7 +430,7 @@ async fetchMe() {
 }
 ```
 
-### 7.7 권한 정책
+### 6.7 권한 정책
 
 | 엔드포인트 유형 | 권한 |
 |----------------|------|
@@ -462,13 +441,13 @@ async fetchMe() {
 
 ---
 
-## 8. 데이터 수집 방법
+## 7. 데이터 수집 방법
 
 im fine edu의 콘텐츠는 두 가지 소스에서 자동 수집됩니다. 모두 Django Management Command로 구현했습니다.
 
 ---
 
-### 8.1 YouTube Data API v3 — 영상 수집
+### 7.1 YouTube Data API v3 — 영상 수집
 
 **실행 명령**:
 ```bash
@@ -527,7 +506,7 @@ API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 ---
 
-### 8.2 경제배움e+ 크롤링 — 정부 교육과정 수집
+### 7.2 경제배움e+ 크롤링 — 정부 교육과정 수집
 
 **실행 명령**:
 ```bash
@@ -576,7 +555,7 @@ python manage.py crawl_econedu [--count 150] [--types ALL ON MX] [--no-detail] [
 
 ---
 
-### 8.3 카테고리 자동 분류 로직
+### 7.3 카테고리 자동 분류 로직
 
 두 크롤러 모두 동일한 키워드 매핑 테이블을 사용합니다.
 
@@ -590,7 +569,7 @@ python manage.py crawl_econedu [--count 150] [--types ALL ON MX] [--no-detail] [
 
 ---
 
-## 9. API 명세
+## 8. API 명세
 
 ### 인증
 
@@ -654,7 +633,7 @@ python manage.py crawl_econedu [--count 150] [--types ALL ON MX] [--no-detail] [
 
 ---
 
-## 10. 데이터베이스 설계
+## 9. 데이터베이스 설계
 
 ### 주요 모델 관계도
 
@@ -699,7 +678,7 @@ Term (glossary.Term)
 
 ---
 
-## 11. 프로젝트 구조
+## 10. 프로젝트 구조
 
 ```
 finedu/
@@ -731,7 +710,7 @@ finedu/
 
 ---
 
-## 12. 설치 및 실행
+## 11. 설치 및 실행
 
 ### 사전 요구사항
 
@@ -782,7 +761,7 @@ npm run dev
 
 ---
 
-## 13. 환경 변수
+## 12. 환경 변수
 
 `backend/.env` 파일에 다음 변수를 설정합니다 (`backend/.env.example` 참고).
 
