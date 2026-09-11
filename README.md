@@ -105,38 +105,7 @@
 
 > 💡 **붉은 테두리로 강조된 블록**이 직접 기획·개발을 담당한 영역입니다 (Vue 3 프론트엔드 전반 · AI 추천 UX).
 
-```mermaid
-graph LR
-    classDef myPart fill:#ffe4e4,stroke:#ff4d4d,stroke-width:3px,color:#000;
-
-    subgraph Client["사용자 브라우저"]
-        FE["Vue 3 SPA (Vite)<br/>Pinia · Axios JWT 인터셉터<br/>AI 추천 UX · EBTI 테스트"]:::myPart
-    end
-
-    subgraph Backend["Django REST Framework"]
-        API["accounts · contents · community<br/>glossary · quiz"]
-        AIENGINE["contents/ai.py<br/>2단계 RAG 추천 엔진"]
-        DB[(SQLite)]
-    end
-
-    subgraph GMS["SSAFY GMS AI Gateway"]
-        GEM["Gemini 2.5 Flash<br/>Stage 1 · 검색/선별"]
-        GPT["GPT-4o<br/>Stage 2 · 번들 생성"]
-    end
-
-    subgraph Collect["데이터 수집 (Management Command)"]
-        YT["YouTube Data API v3"]
-        ECON["경제배움e+ 크롤링"]
-    end
-
-    FE -->|"REST API · JWT"| API
-    API --> DB
-    API --> AIENGINE
-    AIENGINE -->|"Stage 1"| GEM
-    AIENGINE -->|"Stage 2"| GPT
-    YT --> API
-    ECON --> API
-```
+![시스템 아키텍처](docs/images/architecture.png)
 
 ---
 
