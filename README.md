@@ -103,7 +103,7 @@
 
 ## 3. 서비스 아키텍처
 
-> 💡 **붉은 테두리로 강조된 블록**이 직접 기획·개발을 담당한 영역입니다 (Vue 3 프론트엔드 전반 · AI 추천 UX).
+> 💡 **노란 블록**이 직접 기획·개발을 담당한 영역입니다 (Vue 3 프론트엔드 전반 · AI 추천 UX).
 
 ![시스템 아키텍처](docs/images/architecture.png)
 
@@ -115,7 +115,7 @@
 
 ### 4.1 EBTI 금융 성향 테스트
 
-![EBTI 테스트](docs/images/screenshot_ebti.png)
+![EBTI 진단 진행](docs/images/demo_ebti.gif)
 
 **15문항** (5개 테마 × 3문항)으로 사용자의 금융 성향을 분석합니다.
 
@@ -134,7 +134,7 @@
 
 ### 4.2 AI 맞춤형 콘텐츠 추천
 
-![AI 추천](docs/images/screenshot_ai_recommend.png)
+![AI 맞춤 추천 생성](docs/images/demo_ai_recommend.gif)
 
 → [AI 기능 상세 섹션](#5-ai-기능-상세) 참고
 
